@@ -31,11 +31,11 @@
     <xsl:key name="unique_instance" match="//content/*" use="local-name()"/>
     
     <xsl:variable name="sql_chart3d">
-        <xsl:text>SELECT 'Eixo de Y' EixoY,'Eixo de X' EixoX, 1000 Valor From dual</xsl:text>
+        <xsl:text>SELECT 'Eixo de Y' EixoY,'Eixo de X' EixoX, 1000 Valor</xsl:text>
     </xsl:variable>
 
     <xsl:variable name="sql_chart2d">
-        <xsl:text>SELECT 'Eixo de X' EixoX, 1000 Valor From dual</xsl:text>
+        <xsl:text>SELECT 'Eixo de X' EixoX, 1000 Valor</xsl:text>
     </xsl:variable>
 
     <xsl:variable name="double_quotes">"</xsl:variable>
@@ -118,6 +118,9 @@
     </xsl:variable>
     <xsl:variable name="page_name">
         <xsl:value-of select="rows/page"/>
+    </xsl:variable>
+     <xsl:variable name="crud_list">
+        <xsl:value-of select="rows/crud_page_list"/>
     </xsl:variable>
     <xsl:variable name="class_name">
         <xsl:value-of select="rows/plsql/package_html"></xsl:value-of>

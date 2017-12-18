@@ -5,12 +5,11 @@
     <xsl:template name="genBodyToolsbar">
         <xsl:param name="title" />        
         <xsl:param name="page" />
-        <xsl:param name="action" />
-        <xsl:param name="tag" select="@rel"/>
+        <xsl:param name="action" /> 
        
         <xsl:variable name="code_action">
             <xsl:call-template name="sanitizeToolbar">
-                <xsl:with-param name="title" select="$tag"/>
+                <xsl:with-param name="title" select="@rel"/>
                 <xsl:with-param name="selfaction" select="$selfaction"/>
                 <xsl:with-param name="page" select="$page"/>
                 <xsl:with-param name="action" select="$action"/>

@@ -31,11 +31,11 @@
     <xsl:key name="unique_instance" match="//content/*" use="local-name()"/>
     
     <xsl:variable name="sql_chart3d">
-        <xsl:text>SELECT 'Eixo de Y' EixoY,'Eixo de X' EixoX, 1000 Valor From dual</xsl:text>
+        <xsl:text>SELECT 'Eixo de Y' EixoY,'Eixo de X' EixoX, 1000 Valor</xsl:text>
     </xsl:variable>
 
     <xsl:variable name="sql_chart2d">
-        <xsl:text>SELECT 'Eixo de X' EixoX, 1000 Valor From dual</xsl:text>
+        <xsl:text>SELECT 'Eixo de X' EixoX, 1000 Valor</xsl:text>
     </xsl:variable>
 
     <xsl:variable name="double_quotes">"</xsl:variable>
@@ -115,6 +115,9 @@
     <xsl:variable name="end_reserve_code" select="'/*----#END-PRESERVED-AREA----*/'"/>
     <xsl:variable name="app_name">
         <xsl:value-of select="rows/app"/>
+    </xsl:variable>
+     <xsl:variable name="crud_list">
+        <xsl:value-of select="rows/crud_page_list"/>
     </xsl:variable>
     <xsl:variable name="page_name">
         <xsl:value-of select="rows/page"/>
@@ -301,9 +304,6 @@
         <xsl:text>/*----#START-PRESERVED-AREA(</xsl:text>
         <xsl:value-of select="$typeUpper"/>
         <xsl:text>)----*/</xsl:text>
-        <xsl:text>/*----#gen(preserve_code,</xsl:text>
-        <xsl:value-of select="$url"/>
-        <xsl:text>)/#----*/</xsl:text>
     </xsl:template>
     <!-- end reserve_code tmpl -->
     <xsl:template name="end_reserve_code_action">

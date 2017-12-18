@@ -6,12 +6,11 @@
         <xsl:param name="title" />
         <xsl:param name="app" />        
         <xsl:param name="page" />
-        <xsl:param name="action" />
-        <xsl:param name="tag" select="@rel"/> 
+        <xsl:param name="action" /> 
         
         <xsl:variable name="code_action">
             <xsl:call-template name="sanitizeToolbar">
-                <xsl:with-param name="title" select="$tag"/>
+                <xsl:with-param name="title" select="@rel"/>
                 <xsl:with-param name="selfaction" select="$selfaction"/>
                 <xsl:with-param name="page" select="$page"/>
                 <xsl:with-param name="action" select="$action"/>
@@ -28,7 +27,7 @@
         <xsl:value-of select="$enter"/> 
         <xsl:value-of select="$entertab"/><xsl:text>-----</xsl:text>
         <xsl:value-of  select="concat($procName,':')"/>
-        <xsl:value-of select="$tag"/>
+        <xsl:value-of select="@rel"/>
         <xsl:text>(</xsl:text>
         <xsl:value-of select="$app"/>
         <xsl:text> - </xsl:text>        
@@ -70,17 +69,11 @@
         <xsl:value-of select="concat('p_action',':=',$quotes,$action,$quotes)"/>        
         <xsl:value-of select="$endline"/>
 
+        <xsl:call-template name="genDmlService"/>
+        
         <xsl:call-template name="genPreserveYourCode">
             <xsl:with-param name="procName" select="$code_action" />
         </xsl:call-template>
-
-        <xsl:call-template name="genDmlService"/>
-
-        <xsl:if test="service">        
-            <xsl:call-template name="genPreserveYourCode">
-                <xsl:with-param name="procName" select="concat('RESP',$code_action)"/>
-            </xsl:call-template>
-        </xsl:if>
                 
         <xsl:call-template name="genProcedureEndCab">
             <xsl:with-param name="procedureName" select="$procName"/>
