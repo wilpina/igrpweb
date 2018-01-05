@@ -27,7 +27,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row " id="row-c591fe90">
+                                    <div class="row " id="row-e14d65c4">
                                         <div class="gen-column col-sm-6">
                                             <div class="gen-inner">
                                                 <xsl:if test="rows/content/sectionheader_1">
@@ -54,7 +54,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row " id="row-b681dc47">
+                                    <div class="row " id="row-96d02f59">
                                         <div class="gen-column col-md-12">
                                             <div class="gen-inner">
                                                 <xsl:if test="rows/content/table_1">
@@ -86,6 +86,13 @@
                                                                                     <th align="left" class=" gen-fields-holder">
                                                                                         <span>
                                                                                             <xsl:value-of select="rows/content/table_1/fields/dad/label"/>
+                                                                                        </span>
+                                                                                    </th>
+                                                                                </xsl:if>
+                                                                                <xsl:if test="rows/content/table_1/fields/t_page_builder">
+                                                                                    <th align="left" class=" gen-fields-holder">
+                                                                                        <span>
+                                                                                            <xsl:value-of select="rows/content/table_1/fields/t_page_builder/label"/>
                                                                                         </span>
                                                                                     </th>
                                                                                 </xsl:if>
@@ -123,6 +130,25 @@
                                                                                             </span>
                                                                                         </td>
                                                                                     </xsl:if>
+                                                                                    <xsl:if test="t_page_builder">
+                                                                                        <td align="left" data-row="{position()}" data-title="{../../label/t_page_builder}" class="link" item-name="t_page_builder">
+                                                                                            <xsl:choose>
+                                                                                                <xsl:when test="t_page_builder != ''">
+                                                                                                    <a href="{t_page_builder}" class="link bClick btn btn-warning " target-fields="" target="_self" name="t_page_builder">
+                                                                                                        <i class="fa fa-file-code-o"/>
+                                                                                                        <span>
+                                                                                                            <xsl:value-of select="t_page_builder_desc"/>
+                                                                                                        </span>
+                                                                                                    </a>
+                                                                                                </xsl:when>
+                                                                                                <xsl:otherwise>
+                                                                                                    <span>
+                                                                                                        <xsl:value-of select="t_page_builder_desc"/>
+                                                                                                    </span>
+                                                                                                </xsl:otherwise>
+                                                                                            </xsl:choose>
+                                                                                        </td>
+                                                                                    </xsl:if>
                                                                                     <td class="igrp-table-ctx-td">
                                                                                         <xsl:apply-templates select="../../context-menu" mode="table-context-inline">
                                                                                             <xsl:with-param name="row-params" select="context-menu"/>
@@ -155,9 +181,9 @@
             </body>
         </html>
     </xsl:template>
-    <xsl:include href="../../../xsl/tmpl/IGRP-functions.tmpl.xsl?v=1513189364481"/>
-    <xsl:include href="../../../xsl/tmpl/IGRP-variables.tmpl.xsl?v=1513189364481"/>
-    <xsl:include href="../../../xsl/tmpl/IGRP-home-include.tmpl.xsl?v=1513189364481"/>
-    <xsl:include href="../../../xsl/tmpl/IGRP-utils.tmpl.xsl?v=1513189364481"/>
-    <xsl:include href="../../../xsl/tmpl/IGRP-table-utils.tmpl.xsl?v=1513189364482"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-functions.tmpl.xsl?v=1514462591347"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-variables.tmpl.xsl?v=1514462591347"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-home-include.tmpl.xsl?v=1514462591347"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-utils.tmpl.xsl?v=1514462591347"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-table-utils.tmpl.xsl?v=1514462591347"/>
 </xsl:stylesheet>

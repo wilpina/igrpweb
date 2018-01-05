@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="../images/IGRP/IGRP2.3/app/igrp/pesquisarperfil/PesquisarPerfil.xsl" type="text/xsl"?>
+<?xml-stylesheet href="images/IGRP/IGRP2.3/app/igrp/pesquisarperfil/PesquisarPerfil.xsl" type="text/xsl"?>
 <rows>
+    <link_img>images/IGRP/IGRP2.3</link_img>
     <site>
-        <welcome_note>Ola</welcome_note>
-        <footer_note>2011 - Copyright NOSI</footer_note>
-        <user_name>red-igrp</user_name>
+        <welcome_note>Oba</welcome_note>
+        <footer_note>2017 - Copyright NOSI</footer_note>
+        <user_name>Hexagon</user_name>
         <button type="specific">
             <title>Sair</title>
-            <app>RED</app>
+            <app>DUA</app>
             <page />
             <link>#</link>
             <target>_self</target>
@@ -55,18 +56,18 @@
         </toolsbar_1>
         <table_1 type="table" xml-type="table" gen-type="container" gen-group="true">
             <fields>
-                <codigo name="p_codigo" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
-                    <label>Código</label>
-                </codigo>
-                <descricao name="p_descricao" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
-                    <label>Descrição</label>
-                </descricao>
-                <organica name="p_organica" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
-                    <label>Orgânica</label>
-                </organica>
                 <estado name="p_estado" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
                     <label>Estado</label>
                 </estado>
+                <descricao name="p_descricao" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
+                    <label>Nome</label>
+                </descricao>
+                <codigo name="p_codigo" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
+                    <label>Código</label>
+                </codigo>
+                <organica name="p_organica" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
+                    <label>Orgânica</label>
+                </organica>
                 <id name="p_id" type="hidden" maxlength="30" iskey="false" tag="id"/>
             </fields>
             <table>
@@ -76,10 +77,10 @@
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <codigo name="p_codigo">Aperiam doloremque ut officia</codigo>
-                        <descricao name="p_descricao">Mollit aliqua elit officia eli</descricao>
-                        <organica name="p_organica">Sit aperiam officia ipsum anim</organica>
-                        <estado name="p_estado">Mollit dolor laudantium rem ip</estado>
+                        <estado name="p_estado">Magna dolor laudantium anim pe</estado>
+                        <descricao name="p_descricao">Perspiciatis accusantium dolor</descricao>
+                        <codigo name="p_codigo">Dolor doloremque omnis elit ut</codigo>
+                        <organica name="p_organica">Aliqua aperiam accusantium ut</organica>
                         <id name="p_id" tag="id">1</id>
                     </row>
                     <row>
@@ -87,10 +88,10 @@
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <codigo name="p_codigo">Lorem stract adipiscing perspi</codigo>
-                        <descricao name="p_descricao">Stract perspiciatis ut deserun</descricao>
-                        <organica name="p_organica">Officia elit adipiscing amet d</organica>
-                        <estado name="p_estado">Magna dolor laudantium sed ut</estado>
+                        <estado name="p_estado">Anim stract sit rem mollit</estado>
+                        <descricao name="p_descricao">Iste mollit consectetur aperia</descricao>
+                        <codigo name="p_codigo">Natus aperiam unde sit deserun</codigo>
+                        <organica name="p_organica">Unde amet sit amet labore</organica>
                         <id name="p_id" tag="id">1</id>
                     </row>
                     <row>
@@ -98,10 +99,10 @@
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <codigo name="p_codigo">Magna consectetur unde elit ad</codigo>
-                        <descricao name="p_descricao">Ut natus elit omnis elit</descricao>
-                        <organica name="p_organica">Mollit sed doloremque ipsum la</organica>
-                        <estado name="p_estado">Unde consectetur aliqua sit ut</estado>
+                        <estado name="p_estado">Sit officia ipsum consectetur</estado>
+                        <descricao name="p_descricao">Aperiam anim elit stract molli</descricao>
+                        <codigo name="p_codigo">Perspiciatis totam omnis persp</codigo>
+                        <organica name="p_organica">Laudantium accusantium sit dol</organica>
                         <id name="p_id" tag="id">1</id>
                     </row>
                     <row>
@@ -109,10 +110,10 @@
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <codigo name="p_codigo">Doloremque lorem perspiciatis</codigo>
-                        <descricao name="p_descricao">Amet perspiciatis ipsum amet l</descricao>
-                        <organica name="p_organica">Lorem dolor ipsum magna unde</organica>
-                        <estado name="p_estado">Labore accusantium officia mol</estado>
+                        <estado name="p_estado">Unde laudantium magna natus ac</estado>
+                        <descricao name="p_descricao">Accusantium ut voluptatem omni</descricao>
+                        <codigo name="p_codigo">Ipsum rem lorem officia lorem</codigo>
+                        <organica name="p_organica">Doloremque laudantium magna ac</organica>
                         <id name="p_id" tag="id">1</id>
                     </row>
                     <row>
@@ -120,10 +121,10 @@
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <codigo name="p_codigo">Unde stract anim labore accusa</codigo>
-                        <descricao name="p_descricao">Mollit sit elit stract consect</descricao>
-                        <organica name="p_organica">Adipiscing anim magna laudanti</organica>
-                        <estado name="p_estado">Anim dolor rem sit sed</estado>
+                        <estado name="p_estado">Labore perspiciatis adipiscing</estado>
+                        <descricao name="p_descricao">Sit aliqua unde dolor anim</descricao>
+                        <codigo name="p_codigo">Sit doloremque labore dolor re</codigo>
+                        <organica name="p_organica">Laudantium omnis officia accus</organica>
                         <id name="p_id" tag="id">1</id>
                     </row>
                 </value>
@@ -153,7 +154,7 @@
                         <link>index</link>
                         <parameter>undefinedimages/IGRP/IGRP2.3/app/igrp/pesquisarperfil/PesquisarPerfil.xsl?</parameter>
                         <target>_self</target>
-                        <img>primary|fa-list</img>
+                        <img>primary|fa-align-justify</img>
                     </item>
                     <item type="specific" code="" class="black" rel="transacao">
                         <title>Transacao</title>

@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
     
     <link REL="SHORTCUT ICON" HREF="{$path}/assets/img/favicon.ico" />
+   
+      <link rel="mask-icon" href="{$path}/assets/img/safari-pinned-tab.svg" color="#5bbad5"/>
+   
     
     <title><xsl:value-of select="rows/title"/></title>
     <!-- Normalize -->
@@ -179,42 +182,71 @@
     </xsl:if>
   </xsl:template>
   <!-- SIDERBAR -->
-  <xsl:template name="IGRP-sidebar">
-    <xsl:if test="$hasMenu = 'true'">
-      <xsl:variable name="APP" select="rows/app"/>
-      <xsl:variable name="menus" select="document(rows/slide-menu/@file)/menus"/>
-      <div class="col-md-2 col-sm-3 sidebar tree-list" id="igrp-sidebar">
-        <!-- <h4><xsl:value-of select="$menus/title"/></h4> -->
-        <ul class="nav nav-sidebar">
-          <xsl:for-each select="$menus/menu">
-            <xsl:variable name="parentId" select="concat($APP,'-',position())"/>
-            <li parent-id="{$parentId}">
-              <xsl:if test="submenu">
-                <xsl:attribute name="class">treeview</xsl:attribute>
-              </xsl:if>
-              <a href="#">
-                <xsl:value-of select="title"/>
-                <i class="fa fa-angle-right pull-right"></i>
-                <span class="nav-bar-active" bg-color="2"/>
-              </a>
-              <xsl:if test="submenu">
-                <ul class="treeview-menu">
-                  <xsl:for-each select="submenu">
-                    <li>
-                      <a href="{link}" item-id="{$parentId}-{position()}">
-                          <!-- <i class="fa fa-angle-right"></i> -->
-                          <span><xsl:value-of select="title"/></span>
-                      </a>
-                    </li>
-                  </xsl:for-each>
-                </ul>
-              </xsl:if>
-            </li>
-          </xsl:for-each>
-        </ul>
-      </div>
-    </xsl:if>
-  </xsl:template>
+  	<xsl:template name="IGRP-sidebar">
+		<xsl:if test="$hasMenu = 'true'">
+			<xsl:variable name="APP" select="rows/app" />
+			<xsl:variable name="menus"
+				select="document(rows/slide-menu/@file)/menus" />
+			<div class="col-md-2 col-sm-3 sidebar tree-list" id="igrp-sidebar">
+				<!-- <h4><xsl:value-of select="$menus/title"/></h4> -->
+				<ul class="nav nav-sidebar">
+					<xsl:for-each select="$menus/menu">
+					 <xsl:sort select="order"/>
+						<xsl:variable name="parentId" select="concat($APP,'-',position())" />
+						<li parent-id="{$parentId}">
+							<xsl:choose>
+								<xsl:when test="link">
+
+									<!-- <a href="{submenu/link}"> -->
+									<!-- <xsl:value-of select="submenu/title"/> -->
+									<!-- <i class="fa fa-angle-right pull-right"></i> -->
+									<!-- <span class="nav-bar-active" bg-color="2"/> -->
+									<!-- </a> -->
+
+									<xsl:attribute name="class">treeview</xsl:attribute>
+										<a href="{link}" target="{submenu/target}" item-id="{$parentId}-{position()}">
+											
+											<span>
+												<xsl:value-of select="title" />
+											</span>
+<!-- 											<i class="fa fa-user pull-right"></i> -->
+											<span class="nav-bar-active" bg-color="2" />
+										</a>								
+
+								</xsl:when>
+								<xsl:otherwise>
+									<xsl:if test="submenu">
+										<xsl:attribute name="class">treeview</xsl:attribute>
+									</xsl:if>
+									<a href="#">
+										<xsl:value-of select="title" />
+										<i class="fa fa-angle-right pull-right"></i>
+										<span class="nav-bar-active" bg-color="2" />
+									</a>
+									<xsl:if test="submenu">
+										<ul class="treeview-menu">
+											<xsl:for-each select="submenu">
+											 <xsl:sort select="order"/>
+												<li>													
+													<a href="{link}"  target="{target}" item-id="{$parentId}-{position()}">
+<!-- 													<i class="fa fa-circle"></i> -->
+														<span>
+															<xsl:value-of select="title" />
+														</span>
+													</a>
+												</li>
+											</xsl:for-each>
+										</ul>
+									</xsl:if>
+								</xsl:otherwise>
+							</xsl:choose>
+
+						</li>
+					</xsl:for-each>
+				</ul>
+			</div>
+		</xsl:if>
+	</xsl:template>
   <!-- BOTTOM -->
   <xsl:template name="IGRP-bottom">
     

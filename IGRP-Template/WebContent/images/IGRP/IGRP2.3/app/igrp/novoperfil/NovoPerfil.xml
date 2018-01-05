@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="../images/IGRP/IGRP2.3/app/igrp/novoperfil/NovoPerfil.xsl" type="text/xsl"?>
+<?xml-stylesheet href="images/IGRP/IGRP2.3/app/igrp/novoperfil/NovoPerfil.xsl" type="text/xsl"?>
 <rows>
+    <link_img>images/IGRP/IGRP2.3</link_img>
     <site>
-        <welcome_note>Ola</welcome_note>
-        <footer_note>2011 - Copyright NOSI</footer_note>
-        <user_name>red-igrp</user_name>
+        <welcome_note>Oba</welcome_note>
+        <footer_note>2017 - Copyright NOSI</footer_note>
+        <user_name>Hexagon</user_name>
         <button type="specific">
             <title>Sair</title>
-            <app>RED</app>
+            <app>DUA</app>
             <page />
             <link>#</link>
             <target>_self</target>
@@ -49,13 +50,28 @@
                 <page>NovoPerfil</page>
                 <link>index</link>
                 <target>submit</target>
-                <img>info|fa-save</img>
+                <img>primary|fa-save</img>
                 <parameter>undefinedimages/IGRP/IGRP2.3/app/igrp/novoperfil/NovoPerfil.xsl</parameter>
             </item>
         </toolsbar_1>
         <form_1 type="form" xml-type="form" gen-type="container" gen-group="">
             <fields>
-                <aplicacao name="p_aplicacao" type="select" multiple="false" maxlength="30" required="false" change="true" disabled="false" right="false" domain="">
+                <nome name="p_nome" type="text" maxlength="30" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false">
+                    <label>Nome</label>
+                    <value>Aperiam rem sed adipiscing lau</value>
+                </nome>
+                <codigo name="p_codigo" type="text" maxlength="30" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false">
+                    <label>Código</label>
+                    <value>Aperiam lorem natus labore rem</value>
+                </codigo>
+                <activo name="p_activo" type="checkbox" maxlength="30" required="false" change="false" readonly="false" disabled="false" right="false" check="true">
+                    <label>Ativo?</label>
+                    <value>1</value>
+                </activo>
+                <nada name="p_nada" type="separator" maxlength="30" placeholder="" right="false">
+                    <label></label>
+                </nada>
+                <aplicacao name="p_aplicacao" type="select" multiple="false" maxlength="30" required="true" change="true" disabled="false" right="false" domain="" java-type="">
                     <label>Aplicação</label>
                     <list>
                         <option/>
@@ -77,8 +93,8 @@
                         </option>
                     </list>
                 </aplicacao>
-                <organica name="p_organica" type="select" multiple="false" maxlength="30" required="false" change="true" disabled="false" right="false" domain="">
-                    <label>Orgânica</label>
+                <organica name="p_organica" type="select" multiple="false" maxlength="30" required="true" change="true" disabled="false" right="false" domain="" java-type="">
+                    <label>Organização</label>
                     <list>
                         <option/>
                         <option>
@@ -99,16 +115,8 @@
                         </option>
                     </list>
                 </organica>
-                <codigo name="p_codigo" type="text" maxlength="30" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false">
-                    <label>Código</label>
-                    <value>Officia sit amet elit voluptat</value>
-                </codigo>
-                <descricao name="p_descricao" type="text" maxlength="30" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false">
-                    <label>Descrição</label>
-                    <value>Mollit aliqua omnis ipsum offi</value>
-                </descricao>
-                <perfil name="p_perfil" type="select" multiple="false" maxlength="30" required="false" change="false" disabled="false" right="false" domain="">
-                    <label>Perfil</label>
+                <perfil name="p_perfil" type="select" multiple="false" maxlength="30" required="false" change="false" disabled="false" right="false" domain="" java-type="">
+                    <label>Perfil pai</label>
                     <list>
                         <option/>
                         <option>
@@ -129,11 +137,18 @@
                         </option>
                     </list>
                 </perfil>
-                <activo name="p_activo" type="checkbox" maxlength="30" required="false" change="false" readonly="false" disabled="false" right="false" check="true">
-                    <label>Activo?</label>
-                    <value>1</value>
-                </activo>
             </fields>
         </form_1>
+        <toolsbar_2 type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="voltar">
+                <title>Voltar</title>
+                <app>igrp</app>
+                <page>NovoPerfil</page>
+                <link>index</link>
+                <target>_back</target>
+                <img>warning|fa-arrow-left</img>
+                <parameter>undefinedimages/IGRP/IGRP2.3/app/igrp/novoperfil/NovoPerfil.xsl</parameter>
+            </item>
+        </toolsbar_2>
     </content>
 </rows>

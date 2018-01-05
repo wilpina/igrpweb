@@ -27,7 +27,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row " id="row-51448be4">
+                                    <div class="row " id="row-e79bb0ad">
                                         <div class="gen-column col-sm-6">
                                             <div class="gen-inner">
                                                 <xsl:if test="rows/content/sectionheader_1">
@@ -54,7 +54,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="row " id="row-81543f84">
+                                    <div class="row " id="row-c3b2b11a">
                                         <div class="gen-column col-md-12">
                                             <div class="gen-inner">
                                                 <xsl:if test="rows/content/form_1">
@@ -109,6 +109,13 @@
                                                                         </textarea>
                                                                     </div>
                                                                 </xsl:if>
+                                                                <xsl:if test="rows/content/form_1/fields/personalizacoes">
+                                                                    <div class="box-head subtitle gen-fields-holder" text-color="1">
+                                                                        <span>
+                                                                            <xsl:value-of select="rows/content/form_1/fields/personalizacoes/label"/>
+                                                                        </span>
+                                                                    </div>
+                                                                </xsl:if>
                                                                 <xsl:if test="rows/content/form_1/fields/img_src">
                                                                     <div class="form-group col-sm-3   gen-fields-holder" item-name="img_src" item-type="text">
                                                                         <label for="{rows/content/form_1/fields/img_src/@name}">
@@ -135,6 +142,13 @@
                                                                                 <xsl:with-param name="field" select="rows/content/form_1/fields/templates"/>
                                                                             </xsl:call-template>
                                                                         </input>
+                                                                    </div>
+                                                                </xsl:if>
+                                                                <xsl:if test="rows/content/form_1/fields/extras">
+                                                                    <div class="box-head subtitle gen-fields-holder" text-color="1">
+                                                                        <span>
+                                                                            <xsl:value-of select="rows/content/form_1/fields/extras/label"/>
+                                                                        </span>
                                                                     </div>
                                                                 </xsl:if>
                                                                 <xsl:if test="rows/content/form_1/fields/host">
@@ -298,12 +312,16 @@
                 <!-- SELECT JS INCLUDES -->
                 <script type="text/javascript" src="{$path}/plugins/select2/select2.full.min.js?v={$version}"/>
                 <script type="text/javascript" src="{$path}/plugins/select2/select2.init.js?v={$version}"/>
+                <!-- RULES -->
+                <script src="{$path}/core/igrp/IGRP.rules.class.js"/>
+                <script>
+$.IGRP.rules.set({"p_flg_old":[{"name":"show antigo","events":"load,change","isTable":false,"conditions":{"rules":[{"condition":"checked","value":"","value2":"","patern":"","patern_custom":"","opposite":"1"}],"actions":[{"action":"show","targets":"link_menu,link_center","procedure":"","request_fields":"","msg_type":"","msg":""}]}}],"p_flg_external":[{"name":"é externo?","events":"load,change","isTable":false,"conditions":{"rules":[{"condition":"checked","value":"","value2":"","patern":"","patern_custom":"","opposite":"1"}],"actions":[{"action":"show","targets":"host","procedure":"","request_fields":"","msg_type":"info","msg":""}]}}]},'actionsList');</script>
             </body>
         </html>
     </xsl:template>
-    <xsl:include href="../../../xsl/tmpl/IGRP-functions.tmpl.xsl?v=1513855213677"/>
-    <xsl:include href="../../../xsl/tmpl/IGRP-variables.tmpl.xsl?v=1513855213677"/>
-    <xsl:include href="../../../xsl/tmpl/IGRP-home-include.tmpl.xsl?v=1513855213677"/>
-    <xsl:include href="../../../xsl/tmpl/IGRP-utils.tmpl.xsl?v=1513855213677"/>
-    <xsl:include href="../../../xsl/tmpl/IGRP-form-utils.tmpl.xsl?v=1513855213677"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-functions.tmpl.xsl?v=1514462527631"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-variables.tmpl.xsl?v=1514462527631"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-home-include.tmpl.xsl?v=1514462527631"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-utils.tmpl.xsl?v=1514462527631"/>
+    <xsl:include href="../../../xsl/tmpl/IGRP-form-utils.tmpl.xsl?v=1514462527631"/>
 </xsl:stylesheet>
