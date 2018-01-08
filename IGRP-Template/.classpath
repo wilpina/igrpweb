@@ -55,11 +55,11 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/javax.mail-api-1.6.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/reflections-0.9.11.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/I18n.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/IGRP.jar"/>
 	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/igrp.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
