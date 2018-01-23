@@ -28,7 +28,7 @@
                 <!--<xsl:call-template name="IGRP-topmenu"/>-->
                 <nav id="igrp-top-nav" class="navbar navbar-fixed-top" bg-color="1">
                     <a class="navbar-brand col-sm-4 col-md-3" href="{rows/link}" >
-                        <img src="{$path}/themes/default/img/logo.png"/>
+                        <img src="{$path}/themes/default/img/studio.logo.svg"/>
                         <span class=""><b>IGRP</b> <small></small></span>
                     </a>
                     <div id="side-bar-ctrl">
@@ -324,5 +324,5 @@
     <xsl:include href="../../../xsl/tmpl/IGRP-utils.tmpl.xsl?v=1482941622041"/>
     <xsl:include href="../../../xsl/tmpl/IGRP-form-utils.tmpl.xsl?v=1482941622041"/>
     <xsl:include href="../../../xsl/tmpl/IGRP-table-utils.tmpl.xsl?v=1482941622041"/>
-    <xsl:include href="../../../core/bpmn/xsl/bpmn-tree-menu.tmpl.xsl?v=1482941622041"/>
+    <xsl:include href="../../../core/bpmnjs/xsl/bpmn-tree-menu.tmpl.xsl?v=1482941622041"/>  
 </xsl:stylesheet>

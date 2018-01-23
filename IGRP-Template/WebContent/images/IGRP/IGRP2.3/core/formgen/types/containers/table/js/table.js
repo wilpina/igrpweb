@@ -93,7 +93,7 @@ var GENTABLE = function(name,params){
 		container.setPropriety({
 			name:'dataTable',
 			label : 'Data Table',
-			value:true,
+			value:false,
 			xslValue:'igrp-data-table'
 		});
 
@@ -158,9 +158,9 @@ var GENTABLE = function(name,params){
 			name:'ctxType',
 			label:'Context Menu',
 			value:{
-				value:'ctx',
+				value:'inl',
 				options:[
-					{value:'ctx',label:'RIght Click'},
+					{value:'ctx',label:'Right Click'},
 					{value:'inl',label:'Inline'}
 				]
 			},
@@ -340,7 +340,7 @@ var GENTABLE = function(name,params){
 			});
 		}
 	}
-	
+
 	container.onCheckboxFieldSet = function(f){
 		f.setProperty({
 			name  	 : 'switch',
@@ -429,14 +429,17 @@ var GENTABLE = function(name,params){
 	}
 
 	var getTableFooter = function(){
+		
 		var rtn = '<tfoot><tr>';
 
 		container.GET.fields().forEach(function(f){
-			var fValue = container.GET.path()+"/table/value/row[@total='yes']/"+f.GET.tag();
+			if(f.type != 'hidden'){
+				var fValue = container.GET.path()+"/table/value/row[@total='yes']/"+f.GET.tag();
 			var align  =  f.GET.align ? f.GET.align() : '';
 			rtn+='<td align="'+align+'">';
 				rtn+='<xsl:value-of select="'+fValue+'"/>'
 			rtn+='</td>';
+			}
 		});
 
 		if(container.GET.ctxInlineTmpl())
@@ -453,3 +456,4 @@ this[VARS.name].declareContainer({
 	name:'table',
 	container:GENTABLE
 });
+
