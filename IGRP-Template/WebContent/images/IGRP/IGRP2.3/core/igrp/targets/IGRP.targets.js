@@ -340,6 +340,44 @@
 			return false;
 		};
 
+		var right_panel       = function(p){
+			
+			var modal 	 = $('#igrp-right-panel'),
+
+				iframe   = $('iframe',modal),
+
+				n_iframe = iframe.clone(),
+			
+				url 	 = p.url;
+			
+			if( url.indexOf('&target=_blank') == -1 )
+				url+='&target=_blank';
+
+			modal.addClass('loading');
+
+			n_iframe.attr('src',url);
+
+			n_iframe.bind('load',function(e){
+		
+				var contents = n_iframe.contents();
+
+				contents.ready(function(){
+					
+					if($('body',contents)[0])
+
+						modal.removeClass('loading');
+	
+				});
+
+			});
+
+			iframe.replaceWith(n_iframe);
+
+			modal.modal("show");
+
+			return false;
+		};
+
 		var mpsubmit  = function(p){
 			$.IGRP.components.iframeNav.set({
 				url    :$.IGRP.utils.getUrl(p.url)+form.serialize(),
@@ -567,6 +605,14 @@
 				label : 'Modal',
 
 				action : modal
+
+			},
+
+			right_panel 	     : {
+
+				label : 'Right Panel',
+
+				action : right_panel
 
 			},
 
