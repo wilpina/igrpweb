@@ -4,5 +4,6 @@
 	<username></username>
 	<password></password>
 	<base></base>
+	<authentication_filter></authentication_filter>
+	<entryDN></entryDN>
 </ldap>
-
