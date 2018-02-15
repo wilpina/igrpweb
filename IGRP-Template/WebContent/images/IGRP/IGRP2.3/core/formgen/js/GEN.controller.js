@@ -852,10 +852,15 @@ var GENERATOR = function(genparams){
 		if(id){
 			
 			$.getJSON(link+id,function(data){
-
-				var containers = GEN.layout.getAllContainers(data.rows);
-
-				if(callback) callback(containers,data);
+				if(data){
+					var containers = GEN.layout.getAllContainers(data.rows);
+					
+					if(callback) callback(containers,data);
+				}else{
+					console.log('data fail');
+					callback([]);
+				}
+					
 
 			}).fail(function(){
 				console.log('fail');

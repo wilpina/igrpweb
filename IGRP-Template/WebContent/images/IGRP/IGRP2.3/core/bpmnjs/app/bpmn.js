@@ -72,7 +72,8 @@
          
          if (cont){
             var starXml = xml.substring(0,xml.indexOf('<formData>')),
-               field    = xml.substring(xml.indexOf('<formData>')+10,xml.indexOf('</formData>')).replace(/formField/g, 'activiti:formProperty'),
+               field    = xml.substring(xml.indexOf('<formData>')+10,xml.indexOf('</formData>')).
+               replace(/formField/g, 'activiti:formProperty').replace(/label=/g, 'name='),
                endXml   = xml.substring(xml.indexOf('</formData>')+11,xml.length);
 
             newXml = com.oItoActivite(starXml+field+endXml);
