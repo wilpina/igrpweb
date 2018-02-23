@@ -1,0 +1,19 @@
+<style>
+
+	<logo>img/studioLogoBlank.svg</logo>
+
+	<colors>
+		
+		<color name="primary">#337ab7</color>
+
+	</colors> 
+
+	<css >
+		<file>css/header.css</file>
+		<file>css/sidebar.css</file>
+		<file>css/gen.css</file>
+	</css>
+
+	<logo>img/logo.png</logo>
+
+</style>
