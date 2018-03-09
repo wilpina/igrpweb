@@ -263,7 +263,7 @@
 						
 						<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab2"/>
-						<xsl:value-of select="concat($model,'View',' view = new ',$model,'View(model);')"/>
+						<xsl:value-of select="concat($model,'View',' view = new ',$model,'View();')"/>
 						<xsl:call-template name="setSqlChart"/>
 						<xsl:call-template name="setSqlTable"/>
 						<xsl:call-template name="setSqlCombobox"/>
@@ -271,6 +271,12 @@
 						<xsl:call-template name="addLegendColor"/>
 						<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab2"/>
+						
+						<xsl:value-of select="'view.setModel(model);'"/>
+						<xsl:value-of select="$newline"/>
+						<xsl:value-of select="$tab2"/>
+						
+						
 						<xsl:value-of select="'return this.renderView(view);'"/>
 						<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab"/>  
