@@ -49,6 +49,12 @@ var GENERATOR = function(genparams){
 	GEN.propertiesLabels = {};
 
 	GEN.domains 		 = {};
+	
+	GEN.files 			 = {
+		css : [],
+		js  : [],
+		xsl : []
+	};
 
 	GEN.tags = {
 
@@ -2009,8 +2015,6 @@ if(input) {
 			service : GEN.proprieties.service
 		}
 
-		console.log(page)
-
 		//console.log(page);		
 		//console.log(JSON.stringify(page));
 		return JSON.stringify(page);
@@ -3081,10 +3085,6 @@ if(input) {
 		
 		$('.CodeMirror-gutter-wrapper').removeClass('has-error');
 		
-		console.log('removee');
-		
-		console.log( $('.CodeMirror-gutter-wrapper') )
-		
 		if(resize)
 			GEN.resizeCodeMirrorArea();
 	}
@@ -3120,7 +3120,6 @@ if(input) {
 					
 					GEN.UTILS = typeof configData == 'string' ? $.parseJSON(configData) : configData;
 
-					console.log(GEN.UTILS)
 					//loadDomains();
 
 					loadPageContents({ source: genparams.dataSrc });
@@ -3999,6 +3998,7 @@ if(input) {
 		//var options = [{ value:GEN.DETAILS.page, label:GEN.DETAILS.page_descr }];
 		var options = [];
 		var value   = p.value;
+		var tagName = p.tag || 'action';
 
 		if(GEN.DETAILS.linkPageList && GEN.DETAILS.linkPageList[0])
 			
@@ -4022,8 +4022,6 @@ if(input) {
 				for(var i = 0; i < options.length; i++){
 					var o = options[i];
 					field.action = {};
-					
-					
 
 					if(o.value && (id == o.value) ){
 						o.attributes.forEach(function(att){
@@ -4040,7 +4038,6 @@ if(input) {
 					}
 
 				}
-
 		}
 
 		if(typeof p.value == 'object'){
@@ -4052,13 +4049,16 @@ if(input) {
 				}
 			}
 		}
-
+		console.log(p)
+		
 		var params = {
-			name: 'action',
+			name: tagName,
 			value:{
 				value   : value ? value : GEN.DETAILS.id,
 				options : options
 			},
+			isField : p.isField || false,
+			valuePersist : p.valuePersist || false,
 			onChange:function(val){
 				setBTNAction(val);
 			}
@@ -4586,79 +4586,7 @@ if(input) {
 				},
 				onChange:function(v){
 			
-				},
-
-				/*setter: function(){
-					var holder 	  = $('<div class="icon-setter-h"></div>');//.hide();
-					var searcher = $('<div class="form-group icon-searcher col-md-6"><input class="form-control" type="text" placeholder="Pesquisar"></div>')
-					var list 	  = $('<ul style="color:'+field.GET.iconColor()+'"/>');
-					var paramName = p.paramName;
-					var active    = field.GET.img ? field.GET.img().split('|')[0] : '';
-
-					var setValues = function(icon,color){
-						field.SET.img( icon+'|'+field.GET.iconColor() );
-						field.SET.iconClass(icon);
-					}
-
-					searcher.on('keyup','input',function(){
-						var word = $(this).val();
-						
-						$('li',list).hide();
-					
-						$.each($('li[rel*="'+word+'"]',list),function(i,li){
-							$(li).show();
-						});
-
-						if(word.length == 0)
-							$('li',list).show();
-					});
-					//icon color
-					var icolor = $('<div class="form-group col-md-4">'+
-									'<div class="input-group" id="gen-i-color-setter">'+
-										'<input value="'+field.GET.iconColor()+'" placeholder="Cor" type="text" format="hex" class="form-control"/>'+
-										'<span class="input-group-addon">'+
-											'<i></i>'+
-										'</span>'+
-									'</div>'+
-								 '</div>');
-
-					//icon click
-					list.on('click','li',function(){
-						$('li',list).removeClass('active');
-	    				$(this).addClass('active');
-	    				setValues( $(this).attr('rel') )
-					});
-					
-					setTimeout(function(){
-
-						$('#gen-i-color-setter').colorpicker({format:'hex'})
-							.on('changeColor.colorpicker', function(event){
-								var color = event.color.toHex();
-								field.SET.iconColor(color);
-								setValues( $('.btn-i-setter.active').attr('rel') )
-								list.css('color',color);
-						});
-
-					},500);
-
-					GEN.getImagesFromDir({
-						dir      : path+'/library/fontawesome/font-awesome.json',
-						id       : 'fontawesome',
-						callback : function(icons){
-							//console.log(icons)
-							for(var i in icons){
-								var _class = (active == i) ? 'active' : '';
-								var li    = $('<li rel="'+i+'" class="btn-i-setter '+_class+'"><span><i class="fa '+i+'"></i></span></li>')
-								list.append(li);
-							}
-							holder.show();
-						}
-					});
-
-					holder.append(searcher,icolor,list);
-
-					return holder;
-				}*/
+				}
 			},
 			isField:p.isField,
 			valuePersist:p.valuePersist
@@ -5059,8 +4987,9 @@ if(input) {
 		$('body').removeClass('startin waiting');
 	}
 
-	GEN.waiting = function(){
-		$('body').addClass('waiting');
+	GEN.waiting = function(o){
+		var act = o == false ? 'removeClass' : 'addClass';
+ 		$('body')[act]('waiting');
 	}
 	
 	//subscribe

@@ -267,9 +267,21 @@ var GENSTRUCTURES = function(GEN){
 			if(pr.isField){
 				var tag  = containerTag+'_'+pr.name;
 				var persist = pr.valuePersist ? 'persist="true"' : '';
+				var value = container.GET[pr.name]();
+				var valueAttr = '';
+				var label = pr.label || '';
+				
+				if(typeof value == 'object' && value.type=='action'){
+					
+					valueAttr = ' type="action"';
+					
+					value = '<app>'+value.app+'</app><page>'+value.page+'</page><action>'+value.action+'</action>'
+					
+				}
+				
 				rtn+='<'+tag+' name="p_'+tag+'" type="text" maxlength="4000" '+persist+'>'+
-						'<label>'+pr.label+'</label>'+
-						'<value>'+container.GET[pr.name]()+'</value>'+
+						'<label>'+label+'</label>'+
+						'<value'+valueAttr+'>'+value+'</value>'+
 					 '</'+tag+'>';
 			}
 		}
@@ -444,9 +456,7 @@ var GENSTRUCTURES = function(GEN){
 				parent = f.GET.parent && f.GET.parent() ? 'parent="'+f.GET.parent()+'"':'',
 				params = '',
 				actionLINK = f.action ? f.action.link : '';
-				
-				console.log(f);
-				
+
 			if(f.GET.target_fields && f.GET.target_fields())
 				target += '|'+f.GET.target_fields();
 
