@@ -36,6 +36,8 @@
 		<xsl:value-of select="$newline"/>
  		<xsl:value-of select="$import_response"/>
 		<xsl:value-of select="$newline"/>
+ 		<xsl:value-of select="$import_igrp"/>
+		<xsl:value-of select="$newline"/>
 		<xsl:value-of select="$import_query_helper"/>
 		<xsl:value-of select="$newline"/>
      	<xsl:call-template name="start-code">
@@ -82,9 +84,6 @@
 		<xsl:value-of select="$newline"/>
 		<xsl:value-of select="$tab"/>
  		<xsl:value-of select="'public Response actionIndex() throws IOException, IllegalArgumentException, IllegalAccessException{'"/>
-			<xsl:variable name="columns">
-				<xsl:call-template name="sql-select"/>
-			</xsl:variable>
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>
 			<xsl:value-of select="concat($page_name,' model = new ',$page_name,'();')"/>
@@ -96,15 +95,22 @@
 			<xsl:value-of select="concat($page_name,'View',' view = new ',$page_name,'View();')"/>
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>	
+			
+			<xsl:variable name="columns">
+				<xsl:call-template name="sql-select"/>
+			</xsl:variable>
 			<xsl:call-template name="start-code-crud">
 	     		<xsl:with-param name="type" select="'index'"/>
 	     	</xsl:call-template>	     	
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>  		
-			<xsl:value-of select="concat('QueryHelper query = Core.query(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,'select ',$columns,' from ',/rows/plsql/package_copy_db,$double_quotes,');')"/>	
+			<xsl:value-of select="concat('QueryHelper query = Core.query(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,'SELECT ',$columns,' FROM ',/rows/plsql/package_copy_db,$double_quotes,');')"/>	
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>	
 			<xsl:value-of select="'model.loadTable_1(query);'"/>
+			<xsl:value-of select="$newline"/>
+			<xsl:value-of select="$tab2"/>
+			<xsl:call-template name="set-params-context-menu"/>		
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>
 			<xsl:call-template name="end-code-crud"/>
@@ -211,8 +217,9 @@
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>
 			<xsl:value-of select="'else'"/>
-			<xsl:value-of select="$newline"/>
-			<xsl:value-of select="$tab2"/>
+				<xsl:value-of select="$newline"/>
+				<xsl:value-of select="$tab2"/>
+				<xsl:value-of select="$tab"/>
 			<xsl:value-of select="'Core.setMessageError();'"/>
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>
@@ -227,7 +234,6 @@
  	
  	<xsl:template name="set-update-keys-value">
  			<xsl:for-each select="//fields/*[@iskey='true']">	
- 				
 	 			<xsl:choose>
 	 				<xsl:when test="@type='hidden'">
 						<xsl:call-template name="setType">

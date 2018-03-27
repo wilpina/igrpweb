@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="../IGRP_LIC_PAR_GER_PAR_GER_PAG_2_dash.xsl?v={040D4CD9-2C0E-1287-E050-040A0802522D}" type="text/xsl"?>
+<rows><title>Licenciamento Global MZ</title>
+<version>040A120CE7D1A2B9E050040A08024EFF</version>
+<link>/images/IGRP/xml/IGRP-home.xml</link>
+<site><welcome_note>Ola</welcome_note>
+<footer_note>2011 - Copyright NOSI</footer_note>
+<user_name>red-igrp</user_name>
+<button		type="specific"><title>Sair</title>
+<app>RED</app>
+<page />
+<link>#</link>
+<target>_self</target>
+<img>exit.png</img>
+</button>
+</site><plsql><action>PAR_GER_PAR_GER_PAG_2</action><package_db>nosi.webapps.dscakjdsc.pages.par_ger_par_ger_pag_2</package_db><package_html>PAR_GER_PAR_GER_PAG_2</package_html></plsql>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<navigation	file="navigation.xml?v={040D4CD9-2C0C-1287-E050-040A0802522D}"	prm_app="p_prm_app"	prm_page="p_prm_page"	prm_action="p_prm_action" />
+<top_menu	file="/images/IGRP/xml/IGRP-top_menu.xml" />
+<slide-menu	file="slide-menu.xml?v=11" />
+<content		type="dash"><title>ASSOCIAR CNBS</title>
+<menu><item		type="specific"><title>Dados Gerais</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>1A</link>
+<target>_self</target>
+<img>info-menu.png</img>
+</item>
+<item		type="specific"><title>Players</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>LIST_PROC</link>
+<target>_self</target>
+<img>m_empresa_.png</img>
+</item>
+<item		type="specific"><title>Proprietarios</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>PROP</link>
+<target>_self</target>
+<img>descendentes.png</img>
+</item>
+<item		type="specific"><title>Legislacoes</title>
+<app>IGRP_LIC</app>
+<page>IGRP_LIC.GLIC_T_LEGISLACAO</page>
+<link>BULK</link>
+<target>_self</target>
+<img>documentos.png</img>
+</item>
+<item		type="specific"><title>Entidades</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>ENT_LIC</link>
+<target>_self</target>
+<img>m_fiscalizacao.png</img>
+</item>
+<item		type="specific"><title>Taxas</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>TX_LIST</link>
+<target>_self</target>
+<img>contribuicoes.png</img>
+</item>
+<item		type="specific"><title>Processos</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>ASS_PROC</link>
+<target>_self</target>
+<img>m_categoria.png</img>
+</item>
+<item		type="specific"><title>Infraccoes</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>INF</link>
+<target>_self</target>
+<img>alerta.png</img>
+</item>
+<item		type="specific"><title>Receitas</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>REC</link>
+<target>_self</target>
+<img>m_movimentos.png</img>
+</item>
+<item		type="specific"><title>Zonas</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>LIST_ZON</link>
+<target>_self</target>
+<img>m_ponto.fscalizacao.png</img>
+</item>
+<item		type="specific"><title>Periodo</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>LIST_PER</link>
+<target>_self</target>
+<img>m_calendario.png</img>
+</item>
+<item		type="specific"><title>Especies</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>LIST_ESP</link>
+<target>_self</target>
+<img>m_especies.png</img>
+</item>
+<item		type="specific"><title>Instrumentos</title>
+<app>IGRP_LIC</app>
+<page>IGRP_LIC.GLIC_T_INSTRUMENTO</page>
+<link>BULK</link>
+<target>_self</target>
+<img>m_material.png</img>
+</item>
+<item		type="specific"><title>Dados Excepcao</title>
+<app>IGRP_LIC</app>
+<page>PAR_LIC</page>
+<link>2A</link>
+<target>_self</target>
+<img>info-menu.png</img>
+</item>
+<item		type="specific"><title>CAE/Vistoria</title>
+<app>IGRP_LIC</app>
+<page>MOD_SERVICO</page>
+<link>3</link>
+<target>_self</target>
+<img>m_calendario.png</img>
+</item>
+<item		type="specific"><title>CAE/CNBS</title>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<link>PAR_GER_PAG_1</link>
+<target>_self</target>
+<img>m_integracao.png</img>
+</item>
+</menu>
+<form		tab=""><label><cae		type="separator">CAE</cae>
+<codigo		name="p_codigo"	type="text"	maxlength="30"	readonly="readonly">Codigo</codigo>
+<designacao		name="p_designacao"	type="text"	maxlength="250"	readonly="readonly">Designacao</designacao>
+<cnbs		type="separatorlist">CNBS</cnbs>
+<cnbs_pesq		name="p_cnbs_pesq"	type="LOOKUP"	rel="cnbs"	maxlength="250">CNBS</cnbs_pesq>
+<codigo_cnbs		name="p_codigo_cnbs"	type="text"	rel="cnbs"	maxlength="30">Codigo CNBS</codigo_cnbs>
+</label>
+<value><codigo		name="p_codigo">Apidhcrsceifmicgjwqz</codigo>
+<designacao		name="p_designacao">Usvzqcyee</designacao>
+<cnbs_pesq		name="p_cnbs_pesq">Fylnwmnovvlofba</cnbs_pesq>
+<codigo_cnbs		name="p_codigo_cnbs">Flqfvnaa</codigo_cnbs>
+</value>
+<lookup><cnbs_pesq>?XXX</cnbs_pesq>
+</lookup>
+<table><cnbs		type="separatorlist"><label><cnbs_pesq		name="p_cnbs_pesq"	type="lookup"	align="">CNBS</cnbs_pesq>
+<cnbs_pesq_desc		name="p_cnbs_pesq_desc"	type="lookup"	align="">CNBS</cnbs_pesq_desc>
+<codigo_cnbs		name="p_codigo_cnbs"	type="text"	align="">Codigo CNBS</codigo_cnbs>
+<codigo_cnbs_desc		name="p_codigo_cnbs_desc"	type="text"	align="">Codigo CNBS</codigo_cnbs_desc>
+<cnbs_id		name="p_cnbs_id"	type="hidden"	align="">Codigo CNBS</cnbs_id>
+</label>
+<value><row><cnbs_pesq		name="p_cnbs_pesq"	type="lookup">Lbmgonhdusjvpufrcopw</cnbs_pesq>
+<cnbs_pesq_desc		name="p_cnbs_pesq_desc"	type="lookup">Lbmgonhdusjvpufrcopw</cnbs_pesq_desc>
+<codigo_cnbs		name="p_codigo_cnbs"	type="text">Bfcsdasyvlknzd</codigo_cnbs>
+<codigo_cnbs_desc		name="p_codigo_cnbs_desc"	type="text">Bfcsdasyvlknzd</codigo_cnbs_desc>
+</row>
+<row><cnbs_pesq		name="p_cnbs_pesq"	type="lookup">Bvzqd</cnbs_pesq>
+<cnbs_pesq_desc		name="p_cnbs_pesq_desc"	type="lookup">Bvzqd</cnbs_pesq_desc>
+<codigo_cnbs		name="p_codigo_cnbs"	type="text">Brvmxneushcfiefmzmjsoirnwrqfh</codigo_cnbs>
+<codigo_cnbs_desc		name="p_codigo_cnbs_desc"	type="text">Brvmxneushcfiefmzmjsoirnwrqfh</codigo_cnbs_desc>
+</row>
+</value>
+</cnbs>
+</table>
+<tools-bar><item		type="specific"><title>Gravar</title>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<link>PAR_GER_PAG_2</link>
+<target>submit</target>
+<img>save.png</img>
+</item>
+<item		type="specific"><title>Voltar</title>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<link>PAR_GER_PAG_1</link>
+<target>_self</target>
+<img>back.png</img>
+</item>
+</tools-bar>
+</form>
+<table		operation=""><label></label>
+<value><row></row>
+<row></row>
+<row></row>
+<row></row>
+<row></row>
+</value>
+</table>
+</content>
+</rows>

@@ -30,6 +30,8 @@
 		<xsl:value-of select="$newline"/>
  		<xsl:value-of select="$import_response"/>
 		<xsl:value-of select="$newline"/>
+ 		<xsl:value-of select="$import_igrp"/>
+		<xsl:value-of select="$newline"/>
 		<xsl:value-of select="$import_query_helper"/>
 		<xsl:value-of select="$newline"/>
      	<xsl:call-template name="start-code">
@@ -70,15 +72,15 @@
 			<xsl:value-of select="$tab2"/>
 			<xsl:value-of select="concat($page_name,' model = new ',$page_name,'();')"/>
 			<xsl:value-of select="$newline"/>
-			<xsl:value-of select="$tab2"/>	
-			<xsl:value-of select="'model.load();'"/>			
-			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>		
 			<xsl:variable name="conditions">
 				<xsl:call-template name="gen-sql">
 					<xsl:with-param name="type_op" select="'select'"/>
 				</xsl:call-template>
 			</xsl:variable>	
+			<xsl:variable name="columns">
+				<xsl:call-template name="sql-select"/>
+			</xsl:variable>
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>  
 			<xsl:value-of select="concat($page_name,'View',' view = new ',$page_name,'View();')"/>
@@ -87,26 +89,20 @@
 			<xsl:call-template name="start-code-crud">
 	     		<xsl:with-param name="type" select="'index'"/>
 	     	</xsl:call-template>
-	     	<xsl:variable name="columns">
-				<xsl:call-template name="sql-select"/>
-			</xsl:variable>
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>  
-			<xsl:call-template name="gen-sql-combobox"/>
+			<xsl:value-of select="concat('QueryHelper query = Core.query(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,'SELECT ',$columns,' FROM ',/rows/plsql/package_copy_db,$double_quotes,');')"/>	
 			<xsl:value-of select="$newline"/>
-			<xsl:value-of select="$tab2"/> 		
-			<xsl:value-of select="concat('String isEdit = Core.getParam(',$double_quotes,'isEdit',$double_quotes,');')"/>
+			<xsl:value-of select="$tab2"/>	
+			<xsl:value-of select="'model.load(query);'"/>			
+			<xsl:value-of select="$newline"/>
+			<xsl:value-of select="$tab2"/>			
+			<xsl:value-of select="concat('String isEdit = Core.getParam(',$double_quotes,'isEdit',$double_quotes,');')"/>;
  			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>
 			<xsl:value-of select="concat('if(',$isEdit,') {')"/>	
 				<xsl:value-of select="$newline"/>
-				<xsl:value-of select="$tab2"/>		
-				<xsl:value-of select="concat('QueryHelper query = Core.query(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,'select ',$columns,' from ',/rows/plsql/package_copy_db,$double_quotes,')',$conditions,';')"/>
-				<xsl:value-of select="$newline"/>
-				<xsl:value-of select="$tab2"/>	
-				<xsl:value-of select="'model.load(query);'"/>			
-				<xsl:value-of select="$newline"/>
-				<xsl:value-of select="$tab2"/>			
+				<xsl:value-of select="$tab2"/>				
 				<xsl:value-of select="concat('view.btn_save.setLink(',$double_quotes,'save&amp;isEdit=true',$double_quotes,');')"/>	
 				<xsl:value-of select="$newline"/>
 				<xsl:value-of select="$tab2"/>
@@ -215,19 +211,28 @@
  	</xsl:template>
  	
 	<xsl:variable name="isEdit">
-		<xsl:text>Core.isNotNull(isEdit)</xsl:text>
+		<xsl:text>Core.isNull(isEdit)</xsl:text>
 	</xsl:variable>
-
+	
  	<xsl:template name="gen-crud-sql">
 		
 		 	<xsl:choose>
 		 		<xsl:when test="/rows/plsql/package_copy_html!=''">
 		 			<xsl:value-of select="$newline"/>
 					<xsl:value-of select="$tab2"/>
-					<xsl:value-of select="concat('String isEdit = Core.getParam(',$double_quotes,'isEdit',$double_quotes,');')"/>
+					<xsl:value-of select="concat('String isEdit = Core.getParam(',$double_quotes,'isEdit',$double_quotes,');')"/>;
 		 			<xsl:value-of select="$newline"/>
 					<xsl:value-of select="$tab2"/>
-		 			<xsl:value-of select="concat('if(',$isEdit,'){')"/>		 				
+		 			<xsl:value-of select="concat('if(',$isEdit,'){')"/>
+		 				<xsl:value-of select="$newline"/>
+						<xsl:value-of select="$tab2"/>  
+						<xsl:value-of select="$tab"/> 
+		 				<xsl:value-of select="concat('r = Core.insert(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,/rows/plsql/package_copy_html,$double_quotes,',',$double_quotes,/rows/plsql/package_copy_db,$double_quotes,')')"/>
+	 					<xsl:value-of select="$tab2"/>
+						<xsl:call-template name="gen-sql"/>
+						<xsl:value-of select="$newline"/>
+						<xsl:value-of select="$tab2"/>
+	 				<xsl:value-of select="'}else{'"/>
 	 					<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab2"/> 
 						<xsl:value-of select="$tab"/> 
@@ -238,15 +243,6 @@
 						</xsl:call-template>
 						<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab2"/>
-	 				<xsl:value-of select="'}else{'"/>	 					
- 						<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab2"/>  
-						<xsl:value-of select="$tab"/> 
-		 				<xsl:value-of select="concat('r = Core.insert(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,/rows/plsql/package_copy_html,$double_quotes,',',$double_quotes,/rows/plsql/package_copy_db,$double_quotes,')')"/>
-	 					<xsl:value-of select="$tab2"/>
-						<xsl:call-template name="gen-sql"/>
-						<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab2"/>						
 	 				<xsl:value-of select="'}'"/>
 		 		</xsl:when>
 		 		<xsl:otherwise>
@@ -254,21 +250,21 @@
 					<xsl:value-of select="$tab2"/>
 		 			<xsl:value-of select="concat('if(',$isEdit,'){')"/>
 		 				<xsl:value-of select="$newline"/>
+						<xsl:value-of select="$tab2"/> 
+						<xsl:value-of select="$tab"/> 
+		 				<xsl:value-of select="concat(' r = Core.insert(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,/rows/plsql/package_copy_db,$double_quotes,')')"/>
+	 					<xsl:value-of select="$tab2"/>
+						<xsl:call-template name="gen-sql"/>
+						<xsl:value-of select="$newline"/>
+						<xsl:value-of select="$tab2"/>
+	 				<xsl:value-of select="'}else{'"/>
+	 					<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab2"/>
 		 				<xsl:value-of select="concat('r = Core.update(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,/rows/plsql/package_copy_db,$double_quotes,')')"/>
 	 					<xsl:value-of select="$tab2"/>
 						<xsl:call-template name="gen-sql">
 							<xsl:with-param name="type_op" select="'update'"/>
 						</xsl:call-template>
-						<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab2"/>
-	 				<xsl:value-of select="'}else{'"/>
-	 					<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab2"/> 
-						<xsl:value-of select="$tab"/> 
-		 				<xsl:value-of select="concat(' r = Core.insert(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,/rows/plsql/package_copy_db,$double_quotes,')')"/>
-	 					<xsl:value-of select="$tab2"/>
-						<xsl:call-template name="gen-sql"/>
 						<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab2"/>
 	 				<xsl:value-of select="'}'"/>

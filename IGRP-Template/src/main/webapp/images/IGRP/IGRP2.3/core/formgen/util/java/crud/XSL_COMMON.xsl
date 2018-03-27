@@ -100,35 +100,27 @@
  				<xsl:with-param name="text" select="$name"/>
  			</xsl:call-template>
  		</xsl:variable>
-		
-		<xsl:variable name="name__">
-			<xsl:call-template name="replace-all">
-		        <xsl:with-param name="text" select="$name"/>
-		        <xsl:with-param name="replace" select="'p_'"/>
-		        <xsl:with-param name="by" select="''"/>
-		     </xsl:call-template>
-		</xsl:variable>
-					
+ 		
 		<xsl:value-of select="$newline"/>
 		<xsl:value-of select="$tab2"/>
  		<xsl:choose>
  			<xsl:when test="$type='String' or $type='Date'">
- 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParam(',$double_quotes,'p_',$name__,$double_quotes,'));')"/>
+ 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParam(',$double_quotes,'p_',$name,$double_quotes,'));')"/>
  			</xsl:when>
  			<xsl:when test="$type='Integer' or $type='int' or $type='Long'">
- 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamInt(',$double_quotes,'p_',$name__,$double_quotes,'));')"/>
+ 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamInt(',$double_quotes,'p_',$name,$double_quotes,'));')"/>
  			</xsl:when>
  			<xsl:when test="$type='Float' or $type='float'">
- 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamFloat(',$double_quotes,'p_',$name__,$double_quotes,'));')"/>
+ 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamFloat(',$double_quotes,'p_',$name,$double_quotes,'));')"/>
  			</xsl:when>
  			<xsl:when test="$type='Double' or $type='double'">
- 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamDouble(',$double_quotes,'p_',$name__,$double_quotes,'));')"/>
+ 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamDouble(',$double_quotes,'p_',$name,$double_quotes,'));')"/>
  			</xsl:when>
  			<xsl:when test="$type='Short' or $type='short'">
- 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamShort(',$double_quotes,'p_',$name__,$double_quotes,'));')"/>
+ 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamShort(',$double_quotes,'p_',$name,$double_quotes,'));')"/>
  			</xsl:when>
  			<xsl:when test="$type='Long' or $type='long'">
- 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamLong(',$double_quotes,'p_',$name__,$double_quotes,'));')"/>
+ 				<xsl:value-of select="concat('model.set',$name_,'(Core.getParamLong(',$double_quotes,'p_',$name,$double_quotes,'));')"/>
  			</xsl:when>
  		</xsl:choose> 		
  	</xsl:template>
@@ -179,21 +171,18 @@
  		</xsl:choose> 		
  	</xsl:template>
  	
- 	
- 	<xsl:template name="setParam">
- 		<xsl:for-each select="//content/*[@type='table']">
-	 		<xsl:for-each select="fields/*[@iskey='true']">	
-	 			<xsl:value-of select="$newline"/>
-				<xsl:value-of select="$tab2"/>
-	 			<xsl:choose>
-	 				<xsl:when test="@type='hidden'">
-						<xsl:value-of select="concat('view.',@name,'.setParam(true);')"/>
-	 				</xsl:when>
-	 				<xsl:otherwise>
-						<xsl:value-of select="concat('view.',local-name(),'.setParam(true);')"/>
-	 				</xsl:otherwise>
-	 			</xsl:choose>
- 			</xsl:for-each>
+ 	<xsl:template name="set-params-context-menu">
+ 		<xsl:for-each select="//content/*[@type='table']/fields/*[@iskey='true']">
+ 			<xsl:value-of select="$newline"/>
+			<xsl:value-of select="$tab2"/>
+ 			<xsl:choose>
+ 				<xsl:when test="@type='hidden'">
+					<xsl:value-of select="concat('view.',@name,'.setParam(true);')"/>
+ 				</xsl:when>
+ 				<xsl:otherwise>
+					<xsl:value-of select="concat('view.',local-name(),'.setParam(true);')"/>
+ 				</xsl:otherwise>
+ 			</xsl:choose>
 		</xsl:for-each>
  	</xsl:template>
  	
@@ -220,7 +209,7 @@
 			        <xsl:with-param name="by" select="''"/>
 			     </xsl:call-template>
 			</xsl:variable>
-			<xsl:value-of select="concat($name_,' ',$name)"/>
+			<xsl:value-of select="concat($name_,' as ',$name)"/>
  			<xsl:if test="position() != last()">
  				<xsl:value-of select="','"/>
  			</xsl:if>
@@ -228,18 +217,31 @@
  	</xsl:template>
  	
  	
+ 	<xsl:template name="setParam">
+ 		<xsl:for-each select="//content/*[@type='table']/fields/*[@iskey='true']">
+ 			<xsl:value-of select="$newline"/>
+			<xsl:value-of select="$tab2"/>
+ 			<xsl:choose>
+ 				<xsl:when test="@type='hidden'">
+					<xsl:value-of select="concat('view.',@name,'.setParam(true);')"/>
+ 				</xsl:when>
+ 				<xsl:otherwise>
+					<xsl:value-of select="concat('view.',local-name(),'.setParam(true);')"/>
+ 				</xsl:otherwise>
+ 			</xsl:choose>
+		</xsl:for-each>
+ 	</xsl:template>
+ 	
  	<xsl:template name="set-param-update">
- 		<xsl:for-each select="//content/*[@type='table']">
-	 		<xsl:for-each select="fields/*[@iskey='true']">	
-	 			<xsl:choose>
-	 				<xsl:when test="@type='hidden'">
-						<xsl:value-of select="concat('+',$double_quotes,'&amp;target=_blank&amp;isEdit=true&amp;',@name,'=',$double_quotes,'+Core.getParam(',$double_quotes,@name,$double_quotes,')')"/>
-	 				</xsl:when>
-	 				<xsl:otherwise>
-						<xsl:value-of select="concat('+',$double_quotes,'&amp;target=_blank&amp;isEdit=true&amp;p_',local-name(),'=',$double_quotes,'+Core.getParam(',$double_quotes,local-name(),$double_quotes,')')"/>
-	 				</xsl:otherwise>
-	 			</xsl:choose>
- 			</xsl:for-each>
+ 		<xsl:for-each select="//content/*[@type='table']/fields/*[@iskey='true']">
+ 			<xsl:choose>
+ 				<xsl:when test="@type='hidden'">
+					<xsl:value-of select="concat('+',$double_quotes,'&amp;isEdit=true&amp;',@name,'=',$double_quotes,'+Core.getParam(',$double_quotes,@name,$double_quotes,')')"/>
+ 				</xsl:when>
+ 				<xsl:otherwise>
+					<xsl:value-of select="concat('+',$double_quotes,'&amp;isEdit=true&amp;p_',local-name(),'=',$double_quotes,'+Core.getParam(',$double_quotes,local-name(),$double_quotes,')')"/>
+ 				</xsl:otherwise>
+ 			</xsl:choose>
 		</xsl:for-each>
  	</xsl:template>
  	
@@ -261,13 +263,4 @@
  		<xsl:text>/*----#end-code----*/</xsl:text>
  	</xsl:template>
  	
- 	<xsl:template name="gen-sql-combobox">
- 		<xsl:for-each select="//content/*[@type='form']/fields/*[@tableName]">
- 			<xsl:value-of select="concat('view.',name(),'.setSqlQuery(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,'SELECT ',@keyMap,' as ID, ',@keyMap,' as NAME',' FROM ',@schemaName,'.',@tableName,$double_quotes,');')"/>
- 			<xsl:if test="position() != last()"> 				
-				<xsl:value-of select="$newline"/>
-				<xsl:value-of select="$tab2"/>
- 			</xsl:if>
- 		</xsl:for-each>
- 	</xsl:template>
 </xsl:stylesheet>

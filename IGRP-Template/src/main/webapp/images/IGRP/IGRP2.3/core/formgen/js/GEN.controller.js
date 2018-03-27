@@ -1080,8 +1080,14 @@ var GENERATOR = function(genparams){
 				holder.append(label);
 
 				try{
-					var setter            = object.proprieties[propriety].setter();
+					var setter            = object.proprieties[propriety].setter().addClass('propriety-setter').attr('rel',p.propriety);
+					
+					if(objectProperties.type)
+					
+						setter.attr('type',objectProperties.type || 'custom');
+
 					holder.append(setter);
+
 				}catch(e){
 					console.log(e);
 				}
@@ -1347,6 +1353,8 @@ if(input) {
 			$('.modal-header ul li[rel="rules"]',modal).hide();
 
 		GEN.edit.show();
+		
+		return false;
 	}
 
 	GEN.edit.XSLEditor = null;
@@ -2495,7 +2503,10 @@ if(input) {
 		$('#gen-edit-confirm').on('click',function(){
 
 			var setters      = $(VARS.edition.modal+' [rel="properties"] .'+VARS.edition.class.propSetter+', '+VARS.edition.modal+' .modal-footer .propriety-setter');
+			
 			var __tag        = setters.filter('[rel="tag"]');
+
+			var transformer = GEN.edit.object.genType == 'container' ? GEN.edit.object : GEN.edit.object.parent;
 			
 			$('.gen-tag-exist-err').remove();
 			
@@ -2506,83 +2517,123 @@ if(input) {
 					var styleSetters = $(VARS.edition.modal+' [rel="style"] .style-setter');
 				
 					$.each(setters,function(i,setter){
-						var type  = $(setter).attr('type');
-						var rel   = $(setter).attr('rel');
-						var value = null;
 						
-						if(type == 'checkbox')
+						var type  = $(setter).attr('type');
+
+						var rel   = $(setter).attr('rel');
+
+						var value = null;
+
+						switch(type){
+
+							case 'checkbox':
+	
+								value = $(setter).is(':checked');
+	
+							break;
+	
+							case 'formlist':
+	
+								value = $('.IGRP_formlist',setter)[0]._export();
+	
+							break;
+	
+							case 'attrvalue':
+	
+								value = $(setter).attr('attr-value');
+	
+							break;
+	
+							default: 
+	
+								value = $(setter).val();
+	
+	
+						}					
+						
+						/*if(type == 'checkbox')
+
 							value = $(setter).is(':checked');
 						else
-							value = $(setter).val();
+							value = $(setter).val();*/
 
 						if(GEN.edit.object && GEN.edit.object.SET[rel])
+
 							GEN.edit.object.SET[rel](value);
-					});
-
-					//XSL CHANGES
-					GEN.edit.checkXSLChanges();
-
-					//STYLE TAB SETTER
-					$.each(styleSetters,function(i,style){
-
-					 	if(GEN.edit.object.customStyle){
-					 		var rel   = $(style).attr('rel');
-					 		var value = $(style).val();
-
-					 		GEN.edit.object.customStyle[rel] = value;
-					 	}
 
 					});
 
-					//RULES
-					if(GEN.edit.object.formField){
+					if(GEN.edit.object){
 						
-						var slist = $('.IGRP-separatorlist',$(VARS.edition.dialog))[0];
-						// EDSON 08-03-17 var isTable = GEN.edit.object.parent.type == 'formlist' || GEN.edit.object.parent.type == 'separatorlist' ? true : false;
-						var isTable = GEN.edit.object.parent.type == 'formlist' ? true : false;
-						
+						//XSL CHANGES
+						GEN.edit.checkXSLChanges();
 
-						var rule = slist.toJSON({
-							excludeNamePrefix:'gen_rule_',
-							params : {
-								isTable : isTable
-							}
+						//STYLE TAB SETTER
+						$.each(styleSetters,function(i,style){
+
+						 	if(GEN.edit.object.customStyle){
+						 		var rel   = $(style).attr('rel');
+						 		var value = $(style).val();
+
+						 		GEN.edit.object.customStyle[rel] = value;
+						 	}
+
 						});
 
-						GEN.edit.object.setRules( rule );
-						//var rulesDataArr = $('.gen-properties-setts-holder[rel="rules"] #gen-rules-table input:not(.sl-row-id)').serializeArray();
-						//GEN.edit.object.setRules(rulesDataArr);
+						//RULES
+						if(GEN.edit.object.formField || GEN.edit.object.type == 'hidden'){
+							
+							var slist = $('.IGRP-separatorlist',$(VARS.edition.dialog))[0];
+							// EDSON 08-03-17 var isTable = GEN.edit.object.parent.type == 'formlist' || GEN.edit.object.parent.type == 'separatorlist' ? true : false;
+							var isTable = GEN.edit.object.parent.type == 'formlist' ? true : false;
+							
+
+							var rule = slist.toJSON({
+								excludeNamePrefix:'gen_rule_',
+								params : {
+									isTable : isTable
+								}
+							});
+
+							GEN.edit.object.setRules( rule );
+							//var rulesDataArr = $('.gen-properties-setts-holder[rel="rules"] #gen-rules-table input:not(.sl-row-id)').serializeArray();
+							//GEN.edit.object.setRules(rulesDataArr);
+						}
+
+						//copy options
+						if(GEN.edit.object.genType == 'container'){
+							var pageSelect = $(VARS.html.pageCopySelecter);
+							var checked    = $('[name="gen-c-copy"]:checked');
+
+							var copyOptions = pageSelect.val() && checked[0] ? {
+												id         : pageSelect.val(),
+												container  : checked.val(),
+												description: $('option[value="'+pageSelect.val()+'"]',pageSelect).text(),
+												settings   : GEN.edit.copyProperties,
+												plsql      : GEN.edit.copyData
+											} : false;
+
+											
+							GEN.edit.object.copy(copyOptions);
+
+						}
+						//tabs and boxes - have containers inside
+						if(GEN.edit.object.contents)
+
+							setHtmlStyle(GEN.edit.object);
+
+						if(GEN.edit.object.onEditionConfirm) 
+
+							GEN.edit.object.onEditionConfirm(GEN.edit.object);
+
 					}
 
-					//copy options
-					if(GEN.edit.object.genType == 'container'){
-						var pageSelect = $(VARS.html.pageCopySelecter);
-						var checked    = $('[name="gen-c-copy"]:checked');
+					transformer.Transform();
 
-						var copyOptions = pageSelect.val() && checked[0] ? {
-											id         : pageSelect.val(),
-											container  : checked.val(),
-											description: $('option[value="'+pageSelect.val()+'"]',pageSelect).text(),
-											settings   : GEN.edit.copyProperties,
-											plsql      : GEN.edit.copyData
-										} : false;
-
-										
-						GEN.edit.object.copy(copyOptions);
-
-					}
-
-					//tabs and boxes - have containers inside
-					if(GEN.edit.object.contents)
-						setHtmlStyle(GEN.edit.object);
-
-					if(GEN.edit.object.onEditionConfirm) 
-						GEN.edit.object.onEditionConfirm(GEN.edit.object);
-
-					if(GEN.edit.object && ( GEN.edit.object.genType == 'container' || GEN.edit.object.genType == 'html') )
+					/*if(GEN.edit.object && ( GEN.edit.object.genType == 'container' || GEN.edit.object.genType == 'html') )
 						GEN.edit.object.Transform();
 					else
-						GEN.edit.object.parent.Transform();
+						GEN.edit.object.parent.Transform();*/
 					
 
 					$(VARS.edition.modal).modal('hide');
@@ -4477,11 +4528,6 @@ if(input) {
 	}
 
 	GEN.setImgAttr = function(field,p){
-		//colorpicker includes
-		/*GEN.includeToHead([
-			{ type:'css',relative:false, path:path+'/plugins/colorpicker/css/bootstrap-colorpicker.min.css' },
-			{ type:'js',relative:false, path:path+'/plugins/colorpicker/js/bootstrap-colorpicker.js' },
-		]);*/
 
 		var fParent = field.parent || false;
 
@@ -4497,40 +4543,13 @@ if(input) {
 			editable : false
 		});
 
-		if(fParent){
-			//console.log(fParent)
-			/*fParent.setPropriety({
-				name:'use_fa',
-				label:'Font Awesome',
-				value: fParent.GET.use_fa && fParent.GET.use_fa() == false ? false : true,
-				//editable:false
-			});*/
-		}
-			
-
-		
-		/*field.setPropriety({
-			name:'img',
-			label:'Icon',
-			value:{
-				value:p.value ? p.value : '',
-				list:{
-					items:GEN.icons.fontawesome,
-					itemTemplate:'<span label="#label#" class="btn-i-setter"><i class="fa #value#"></i></span>',
-					searcher:true,
-					onSelect:function(icon){
-						field.SET.iconClass(icon);
-					}
-				},
-				size:'12'
-			}
-		})*/
 
 		var name = p.name ? p.name : 'img';
 
 		field.setPropriety({
 			name      : name,
 			label     : 'Icon',
+			type 	  : 'attrvalue',
 			value : {
 				value : p.value,
 				size  : '12',
@@ -4538,9 +4557,12 @@ if(input) {
 				//color : field.GET.iconColor(),
 				icon  : '',
 				setter:function(){
+
 					var holder = $(VARS.fontawesome.setter).clone(true);
 
 					var img = field.GET[name]();
+
+					holder.attr('attr-value',img);
 
 					var activeItem = $('.gen-fa-icon[rel="'+img+'"]',holder);
 
@@ -4564,22 +4586,25 @@ if(input) {
 	    				
 	    				$(this).addClass('active');
 
-	    				field.SET[name]( rel );
+	    				holder.attr('attr-value',rel);
+
+	    				//field.SET[name]( rel );
 
 					});
 
 					setTimeout(function(){
 						
 						try{
+							
 							$('.tab-content').animate({
 						        scrollTop: activeItem.position().top
 						    }, 400);
-
-							$('.nav-tabs',holder).tabdrop();
+							
 						}catch(err){
 							return;
 						}
 						
+						$('.nav-tabs',holder).tabdrop();
 						
 					},250);
 					
@@ -4594,11 +4619,6 @@ if(input) {
 			valuePersist:p.valuePersist
 		});
 
-		/*field.setPropriety({
-			name     : 'iconColor',
-			value    : 'inherit',
-			editable : false
-		});*/
 	}
 
 	GEN.getImagesFromDir = function (p){
@@ -4747,6 +4767,17 @@ if(input) {
 		});
 
 		return GENRULES.add(rules);
+	}
+	
+	GEN.escapeXSLChars = function(str){
+
+		str = str.replaceAll('<','&lt;');
+
+		str = str.replaceAll('>','&gt;');
+
+		str = str.replaceAll('&','&amp;');
+
+		return str;
 	}
 
 	var getPageId = function(){
@@ -4955,8 +4986,14 @@ if(input) {
 		var rulesStr = GEN.getRules();
 
 		if(rulesStr){
+
 			var bodyEnd  = rtn.indexOf('</body>');
-			rtn = rtn.insert(bodyEnd,'<!-- RULES --><script src="{$path}/core/igrp/IGRP.rules.class.js"></script><script>\n'+rulesStr.caller+'</script>');
+
+			var caller 	 = rulesStr.caller;
+
+			caller = GEN.escapeXSLChars( caller );
+
+			rtn = rtn.insert(bodyEnd,'<!-- RULES --><script src="{$path}/core/igrp/IGRP.rules.class.js"></script><script>\n'+caller+'</script>');
 		}
 		
 

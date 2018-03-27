@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="../IGRP_LIC_PAR_GER_DET_TPLIC_form.xsl?v={1E62348E-4098-8462-E050-490A0C48609E}" type="text/xsl"?>
+<rows><title>Licenciamento Global MZ</title>
+<version>1E60C53B1F7239DFE050490A0C4857CC</version>
+<link>/images/IGRP/xml/IGRP-home.xml</link>
+<site><welcome_note>Ola</welcome_note>
+<footer_note>2011 - Copyright NOSI</footer_note>
+<user_name>red-igrp</user_name>
+<button		type="specific"><title>Sair</title>
+<app>RED</app>
+<page />
+<link>#</link>
+<target>_self</target>
+<img>exit.png</img>
+</button>
+</site><plsql><action>PAR_GER_DET_TPLIC</action><package_db>nosi.webapps.dscakjdsc.pages.par_ger_det_tplic</package_db><package_html>PAR_GER_DET_TPLIC</package_html></plsql>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<navigation	file="navigation.xml?v={1E62348E-4097-8462-E050-490A0C48609E}"	prm_app="p_prm_app"	prm_page="p_prm_page"	prm_action="p_prm_action" />
+<top_menu	file="/images/IGRP/xml/IGRP-top_menu.xml" />
+<slide-menu	file="slide-menu.xml?v=20" />
+<content		type="form"><title>Detalhes Tipo Licenca</title>
+<form		tab=""><label><id		name="p_id"	type="hidden"	maxlength="30">id</id>
+<caracter_licenca		type="separator">Identificacao Tipo Licenca</caracter_licenca>
+<sector		name="p_sector"	type="select"	required="true"	change="true"	maxlength="20">Sector</sector>
+<nome_tipo_licenca		name="p_nome_tipo_licenca"	type="text"	required="true"	maxlength="150">Nome Tipo Licenca</nome_tipo_licenca>
+<descricao		name="p_descricao"	type="text"	maxlength="400">Descricao</descricao>
+<flag_reg_simp		name="p_flag_reg_simp"	type="checkbox"	required="true"	maxlength="30">Regime Simplificado</flag_reg_simp>
+<categorias		type="separatorlist">Categorias Associadas</categorias>
+<sector_assoc		name="p_sector_assoc"	type="select"	required="true"	change="true"	rel="categorias"	maxlength="240">Sector</sector_assoc>
+<categoria_assoc		name="p_categoria_assoc"	type="select"	required="true"	change="true"	rel="categorias"	maxlength="240">Categoria</categoria_assoc>
+<subcategoria_assoc		name="p_subcategoria_assoc"	type="select"	rel="categorias"	maxlength="240">Subcategoria</subcategoria_assoc>
+</label>
+<value><nome_tipo_licenca		name="p_nome_tipo_licenca">Kaeiplnjenzimrglysdv</nome_tipo_licenca>
+<descricao		name="p_descricao">Ynnrqnqoopfhknem</descricao>
+<flag_reg_simp	name="p_flag_reg_simp" />
+<hidden		name="p_id">882960</hidden>
+</value>
+<list><sector		name="p_sector"><option><text>-- Sector --</text>
+<value />
+</option>
+<option		selected="true"><text>Opcao 1</text>
+<value>1</value>
+</option>
+<option><text>Opcao 2</text>
+<value>2</value>
+</option>
+<option><text>Opcao 3</text>
+<value>3</value>
+</option>
+</sector>
+<sector_assoc		name="p_sector_assoc"><option><text>-- Sector --</text>
+<value />
+</option>
+<option><text>Opcao 1</text>
+<value>1</value>
+</option>
+<option		selected="true"><text>Opcao 2</text>
+<value>2</value>
+</option>
+<option><text>Opcao 3</text>
+<value>3</value>
+</option>
+</sector_assoc>
+<categoria_assoc		name="p_categoria_assoc"><option><text>-- Categoria --</text>
+<value />
+</option>
+<option		selected="true"><text>Opcao 1</text>
+<value>1</value>
+</option>
+<option><text>Opcao 2</text>
+<value>2</value>
+</option>
+<option><text>Opcao 3</text>
+<value>3</value>
+</option>
+</categoria_assoc>
+<subcategoria_assoc		name="p_subcategoria_assoc"><option><text>-- Subcategoria --</text>
+<value />
+</option>
+<option><text>Opcao 1</text>
+<value>1</value>
+</option>
+<option		selected="true"><text>Opcao 2</text>
+<value>2</value>
+</option>
+<option><text>Opcao 3</text>
+<value>3</value>
+</option>
+</subcategoria_assoc>
+</list>
+<table><categorias		type="separatorlist"><label><sector_assoc		name="p_sector_assoc"	type="select"	align="">Sector</sector_assoc>
+<sector_assoc_desc		name="p_sector_assoc_desc"	type="select"	align="">Sector</sector_assoc_desc>
+<categoria_assoc		name="p_categoria_assoc"	type="select"	align="">Categoria</categoria_assoc>
+<categoria_assoc_desc		name="p_categoria_assoc_desc"	type="select"	align="">Categoria</categoria_assoc_desc>
+<subcategoria_assoc		name="p_subcategoria_assoc"	type="select"	align="">Subcategoria</subcategoria_assoc>
+<subcategoria_assoc_desc		name="p_subcategoria_assoc_desc"	type="select"	align="">Subcategoria</subcategoria_assoc_desc>
+<categorias_id		name="p_categorias_id"	type="hidden"	align="">Subcategoria</categorias_id>
+</label>
+<value><row><sector_assoc		name="p_sector_assoc"	type="select">1</sector_assoc>
+<sector_assoc_desc		name="p_sector_assoc_desc"	type="select">1</sector_assoc_desc>
+<categoria_assoc		name="p_categoria_assoc"	type="select">1</categoria_assoc>
+<categoria_assoc_desc		name="p_categoria_assoc_desc"	type="select">1</categoria_assoc_desc>
+<subcategoria_assoc		name="p_subcategoria_assoc"	type="select">1</subcategoria_assoc>
+<subcategoria_assoc_desc		name="p_subcategoria_assoc_desc"	type="select">1</subcategoria_assoc_desc>
+</row>
+<row><sector_assoc		name="p_sector_assoc"	type="select">2</sector_assoc>
+<sector_assoc_desc		name="p_sector_assoc_desc"	type="select">2</sector_assoc_desc>
+<categoria_assoc		name="p_categoria_assoc"	type="select">1</categoria_assoc>
+<categoria_assoc_desc		name="p_categoria_assoc_desc"	type="select">1</categoria_assoc_desc>
+<subcategoria_assoc		name="p_subcategoria_assoc"	type="select">2</subcategoria_assoc>
+<subcategoria_assoc_desc		name="p_subcategoria_assoc_desc"	type="select">2</subcategoria_assoc_desc>
+</row>
+</value>
+</categorias>
+</table>
+<tools-bar><item		type="specific"><title>Gravar</title>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<link>DET_TPLIC</link>
+<target>submit</target>
+<img>save.png</img>
+</item>
+<item		type="specific"><title>Fechar</title>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<link>DET_TPLIC</link>
+<target>_close</target>
+<img>delete.png</img>
+</item>
+</tools-bar>
+</form>
+</content>
+</rows>

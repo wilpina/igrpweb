@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet href="../IGRP_LIC_PAR_GER_MENU_LG_dash.xsl?v={03563980-B027-5832-E050-040A08023A60}" type="text/xsl"?>
+<rows><title>Licenciamento Global MZ</title>
+<version>0355D4F21D3028AFE050040A0802317E</version>
+<link>/images/IGRP/xml/IGRP-home.xml</link>
+<site><welcome_note>Ola</welcome_note>
+<footer_note>2011 - Copyright NOSI</footer_note>
+<user_name>red-igrp</user_name>
+<button		type="specific"><title>Sair</title>
+<app>RED</app>
+<page />
+<link>#</link>
+<target>_self</target>
+<img>exit.png</img>
+</button>
+</site><plsql><action>PAR_GER_MENU_LG</action><package_db>nosi.webapps.dscakjdsc.pages.par_ger_menu_lg</package_db><package_html>PAR_GER_MENU_LG</package_html></plsql>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<navigation	file="navigation.xml?v={03563980-B025-5832-E050-040A08023A60}"	prm_app="p_prm_app"	prm_page="p_prm_page"	prm_action="p_prm_action" />
+<top_menu	file="/images/IGRP/xml/IGRP-top_menu.xml" />
+<slide-menu	file="slide-menu.xml?v=8" />
+<content		type="dash"><title>Menu Licenciamento Geral</title>
+<menu><item		type="specific"><title>Sector</title>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<link>SEC_LIST</link>
+<target>_self</target>
+<img>componentes.png</img>
+</item>
+<item		type="specific"><title>Categorias</title>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<link>CAT_LIST</link>
+<target>_self</target>
+<img>historico.png</img>
+</item>
+<item		type="specific"><title>Tipo Licencas</title>
+<app>IGRP_LIC</app>
+<page>PAR_GER</page>
+<link>LIC_LIST</link>
+<target>_self</target>
+<img>m_licenca.png</img>
+</item>
+</menu>
+<table		operation=""><label></label>
+<value><row></row>
+<row></row>
+<row></row>
+<row></row>
+<row></row>
+</value>
+</table>
+</content>
+</rows>

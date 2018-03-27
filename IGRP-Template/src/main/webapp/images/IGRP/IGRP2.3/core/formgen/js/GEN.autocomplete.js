@@ -48,13 +48,36 @@ $(function(){
 		
 		var model = [];
 		
-		//model
-		model.push('get'+capitalizeFirstLetter(tag)+'()' );
-		model.push('set'+capitalizeFirstLetter(tag)+'( Object value )' );
+		if( (o.genType == 'field' && o.parent && !o.parent.xml.table) || o.xml.type == 'text' ){
+			//model
+			model.push('get'+capitalizeFirstLetter(tag)+'()' );
+			model.push('set'+capitalizeFirstLetter(tag)+'( Object value )' );
+		}
+		
 		
 		if(o.xml.description){
 			model.push('get'+capitalizeFirstLetter(tag)+'_desc()' );
 			model.push('set'+capitalizeFirstLetter(tag)+'_desc( Object value )' );
+		}
+	
+		if(o.type == 'table'){
+			
+			var tbName = o.GET.tag(),
+				
+				fields = o.GET.fields(),
+				
+				sqlFields = function(){
+					var rtn = "";
+					fields.forEach(function(f,i){
+						rtn += "'"+f.GET.tag()+"' as "+f.GET.tag();
+						if(i < fields.length -1)
+							rtn+=", ";
+					});
+					return rtn;
+				}();
+
+				model.push('load'+capitalizeFirstLetter(tbName)+'( Core.query( "SELECT '+sqlFields+'" ) )');
+			
 		}
 			
 		
@@ -121,6 +144,13 @@ $(function(){
 				method : 'setParam(boolean isParam)'
 			});
 			
+			if(o.type == 'chart'){
+				methods.push({
+					name : 'view.'+tag,
+					method : 'setSqlQuery(null, String query)'
+				});
+			}
+			
 		}
 			
 		methods.push({
@@ -162,8 +192,36 @@ $(function(){
 		try{
 			//model
 			GEN.getAllContents().forEach(function(c){
-
+				
+				if(c.container){
+					
+					if(c.container.xml.type == 'text'){
+						
+						var tag = c.container.GET.tag()+'_text';
+						
+						setHint(tag,c.container);
+						
+					}else{
+						
+						setHint(c.container.GET.tag(),c.container);
+							
+					}
+					
+				}
+				
 				if(c.fields[0]){
+
+					c.fields.forEach(function(f){
+						
+						var tag = f.GET.tag();
+
+						setHint(tag,f);
+
+					});
+
+				}
+
+				/*if(c.fields[0]){
 
 					c.fields.forEach(function(f){
 						
@@ -187,7 +245,7 @@ $(function(){
 							
 					}
 					
-				}
+				}*/
 				
 
 			});
