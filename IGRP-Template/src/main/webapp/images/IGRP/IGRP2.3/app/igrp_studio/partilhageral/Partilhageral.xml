@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?xml-stylesheet href="/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/partilha_geral/Partilha_geral.xsl" type="text/xsl"?>
+<?xml-stylesheet href="/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/partilhageral/Partilhageral.xsl" type="text/xsl"?>
 <rows>
     <link_img>/IGRP/images/IGRP/IGRP2.3</link_img>
     <site>
@@ -15,13 +15,13 @@
             <img>exit.png</img>
         </button>
     </site>
-    <page>Partilha_geral</page>
+    <page>Partilhageral</page>
     <app>igrp_studio</app>
     <plsql>
         <action>index</action>
         <package_instance></package_instance>
         <package_db>nosi.webapps.igrp_studio.pages</package_db>
-        <package_html>Partilha_geral</package_html>
+        <package_html>Partilhageral</package_html>
         <table_name></table_name>
         <with_replace>false</with_replace>
         <with_label>false</with_label>
@@ -33,23 +33,23 @@
         <preserve_url>webapps?r=igrp/page/preserveUrl&amp;p_id=49</preserve_url>
     </plsql>
     <content>
-        <title>Partilha Geral</title>
+        <title>Partilha Geral - Inter Aplicações (Páginas)</title>
         <sectionheader_1 type="sectionheader" xml-type="form" gen-type="container" gen-group="">
             <fields>
                 <sectionheader_1_text type="text" name="p_sectionheader_1_text" persist="true" maxlength="4000">
-                    <value>Partilha Geral - Inter Aplicações (Páginas)</value>
+                    <value>Partilha Geral - Inter Aplicações (Páginas) </value>
                 </sectionheader_1_text>
             </fields>
         </sectionheader_1>
         <toolsbar_1 type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
             <item type="specific" code="" rel="partilhar">
                 <title>Partilhar</title>
-                <app>igrp_studio</app>
-                <page>Partilha_geral</page>
-                <link>index</link>
+                <app/>
+                <page/>
+                <link/>
                 <target>submit</target>
-                <img>success|fa-share-alt</img>
-                <preview>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/partilha_geral/Partilha_geral.xml</preview>
+                <img>success|fa-share-alt-square</img>
+                <preview>undefined</preview>
             </item>
         </toolsbar_1>
         <form_1 type="form" xml-type="form" gen-type="container" gen-group="">
@@ -127,42 +127,36 @@
                 <estado name="p_estado" type="checkbox" maxlength="30" align="left" lookup_parser="false" iskey="false" switch="false" check="true" desc="true">
                     <label>Estado</label>
                 </estado>
-                <descricao name="p_descricao" type="text" maxlength="100" align="left" lookup_parser="false" iskey="false">
+                <descricao name="p_descricao" type="plaintext" maxlength="100" align="left" lookup_parser="false" iskey="false">
                     <label>Descrição</label>
                 </descricao>
-                <hidden_1 name="p_hidden_1" type="hidden" maxlength="30" iskey="true" tag="hidden_1"/>
             </fields>
             <table>
                 <value>
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Consectetur ipsum voluptatem mollit lorem</descricao>
-                        <hidden_1 name="p_hidden_1" tag="hidden_1">1</hidden_1>
+                        <descricao name="p_descricao">Deserunt sit consectetur aliqua voluptatem elit aliqua elit dolor sit laudantium adipiscing totam re</descricao>
                     </row>
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Amet natus ut labore natus</descricao>
-                        <hidden_1 name="p_hidden_1" tag="hidden_1">1</hidden_1>
+                        <descricao name="p_descricao">Perspiciatis amet aperiam accusantium ut anim stract sit mollit omnis mollit sit iste aliqua consect</descricao>
                     </row>
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Elit anim stract sit ipsum</descricao>
-                        <hidden_1 name="p_hidden_1" tag="hidden_1">1</hidden_1>
+                        <descricao name="p_descricao">Ipsum sit labore sed magna laudantium voluptatem totam sit anim aperiam ut unde officia doloremque m</descricao>
                     </row>
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Natus omnis adipiscing ut sit</descricao>
-                        <hidden_1 name="p_hidden_1" tag="hidden_1">1</hidden_1>
+                        <descricao name="p_descricao">Mollit elit sed consectetur iste rem mollit totam sit anim aliqua iste lorem totam rem officia volup</descricao>
                     </row>
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Laudantium totam ipsum sit consectetur</descricao>
-                        <hidden_1 name="p_hidden_1" tag="hidden_1">1</hidden_1>
+                        <descricao name="p_descricao">Omnis adipiscing anim magna accusantium consectetur iste deserunt unde consectetur iste elit dolor a</descricao>
                     </row>
                 </value>
             </table>
