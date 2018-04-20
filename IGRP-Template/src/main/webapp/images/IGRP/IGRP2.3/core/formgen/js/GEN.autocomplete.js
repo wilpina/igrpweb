@@ -34,7 +34,7 @@ $(function(){
 					});
 					
 
-					server.hints.Core.push(methodName+'( '+paramsStr+' )');
+					server.hints.Core.push(methodName+'('+paramsStr+')');
 					
 				}
 				
@@ -50,14 +50,14 @@ $(function(){
 		
 		if( (o.genType == 'field' && o.parent && !o.parent.xml.table) || o.xml.type == 'text' ){
 			//model
-			model.push('get'+capitalizeFirstLetter(tag)+'()' );
-			model.push('set'+capitalizeFirstLetter(tag)+'( Object value )' );
+			model.push('get'+capitalizeFirstLetter(tag)+'()');
+			model.push('set'+capitalizeFirstLetter(tag)+'(Object value)');
 		}
 		
 		
 		if(o.xml.description){
-			model.push('get'+capitalizeFirstLetter(tag)+'_desc()' );
-			model.push('set'+capitalizeFirstLetter(tag)+'_desc( Object value )' );
+			model.push('get'+capitalizeFirstLetter(tag)+'_desc()');
+			model.push('set'+capitalizeFirstLetter(tag)+'_desc(Object value)');
 		}
 	
 		if(o.type == 'table'){
@@ -76,7 +76,7 @@ $(function(){
 					return rtn;
 				}();
 
-				model.push('load'+capitalizeFirstLetter(tbName)+'( Core.query( "SELECT '+sqlFields+'" ) )');
+				model.push('load'+capitalizeFirstLetter(tbName)+'(Core.query(null,"SELECT '+sqlFields+'"))');
 			
 		}
 			
@@ -89,7 +89,7 @@ $(function(){
 		
 		var view = [];
 
-		view.push(tag);
+		view.push(tag);	
 
 		return view;
 		
@@ -103,12 +103,12 @@ $(function(){
 			
 			methods.push({
 				name : 'view.'+tag,
-				method : 'setLabel( String label )'
+				method : 'setLabel(String label)'
 			});
 			
 			methods.push({
 				name : 'view.'+tag,
-				method : o.xml.options ? 'setValue(Map<?,?> value)' :'setValue( Object value )'
+				method : o.xml.options ? 'setValue(Map<?,?> value)' :'setValue(Object value)'
 			});
 			
 			if(o.xml.lookup){
@@ -118,7 +118,7 @@ $(function(){
 				});
 				methods.push({
 					name : 'view.'+tag,
-					method :'setLookup(String app,String page,String action)'
+					method :'setLookup(String app, String page, String action)'
 				});
 			}
 
@@ -126,12 +126,12 @@ $(function(){
 				
 				methods.push({
 					name : 'view.'+tag,
-					method : 'setListOptions( Map<?,?>  map)'
+					method : 'setListOptions(Map<?,?> map)'
 				});
 				
 				methods.push({
 					name : 'view.'+tag,
-					method : 'setSqlQuery(String connectionName, String tableName, String key, String value)'
+					method : 'setQuery(Core.query(String connectionName, String tableName))'
 				});
 
 			}
@@ -155,7 +155,7 @@ $(function(){
 			
 		methods.push({
 			name : 'view.'+tag,
-			method : 'setVisible( boolean isVisible )'
+			method : 'setVisible(boolean isVisible)'
 		});
 
 		
@@ -174,11 +174,11 @@ $(function(){
 		
 		var setHint = function(tag,object){
 
-			SetTagModelAutoComplete( tag, object ).forEach(function( m ){ hints.model.push(m) }) ;
+			SetTagModelAutoComplete(tag,object).forEach(function(m){ hints.model.push(m) }) ;
 			
-			SetTagViewAutoComplete( tag,object ).forEach(function( m ){ hints.view.push(m) }) ;
+			SetTagViewAutoComplete(tag,object).forEach(function(m){ hints.view.push(m) });			
 			
-			SetFieldsViewAutoComplete( tag,object ).forEach(function( m ){ 
+			SetFieldsViewAutoComplete( tag,object ).forEach(function(m){ 
 				
 				if(!hints[m.name])
 					
@@ -292,25 +292,6 @@ $(function(){
 
 			    	var hintClass = $.trim(lineText.substring(0, cur.ch-1));
 
-			    	/*if( !server.hints[hintClass] ){
-			    		
-			    		console.log('no class fouund on dot!')
-			    		
-			    		var arr = lineText.split(/[-+.(,;\t),]/);
-			    		
-			    		if(arr && arr[0]){
-			    			
-			    			arr = arr.filter(function(v){
-			    				
-			    				return $.trim(v) != '';
-			    					
-			    			});
-			    			
-			    			hintClass = $.trim(arr[arr.length-1]);
-			    			
-			    		}
-			    	}*/
-			    	
 			    	if(server.hints[hintClass]){
 
 			    		options.words = server.hints[hintClass];
@@ -334,46 +315,20 @@ $(function(){
 			    				hintClass = $.trim(dotArr[dotArr.length-2]) +'.'+ $.trim(dotArr[dotArr.length-1]);
 			    			
 			    			options.words = server.hints[hintClass];
-			    				
-			    			
+
 			    		}
-			    		
-			    		/*if(hintClass){
-			    			
-			    			var dotArr = lineText.split(/[-+.(,;\t),]/)
-			    			
-			    			dotArr = dotArr.filter(function(v){
-			    				
-			    				return $.trim(v) != '';
-			    			});
 
-			    			hintClass = $.trim(dotArr.slice(Math.max(dotArr.length - 2, 1)).join('.'));
-			    			
-			    			options.words = server.hints[hintClass];
-			    			
-			    		}*/
-			    		
-			    		
 			    	}
-			    		
 			    	
-			    	if(!options.words)
-
-			    		return;
-
 			    	isDot = true;
 
 			    	from = CodeMirror.Pos(cur.line, token.start+1);
-		
-			    }
-			    
-			    if(isDot){
-
+			    	
 			    	found = options.words;
-
+		
 			    }else{
 			    	
-			    	var tIdx 	= lineText.indexOf(token.string),
+			    	var tIdx = lineText.indexOf(token.string),
 			    		
 			    		partStr = $.trim(lineText.substring(0,tIdx)),
 			    		
@@ -381,22 +336,9 @@ $(function(){
 			    		
 			    		isClass = false;
 
-			    	/*parts.forEach(function(p){
-
-			    		if( server.hints[p] ){
-			    			
-			    			options.words = server.hints[p];
-			    			
-			    			isClass = true;
-			    		}
-			    			
-			    	});	*/
-			    	
-			    	//if(!isClass){
-
 		    		var _arr = lineText.split(/[-+.(,;\t),]/);
 		    		
-		    		if(_arr && _arr[0]){
+		    		if(_arr && _arr.length){
 		    			
 		    			_arr = _arr.filter(function(v){
 		    				
@@ -405,27 +347,34 @@ $(function(){
 		    			});
 		    			
 		    			var hintClss = $.trim( _arr[_arr.length - 2] );
-		    			
-		    			
+
 		    			if(hintClss && server.hints[hintClss])
 		    				
 		    				options.words = server.hints[hintClss];
 		    			
 		    			else{
+		    				
 		    				var dotArr = lineText.split(/[-+.(,;\t),]/).filter(function(v,i){
 			    				
 			    				return $.trim(v) != '';
 			    				
 			    			});
-			    			
+
 		    				dotArr.pop();
+
+		    				hintClass = dotArr.join('.')
 		    				
-			    			hintClass = $.trim(dotArr.slice(Math.max(dotArr.length - 2, 1)).join('.'));
-			    			
-			    			options.words = server.hints[hintClass];
-			    			
-			    			console.log(hintClass)
-		    				
+			    			if(server.hints[hintClass])
+			    				
+			    				options.words = server.hints[hintClass];
+			    	
+			    			else{
+			    				
+			    				hintClass = $.trim(dotArr.slice(Math.max(dotArr.length - 2, 1)).join('.'));
+			    				
+			    				options.words = server.hints[hintClass];
+			    			}
+
 		    			}
 
 		    		}
@@ -436,31 +385,24 @@ $(function(){
 
 					      	var word = options.words[i];
 
-					      	if ( token.string && word.slice(0, token.string.length) == token.string)
+					      	if (token.string && word.slice(0, token.string.length) == token.string)
 
-					      		found.push( word );
+					      		found.push(word);
 					        
 					    }
 		    			
 		    		}
-			    	
-			    	
+		    		
 			    }
 
 			    return {
-
-				      	list : found,
-
-				     	from : from,
-
-				        to   : CodeMirror.Pos(cur.line, token.end)
-
-				    }
+			      	list : found || [],
+			     	from : from,
+			        to   : CodeMirror.Pos(cur.line, token.end)
+			    }
 		    	
-		    }catch(err){
-		    	
-		    	console.log(err);
-		    	
+		    }catch(err){		    	
+		    	console.log(err);		    	
 		    }
 
 		}
@@ -471,7 +413,7 @@ $(function(){
 		
 		GEN.on('ready',function(){
 			
-			$.get( GEN.UTILS.core_methods_list, SetCoreAutoComplete )
+			$.get(GEN.UTILS.core_methods_list,SetCoreAutoComplete )
 			
 		});
 		
