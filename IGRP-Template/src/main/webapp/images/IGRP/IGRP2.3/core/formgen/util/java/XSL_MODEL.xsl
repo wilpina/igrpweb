@@ -9,7 +9,7 @@
     	...
 	-->
     <xsl:template name="gen-get-set-model">
-    	<xsl:for-each select="/rows/content/*[@type != 'treemenu'  and @type != 'table'  and @type != 'separatorlist'  and @type != 'formlist']">
+    	<xsl:for-each select="/rows/content/*[@type != 'treemenu'  and @type != 'table' and @type != 'formlist']">
     		<xsl:for-each select="fields/*">
     			<xsl:variable name="tag_name">
 					<xsl:choose>
@@ -42,7 +42,7 @@
     	...
 	-->
     <xsl:template name="declare-variables-model">
-    	<xsl:for-each select="/rows/content/*[@type != 'treemenu' and @type != 'table' and @type != 'separatorlist' and @type != 'formlist']">
+    	<xsl:for-each select="/rows/content/*[@type != 'treemenu' and @type != 'table' and @type != 'formlist']">
     		<xsl:for-each select="fields/*">
     			<xsl:variable name="tag_name">
 					<xsl:choose>
@@ -107,8 +107,11 @@
 	    		<xsl:with-param name="type" select="'arraylist'" />
 	    		<xsl:with-param name="name" select="name()" />
 	    	</xsl:call-template>
-			<xsl:value-of select="$newline"/>		
-    	</xsl:for-each>       
+			<xsl:value-of select="$newline"/>	
+			
+    	</xsl:for-each>  
+    	
+    	
 	</xsl:template>
 
  	<!-- import all class to using in model -->
@@ -126,6 +129,8 @@
  		<xsl:value-of select="$import_separator_list"/>
 		<xsl:value-of select="$newline"/>
  		<xsl:value-of select="$import_separator_list_annotation"/>
+		<xsl:value-of select="$newline"/>
+ 		<xsl:value-of select="$import_date"/>
  		
 		<xsl:value-of select="$newline"/>
 		<xsl:if test="count(/rows/content/*[@type = 'treemenu' or @type = 'table' or @type = 'formlist' or @type = 'separatorlist']) > 0">
