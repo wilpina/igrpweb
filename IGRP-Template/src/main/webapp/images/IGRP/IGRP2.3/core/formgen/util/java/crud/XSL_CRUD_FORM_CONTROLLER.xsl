@@ -32,8 +32,6 @@
 		<xsl:value-of select="$newline"/>
  		<xsl:value-of select="$import_igrp"/>
 		<xsl:value-of select="$newline"/>
-		<xsl:value-of select="$import_query_helper"/>
-		<xsl:value-of select="$newline"/>
      	<xsl:call-template name="start-code">
      		<xsl:with-param name="type" select="'packages_import'"/>
      		<xsl:with-param name="url" select="''"/>
@@ -100,7 +98,7 @@
 			<xsl:value-of select="concat('if(',$isEditSave,') {')"/>	
 				<xsl:value-of select="$newline"/>
 				<xsl:value-of select="$tab2"/>
-				<xsl:value-of select="concat('QueryHelper query = Core.query(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,'SELECT ',$columns,' FROM ',/rows/plsql/package_copy_db,$double_quotes,')',$conditions,';')"/>
+				<xsl:value-of select="concat('QueryInterface query = Core.query(',$double_quotes,/rows/plsql/package_instance,$double_quotes,',',$double_quotes,'SELECT ',$columns,' FROM ',/rows/plsql/package_copy_html,'.',/rows/plsql/package_copy_db,$double_quotes,')',$conditions,';')"/>
 				<xsl:value-of select="$newline"/>
 				<xsl:value-of select="$tab2"/>	
 				<xsl:value-of select="'model.load(query);'"/>			
@@ -144,13 +142,13 @@
 	     	</xsl:call-template>
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/> 
-			<xsl:value-of select="'Object r = null;'"/>	 					
+			<xsl:value-of select="'ResultSet r = null;'"/>	 					
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>	
 			<xsl:call-template name="gen-crud-sql"/>
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>	
-			<xsl:value-of select="concat('','if(r != null){')"/>
+			<xsl:value-of select="concat('','if(!r.hasError()){')"/>
 			<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>		
 			<xsl:value-of select="$tab"/>
@@ -201,6 +199,8 @@
 			<xsl:call-template name="start-code-crud">
 	     		<xsl:with-param name="type" select="$actionName"/>
 	     	</xsl:call-template>
+	     	<xsl:value-of select="$newline"/>
+			<xsl:value-of select="$tab2"/>
 	     	<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab2"/>
 			<xsl:call-template name="end-code-crud"/>

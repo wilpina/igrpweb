@@ -12,9 +12,7 @@
 	     	<xsl:value-of select="$newline"/>
 	 		<xsl:call-template name="actionIndex"></xsl:call-template>
 	 		<xsl:call-template name="actionEditCalendar"></xsl:call-template>
-	 		<xsl:value-of select="$newline"/>
-	 		 <xsl:call-template name="createActions"></xsl:call-template>
-	 		<xsl:value-of select="$newline"/>
+	 		 <xsl:call-template name="createActions"></xsl:call-template>	 	
  		<xsl:value-of select="'}'"/>
     </xsl:template>
 
@@ -26,7 +24,7 @@
      		<xsl:value-of select="concat($preserve_url,'&amp;type=c_import','&amp;app=',$app_name,'&amp;page=',$page_name)"></xsl:value-of>
      	</xsl:variable>
      	<xsl:variable name="your_code">
-			<xsl:value-of select="document($url)/your_code"/>
+		<!--<xsl:value-of select="document($url)/your_code"/> -->
 		</xsl:variable>	
 		<xsl:value-of select="$newline"/>
 		<!-- <xsl:value-of select="$begin_reserve_code_controller_import"></xsl:value-of> -->
@@ -41,8 +39,6 @@
 		 		<xsl:value-of select="$import_exception"/>
 				<xsl:value-of select="$newline"/>
 		 		<xsl:value-of select="$import_response"/>
-				<xsl:value-of select="$newline"/>
-				<xsl:value-of select="$import_query_helper"/>
      		</xsl:otherwise>
      	</xsl:choose>
      	<xsl:call-template name="start-code">
@@ -102,7 +98,7 @@
      	</xsl:variable>
      	
      	<xsl:variable name="your_code">
-			<xsl:value-of select="document($url)/your_code"/>
+			<!--  <xsl:value-of select="document($url)/your_code"/> -->
 		</xsl:variable>	
 		
      	<xsl:call-template name="start-code">
@@ -119,10 +115,7 @@
 				<xsl:value-of select="$newline"/>
      		</xsl:otherwise>
      	</xsl:choose>
-		<xsl:value-of select="$newline"/>
-	    <xsl:value-of select="$tab"/>
-	    <xsl:value-of select="$newline"/>
-	    <xsl:value-of select="$tab"/>
+
      	<xsl:value-of select="$end_reserve_code"></xsl:value-of>
 	</xsl:template>
 	
@@ -159,6 +152,7 @@
 		<xsl:variable name="model">
    			<xsl:value-of select="$page_"></xsl:value-of>
 		</xsl:variable>
+		
 		<xsl:variable name="actionCamel">
 			<xsl:choose>
 				<xsl:when test="$type_render_!='render_message'">
@@ -201,7 +195,7 @@
      	</xsl:variable>	
 
      	<xsl:variable name="your_code_exception">
-			<xsl:value-of select="document($url_)/your_code"/>
+			<!--  <xsl:value-of select="document($url_)/your_code"/> -->
 		</xsl:variable>	
 		
 		<xsl:value-of select="$newline"/>
@@ -252,32 +246,32 @@
 					<xsl:when test="$type_render_='render'">
 						<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab2"/>
-						<xsl:value-of select="concat($model,' model = new ',$model,'();')"/>
-						
+						<xsl:value-of select="concat($model,' model = new ',$model,'();')"/>						
 						<xsl:call-template name="newlineTab2"/>
-
-						<xsl:value-of select="concat($model,'View',' view = new ',$model,'View();')"/>
 						
-						<xsl:call-template name="newlineTab2"/>		
-
 						<xsl:value-of select="'model.load();'"/>
-						
+													
+						<xsl:call-template name="newlineTab2"/>		
+					
+						<xsl:value-of select="concat($model,'View',' view = new ',$model,'View();')"/>					
+						<xsl:call-template name="setParam"/>
 						<!-- <xsl:call-template name="start-code">
 				     		<xsl:with-param name="type" select="concat($action,'-load')"/>
 				     		<xsl:with-param name="url" select="$url"/>
 				     	</xsl:call-template> -->
 
 						<!-- <xsl:value-of select="concat($model,'View',' view = new ',$model,'View(model);')"/> -->
-
+						
+						<!--  <xsl:call-template name="gen-lookups"/> -->
+						
 						<xsl:if test="//rows/content/*[@type='chart'] or //rows/content/*[@type='table'] or //rows/content/*[@type='table']/fields/*[@iskey='true'] or //rows/content/*/fields/*[@type='select']">
 							
 							<xsl:call-template name="start-example"/>
-							<xsl:value-of select="$newline"/>
-							<xsl:value-of select="$tab2"/>
-							<xsl:call-template name="setSqlTable"/>
+				    		<xsl:call-template name="newlineTab2"/>					    		
+							<xsl:call-template name="setSqlTable"/>					
 							<xsl:call-template name="setSqlChart"/>						
 							<xsl:call-template name="setSqlCombobox"/>
-							<xsl:call-template name="setParam"/>
+							
 
 							<xsl:call-template name="end-example"/>
 
@@ -287,62 +281,57 @@
 						<xsl:call-template name="start-code">
 				     		<xsl:with-param name="type" select="concat($action,'')"/>
 				     		<xsl:with-param name="url" select="$url"/>
-				     	</xsl:call-template>
-
-				     	<xsl:call-template name="newlineTab2"/>
-
+				     	</xsl:call-template>			     
+							
 				     	<xsl:value-of select="'view.setModel(model);'"/>
-
-				     	<xsl:call-template name="newlineTab2"/>
 				     	<xsl:call-template name="newlineTab2"/>
 
 						<xsl:value-of select="'return this.renderView(view);'"/>
-						<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab"/>  
+					
 					</xsl:when>
 					<xsl:when test="$type_render_='redirect'">
 						<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab2"/>
 						<xsl:value-of select="concat($class_name,' model = new ',$class_name,'();')"/>
-						<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab2"/>			
+					    <xsl:call-template name="newlineTab2"/>			
 						<xsl:value-of select="'model.load();'"/>
 
 						<xsl:call-template name="start-example"/>
 						
 						<xsl:value-of select="$newline"/>
 						<xsl:value-of select="$tab2"/>	
-						<xsl:value-of select="concat('','if(model.save(model)){')"/>
+<!-- 						<xsl:value-of select="concat('','if(model.save(model)){')"/> -->
+<!-- 						<xsl:call-template name="newlineTab2"/>	 -->
+<!-- 						<xsl:value-of select="$tab"/> -->
+<!-- 						<xsl:value-of select="concat('','Core.setMessageSuccess();')"/> -->
+<!-- 						<xsl:value-of select="$newline"/> -->
+<!-- 						<xsl:value-of select="$tab2"/> -->
+<!-- 						<xsl:value-of select="' }else{'"/>						 -->
+<!-- 						<xsl:call-template name="newlineTab2"/>		 -->
+<!-- 						<xsl:value-of select="$tab"/>						 -->
+<!-- 						<xsl:value-of select="concat('','Core.setMessageError();')"/> -->
+<!-- 						<xsl:call-template name="newlineTab2"/>	 -->
+						<xsl:value-of select="concat(' ','this.addQueryString(',$double_quotes,'p_id',$double_quotes,',',$double_quotes,'12',$double_quotes,'); //to send a query string in the URL')"/>							
+			
 						<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab2"/>		
-						<xsl:value-of select="$tab"/>
-						<xsl:value-of select="concat('','Core.setMessageSuccess();')"/>
-						<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab2"/>
-						<xsl:value-of select="' }else{'"/>						
-						<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab2"/>		
-						<xsl:value-of select="$tab"/>						
-						<xsl:value-of select="concat('','Core.setMessageError();')"/>
-						<xsl:value-of select="$newline"/>
-
-						<xsl:value-of select="$tab2"/>
-
-						<xsl:value-of select="concat(' return this.forward(',$double_quotes,$app__,$double_quotes,',',$double_quotes,$page_,$double_quotes,',',$double_quotes,'index',$double_quotes,');')"/>							
-						<xsl:value-of select="$newline"/>
-						<xsl:value-of select="$tab2"/>				
-						<xsl:value-of select="concat('}','')"/>
+						<xsl:value-of select="$tab2"/>	
+						
+						<xsl:value-of select="concat(' return this.forward(',$double_quotes,$app__,$double_quotes,',',$double_quotes,$page_,$double_quotes,',',$double_quotes,'index',$double_quotes,', this.queryString()); //if submit, loads the values')"/>							
+							
+<!-- 						<xsl:value-of select="concat('}','')"/> -->
 
 						<xsl:call-template name="end-example"/>
-
+			
 						<xsl:call-template name="start-code">
 				     		<xsl:with-param name="type" select="concat($action,'')"/>
 				     		<xsl:with-param name="url" select="$url"/>
+				     		<!--  <xsl:with-param name="text" select="concat('return null;',$newline,$newline)"/> -->
 				     	</xsl:call-template>
 
-						<xsl:value-of select="concat('return this.redirect(',$double_quotes,$app__,$double_quotes,',',$double_quotes,$page_,$double_quotes,',',$double_quotes,'index',$double_quotes,');')"/>
-						<xsl:value-of select="$newline"/>  
-						<xsl:value-of select="$tab"/>
+				     	<xsl:if test="not(@custom_return) or @custom_return!='true'">
+					     	<xsl:value-of select="concat('return this.redirect(',$double_quotes,$app__,$double_quotes,',',$double_quotes,$page_,$double_quotes,',',$double_quotes,'index',$double_quotes,', this.queryString());')"/>
+					   	</xsl:if>
+						
 					</xsl:when>
 					<xsl:when test="$type_render_='render_message'">
 						<xsl:value-of select="$newline"/>
@@ -379,8 +368,6 @@
 					<xsl:value-of select="$newline"/>
 					<xsl:value-of select="$tab2"/>
 					<xsl:value-of select="concat('return this.redirect(',$double_quotes,$app,$double_quotes,',',$double_quotes,$page,$double_quotes,',',$double_quotes,'index',$double_quotes,');')"/>
-					<xsl:value-of select="$newline"/>  
-					<xsl:value-of select="$tab"/>
 				</xsl:if>
 			</xsl:otherwise>
 		</xsl:choose>  
@@ -393,10 +380,49 @@
      		<xsl:with-param name="type" select="$action"/>
      	</xsl:call-template>
 
-
 		<xsl:value-of select="$newline"/>
 		<xsl:value-of select="$tab"/>
  		<xsl:value-of select="'}'"/>
+ 		<xsl:value-of select="$newline"/>
+		<xsl:value-of select="$tab"/>
+	</xsl:template>
+	
+	<xsl:template name="gen-lookups">
+		<xsl:value-of select="$newline"/>
+		<xsl:value-of select="concat($newline,$tab2)"/>
+		
+		<xsl:for-each select="rows/content/*[not(@type='table')]/fields/*[@type='lookup']">
+			
+			<xsl:variable name="lookupName" select="name()"/>
+			
+			<xsl:variable name="lu_app" select="@app"/>
+			<xsl:variable name="lu_page" select="@page"/>
+			<xsl:variable name="lu_act" select="@action"/>
+			
+			<xsl:variable name="lookup_action">
+				<xsl:value-of select="concat($double_quotes,$lu_app,$double_quotes)"/><xsl:text>,</xsl:text>
+				<xsl:value-of select="concat($double_quotes,$lu_page,$double_quotes)"/><xsl:text>,</xsl:text>
+				<xsl:value-of select="concat($double_quotes,$lu_act,$double_quotes)"/>
+			</xsl:variable>			
+
+			<xsl:text>view.</xsl:text><xsl:value-of select="$lookupName"/><xsl:text>.setLookup(</xsl:text><xsl:value-of select="$lookup_action"/><xsl:text>);</xsl:text>
+			
+			<xsl:value-of select="concat($newline,$tab2)"/>
+			
+			<xsl:for-each select="lookupParams/param">
+			
+				<xsl:variable name="lookupParam">
+					<xsl:value-of select="concat($double_quotes,@name,$double_quotes,',',$double_quotes,.,$double_quotes)"/>
+				</xsl:variable>
+
+				<xsl:text>view.</xsl:text><xsl:value-of select="$lookupName"/><xsl:text>.addParam(</xsl:text><xsl:value-of select="$lookupParam"/><xsl:text>);</xsl:text>
+				
+				<xsl:value-of select="concat($newline,$tab2)"/>
+				
+			</xsl:for-each>
+			<xsl:value-of select="concat($newline,$tab2)"/>
+		</xsl:for-each>
+		
 	</xsl:template>
 	
  	<!-- add actionIndex() - it is default method in any controller -->
@@ -430,8 +456,7 @@
 				<xsl:value-of select="$newline"/>
 				<xsl:value-of select="$tab2"/>
 		 		<xsl:variable name="instance_name"><xsl:value-of select="local-name()"/></xsl:variable>			
-				<xsl:value-of select="$newline"/>
-				<xsl:value-of select="$tab2"/>
+				<xsl:value-of select="newlineTab2"/>				
 				<xsl:value-of select="concat('view.',$instance_name,'.addLegendColor(',$double_quotes,'Cor 1',$double_quotes,',Core.getPinkColor());')"/>
 				<xsl:value-of select="$newline"/>
 				<xsl:value-of select="$tab2"/>
@@ -445,7 +470,6 @@
  	<!-- view.chart_1.setSqlQuery("select 'Eixo Y' EixoY, 'Eixo X' EixoX, 100 Valor FROM dual"); -->
  	<xsl:template name="setSqlChart">
  		<xsl:for-each select="//content/*[@type='chart']">
-
 	 		<xsl:variable name="instance_name"><xsl:value-of select="local-name()"/></xsl:variable>
  			<xsl:call-template name="generateCommentConnectionName"/>
 	 		<xsl:choose>
@@ -461,7 +485,7 @@
  	
  	
  	<!-- view.table_1.setSqlQuery("select 'name' name, 1 id FROM dual"); -->
- 	<xsl:template name="setSqlTable">
+ 	<xsl:template name="setSqlTable"> 	
  		<xsl:for-each select="//content/*[@type='table']">
 	 		<xsl:variable name="instance_name"><xsl:value-of select="local-name()"/></xsl:variable>
 	 		<xsl:variable name="sql_fields">
@@ -474,25 +498,25 @@
  			<xsl:call-template name="CamelCaseWord">
  				<xsl:with-param name="text" select="name()"/>
  			</xsl:call-template>
- 			<xsl:value-of select="concat('(Core.query(',$double_quotes,'SELECT ',$sql_fields,' ',$double_quotes,'));')"/>
- 				<xsl:value-of select="$newline"/>
-				<xsl:value-of select="$tab2"/>
-		</xsl:for-each>
+ 			<xsl:value-of select="concat('(Core.query(null,',$double_quotes,'SELECT ',$sql_fields,' ',$double_quotes,'));')"/> 	
+ 			<xsl:call-template name="newlineTab2"/>				
+		</xsl:for-each>		
  	</xsl:template>
  	
  	<!-- view.pd_id.setParam(true); -->
  	<xsl:template name="setParam">
  		<xsl:for-each select="//content/*[@type='table']">
 	 		<xsl:for-each select="fields/*[@iskey='true']">	
+	 		<xsl:call-template name="newlineTab2"/>	
 	 			<xsl:choose>
 	 				<xsl:when test="@type='hidden'">
-						<xsl:value-of select="concat('view.',@name,'.setParam(true);')"/>
+						<xsl:value-of select="concat('view.',@tag,'.setParam(true);')"/>
 	 				</xsl:when>
 	 				<xsl:otherwise>
 						<xsl:value-of select="concat('view.',local-name(),'.setParam(true);')"/>
 	 				</xsl:otherwise>
-	 			</xsl:choose>
- 			</xsl:for-each>
+	 			</xsl:choose>	 			
+ 			</xsl:for-each> 	 			
 		</xsl:for-each>
  	</xsl:template>
  	
@@ -504,13 +528,15 @@
 	 			<xsl:call-template name="generateCommentConnectionName"/>
 		 		<xsl:choose>
 		 			<xsl:when test="@schemaName!='' and @tableName!='' and @keyMap!='' and @conn!=''">
-		 					<xsl:value-of select="concat('view.',$instance_name,'.setSqlQuery(',$double_quotes,@conn,$double_quotes,',',$double_quotes,@schemaName,$double_quotes,',',$double_quotes,@tableName,$double_quotes,',',$double_quotes,@keyMap,$double_quotes,',',$double_quotes,@keyMap,$double_quotes,');')"/>
+		 					<xsl:value-of select="concat('view.',$instance_name,'.setQuery(Core.query(',$double_quotes,@conn,$double_quotes,',',$double_quotes,@schemaName,$double_quotes,',',$double_quotes,@tableName,$double_quotes,',',$double_quotes,@keyMap,$double_quotes,',',$double_quotes,@keyMap,$double_quotes,'));')"/>
 		 			</xsl:when>
 		 			<xsl:otherwise>
-		 				<xsl:value-of select="concat('view.',$instance_name,'.setSqlQuery(null,',$double_quotes,'SELECT ',$simple_quotes,'id',$simple_quotes,' as ID,',$simple_quotes,'name',$simple_quotes,' as NAME ',$double_quotes,');')"/>
+		 				<xsl:value-of select="concat('view.',$instance_name,'.setQuery(Core.query(null,',$double_quotes,'SELECT ',$simple_quotes,'id',$simple_quotes,' as ID,',$simple_quotes,'name',$simple_quotes,' as NAME ',$double_quotes,'));')"/>
 		 			</xsl:otherwise>
-		 		</xsl:choose>
-			</xsl:for-each>
+		 		</xsl:choose>		 		
+			</xsl:for-each>			
 	 	</xsl:for-each>
  	</xsl:template>
+ 	
+      
 </xsl:stylesheet>

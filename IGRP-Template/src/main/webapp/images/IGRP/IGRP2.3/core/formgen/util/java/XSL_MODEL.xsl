@@ -9,12 +9,12 @@
     	...
 	-->
     <xsl:template name="gen-get-set-model">
-    	<xsl:for-each select="/rows/content/*[@type != 'treemenu'  and @type != 'table'  and @type != 'separatorlist'  and @type != 'formlist']">
+    	<xsl:for-each select="/rows/content/*[@type != 'treemenu'  and @type != 'table' and @type != 'formlist']">
     		<xsl:for-each select="fields/*">
     			<xsl:variable name="tag_name">
 					<xsl:choose>
 						<xsl:when test="@type='hidden'">
-							<xsl:value-of select="@name"/>
+							<xsl:value-of select="@tag"/>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="name()"/>
@@ -42,12 +42,12 @@
     	...
 	-->
     <xsl:template name="declare-variables-model">
-    	<xsl:for-each select="/rows/content/*[@type != 'treemenu' and @type != 'table' and @type != 'separatorlist' and @type != 'formlist']">
+    	<xsl:for-each select="/rows/content/*[@type != 'treemenu' and @type != 'table' and @type != 'formlist']">
     		<xsl:for-each select="fields/*">
     			<xsl:variable name="tag_name">
 					<xsl:choose>
 						<xsl:when test="@type='hidden'">
-							<xsl:value-of select="@name"/>
+							<xsl:value-of select="@tag"/>
 						</xsl:when>
 						<xsl:otherwise>
 							<xsl:value-of select="name()"/>
@@ -107,8 +107,11 @@
 	    		<xsl:with-param name="type" select="'arraylist'" />
 	    		<xsl:with-param name="name" select="name()" />
 	    	</xsl:call-template>
-			<xsl:value-of select="$newline"/>		
-    	</xsl:for-each>       
+			<xsl:value-of select="$newline"/>	
+			
+    	</xsl:for-each>  
+    	
+    	
 	</xsl:template>
 
  	<!-- import all class to using in model -->
@@ -126,6 +129,8 @@
  		<xsl:value-of select="$import_separator_list"/>
 		<xsl:value-of select="$newline"/>
  		<xsl:value-of select="$import_separator_list_annotation"/>
+		<xsl:value-of select="$newline"/>
+ 		<xsl:value-of select="$import_date"/>
  		
 		<xsl:value-of select="$newline"/>
 		<xsl:if test="count(/rows/content/*[@type = 'treemenu' or @type = 'table' or @type = 'formlist' or @type = 'separatorlist']) > 0">
@@ -151,7 +156,7 @@
 			
 			<xsl:value-of select="$newline"/>
 			
-			<xsl:for-each select="//rows/content/*[@xml-type='table']">
+			<xsl:for-each select="//rows/content/*[@xml-type='table' or @type='formlist' or @type='separatorlist']">
 				<xsl:value-of select="$newline"/>
 				<xsl:value-of select="$tab"/>
 				
@@ -162,10 +167,18 @@
 				</xsl:variable>
 				
 				<xsl:text>public void load</xsl:text>
-				<xsl:value-of select="$tclassName"/><xsl:text>(QueryHelper query) {</xsl:text>
+				<xsl:value-of select="$tclassName"/><xsl:text>(BaseQueryInterface query) {</xsl:text>
 				<xsl:value-of select="$newline"/>
 				<xsl:value-of select="$tab2"/>
-				<xsl:value-of select="concat( 'this.set',$tclassName,'(this.loadTable(query,',$tclassName,'.class));' )"/>
+				<xsl:choose>
+					<xsl:when test=" @type='formlist' or @type='separatorlist'">
+						<xsl:value-of select="concat( 'this.set',$tclassName,'(this.loadFormList(query,',$tclassName,'.class));' )"/>
+					</xsl:when>
+					<xsl:otherwise>
+						<xsl:value-of select="concat( 'this.set',$tclassName,'(this.loadTable(query,',$tclassName,'.class));' )"/>
+					</xsl:otherwise>
+				</xsl:choose>
+				
 				<!--<xsl:text>this.loadTable(query,</xsl:text>
 				<xsl:value-of select="$tclassName"/>
 				<xsl:text>.class);</xsl:text> -->
@@ -195,7 +208,7 @@
  			<xsl:variable name="tag_name">
 				<xsl:choose>
 					<xsl:when test="@type='hidden'">
-						<xsl:value-of select="@name"/>
+						<xsl:value-of select="@tag"/>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="name()"/>
@@ -226,7 +239,7 @@
  			<xsl:variable name="tag_name">
 				<xsl:choose>
 					<xsl:when test="@type='hidden'">
-						<xsl:value-of select="@name"/>
+						<xsl:value-of select="@tag"/>
 					</xsl:when>
 					<xsl:otherwise>
 						<xsl:value-of select="name()"/>
@@ -283,6 +296,17 @@
 	    		<xsl:with-param name="tab_" select="$tab2" />
 	    		<xsl:with-param name="tab2_" select="concat($tab,$tab2)" />
 	    	</xsl:call-template>
+			<xsl:if test="@type = 'checkbox' or @type='radio'">				
+	 			<xsl:value-of select="$newline"/>
+	 			<xsl:value-of select="$tab2"/>
+	 			<xsl:call-template name="gen-method-set-get">
+		    		<xsl:with-param name="type_content" select="'Pair'" />
+		    		<xsl:with-param name="type" select="'Pair'" />
+		    		<xsl:with-param name="name" select="concat($tag_name,'_check')" />
+		    		<xsl:with-param name="tab_" select="$tab2" />
+		    		<xsl:with-param name="tab2_" select="concat($tab,$tab2)" />
+		    	</xsl:call-template>
+			</xsl:if>
 			<xsl:value-of select="$newline"/>
 		</xsl:for-each>
 		<xsl:value-of select="$newline"/>

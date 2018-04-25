@@ -145,11 +145,24 @@
       </xsl:attribute>
     </xsl:if>
     
+    <xsl:if test="$field/@disabled='true' or $field/@disabled='disabled'">
+      <xsl:attribute name="disabled">
+        <xsl:value-of select="'disabled'" />
+      </xsl:attribute>
+    </xsl:if>
+    
     <xsl:if test="$field/@readonly='readonly' and ($field/@type != 'file' or not($field/@type))">
       <xsl:attribute name="readonly">
         <xsl:value-of select="'readonly'" />
       </xsl:attribute>
     </xsl:if>
+    
+    <xsl:if test="$field/@maxlength">
+      <xsl:attribute name="maxlength">
+        <xsl:value-of select="$field/@maxlength" />
+      </xsl:attribute>
+    </xsl:if>
+    
   </xsl:template>
 
 </xsl:stylesheet>

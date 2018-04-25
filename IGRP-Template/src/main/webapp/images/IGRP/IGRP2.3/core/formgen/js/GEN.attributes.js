@@ -57,6 +57,74 @@
 
 			return html;
 
+		},
+		
+		formlist : function(o){
+			
+			o.name = o.name || 'flist-attr'+(new Date().getTime());
+		
+			var flist = $('<table id="'+o.name+'" class="table table-striped gen-data-table IGRP_formlist " rel="T_'+o.name+'" data-control="data-'+o.flistName+'"><thead><tr><th class="table-btn add"><a class="formlist-row-add btn btn-primary" rel="'+o.name+'"><i class="fa fa-plus"/></a></th></tr></thead><tbody><tr row="0"><input type="hidden" name="p_'+o.name+'_id" value=""/><td class="table-btn delete" data-row="0"><span class="formlist-row-remove btn btn-danger" rel="'+o.name+'"><i class="fa fa-times"/></span></td></tr></tbody></table>');
+			
+			var getInput = function(f){
+				
+				var input = '<input type="'+f.type+'" name="p_'+f.tag+'_fk" value="" class="text form-control" rel="F_'+o.name+'"/>';
+				
+				switch(f.type){
+					case 'select':
+						var options = '<option/>';
+						if(f.options && f.options[0]){
+							f.options.forEach(function(opt){
+								options+='<option value="'+opt.value+'">'+opt.label ||''+'</option>'
+							});
+						}
+						
+						input = '<select id="'+f.tag+'_fk" name="p_'+f.tag+'_fk" class="text form-control select2 " rel="F_'+o.name+'">'+options+'</select>'
+						
+					break;
+				}
+				
+				return input;
+				
+			};
+			
+			if(o.fields){
+				
+				for(var f in o.fields){
+					
+					var field = o.fields[f],
+					
+						label = field.label || f,
+						
+						rows = field.rows && field.rows[0] ? field.rows : [];
+					
+					field.tag = f;
+					
+					$('<th><span>'+label+'</span></th>').insertBefore( $('thead .table-btn.add',flist) );
+					
+					$('<td align="" data-row="0" data-title="'+label+'" class="'+field.type+'" item-name="'+f+'">'+
+						'<input type="hidden" name="p_'+f+'_fk_desc" value=""/>'+
+							'<div class="form-group" item-name="'+f+'" item-type="'+field.type+'">'+
+								getInput( field )+
+							'</div>'+
+						'</td>').insertBefore( $('tbody .table-btn.delete',flist) );
+					
+					
+				}
+			}
+
+			flist.IGRP_formlist({
+
+				data : o.data
+
+			});
+
+			//select2
+			$.IGRP.components.select2.init(flist);
+	
+			
+			
+			return flist;
+			
 		}
 
 	}
@@ -67,7 +135,7 @@
 			
 			var type = options && options.type ? options.type : null,
 
-				html = null;
+				html = false;
 
 			if(attrTypes[type])
 

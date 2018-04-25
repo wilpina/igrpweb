@@ -125,7 +125,7 @@
  	
  			if(fields.valid())
  				$.IGRP.utils.openWin({
- 					url    : $.IGRP.utils.getUrl(p.url)+form.serialize(),
+ 					url    : setTargetParameter($.IGRP.utils.getUrl(p.url))+form.serialize(),
 	 				width  : 980,
 	 				height : 520,
 	 				win    : 'IGRP'
@@ -269,7 +269,7 @@
 				},
 
 				error:function(){
-					console.log('dsa')
+					console.log('filter error line 272 IGRP.targets.js')
 				}
 
 			});
@@ -311,7 +311,7 @@
 		var _blank       = function(p){
 			var d = new Date();
 			$.IGRP.utils.openWin({
-				url    : p.url,
+				url    : setTargetParameter(p.url),
 				width  : 980,
 				height : 520,
 				win    : 'IGRP-'+d.getMilliseconds()
@@ -325,11 +325,15 @@
 		};
 
 		//blank (popup)
+		var mWindow = null;
+		
 		var modal       = function(p){
+			
+			if (p.clicked && p.clicked.attr('close') && p.clicked.attr('close') == 'refresh')
+				
+				mWindow = window;
 		
 			var url = setTargetParameter(p.url);
-			
-			console.log(url);
 			
 			$.IGRP.components.iframeNav.set({
 				url    :url,
@@ -339,40 +343,14 @@
 		};
 
 		var right_panel       = function(p){
+
+			if (p.clicked && p.clicked.attr('close') && p.clicked.attr('close') == 'refresh')
+				mWindow = window;
 			
-			var modal 	 = $('#igrp-right-panel'),
+			p.url = setTargetParameter(p.url);
 
-				iframe   = $('iframe',modal),
-
-				n_iframe = iframe.clone(),
+			$.IGRP.components.rightPanel.set(p);
 			
-				url 	 = p.url;
-			
-			if( url.indexOf('&target=_blank') == -1 )
-				url+='&target=_blank';
-
-			modal.addClass('loading');
-
-			n_iframe.attr('src',url);
-
-			n_iframe.bind('load',function(e){
-		
-				var contents = n_iframe.contents();
-
-				contents.ready(function(){
-					
-					if($('body',contents)[0])
-
-						modal.removeClass('loading');
-	
-				});
-
-			});
-
-			iframe.replaceWith(n_iframe);
-
-			modal.modal("show");
-
 			return false;
 		};
 
@@ -381,7 +359,7 @@
 			var formData = p.clicked.parents('table tbody tr')[0] ? '' : form.serialize();
 			
 			$.IGRP.components.iframeNav.set({
-				url    :$.IGRP.utils.getUrl(p.url)+formData,
+				url    : setTargetParameter($.IGRP.utils.getUrl(p.url)+formData),
 				clicked:p.clicked
 			});
 			
@@ -449,13 +427,24 @@
 			try{
 
 				var popup 	= window.opener || false,
+
 					_window = popup || window.parent,
+
 					_window = _window.frames['head_filho'] || _window;
-				
-				_window.location.reload(true);
+
+				if (mWindow) {
+					_window = mWindow;
+					popup 	= false;
+					mWindow = null;
+				}
 				
 				if(popup)
+				
 					close();
+					
+				_window.location.reload();
+				
+
 
 			}catch(e){null;}
 		};
@@ -482,9 +471,11 @@
 		
 		var setTargetParameter = function(url){
 			
-			if(url.indexOf('target=_blank') == -1){
-				var symb = getParameterSymbol(url);
-				url+=symb+'target=_blank';
+			if(url){
+				if(url.indexOf('target=_blank') == -1){
+					var symb = getParameterSymbol(url);
+					url+=symb+'target=_blank';
+				}
 			}
 			return url;
 		}
@@ -646,13 +637,7 @@
 
 			},
 
-			modalpopup   : {
-
-				label : 'Modal Popup',
-
-				action : modal
-
-			},
+			
 
 			mpsubmit   : {
 

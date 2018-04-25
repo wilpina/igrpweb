@@ -95,6 +95,8 @@
     <script src="{$path}/core/igrp/tree/IGRP.tree.js?v={$version}"></script>
     <!-- IGRP sidebar controller -->
     <script src="{$path}/core/igrp/sidebar/IGRP.sidebar.js?v={$version}"></script>
+    <!-- IGRP rightpanel controller -->
+    <script src="{$path}/core/igrp/rightpanel/rightpanel.js"></script>
     <!-- IGRP scroll to top controller -->
     <script src="{$path}/core/igrp/scrolltop/IGRP.scrolltop.js?v={$version}"></script>
     <!-- IGRP XML XSL Transform -->
@@ -262,7 +264,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <span class="title"></span>
-            <!-- <button type="button" class="close" data-dismiss="modal">×</button> -->
+            <button type="button" class="close" data-dismiss="modal">×</button>
           </div>
           <div class="modal-body">
            
@@ -621,7 +623,8 @@
         #igrp-form-gen #igrp-sidebar .nav-tabs > li.active > a, 
         #igrp-form-gen #igrp-sidebar .nav-tabs > li > a:hover,
         #igrp-form-gen .gen-viewers-toolbar .btn,
-        #igrp-form-gen .treeview-menu>li>a{
+        #igrp-form-gen .treeview-menu>li>a,
+        .gen-page-properties-inner ul li a{
           color:<xsl:value-of select="$mainColor"/>!important;
         }
         #igrp-form-gen #igrp-sidebar .nav-tabs > li.active > a:after{
