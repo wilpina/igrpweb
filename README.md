@@ -4,6 +4,10 @@
 
 You get paid if it's a good contribution and recognized with a certificate (diamond, gold, silver) by NOSi
 
+## FAQ 
+
+https://nosicode.gitbook.io/faq
+
 ## DISCLAIMER
 
 O IGRP é uma plataforma informática criada e desenvolvida pelo NOSi.
