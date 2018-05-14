@@ -40,9 +40,9 @@
                     <label>Title</label>
                     <value>Report designer</value>
                 </infopanel_1_title>
-                <infopanel_1_val name="p_infopanel_1_val" type="text" maxlength="4000">
+                <infopanel_1_val name="p_infopanel_1_val" type="text" maxlength="4000" persist="true">
                     <label>Value</label>
-                    <value></value>
+                    <value/>
                 </infopanel_1_val>
                 <infopanel_1_url name="p_infopanel_1_url" type="text" maxlength="4000" persist="true">
                     <label>URL</label>
@@ -64,7 +64,7 @@
                     <label>Title</label>
                     <value>BPMN designer</value>
                 </infopanel_2_title>
-                <infopanel_2_val name="p_infopanel_2_val" type="text" maxlength="4000">
+                <infopanel_2_val name="p_infopanel_2_val" type="text" maxlength="4000" persist="true">
                     <label>Value</label>
                     <value></value>
                 </infopanel_2_val>
@@ -88,7 +88,7 @@
                     <label>Title</label>
                     <value>Application builder</value>
                 </infopanel_3_title>
-                <infopanel_3_val name="p_infopanel_3_val" type="text" maxlength="4000">
+                <infopanel_3_val name="p_infopanel_3_val" type="text" maxlength="4000" persist="true">
                     <label>Value</label>
                     <value></value>
                 </infopanel_3_val>
@@ -134,6 +134,28 @@
                     </list>
                     <rules/>
                 </env_fk>
+                <modulo name="p_modulo" type="select" multiple="true" domain="" maxlength="50" required="false" change="true" disabled="false" right="false" java-type="">
+                    <label>Módulo</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Option 1</text>
+                            <value>1</value>
+                        </option>
+                        <option>
+                            <text>Option 2</text>
+                            <value>2</value>
+                        </option>
+                        <option>
+                            <text>Option 3</text>
+                            <value>3</value>
+                        </option>
+                        <option>
+                            <text>Option 4</text>
+                            <value>4</value>
+                        </option>
+                    </list>
+                </modulo>
                 <link_btn_nova_pagina name="p_link_btn_nova_pagina" type="link" target="modal" target_fields="" closerefresh="true" action="index" page="ListaEnv" app="igrp_studio" class="success" btnSize="" iconColor="#333" iconClass="" img="fa-plus-square" maxlength="30" placeholder="" right="true" custom_action="" action_type="false">
                     <label>Nova página</label>
                     <value>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/listaenv/ListaEnv.xml</value>
@@ -142,9 +164,9 @@
                     <label>CRUD generator</label>
                     <value>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/crudgenerator/CRUDGenerator.xml</value>
                 </crud_generator>
-                <btn_import name="p_btn_import" type="link" target="modal" target_fields="" closerefresh="true" action="undefined" page="undefined" app="undefined" class="danger" btnSize="" iconColor="#333" iconClass="" img="fa-upload" maxlength="30" placeholder="" right="true" custom_action="" action_type="false">
+                <btn_import name="p_btn_import" type="link" target="modal" target_fields="" closerefresh="true" action="index" page="Env" app="igrp_studio" class="danger" btnSize="" iconColor="#333" iconClass="" img="fa-upload" maxlength="30" placeholder="" right="true" custom_action="" action_type="false">
                     <label>Importar</label>
-                    <value>http://dogiro.co.uk/coes</value>
+                    <value>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/env/Env.xml</value>
                 </btn_import>
             </fields>
         </form_1>
@@ -159,7 +181,7 @@
                 <descricao_page name="p_descricao_page" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
                     <label>Título (código)</label>
                 </descricao_page>
-                <id_page name="p_id_page" type="hidden" maxlength="30" iskey="false" tag="id_page"/>
+                <id_page name="p_id_page" type="hidden" maxlength="30" iskey="true" tag="id_page"/>
                 <nome_page name="p_nome_page" type="hidden" maxlength="30" iskey="false" tag="nome_page"/>
             </fields>
             <table>
@@ -171,7 +193,7 @@
                         </context-menu>
                         <status_page name="p_status_page" check="true" desc="true">1</status_page>
                         <status_page_desc name="p_status_page_desc">1</status_page_desc>
-                        <descricao_page name="p_descricao_page">Consectetur natus labore strac</descricao_page>
+                        <descricao_page name="p_descricao_page">Aperiam natus accusantium cons</descricao_page>
                         <id_page name="p_id_page" tag="id_page">1</id_page>
                         <nome_page name="p_nome_page" tag="nome_page">1</nome_page>
                     </row>
@@ -182,7 +204,7 @@
                         </context-menu>
                         <status_page name="p_status_page" check="true" desc="true">1</status_page>
                         <status_page_desc name="p_status_page_desc">1</status_page_desc>
-                        <descricao_page name="p_descricao_page">Aperiam voluptatem aperiam und</descricao_page>
+                        <descricao_page name="p_descricao_page">Unde officia sit iste mollit</descricao_page>
                         <id_page name="p_id_page" tag="id_page">1</id_page>
                         <nome_page name="p_nome_page" tag="nome_page">1</nome_page>
                     </row>
@@ -193,7 +215,7 @@
                         </context-menu>
                         <status_page name="p_status_page" check="true" desc="true">1</status_page>
                         <status_page_desc name="p_status_page_desc">1</status_page_desc>
-                        <descricao_page name="p_descricao_page">Lorem perspiciatis amet iste n</descricao_page>
+                        <descricao_page name="p_descricao_page">Adipiscing mollit elit lorem e</descricao_page>
                         <id_page name="p_id_page" tag="id_page">1</id_page>
                         <nome_page name="p_nome_page" tag="nome_page">1</nome_page>
                     </row>
@@ -204,7 +226,7 @@
                         </context-menu>
                         <status_page name="p_status_page" check="true" desc="true">1</status_page>
                         <status_page_desc name="p_status_page_desc">1</status_page_desc>
-                        <descricao_page name="p_descricao_page">Iste anim accusantium labore a</descricao_page>
+                        <descricao_page name="p_descricao_page">Ipsum consectetur unde deserun</descricao_page>
                         <id_page name="p_id_page" tag="id_page">1</id_page>
                         <nome_page name="p_nome_page" tag="nome_page">1</nome_page>
                     </row>
@@ -215,7 +237,7 @@
                         </context-menu>
                         <status_page name="p_status_page" check="true" desc="true">1</status_page>
                         <status_page_desc name="p_status_page_desc">1</status_page_desc>
-                        <descricao_page name="p_descricao_page">Dolor anim doloremque accusant</descricao_page>
+                        <descricao_page name="p_descricao_page">Magna deserunt ut sit omnis</descricao_page>
                         <id_page name="p_id_page" tag="id_page">1</id_page>
                         <nome_page name="p_nome_page" tag="nome_page">1</nome_page>
                     </row>
@@ -223,11 +245,11 @@
                 <context-menu>
                     <item type="specific" code="" class="warning" rel="editar">
                         <title>Editar</title>
-                        <app/>
-                        <page/>
-                        <link/>
-                        <parameter>undefined?</parameter>
-                        <target>modal|refresh</target>
+                        <app>igrp_studio</app>
+                        <page>ListaPage</page>
+                        <link>index</link>
+                        <parameter>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/listapage/ListaPage.xml?</parameter>
+                        <target>mpsubmit|refresh</target>
                         <img>warning|fa-pencil</img>
                     </item>
                     <item type="specific" code="" class="primary" rel="visualizar">
@@ -269,6 +291,17 @@
                 </context-menu>
             </table>
         </table_1>
+        <toolsbar_2 type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="nova_aplicacao">
+                <title>Nova Aplicação</title>
+                <app>igrp_studio</app>
+                <page>Env</page>
+                <link>index</link>
+                <target>modal|refresh</target>
+                <img>primary|fa-plus</img>
+                <preview>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/env/Env.xml</preview>
+            </item>
+        </toolsbar_2>
         <myapps_list type="table" xml-type="table" title="Minhas Aplicações" gen-type="container" gen-group="true">
             <fields>
                 <icon name="p_icon" type="img" persist="true" img="images/IGRP/IGRP2.3/assets/img/jon_doe.jpg" width="" height="" croppie="false" rounded="false" maxlength="30" align="left" lookup_parser="false" iskey="false">
@@ -308,16 +341,5 @@
                 </value>
             </table>
         </myapps_list>
-        <toolsbar_2 type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
-            <item type="specific" code="" rel="nova_aplicacao">
-                <title>Nova Aplicação</title>
-                <app>igrp_studio</app>
-                <page>Env</page>
-                <link>index</link>
-                <target>modal|refresh</target>
-                <img>primary|fa-plus</img>
-                <preview>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/env/Env.xml</preview>
-            </item>
-        </toolsbar_2>
     </content>
 </rows>
