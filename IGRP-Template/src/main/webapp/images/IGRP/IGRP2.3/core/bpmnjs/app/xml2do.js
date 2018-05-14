@@ -6,17 +6,23 @@ var minify = function(str){
     return str.replace(/^\s+|\r\n|\n|\r|(>)\s+(<)|\s+$/gm, '$1$2');
 };
 
-var formField = function(str,t){
+var formField = function(p){
 	var v = '';
+  
+	if (p.t == 'c'){
+      v = p.o.replace(/activiti_G_formProperty/g, 'camunda_G_formField').
+      replace(/expression=/g, 'defaultValue=');
 
-	if (t == 'c') 
-		v = str.replace(/activiti_G_formProperty/g, 'camunda_G_formField').
-			replace(/name=/g, 'label=').replace(/expression=/g, 'defaultValue=');
+      if (!/executionListener|taskListener/i.test(p.n))
+        v = v.replace(/name=/g, 'label=');
+    }
+    else if (p.t == 'a'){
+		  v = p.o.replace(/camunda_G_formField/g, 'activiti_G_formProperty').
+            replace(/defaultValue=/g, 'expression=');
 
-	else if (t == 'a')
-		v = str.replace(/camunda_G_formField/g, 'activiti_G_formProperty').replace(/label=/g, 'name=').
-            replace(/defaultValue=/g, 'expression=')
-
+      if (!/executionListener|taskListener/i.test(p.n))
+        v = v.replace(/label=/g, 'name=');
+    }
 	return v;
 }
 
@@ -44,26 +50,39 @@ $.fn.activiti2Io = function(params) {
           tag       = getAttrs($(this)[0].attributes);
 
       if (strChilds) {
+        var omissionField = ['activiti_G_formProperty','activiti_G_executionListener','activiti_G_taskListener'];
+
    		  strChilds = $($.parseXML(xml2String(strChilds).replace(/:/g, '_G_')));
 
      		strChilds.find('extensionElements > *').each(function(x,l){
+
      			var tagName = $(this)[0].tagName;
-
-     			if(tagName != 'activiti_G_formProperty'){
-
+          
+     			if($.inArray(tagName, omissionField) == -1){
+            
      				if (tagName == 'modeler_G_assignee-info-email')
      					tag +='camunda_G_candidateUsers="'+$(this).text()+'"';
 
      				else if (tagName == 'modeler_G_assignee-info-firstname') 
      					tag += ' camunda_G_candidateGroups="'+$(this).text()+'"';
 
-     			}else
-     				str += formField(xml2String($(this)[0]),'c');
+     			}else{
+            str += formField({
+              o  : xml2String($(this)[0]),
+              t  : 'c',
+              n  : tagName
+            });
+          }
      		});  
 
-   		 if (strChilds.find('extensionElements > activiti_G_formProperty')[0])
-   		 	 str = '<bpmn_G_extensionElements><camunda_G_formData>'+ str+'</camunda_G_formData></bpmn_G_extensionElements>';
+   		  if (strChilds.find('extensionElements > activiti_G_formProperty')[0])
+   		 	 str = '<camunda_G_formData>'+ str+'</camunda_G_formData>';
+        
+        if (str != '')
+          str = '<bpmn_G_extensionElements>'+ str+'</bpmn_G_extensionElements>';
       }
+
+      
        //$(xml.find('process > userTask')[i]).empty();
    		return '<userTask '+tag+'>'+str+'</userTask>';
 	});
@@ -96,18 +115,33 @@ $.fn.io2Activiti = function(params){
    		var strChilds = $(this).find('extensionElements')[0],
         tag     = getAttrs($(this)[0].attributes),
         str       = '';
-
+       
    		if (strChilds) {
+        var omissionField = ['camunda_G_formData'];
 
    			strChilds = $($.parseXML(xml2String(strChilds).replace(/:/g, '_G_')));
 
-	   		strChilds.find('camunda_G_formData > *').each(function(x,l){
-	   			var tagName = $(this)[0].tagName;
+        strChilds.find('extensionElements > *').each(function(x,l){
+          var tagName = $(this)[0].tagName;
 
-	   			str += formField(xml2String($(this)[0]),'a');
-	   		});
+          if ($.inArray(tagName, omissionField) != -1) {
 
-	   		if (strChilds.find('extensionElements camunda_G_formData')[0])
+            $(this).find('> *').each(function(x,l){
+              
+              str += formField(xml2String($(this)[0]),'a');
+            
+            });
+
+          }else{
+            str += formField({
+              o  : xml2String($(this)[0]),
+              t  : 'a',
+              n  : tagName
+            });
+          }
+        });
+
+	   		if (str != '')
 	   			str = '<extensionElements>'+ str+'</extensionElements>';
    		}
 
