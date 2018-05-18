@@ -2318,7 +2318,9 @@ if(input) {
 				editorName = rel.substring(4),
 				editor     = GEN[editorName+'Editor'];
 
-			$('#gen-page-setts-ctrl').hide();
+			$('.gen-viewers-toolbar .gen-page-setts-ctrl').hide();
+			
+			$('.gen-viewers-toolbar .gen-toolbar-items').hide();
 
 			var callback = function(){
 
@@ -2341,6 +2343,16 @@ if(input) {
 				}
 
 				$('body').attr('view',rel);
+				
+				try{
+					
+					$('.gen-viewers-toolbar .gen-toolbar-items[rel*="'+rel.split('gen-')[1]+'"]').show();
+					
+				}catch(_err){
+					
+				}
+				
+				
 
 				executeEvents(viewChangeEvents,{
 					id   : rel,
@@ -2734,7 +2746,7 @@ if(input) {
 		
 		});
 
-		$('#gen-page-setts-ctrl').on('click',function(){
+		$('.gen-page-setts-ctrl').on('click',function(){
 			
 			openPLSQLSettings();
 
@@ -3804,7 +3816,7 @@ if(input) {
 
 					editor.refresh();
 
-					$('#gen-page-setts-ctrl').show();
+					$('.gen-viewers-toolbar .gen-page-setts-ctrl').show();
 				}
 
 				/* GOOGLE CHROME XSLT document() function hack */
@@ -4052,6 +4064,7 @@ if(input) {
 		var options = [];
 		var value   = p.value;
 		var tagName = p.tag || 'action';
+		var type    = p.type || 'text';
 
 		if(GEN.DETAILS.linkPageList && GEN.DETAILS.linkPageList[0])
 			
@@ -4102,14 +4115,15 @@ if(input) {
 				}
 			}
 		}
-		console.log(p)
 		
 		var params = {
 			name: tagName,
 			value:{
 				value   : value ? value : GEN.DETAILS.id,
-				options : options
+				options : options,
+				type : type
 			},
+			
 			isField : p.isField || false,
 			valuePersist : p.valuePersist || false,
 			onChange:function(val){
@@ -4121,7 +4135,7 @@ if(input) {
 			params.order = p.order;
 		
 		if(p.xmlAttr)
-			params.xmlAttr = p.xmlAttr
+			params.xmlAttr = p.xmlAttr;
 
 		field.setPropriety(params);
 		
@@ -4181,7 +4195,7 @@ if(input) {
 
 		}
 
-		setBTNAction(field.GET.action());
+		setBTNAction(field.GET[tagName]());
 	}
 
 
@@ -4345,7 +4359,8 @@ if(input) {
 				if(
 					field.GET.target && field.GET.target() == 'modal' ||
 					field.GET.target && field.GET.target() == 'right_panel' || 
-				   	field.GET.target && field.GET.target() == 'mpsubmit'   
+				   	field.GET.target && field.GET.target() == 'mpsubmit'   || 
+				   	field.GET.target && field.GET.target() == 'right_panel_submit'
 				)
 
 					o.input.show();
@@ -4361,8 +4376,10 @@ if(input) {
 			$.IGRP.rules.set({"edit-target":[
 				{"name":"","event":"change","condition":"equal","value":"changesrc","value2":"","patern":"","patern_custom":"","action":"show","targets":"edit-target_fields","procedure":"","msg_type":"","msg":"","opposite":"1","isTable":false},
 				{"name":"","event":"change","condition":"equal","value":"modal","value2":"","patern":"","patern_custom":"","action":"show","targets":"edit-closerefresh","procedure":"","msg_type":"","msg":"","opposite":"1","isTable":false},
-				{"name":"","event":"change","condition":"equal","value":"right_panel","value2":"","patern":"","patern_custom":"","action":"show","targets":"edit-closerefresh","procedure":"","msg_type":"","msg":"","opposite":"","isTable":false}
-			]});
+				{"name":"","event":"change","condition":"equal","value":"right_panel","value2":"","patern":"","patern_custom":"","action":"show","targets":"edit-closerefresh","procedure":"","msg_type":"","msg":"","opposite":"","isTable":false},
+				{"name":"","event":"change","condition":"equal","value":"mpsubmit","value2":"","patern":"","patern_custom":"","action":"show","targets":"edit-closerefresh","procedure":"","msg_type":"","msg":"","opposite":"","isTable":false},
+				{"name":"","event":"change","condition":"equal","value":"right_panel_submit","value2":"","patern":"","patern_custom":"","action":"show","targets":"edit-closerefresh","procedure":"","msg_type":"","msg":"","opposite":"","isTable":false}
+				]});
 			targetRulesSet = true;
 		}
 
@@ -4375,7 +4392,7 @@ if(input) {
 		field.setPropriety({
 			name:'class',
 			value:{
-				value :_default ? _default : 'default',
+				value :_default ? _default : 'primary',
 				size  : '12',
 				list  : {
 					items:[
@@ -4423,7 +4440,7 @@ if(input) {
 
 		field.setPropriety({
 			name:'maxlength',
-			propriety:30,
+			propriety:250,
 			onChange:function(value){
 				field.holder.find('[maxlength]').attr('maxlength',value);
 			}

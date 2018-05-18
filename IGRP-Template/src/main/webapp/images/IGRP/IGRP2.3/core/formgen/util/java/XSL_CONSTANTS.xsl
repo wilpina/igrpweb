@@ -38,13 +38,9 @@
     </xsl:variable>
 
     <xsl:key name="unique_instance" match="//content/*" use="local-name()"/>
-    
-    <xsl:variable name="sql_chart3d">
-        <xsl:text>SELECT 'Eixo de Y' EixoY,'Eixo de X' EixoX, 1000 Valor</xsl:text>
-    </xsl:variable>
-
-    <xsl:variable name="sql_chart2d">
-        <xsl:text>SELECT 'Eixo de X' EixoX, 1000 Valor</xsl:text>
+   
+    <xsl:variable name="sql_chart">
+        <xsl:text>SELECT 'Eixo X' as EixoX,10 as Valor</xsl:text>
     </xsl:variable>
 
     <xsl:variable name="double_quotes">"</xsl:variable>
@@ -54,6 +50,8 @@
     <xsl:variable name="import_config">
     	<xsl:if test="count(//fields/*[@persist='true' or @type='link']) &gt; 0">
         	<xsl:text>import nosi.core.config.Config;</xsl:text>
+        	 <xsl:value-of select="$newline"/>
+        	<xsl:text>import nosi.core.gui.components.IGRPLink;</xsl:text>
         </xsl:if>
     </xsl:variable>
     
@@ -133,6 +131,8 @@
         <xsl:text>import nosi.core.webapp.databse.helpers.ResultSet;</xsl:text>
         <xsl:value-of select="$newline"/>
         <xsl:text>import nosi.core.webapp.databse.helpers.QueryInterface;</xsl:text>
+         <xsl:value-of select="$newline"/>
+           <xsl:text>import nosi.core.config.Config;</xsl:text>
     </xsl:variable>
 
     <xsl:variable name="import_exception">

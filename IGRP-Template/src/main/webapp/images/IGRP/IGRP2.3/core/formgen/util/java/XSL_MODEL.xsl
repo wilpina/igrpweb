@@ -22,12 +22,33 @@
 					</xsl:choose>
 			 	</xsl:variable>
 	            <xsl:if test="not(@name=preceding::node()/@name)">	
+					
 					<xsl:value-of select="$tab"/>
-					<xsl:call-template name="gen-method-set-get">
-			    		<xsl:with-param name="type" select="@type" />
-			    		<xsl:with-param name="name" select="$tag_name" />
-			    		<xsl:with-param name="javaType" select="@java-type"/>
-			    	</xsl:call-template>
+					
+					<xsl:variable name="type_field_">
+						<xsl:call-template name="get-variable-type-java">
+				    		<xsl:with-param name="type" select="@type" />
+				    		<xsl:with-param name="javaType" select="@java-type" />
+				    	</xsl:call-template>
+					</xsl:variable>
+					
+					<xsl:choose>
+							<xsl:when test="@type='select' and @multiple='true'">
+								<xsl:call-template name="gen-method-set-get">
+									<xsl:with-param name="type" select="concat($type_field_, '[]')" />
+						    		<xsl:with-param name="name" select="$tag_name" />
+						    		<xsl:with-param name="javaType" select="concat($type_field_, '[]')"/>
+						    	</xsl:call-template>
+							</xsl:when>
+							<xsl:otherwise>
+								<xsl:call-template name="gen-method-set-get">
+									<xsl:with-param name="type" select="@type" />
+						    		<xsl:with-param name="name" select="$tag_name" />
+						    		<xsl:with-param name="javaType" select="@java-type"/>
+						    	</xsl:call-template>
+							</xsl:otherwise>
+			    	</xsl:choose>
+			    	
 					<xsl:value-of select="$newline"/>
 				</xsl:if>
 			</xsl:for-each>
@@ -65,7 +86,24 @@
 					<xsl:value-of select="concat('@RParam(rParamName = ',$double_quotes,@name,$double_quotes,')')"/>			
 					<xsl:value-of select="$newline"/>			
 					<xsl:value-of select="$tab"/>
-					<xsl:value-of select="concat('private ',$type_field,' ',$tag_name,';')"/>				
+					
+					<xsl:choose>
+						<xsl:when test="@type='select' and @multiple='true'">
+							<xsl:value-of select="concat('private ',$type_field,'[] ',$tag_name,';')"/>
+						</xsl:when>
+						<xsl:otherwise>	
+							<xsl:choose>				
+								<xsl:when test="@type='link'">
+									<xsl:value-of select="concat('private ','IGRPLink ', $tag_name,';')"/>
+								</xsl:when>
+								<xsl:otherwise>						
+									<xsl:value-of select="concat('private ',$type_field,' ',$tag_name,';')"/>									
+								</xsl:otherwise>	
+							</xsl:choose>
+						</xsl:otherwise>			
+					</xsl:choose>
+					
+					
 					<xsl:value-of select="$newline"/>
 					<xsl:if test="@type='link'">	
 						<xsl:value-of select="$tab"/>				
@@ -109,6 +147,38 @@
 	    	</xsl:call-template>
 			<xsl:value-of select="$newline"/>	
 			
+			 
+			<xsl:value-of select="$tab"/> 
+			<xsl:value-of select="concat('@RParam(rParamName = ',$double_quotes, 'p_',name(),'_id',$double_quotes,')')"/>			
+			<xsl:value-of select="$newline"/>			
+			<xsl:value-of select="$tab"/> 
+			<xsl:value-of select="concat('private ','String[]',' ', 'p_',name(),'_id',';')"/>				
+			<xsl:value-of select="$newline"/>
+			
+			<xsl:value-of select="$tab"/>
+			<xsl:value-of select="concat('@RParam(rParamName = ',$double_quotes, 'p_',name(),'_del',$double_quotes,')')"/>			
+			<xsl:value-of select="$newline"/>			
+			<xsl:value-of select="$tab"/>
+			<xsl:value-of select="concat('private ','String[]',' ', 'p_',name(),'_del',';')"/>				
+			<xsl:value-of select="$newline"/>
+			 
+			<xsl:value-of select="$tab"/>
+			<xsl:call-template name="gen-method-set-get">
+	    		<xsl:with-param name="type" select="'String[]'" />
+	    		<xsl:with-param name="name" select="concat('p_',name(),'_id')" />
+	    		<xsl:with-param name="javaType" select="'String[]'"/>
+	    	</xsl:call-template>
+			<xsl:value-of select="$newline"/>
+			
+			<xsl:value-of select="$tab"/> 
+			<xsl:call-template name="gen-method-set-get">
+	    		<xsl:with-param name="type" select="'String[]'" />
+	    		<xsl:with-param name="name" select="concat('p_',name(),'_del')" />
+	    		<xsl:with-param name="javaType" select="'String[]'"/>
+	    	</xsl:call-template>
+			<xsl:value-of select="$newline"/>
+			
+			
     	</xsl:for-each>  
     	
     	
@@ -142,7 +212,16 @@
  	</xsl:template>
 
 
- 	<!-- Join all template to create a class model -->
+ 	<!-- Join all template to create a class model
+ 	Example:
+ 	
+ 	 public void loadTable_1(BaseQueryInterface query) {
+		this.setTable_1(this.loadTable(query,Table_1.class));
+	}
+
+	public void loadMyapps_list(BaseQueryInterface query) {
+		this.setMyapps_list(this.loadTable(query,Myapps_list.class));
+	} -->
  	<xsl:template name="create-model">
  		<xsl:call-template name="import-packages-model"></xsl:call-template>
  		<xsl:value-of select="$newline"/>
@@ -194,7 +273,14 @@
  		<xsl:value-of select="'}'"/>
  	</xsl:template>
  	
- 	<!-- Gen attributes for subclass -->
+ 	<!-- Gen attributes for subclass 
+ 	Example:
+ 	
+ 		public static class Myapps_list{
+		private String icon;
+		private String aplicacao;
+		private String aplicacao_desc;
+ 	-->
  	<xsl:template name="gen-ttributes-subclass">
  		<xsl:value-of select="$newline"/>
 			<xsl:value-of select="$tab"/>
@@ -221,15 +307,22 @@
 		    		<xsl:with-param name="javaType" select="@java-type" />
 		    	</xsl:call-template>
 			</xsl:variable>
- 			<xsl:value-of select="$newline"/>
+			<xsl:if test="@type != 'link'">
+			<xsl:value-of select="$newline"/>
  			<xsl:value-of select="$tab2"/>
-			<xsl:value-of select="concat('private ',$type_field,' ',$tag_name,';')"/>
+			<xsl:value-of select="concat('private ',$type_field,' ',$tag_name,';')"/>		
+			
+			</xsl:if>
+ 			
 			<xsl:if test="@type = 'checkbox' or @type='radio'">				
 	 			<xsl:value-of select="$newline"/>
 	 			<xsl:value-of select="$tab2"/>
 				<xsl:value-of select="concat('private ',$type_field,' ',$tag_name,'_check;')"/>
 			</xsl:if>			
-			<xsl:if test="@type = 'link'">				
+			<xsl:if test="@type = 'link'">		
+				<xsl:value-of select="$newline"/>
+	 			<xsl:value-of select="$tab2"/>
+				<xsl:value-of select="concat('private ','IGRPLink',' ',$tag_name,';')"/>		
 	 			<xsl:value-of select="$newline"/>
 	 			<xsl:value-of select="$tab2"/>
 				<xsl:value-of select="concat('private ',$type_field,' ',$tag_name,'_desc;')"/>
