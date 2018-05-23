@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<comment></comment>
+	<comment>store config igrp database</comment>
 	<entry key="java.net.preferIPv4Stack"></entry>
 	<entry key="mail.smtp.host"></entry>
 	<entry key="mail.smtp.socketFactory.port"></entry>
