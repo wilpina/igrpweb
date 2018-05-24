@@ -3,7 +3,7 @@
   <display-name>IGRP</display-name>
   <context-param>
     <param-name>workspace</param-name>
-    <param-value></param-value>
+    <param-value>D:\temp\IGRP\WORKSPACE ECLIPSE\IGRP-Java-Template-Eclipse\IGRP-Template</param-value>
   </context-param>
   <servlet>
     <servlet-name>IGRP</servlet-name>
