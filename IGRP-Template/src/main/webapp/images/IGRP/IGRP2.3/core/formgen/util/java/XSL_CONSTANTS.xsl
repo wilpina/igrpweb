@@ -38,13 +38,9 @@
     </xsl:variable>
 
     <xsl:key name="unique_instance" match="//content/*" use="local-name()"/>
-    
-    <xsl:variable name="sql_chart3d">
-        <xsl:text>SELECT 'Eixo de Y' EixoY,'Eixo de X' EixoX, 1000 Valor</xsl:text>
-    </xsl:variable>
-
-    <xsl:variable name="sql_chart2d">
-        <xsl:text>SELECT 'Eixo de X' EixoX, 1000 Valor</xsl:text>
+   
+    <xsl:variable name="sql_chart">
+        <xsl:text>SELECT 'Eixo X' as EixoX,10 as Valor</xsl:text>
     </xsl:variable>
 
     <xsl:variable name="double_quotes">"</xsl:variable>
@@ -97,6 +93,12 @@
 
     <xsl:variable name="import_model">
        	<xsl:text>import nosi.core.webapp.Model;</xsl:text>
+    </xsl:variable>
+    
+    <xsl:variable name="import_table">
+    	<xsl:if test="count(/rows/content/*[@type='table']) &gt; 0">
+        	<xsl:text>import nosi.core.gui.components.IGRPTable;</xsl:text>
+        </xsl:if>
     </xsl:variable>
     
     <xsl:variable name="import_array_list">
