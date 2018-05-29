@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ldap> <!-- Just for test :-) ... -->
-	<url>ldap://gov.cv:389</url>
+	<url></url>
 	<username></username>
 	<password></password>
 	<base></base>
