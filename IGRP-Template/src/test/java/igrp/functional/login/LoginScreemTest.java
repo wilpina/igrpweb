@@ -39,26 +39,26 @@ import com.thoughtworks.selenium.DefaultSelenium;
 public class LoginScreemTest {
 	private static final String WEBAPP_SRC = "src/main/webapp";
     
-    @Deployment(testable = false)
-    public static WebArchive createDeployment() {
-
-    	return ShrinkWrap.create(WebArchive.class, "igrp.war")
-            .addClasses(nosi.core.servlet.IgrpServlet.class, 
-            		    nosi.webapps.igrp.dao.Action.class,
-            			nosi.core.config.ConfigDBIGRP.class,
-            			nosi.core.config.Config.class
-            			)
-            //.setWebXML(new File(WEBAPP_INF + "/web.xml"))
-            
-            .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
-                .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
-                "/", Filters.includeAll()
-            		)
-            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-            .addAsWebInfResource(
-                new StringAsset("<faces-config version=\"2.0\"/>"),
-                "faces-config.xml");
-    }
+//    @Deployment(testable = false)
+//    public static WebArchive createDeployment() {
+//
+//    	return ShrinkWrap.create(WebArchive.class, "igrp.war")
+//            .addClasses(nosi.core.servlet.IgrpServlet.class, 
+//            		    nosi.webapps.igrp.dao.Action.class,
+//            			nosi.core.config.ConfigDBIGRP.class,
+//            			nosi.core.config.Config.class
+//            			)
+//            //.setWebXML(new File(WEBAPP_INF + "/web.xml"))
+//            
+//            .merge(ShrinkWrap.create(GenericArchive.class).as(ExplodedImporter.class)
+//                .importDirectory(WEBAPP_SRC).as(GenericArchive.class),
+//                "/", Filters.includeAll()
+//            		)
+//            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+//            .addAsWebInfResource(
+//                new StringAsset("<faces-config version=\"2.0\"/>"),
+//                "faces-config.xml");
+//    }
     
     @Drone
     DefaultSelenium browser;

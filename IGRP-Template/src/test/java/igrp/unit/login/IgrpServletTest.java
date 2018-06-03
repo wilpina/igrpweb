@@ -10,9 +10,9 @@ import org.eclipse.jetty.testing.ServletTester;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import nosi.core.servlet.IgrpServlet;
-import nosi.core.webapp.FlashMessage;
-import nosi.core.webapp.Igrp;
+//import nosi.core.servlet.IgrpServlet;
+//import nosi.core.webapp.FlashMessage;
+//import nosi.core.webapp.Igrp;
 //@Ignore
 public class IgrpServletTest {
 
@@ -21,7 +21,7 @@ public class IgrpServletTest {
     public void testServlet() throws Exception {
 
     	ServletTester servletTester = new ServletTester();
-    	servletTester.addServlet(IgrpServlet.class, "/igrp");
+//    	servletTester.addServlet(IgrpServlet.class, "/igrp");
     	servletTester.start();
 
     	

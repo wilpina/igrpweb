@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/IGRP/images/IGRP/IGRP2.3/app/app_teste/registo_veiculo/Registo_veiculo.xsl" type="text/xsl"?>
+<rows>
+    <link_img>/IGRP/images/IGRP/IGRP2.3</link_img>
+    <site>
+        <welcome_note>Oba</welcome_note>
+        <footer_note>2017 - Copyright NOSI</footer_note>
+        <user_name>Hexagon</user_name>
+        <button type="specific">
+            <title>Sair</title>
+            <app>DUA</app>
+            <page />
+            <link>#</link>
+            <target>_self</target>
+            <img>exit.png</img>
+        </button>
+    </site>
+    <page>Registo_veiculo</page>
+    <app>app_teste</app>
+    <plsql>
+        <action>index</action>
+        <package_instance></package_instance>
+        <package_db>nosi.webapps.app_teste.pages</package_db>
+        <package_html>Registo_veiculo</package_html>
+        <table_name></table_name>
+        <with_replace>false</with_replace>
+        <with_label>false</with_label>
+        <with_biztalk>false</with_biztalk>
+        <dynamic_menu>false</dynamic_menu>
+        <copy_menu>false</copy_menu>
+        <package_copy_db />
+        <package_copy_html />
+        <preserve_url>webapps?r=igrp/page/preserveUrl&amp;p_id=57</preserve_url>
+    </plsql>
+    <content>
+        <title>Registo Veiculo</title>
+        <form_1 type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <matricual name="p_matricual" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false">
+                    <label>Matricual</label>
+                    <value>Sed deserunt sit elit omnis</value>
+                </matricual>
+                <marca name="p_marca" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false">
+                    <label>Marca</label>
+                    <value>Ipsum mollit sit unde lorem</value>
+                </marca>
+                <modelo name="p_modelo" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false">
+                    <label>Modelo</label>
+                    <value>Anim stract adipiscing totam anim</value>
+                </modelo>
+                <chassi name="p_chassi" type="text" maxlength="250" required="false" change="false" readonly="false" disabled="false" placeholder="" right="false">
+                    <label>Chassi</label>
+                    <value>Natus accusantium sit natus anim</value>
+                </chassi>
+            </fields>
+        </form_1>
+    </content>
+</rows>
