@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 
-	<display-name>IGRP-Template</display-name>
+	<display-name>IGRP</display-name>
 
 	<context-param>
 		<param-name>workspace</param-name>
-		<param-value>C:\Users\Isaías Nunes\git\IGRP-Java-Template-Eclipse\IGRP-Template</param-value>
+		<param-value></param-value>
 	</context-param>
 	
 	<context-param>
@@ -86,7 +86,7 @@
 	    </init-param>
 	    <init-param>
 			<param-name>authentication_type</param-name>
-			<param-value>ldap</param-value>
+			<param-value>db</param-value>
 		</init-param>
 		<init-param>
 			<param-name>env</param-name>
