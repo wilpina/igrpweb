@@ -33,7 +33,10 @@
 			<file-size-threshold>0</file-size-threshold>
 		</multipart-config>
 	</servlet>
-
+	<servlet>
+	   <servlet-name>testesso</servlet-name>
+	   <servlet-class>nosi.core.servlet.TesteSso</servlet-class>
+	</servlet>
 	<servlet>
 		<servlet-name>igrpsso</servlet-name>
 		<servlet-class>nosi.core.servlet.IgrpOAuth2SSO</servlet-class>
