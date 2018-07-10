@@ -8,12 +8,12 @@
 
 	<context-param>
 		<param-name>workspace</param-name>
-		<param-value></param-value>
+		<param-value>/IGRP-Template/</param-value>
 	</context-param>
 	
 	<context-param>
 		<param-name>images</param-name>
-		<param-value>/IGRP-Template/</param-value>
+		<param-value>/IGRP/</param-value>
 	</context-param>
 	
 	<servlet>
@@ -33,10 +33,7 @@
 			<file-size-threshold>0</file-size-threshold>
 		</multipart-config>
 	</servlet>
-	<servlet>
-	   <servlet-name>testesso</servlet-name>
-	   <servlet-class>nosi.core.servlet.TesteSso</servlet-class>
-	</servlet>
+
 	<servlet>
 		<servlet-name>igrpsso</servlet-name>
 		<servlet-class>nosi.core.servlet.IgrpOAuth2SSO</servlet-class>
@@ -73,34 +70,14 @@
 		<servlet-name>default</servlet-name>
 		<url-pattern>/images/*</url-pattern>
 	</servlet-mapping>
-
+	<servlet>
+	   <servlet-name>testesso</servlet-name>
+	   <servlet-class>nosi.core.servlet.TesteSso</servlet-class>
+	</servlet>
 	<welcome-file-list>
 		<!-- <welcome-file>app/webapps?r=igrp/login/login</welcome-file> -->
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
-	
-	
-	<servlet>
-	  	<servlet-name>IGRP-Rest</servlet-name>
-	  	<servlet-class>nosi.core.servlet.IgrpRestServlet</servlet-class>
-	    <init-param>
-	        <param-name>jersey.config.server.provider.packages</param-name>
-	        <param-value>nosi.core.webapp.webservices.rest</param-value>
-	    </init-param>
-	    <init-param>
-			<param-name>authentication_type</param-name>
-			<param-value>db</param-value>
-		</init-param>
-		<init-param>
-			<param-name>env</param-name>
-			<param-value>dev</param-value>
-		</init-param>
-	</servlet>
- 
-	<servlet-mapping>
-		<servlet-name>IGRP-Rest</servlet-name>
-		<url-pattern>/rest/*</url-pattern>
-	</servlet-mapping>
 	
 	<error-page>
 		<exception-type>java.lang.Exception</exception-type>
