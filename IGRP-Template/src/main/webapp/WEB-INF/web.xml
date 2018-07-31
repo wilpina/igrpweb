@@ -4,16 +4,16 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	id="WebApp_ID" version="3.1">
 
-	<display-name>IGRP</display-name>
+	<display-name>IGRP-Template</display-name>
 
 	<context-param>
 		<param-name>workspace</param-name>
-		<param-value>C:\Users\isaias.nunes\git\IGRP-Framework\IGRP</param-value>
+		<param-value></param-value>
 	</context-param>
 	
 	<context-param>
 		<param-name>images</param-name>
-		<param-value>/IGRP/</param-value>
+		<param-value>/IGRP-Template/</param-value>
 	</context-param>
 	
 	<servlet>
