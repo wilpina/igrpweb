@@ -59,7 +59,7 @@
         
         
         
-        <property name="java-output-path" value="/IGRP/build/classes"/>
+        <property name="java-output-path" value="/IGRP-Template/build/classes"/>
         <property name="context-root" value="IGRP-Template"/>
                                                                             
     
