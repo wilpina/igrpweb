@@ -54,24 +54,28 @@
         	<xsl:text>import nosi.core.gui.components.IGRPLink;</xsl:text>
         	 <xsl:value-of select="$newline"/>
         	<xsl:text>import nosi.core.webapp.Report;</xsl:text>
+        	<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
     
     <xsl:variable name="import_HashMap">    
     	<xsl:if test="count(/rows/content/*[@type='table']/fields/*[@type='color']) &gt; 0">
         	<xsl:text>import java.util.HashMap;</xsl:text>
+        	<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
     
     <xsl:variable name="import_Map">   
     	<xsl:if test="count(/rows/content/*[@type='table']/fields/*[@type='color']) &gt; 0">
         	<xsl:text>import java.util.Map;</xsl:text>
+        	<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
 
     <xsl:variable name="import_components">
     	<xsl:if test="count(/rows/content/*) &gt; 0">
         	<xsl:text>import nosi.core.gui.components.*;</xsl:text>
+     		<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
 
@@ -80,56 +84,66 @@
 	        <xsl:text>import nosi.core.gui.fields.*;</xsl:text>
 	        <xsl:value-of select="$newline"/>
 	        <xsl:text>import static nosi.core.i18n.Translator.gt;</xsl:text>
+  			<xsl:value-of select="$newline"/>    
         </xsl:if>
     </xsl:variable>
 
     <xsl:variable name="import_view">
         <xsl:text>import nosi.core.webapp.View;</xsl:text>
+        <xsl:value-of select="$newline"/>
     </xsl:variable>
 
     <xsl:variable name="import_date">
     	<xsl:if test="count(//fields/*[@java-type='Date']) &gt; 0">
         	<xsl:text>import java.sql.Date;</xsl:text>
+        	<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
 
     <xsl:variable name="import_model">
        	<xsl:text>import nosi.core.webapp.Model;</xsl:text>
+       	<xsl:value-of select="$newline"/>
     </xsl:variable>
     
     <xsl:variable name="import_table">
-    	<xsl:if test="count(/rows/content/*[@type='table']) &gt; 0">
+    	<xsl:if test="count(/rows/content/*[@type='table' or @type='treemenu']) &gt; 0">
         	<xsl:text>import nosi.core.gui.components.IGRPTable;</xsl:text>
+        	<xsl:value-of select="$newline"/>        	
         </xsl:if>
     </xsl:variable>
     
     <xsl:variable name="import_array_list">
-    	<xsl:if test="count(/rows/content/*[@type='separatorlist' or @type='formlist' or @type='table' or @type='timeline']) &gt; 0">
+    	<xsl:if test="count(/rows/content/*[@type='separatorlist' or @type='formlist' or @type='table' or @type='timeline' or @type='treemenu']) &gt; 0">
         	<xsl:text>import java.util.ArrayList;</xsl:text> 
+       		<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
 
-    <xsl:variable name="import_list">
-    	<xsl:if test="count(/rows/content/*[@type='separatorlist' or @type='formlist' or @type='table' or @type='timeline']) &gt; 0">
+    <xsl:variable name="import_list"> 
+    	<xsl:if test="count(/rows/content/*[@type='separatorlist' or @type='formlist' or @type='table' or @type='timeline' or @type='treemenu']) &gt; 0">
         	<xsl:text>import java.util.List;</xsl:text>
+        	<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
 
     <xsl:variable name="import_separator_list">    
     	<xsl:if test="count(/rows/content/*[@type='separatorlist' or @type='formlist']) &gt; 0">
         	<xsl:text>import nosi.core.gui.components.IGRPSeparatorList.Pair;</xsl:text>
+       		<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
     
     <xsl:variable name="import_query_helper">
-    	<xsl:if test="count(/rows/content/*[@type='separatorlist' or @type='formlist' or @type='table' or @type='timeline']) &gt; 0">
+    	<xsl:if test="count(/rows/content/*[@type='separatorlist' or @type='formlist' or @type='table' or @type='timeline' or @type='treemenu']) &gt; 0">
         	<xsl:text>import nosi.core.webapp.databse.helpers.BaseQueryInterface;</xsl:text>
+       		<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
 
     <xsl:variable name="import_separator_list_annotation">     
     	<xsl:if test="count(/rows/content/*[@type='separatorlist' or @type='formlist']) &gt; 0">
         	<xsl:text>import nosi.core.webapp.SeparatorList;</xsl:text>
+      		<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
 
@@ -139,8 +153,6 @@
         <xsl:text>import nosi.core.webapp.databse.helpers.ResultSet;</xsl:text>
         <xsl:value-of select="$newline"/>
         <xsl:text>import nosi.core.webapp.databse.helpers.QueryInterface;</xsl:text>
-         <xsl:value-of select="$newline"/>
-           <xsl:text>import nosi.core.config.Config;</xsl:text>
     </xsl:variable>
 
     <xsl:variable name="import_exception">
@@ -160,6 +172,7 @@
     <xsl:variable name="import_annotations">
     	<xsl:if test="count(//fields/*) &gt; 0">
         	<xsl:text>import nosi.core.webapp.RParam;</xsl:text>
+        	<xsl:value-of select="$newline"/>
         </xsl:if>
     </xsl:variable>
 
@@ -418,11 +431,6 @@
             </xsl:call-template>
         </xsl:variable>
         
-<!--         <xsl:value-of select="$newline"/> -->
-        
-<!--         <xsl:if test="$tabCode"> -->
-<!--             <xsl:value-of select="$indentation"/> -->
-<!--         </xsl:if> -->
         
         <xsl:value-of select="$newline"/>
 
@@ -434,39 +442,27 @@
         <xsl:value-of select="$typeLower"/>
         <xsl:text>)----*/</xsl:text>
 
-        <xsl:value-of select="$newline"/>
-        
+        <xsl:value-of select="$newline"/>        
         <xsl:if test="$tabCode">
             <xsl:value-of select="$indentation"/>
         </xsl:if>
-
-        <xsl:value-of select="$newline"/>
-
+        <xsl:value-of select="$newline"/>        
         <xsl:if test="$tabCode">
             <xsl:value-of select="$indentation"/>
-        </xsl:if>
-        
+        </xsl:if>        
         <xsl:value-of select="$text"/>
-          <xsl:call-template name="newlineTab2"/>
-
+		<xsl:value-of select="$newline"/>     
+          
 		<xsl:if test="$end = true()">
 	        <xsl:call-template name="end-code">
 	            <xsl:with-param name="type" select="$type"/>
 	        </xsl:call-template>
 		</xsl:if>
-			
-        <xsl:value-of select="$newline"/>
-
+		
+		<xsl:value-of select="$newline"/>
         <xsl:if test="$tabCode">
             <xsl:value-of select="$indentation"/>
-        </xsl:if>
-        
-<!--         <xsl:value-of select="$newline"/> -->
-        
-<!--         <xsl:if test="$tabCode"> -->
-<!--             <xsl:value-of select="$indentation"/> -->
-<!--         </xsl:if> -->
-
+        </xsl:if>     
     </xsl:template>
 
     <xsl:template name="end-code">
@@ -529,9 +525,7 @@
     		name()!='lookup_parser' and
     		name()!='iskey' and
     		name()!='format' and
-    		name()!='change' and
-    		name()!='readonly' and
-    		name()!='disabled' and
+    		name()!='change' and 
     		name()!='placeholder' and
     		name()!='custom_action' and	
     		name()!='action_type' and

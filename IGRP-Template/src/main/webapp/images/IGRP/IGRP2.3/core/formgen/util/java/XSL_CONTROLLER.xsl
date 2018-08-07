@@ -3,8 +3,7 @@
     <xsl:output method="text" encoding="UTF-8" indent="no"/>
 
     <!-- Join all templates to create controller -->
-    <xsl:template name="create-controller">
-    	<xsl:value-of select="$newline"/>
+    <xsl:template name="create-controller">    
      	<xsl:call-template name="import-packages-controller"></xsl:call-template>
      	<xsl:value-of select="$newline"/>
  		<xsl:value-of select="concat('public class ',$class_name,'Controller extends Controller {')"/>
@@ -14,29 +13,16 @@
 	 		<xsl:call-template name="actionEditCalendar"></xsl:call-template>	 		
 	 		<xsl:call-template name="createActions"></xsl:call-template> 	
  		<xsl:value-of select="'}'"/>
-    </xsl:template>
-    
-    
-    
+    </xsl:template>  
     
     <!-- create actions based in rules (Fields) -->
- 	<xsl:template name="createActions_">
- 	
+ 	<xsl:template name="createActions_"> 	
  		<xsl:variable name="app_" select="/rows/app" />
-		<xsl:variable name="page_" select="/rows/page" />
-		
- 		<xsl:for-each select="//rules/rule">
- 		
+		<xsl:variable name="page_" select="/rows/page" />		
+ 		<xsl:for-each select="//rules/rule"> 		
  			<xsl:variable name="action_" select="./proc" />
- 			
- 				
- 			
- 		</xsl:for-each>
- 		
+ 		</xsl:for-each> 		
  	</xsl:template>
- 	
- 	
- 	
  	
 
      <!-- import all class to using in controller -->
@@ -71,7 +57,7 @@
      	</xsl:call-template>
      	<xsl:value-of select="$end_reserve_code"></xsl:value-of>
 		<!--<xsl:call-template name="import-class-models"></xsl:call-template>  -->
-		<xsl:value-of select="$newline"/>
+	
  	</xsl:template>
  	
  	

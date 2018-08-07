@@ -4,12 +4,10 @@
 
     <!-- Join all templates to create view -->
     <xsl:template name="create-view">
-		<xsl:value-of select="$newline"/>
      	<xsl:call-template name="import-packages-view"></xsl:call-template>
      	<xsl:value-of select="$newline"/>
  		<xsl:value-of select="concat('public class ',$class_name,'View extends View {')"/> 			
 	 		<xsl:value-of select="$newline"/>
-<!-- 	     	<xsl:value-of select="$tab"/>	 -->
  	     	<xsl:value-of select="$newline"/> 
 	     	<xsl:call-template name="declare-variables-view"/>
 	     	<xsl:value-of select="$newline"/>
@@ -29,9 +27,7 @@
 	<!-- Set Model -->
 	<xsl:template name="set-model">
 		
-		<!--<xsl:value-of select="$newline"/>
-		<xsl:value-of select="$tab"/>
- 		<xsl:text>@Override</xsl:text>-->
+
 		<xsl:value-of select="$newline"/>
 		<xsl:value-of select="$tab"/>
  		<xsl:text>@Override</xsl:text>
@@ -58,8 +54,7 @@
 			<xsl:value-of select="$tab2"/>				
 		</xsl:for-each>
 		
-		<xsl:value-of select="$newline"/>			
-		<xsl:value-of select="$tab"/>
+		
 		
  		<xsl:text>}</xsl:text>
  		
@@ -76,22 +71,15 @@
  	<xsl:template name="import-packages-view">
  		<xsl:value-of select="concat('package ',$package_name)"/>
 		<xsl:value-of select="$newline"/>
+		<xsl:value-of select="$newline"/>
  		<xsl:value-of select="$import_model"/>
-		<xsl:value-of select="$newline"/>
  		<xsl:value-of select="$import_view"/>
-		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_components"/>
-		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_fields"/>
-		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_date"/>
-		<xsl:value-of select="$newline"/>
-		<xsl:value-of select="$import_config"/>
-		<xsl:value-of select="$newline"/>
-		<xsl:value-of select="$import_Map"/>
-		<xsl:value-of select="$newline"/>
-		<xsl:value-of select="$import_HashMap"/>
-		<xsl:value-of select="$newline"/>
+ 		<xsl:value-of select="$import_components"/>	
+ 		<xsl:value-of select="$import_fields"/>		
+ 		<xsl:value-of select="$import_date"/>	
+		<xsl:value-of select="$import_config"/>	
+		<xsl:value-of select="$import_Map"/>		
+		<xsl:value-of select="$import_HashMap"/>		
 		
  	</xsl:template>
  	
@@ -359,7 +347,7 @@
 			
 			<xsl:choose>
 			
-			  <xsl:when test="@type='circlestatbox' or @type='smallbox' or @type='statbox' or type='timeline'">
+			  <xsl:when test="@type='circlestatbox' or @type='smallbox' or @type='statbox' or @type='quickbuttonbox' or @type='timeline' or @type='treemenu'">
 			  
 			  <xsl:call-template name="gen-instance-components">
 					<xsl:with-param name="type_content"><xsl:value-of select="@type" /></xsl:with-param>

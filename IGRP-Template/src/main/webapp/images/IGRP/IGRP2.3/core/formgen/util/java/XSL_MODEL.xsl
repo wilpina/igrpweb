@@ -188,29 +188,17 @@
  	<xsl:template name="import-packages-model">
  		<xsl:value-of select="concat('package ',$package_name)"/>
 		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_config"/>
-		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_table"/>
-		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_model"/>
-		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_annotations"/>
- 		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_query_helper"/>
-		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_separator_list"/>
-		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_separator_list_annotation"/>
-		<xsl:value-of select="$newline"/>
- 		<xsl:value-of select="$import_date"/>
- 		
-		<xsl:value-of select="$newline"/>
-		<xsl:if test="count(/rows/content/*[@type = 'treemenu' or @type = 'table' or @type = 'formlist' or @type = 'separatorlist' or @type='timeline']) > 0">
-	 		<xsl:value-of select="$import_array_list"/>
-			<xsl:value-of select="$newline"/>
-			<xsl:value-of select="$import_list"/>
-			<xsl:value-of select="$newline"/>
-		</xsl:if>
+		 <xsl:value-of select="$newline"/>
+ 		<xsl:value-of select="$import_config"/>	
+ 		<xsl:value-of select="$import_table"/>		
+ 		<xsl:value-of select="$import_model"/>	
+ 		<xsl:value-of select="$import_annotations"/> 		
+ 		<xsl:value-of select="$import_query_helper"/>	
+ 		<xsl:value-of select="$import_separator_list"/>	
+ 		<xsl:value-of select="$import_separator_list_annotation"/>		
+ 		<xsl:value-of select="$import_date"/> 		
+		<xsl:value-of select="$import_array_list"/>
+		<xsl:value-of select="$import_list"/>	
  	</xsl:template>
 
 
@@ -224,7 +212,7 @@
 	public void loadMyapps_list(BaseQueryInterface query) {
 		this.setMyapps_list(this.loadTable(query,Myapps_list.class));
 	} -->
- 	<xsl:template name="create-model">
+ 	<xsl:template name="create-model"> 	  
  		<xsl:call-template name="import-packages-model"></xsl:call-template>
  		<xsl:value-of select="$newline"/>
 	 		<xsl:value-of select="concat('public class ',$class_name,' extends Model{')"/>
@@ -356,85 +344,6 @@
 		<xsl:value-of select="'}'"/> 	
  	</xsl:template>
  	
- 	
- 	
- 	<xsl:template name="gen-ttributes-subclass-timeline">
- 		<xsl:value-of select="$newline"/>
-			<xsl:value-of select="$tab"/>
-			<xsl:variable name="tableName">
-    			<xsl:call-template name="gen-className">
-    				<xsl:with-param name="className"><xsl:value-of select="name()"/> </xsl:with-param> 
-    			</xsl:call-template> 
-    		</xsl:variable>  
- 		<xsl:value-of select="concat('public static class ',$tableName,' {')"/>
- 		<xsl:for-each select="fields/*">
- 			<xsl:variable name="tag_name">
-				<xsl:choose>
-					<xsl:when test="@type='hidden'">
-						<xsl:value-of select="@tag"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="name()"/>
-					</xsl:otherwise>
-				</xsl:choose>
-		 	</xsl:variable>
-			<xsl:variable name="type_field">
-				<xsl:call-template name="get-variable-type-java">
-		    		<xsl:with-param name="type" select="@type" />
-		    		<xsl:with-param name="javaType" select="@java-type" />
-		    	</xsl:call-template>
-			</xsl:variable>
-			<xsl:if test="@type != 'link'">
-			<xsl:value-of select="$newline"/>
- 			<xsl:value-of select="$tab2"/>
-			<xsl:value-of select="concat('private ',$type_field,' ',$tag_name,';')"/>		
-			
-			</xsl:if>
- 			
-			<xsl:if test="@type = 'checkbox' or @type='radio'">				
-	 			<xsl:value-of select="$newline"/>
-	 			<xsl:value-of select="$tab2"/>
-				<xsl:value-of select="concat('private ',$type_field,' ',$tag_name,'_check;')"/>
-			</xsl:if>			
-			<xsl:if test="@type = 'link'">		
-				<xsl:value-of select="$newline"/>
-	 			<xsl:value-of select="$tab2"/>
-				<xsl:value-of select="concat('private ','IGRPLink',' ',$tag_name,';')"/>		
-	 			<xsl:value-of select="$newline"/>
-	 			<xsl:value-of select="$tab2"/>
-				<xsl:value-of select="concat('private ',$type_field,' ',$tag_name,'_desc;')"/>
-			</xsl:if>
- 		</xsl:for-each>
- 		<xsl:for-each select="fields/*">
- 			<xsl:variable name="tag_name">
-				<xsl:choose>
-					<xsl:when test="@type='hidden'">
-						<xsl:value-of select="@tag"/>
-					</xsl:when>
-					<xsl:otherwise>
-						<xsl:value-of select="name()"/>
-					</xsl:otherwise>
-				</xsl:choose>
-		 	</xsl:variable>
-			<xsl:call-template name="gen-method-set-get">
-	    		<xsl:with-param name="type_content" select="../../@type" />
-	    		<xsl:with-param name="type" select="@type" />
-	    		<xsl:with-param name="name" select="$tag_name" />
-	    		<xsl:with-param name="tab_" select="$tab2" />
-	    		<xsl:with-param name="tab2_" select="concat($tab,$tab2)" />
-	    		<xsl:with-param name="javaType" select="@java-type"/>
-	    	</xsl:call-template>
-			<xsl:value-of select="$newline"/>
-		</xsl:for-each>
-		<xsl:value-of select="$newline"/>
-		<xsl:value-of select="$tab"/>
-		<xsl:value-of select="'}'"/> 	
- 	</xsl:template>
- 	
- 	
- 	
- 	
- 	
  	<!-- Gen attributes for subclass for separatorList and formlist-->
  	<xsl:template name="gen-ttributes-subclass-separatorList">
  		<xsl:value-of select="$newline"/>
@@ -510,11 +419,6 @@
  		<xsl:for-each select="/rows/content/*[@type='table' or @type='timeline']">
  			<xsl:call-template name="gen-ttributes-subclass"></xsl:call-template>
  		</xsl:for-each> 
- 	<!-- 
- 		<xsl:for-each select="/rows/content/*[@type='timeline']">
- 			<xsl:call-template name="gen-ttributes-subclass-timeline"></xsl:call-template>
- 		</xsl:for-each> 
- 		-->
  		<xsl:for-each select="/rows/content/*[@type='treemenu']">
  			<xsl:call-template name="gen-ttributes-subclass"></xsl:call-template>
  		</xsl:for-each> 		
