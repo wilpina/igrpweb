@@ -1,5 +1,22 @@
 << GITHUB PROJECT AND DOCUMENTS IN CONSTRUCTION >>
 
+## FAQ How to...
+
+Developers can see how to do some coding in the framework here: https://nosicode.gitbook.io/faq/
+
+## Useful Links
+
+Javadoc - Core.java... https://cloud.nosi.cv/IGRP/images/javadoc/index.html
+
+Demo cloud https://cloud.nosi.cv/IGRP:
+* User: demo@nosi.cv
+* Pass: demo
+
+Igrpweb - https://igrpweb.cv
+
+Nosicode - https://nosicode.cv
+
+
 ## Why contribute?
 
 You get paid if it's a good contribution and recognized with a certificate (diamond, gold, silver) by NOSi
