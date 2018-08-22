@@ -71,7 +71,8 @@
                                   <xsl:with-param name="app" select="app" />
                                   <xsl:with-param name="linkextra" select="parameter" />
                               </xsl:call-template> 
-                              <xsl:value-of select="title"/>
+                              <i class="fa fa-cog fa-spin fa-fw hidden"></i><span><xsl:value-of select="title"/></span>
+                              
                           </a>
                       </li>
                   </xsl:for-each>
@@ -273,7 +274,7 @@
                                   </a>
                               </div>
                               
-                              <div class="pull-left gen-toolbar-items" rel="java">
+                              <div class="pull-right gen-toolbar-items" rel="java">
                                   <a href="{$path}/../../javadoc/index.html" class="btn btn-link" target="_newtab">                                  
                                    <i class="fa fa-file-text"></i>
                                   <span>Javadoc - Core.class</span>                                  
@@ -285,13 +286,13 @@
                               </div>
 
 
-                              <div class="btn btn-link pull-right gen-copy-to-clipboard" >
-                                 <i class="fa fa-clipboard"></i><span>Copiar</span>
-                              </div>
+<!--                               <div class="btn btn-link pull-right gen-copy-to-clipboard" > -->
+<!--                                  <i class="fa fa-clipboard"></i><span>Copiar</span> -->
+<!--                               </div> -->
                               <!-- <a class="btn btn-link pull-right gen-download-content" href="#">
                                  <i class="fa fa-upload"></i><span>Download</span>
                               </a> -->
-                              <a class="btn btn-link pull-right gen-page-setts-ctrl"  rel="plsql">
+                              <a class="btn btn-link pull-left gen-page-setts-ctrl"  rel="plsql">
                                   <i class="fa fa-gears"></i>
                                   <span>Settings</span>
                               </a>
@@ -363,10 +364,10 @@
                                         <option value="java" selected="">Java</option>
                                       </select>
                                   </div>
-                                  <div class="col-md-6 form-group" item-name="table_name">
-                                      <label>Table Name</label>
-                                      <input rel="table" type="text" name="plsql_table" value="" class="text gen-page-setter form-control" maxlength="50"/>
-                                  </div>
+<!--                                   <div class="col-md-6 form-group" item-name="table_name"> -->
+<!--                                       <label>Table Name</label> -->
+<!--                                       <input rel="table" type="text" name="plsql_table" value="" class="text gen-page-setter form-control" maxlength="50"/> -->
+<!--                                   </div> -->
                                   <div class="col-md-6 form-group" item-name="package_db_name" required="required">
                                       <label>Package Name (DB)</label>
                                       <input rel="package" required="" type="text" name="plsql_pack" value="" class="text gen-page-setter form-control" maxlength="50"/>
@@ -379,16 +380,16 @@
                                       <label>Subversion Path</label>
                                       <input rel="subversionpath" type="text" name="plsql_subv" value="" class="text gen-page-setter form-control"/>
                                   </div> -->
-                                  <div class="col-md-6 form-group" item-name="page_service">
-                                      <label>Service</label>
-                                      <div class="settings-service"></div>
-                                  </div>
-								 <div class="col-md-5 col-md-offset-1 checkbox" style="margin-top:15px">
-                                      <div  item-name="process">
-                                          <input rel="process" type="checkbox" name="plsql_process" value="" class="checkbox gen-page-setter "/>
-                                          <span>Processo</span>
-                                      </div>
-                                  </div>
+<!--                                   <div class="col-md-6 form-group" item-name="page_service"> -->
+<!--                                       <label>Service</label> -->
+<!--                                       <div class="settings-service"></div> -->
+<!--                                   </div> -->
+<!-- 								 <div class="col-md-5 col-md-offset-1 checkbox" style="margin-top:15px"> -->
+<!--                                       <div  item-name="process"> -->
+<!--                                           <input rel="process" type="checkbox" name="plsql_process" value="" class="checkbox gen-page-setter "/> -->
+<!--                                           <span>Processo</span> -->
+<!--                                       </div> -->
+<!--                                   </div> -->
                                   <!-- <div class="col-md-5 col-md-offset-1 checkbox" style="margin-top:15px">
                                       <div  item-name="replace">
                                           <input rel="replace" type="checkbox" name="plsql_replace" value="" class="checkbox gen-page-setter "/>

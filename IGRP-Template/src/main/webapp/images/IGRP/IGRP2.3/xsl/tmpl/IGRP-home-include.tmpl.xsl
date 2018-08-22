@@ -60,10 +60,12 @@
     <script src="{$path}/core/igrp/IGRP.defaults.js?v={$version}" ></script>
     <!-- IGRP core functions -->
     <script src="{$path}/core/igrp/IGRP.core.js?v={$version}" ></script>
-    <!-- IGRP globalModal -->
-    <script src="{$path}/core/igrp/globalmodal/IGRP.globalModal.js?v={$version}"  async="async"></script>
-    <!-- IGRP iframeNavigation -->
-    <script src="{$path}/core/igrp/iframenav/IGRP.iframeNav.js?v={$version}"  async="async"></script>
+    <!-- IGRP globalModal
+    not async -->
+    <script src="{$path}/core/igrp/globalmodal/IGRP.globalModal.js?v={$version}"  ></script>
+    <!-- IGRP iframeNavigation 
+       not async -->
+    <script src="{$path}/core/igrp/iframenav/IGRP.iframeNav.js?v={$version}"  ></script>
     <!-- IGRP targets controller -->
     <script src="{$path}/core/igrp/targets/IGRP.targets.js?v={$version}" ></script>
     <!-- IGRP targets controller -->
@@ -306,7 +308,7 @@
  
      
    <!-- FontAwesome -->
-    <link rel="stylesheet" href="{$path}/core/fontawesome/4.7/css/font-awesome.css" media="none" onload="if(media!='all')media='all'"/>
+    <link rel="stylesheet" href="{$path}/core/fontawesome/4.7/css/font-awesome.min.css" media="none" onload="if(media!='all')media='all'"/>
      
 	
      <!-- THEME CSS -->
