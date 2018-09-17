@@ -2001,7 +2001,9 @@ var CONTAINER = function(name,params){
 				container:container.GET.type(),
 				genType  : container.genType,
 				callback:function(result){
-					p.field.templates[context] = result || container.fieldDefaultTemplate;
+					
+					p.field.templates[context] = result;
+					
 					//call again and increments dropZone
 					getDropZonesFieldsTemplate({
 						field    :p.field,
@@ -2160,7 +2162,7 @@ var CONTAINER = function(name,params){
 
 
 			var templateCallback = function(contents){
-				
+				//console.log(contents)
 				if(contents.template){
 					
 					var contextMenuFields = container.contextMenu ? container.contextMenu.getGenFields() : [];

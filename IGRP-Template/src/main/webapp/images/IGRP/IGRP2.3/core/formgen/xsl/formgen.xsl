@@ -16,12 +16,13 @@
   		
       <html>          
         <head>            
-       	 <script>           
- window.moveTo(0, 0);
- window.resizeTo(screen.width, screen.height);
+       	  
+          <xsl:call-template name="IGRP-head"/>            
+          <xsl:call-template name="GEN-head"/>
+          <script>    
+           	window.moveTo(0, 0);
+           	window.resizeTo(screen.width, screen.height);
       	  </script>
-            <xsl:call-template name="IGRP-head"/>            
-            <xsl:call-template name="GEN-head"/>
         </head>
 
         <body class="fixed-nav startin" view="gen-design" template="{rows/template}" id="igrp-form-gen">            
@@ -92,9 +93,9 @@
           <form class="IGRP-form" name="formular_default" novalidate="">
               <div class="container-fluid">
                   <div class="row">
-                      <div class="col-md-2 col-sm-3 sidebar tree-list" id="igrp-sidebar" bg-color="primary">
+                      <div class="col-md-2 col-sm-3 sidebar tree-list" id="igrp-sidebar" bg-color="secondary">
                           
-                          <ul class="nav nav-tabs col-md-2 col-sm-3 col-xs-12 clearfix" role="tablist" bg-color="primary">
+                          <ul class="nav nav-tabs col-md-2 col-sm-3 col-xs-12 clearfix" role="tablist" bg-color="secondary">
                              <!--<li class="col-xs-4">
                                   <a class="txt-ellipsis" href="#gen-page-properties" role="tab" data-toggle="tab">
                                       <i class="fa fa-cog"></i>
@@ -118,13 +119,13 @@
 
                           <div class="form-group gen-searcher-wrapper col-md-2 col-sm-3 col-xs-12" h-calc="-55">
                            
-                            <input bg-color="primary" type="text" class="form-control gen-types-search" placeholder="Pesquisar..."/>
+                            <input bg-color="secondary" type="text" class="form-control gen-types-search" placeholder="Pesquisar..."/>
                             
                             <span class="gen-type-search-clear">
                               <i class="fa fa-times"></i>
                             </span>
 
-                            <div class="gen-searcher-contents" bg-color="primary">
+                            <div class="gen-searcher-contents" bg-color="secondary">
                               
                             </div>
 
@@ -921,7 +922,7 @@
                         Procedure
                       </span>
                     </label>
-                    <input type="text" value="" class="form-control rule-setter " id="p_gen_rule_procedure" name="p_gen_rule_procedure" maxlength="500" placeholder="">
+                    <input type="text" value="" class="form-control rule-setter " id="p_gen_rule_procedure" name="p_gen_rule_procedure" maxlength="500" placeholder="Action ex: index">
                     </input>
                   </div>
 
@@ -1100,7 +1101,7 @@
 
                         <div class="form-group col-md-6" item-name="gen_rule_procedure" item-type="text">
                             <label>Procedure</label>
-                            <input name="p_gen_rule_procedure" type="text" class="form-control rule-setter" rel="gen_rule_procedure"/>
+                            <input name="p_gen_rule_procedure" type="text" class="form-control rule-setter" rel="gen_rule_procedure" placeholder="Action ex: index"/>
                         </div>
 
                         <div class="col-md-6 form-group" item-name="gen_rule_msg_type" item-type="select" required="required">

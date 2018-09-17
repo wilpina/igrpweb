@@ -499,6 +499,14 @@ ul#list-reports {
 	display: none;
 }
 
+.igrp-paragraph p{
+	word-break: break-word;
+}
+.igrp-paragraph li{
+	list-style:inherit;
+	
+}
+
 body.sidebar-off #igrp-sidebar {
 	display: none
 }
@@ -592,10 +600,10 @@ body.sidebar-off .navbar-brand {
 }
 
 .treeview-menu>li>a:hover, .treeview-menu>li>a.active {
-	background: rgba(0, 0, 0, 0.13);
+	background: rgba(0, 0, 0, 0.05);
 	text-decoration: none;
 	opacity: 1;
-	font-weight: bolder;
+	/*font-weight: bolder;*/
 	color: white;
 	/*     font-size: 15px; */
 
@@ -1718,7 +1726,7 @@ table thead th {
 
 .igrp-msg-icon{
   position: absolute;
-  top: 10px;
+  top: 8px;
   left: 10px;
 }
 
