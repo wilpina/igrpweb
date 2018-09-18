@@ -1222,6 +1222,7 @@ var GENERATOR = function(genparams){
 		
 			//if( object.isEditable(p) && p != 'type' && p != 'name'){
 			
+			
 			if( object.isEditable(p) && p != 'type' && p != 'name'){
 				
 				var input     = false;
@@ -1262,7 +1263,7 @@ var GENERATOR = function(genparams){
 				});
 
 				if(input) {
-					
+						
 					if(p == 'tag') {
 						
 						input.attr('required','true');
@@ -1294,6 +1295,11 @@ var GENERATOR = function(genparams){
 						}
 
 					}
+					
+					if(objectProperties && objectProperties.hidden)
+						
+						input.addClass('hidden');
+
 
 					if(object.propertiesOptions[p] && object.propertiesOptions[p].onEditionStart)
 						object.propertiesOptions[p].onEditionStart( {
@@ -3095,6 +3101,7 @@ var GENERATOR = function(genparams){
 						GEN.server.compile({
 							mode : 'java',
 							then : function(results){
+				
 								results.forEach(function(r){									
 									var name = r.name.toLowerCase();
 									vParam.push({
