@@ -31,6 +31,9 @@
 	<entry key="igrp.plsql.url"></entry>
 	
 	<!--  -->
+	<entry key="igrp.authentication.govcv.enbaled">false</entry>
+	
+	<!--  -->
 	<entry key="igrp.env.isNhaLogin">false</entry>
 	<entry key="igrp.env.nhaLogin.url"></entry>
 	
@@ -38,7 +41,7 @@
 	<entry key="igrp.pwdRecover">true</entry>
 	
 	<!--  -->
-	<entry key="java.net.preferIPv4Stack">true</entry>
+	<entry key="java.net.preferIPv4Stack"></entry>
 	<entry key="mail.smtp.host"></entry>
 	<entry key="mail.smtp.socketFactory.port"></entry>
 	<entry key="mail.smtp.socketFactory.class"></entry>

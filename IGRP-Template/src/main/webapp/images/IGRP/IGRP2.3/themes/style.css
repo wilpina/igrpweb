@@ -139,6 +139,15 @@ b{
   display: none!important;
 }
 
+
+.disable-output-escaping{
+  opacity: 0;
+}
+
+.disable-output-escaping.set{
+  opacity: 1;
+}
+
 /*LOGIN*/
 
 
@@ -501,10 +510,14 @@ ul#list-reports {
 
 .igrp-paragraph p{
 	word-break: break-word;
-}
-.igrp-paragraph li{
-	list-style:inherit;
 	
+}
+.igrp-paragraph ul li{
+	list-style:disc;
+}
+
+.igrp-paragraph ol li{
+	list-style:decimal;
 }
 
 body.sidebar-off #igrp-sidebar {
