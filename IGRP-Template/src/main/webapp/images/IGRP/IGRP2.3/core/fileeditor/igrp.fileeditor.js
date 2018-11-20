@@ -110,11 +110,27 @@
 					pNotify     : false,
 					pLoading    : true,
 		         	pParam      : {
-		          		pArrayFiles : [{name : 'p_package', value : editor[0].CodeMirror.getValue()}],
-			           	pArrayItem  : [{name : 'p_package_id', value : $(active.li).attr('item-id')}]
+		          		pArrayFiles : [
+			          		{
+			          			name : 'p_package', 
+			          			value : editor[0].CodeMirror.getValue()
+			          		}
+		          		],
+			           	pArrayItem  : [
+			           		{
+			           			name : 'p_package_id', 
+			           			value : $(active.li).attr('item-id')
+			           		},
+			           		{
+			           			name : 'fileName', 
+			           			value : $(active.li).attr('file-name')
+			           		}
+			           	]
 			        },
 					pComplete   :function(req,text,status){
+
 						var type 	= 'danger',
+						
 							message = req.statusText;
 
 						removeEditorsErrors(true);
@@ -164,7 +180,9 @@
 		};
 
 		function GetEditor(active){
+
 			return active.pane.find('.CodeMirror');
+
 		}
 
 		function Events(){
@@ -179,7 +197,9 @@
 
 					path 	= $(li).attr('file-path'),
 
-					name    = $(li).attr('name');
+					name    = $(li).attr('title'),
+
+					file    = $(li).attr('file-name');
 
 				if(!li.request){
 
@@ -199,7 +219,13 @@
 
 							content : GetCodeEditor( { id : tabID, content : d } ),
 
-							active  : true
+							active  : true,
+
+							attrs   : {
+
+								'file-name' : file
+
+							}
 
 						});
 
@@ -215,12 +241,12 @@
 
 			});
 
-			$('.'+selectors.saveClss,dom).on('click',Save);
+			$('.'+selectors.saveClss,dom).on('click', Save);
 
 		};
 
 		function DrawList(dir){
-
+			
 			fileEditor.menu = $(fileEditor.templates.tree(dir));
 
 			$('.'+selectors.leftPanelClss,dom).html(fileEditor.menu);
@@ -237,28 +263,46 @@
 				
 				$.get(dataURL).then(function(d){	
 					
-					DrawList( d.dir );
+					DrawList( d );
 
 					if(d.default_file){
 
 						d.default_file.forEach(function(f){
 
-							var file   = $('.file[file-id="'+f.id+'"]'),
-								parent = file.parents('li.folder');
+							var fileItem = $('.file[file-name="'+f.fileName+'"]');
 
-							if(file[0]){
+							if(fileItem[0]){
 
-								file.click();
+								var parents = fileItem.parents('.folder');
 
-								if (parent[0])
+								parents.find('span[data-toggle]').click();
 
-									$('span[data-toggle]',parent).click();
-							}						
+								fileItem.click();
+
+							}
+					
 						});
 
 					}
 
 				},ErrorHandler);
+
+			$('.igrp-fileeditor-main-panel').on('shown.bs.tab','.nav-tabs a', function(event){
+				
+				var href = $(this).attr('href'),
+
+					id   = href ? href.split('#file-')[1] : false;
+
+				if(id){
+
+					$('.file').removeClass('active');
+
+					$('.file#'+id).addClass('active'); 
+
+				}
+
+			});
+
 
 		};
 
