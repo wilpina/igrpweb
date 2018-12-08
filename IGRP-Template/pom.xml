@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>IGRP-Template</groupId>
 	<artifactId>IGRP-Template</artifactId>
-	<version>0.9.7 14-06-18</version>
+	<version>1.0.8 08-12-18</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<tomee.version>7.0.4</tomee.version>
+		<tomee.version>7.1.0</tomee.version>
 
 		<!-- Test properties -->
 		<arquillian.bom.version>1.0.0.Final</arquillian.bom.version>
