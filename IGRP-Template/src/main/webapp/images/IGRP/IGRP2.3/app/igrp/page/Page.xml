@@ -61,14 +61,22 @@
             <fields>
                 <page_descr name="p_page_descr" type="text" maxlength="255" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false">
                     <label>Título</label>
-                    <value>Magna aliqua consectetur magna labore</value>
+                    <value>Magna doloremque ut sit elit</value>
+                    <rules>
+                        <rule type="remote">
+                            <proc>update</proc>
+                            <requestFields>
+                                <item>p_page</item>
+                            </requestFields>
+                        </rule>
+                    </rules>
                 </page_descr>
                 <page name="p_page" type="text" maxlength="255" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false">
                     <label>Código</label>
-                    <value>Amet unde sit magna sit</value>
+                    <value>Magna lorem aliqua deserunt adipiscing</value>
                     <rules>
                         <rule type="remote">
-                            <proc>actionUpdate</proc>
+                            <proc>update</proc>
                             <requestFields>
                                 <item>p_page</item>
                             </requestFields>
