@@ -2,20 +2,20 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>IGRP-Template</groupId>
-	<artifactId>IGRP-Template</artifactId>
-	<version>1.0.8 08-12-18</version>
+	<groupId>IGRP</groupId>
+	<artifactId>IGRP</artifactId>
+	<version>0.9.7 14-06-18</version>
 	<packaging>war</packaging>
 
 	<properties>
 		<!-- Database migrations properties -->
 		<activejdbc.version>1.4.13</activejdbc.version>
-		<environments>igrp.lab,igrp.dev</environments>
+		<environments>igrp.lab,igrp.dev, igrp.tst</environments>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
 		<tomee.version>7.1.0</tomee.version>
-
+		<javadoc.plugin.version>3.0.1</javadoc.plugin.version>
 		<!-- Test properties -->
 		<arquillian.bom.version>1.0.0.Final</arquillian.bom.version>
 		<arquillian.drone.bom.version>1.0.0.Final</arquillian.drone.bom.version>
@@ -172,7 +172,7 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>
-			<version>1.2</version>
+			<version>1.6</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-io -->
@@ -186,13 +186,10 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>5.3.1.Final</version>
+			<version>5.3.7.Final</version>
 		</dependency>
 
-		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-c3p0</artifactId> 
-			<version>5.3.1.Final</version> </dependency> https://mvnrepository.com/artifact/com.mchange/c3p0 
-			<dependency> <groupId>com.mchange</groupId> <artifactId>c3p0</artifactId> 
-			<version>0.9.5.2</version> </dependency> -->
+		<!--  -->
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-hikaricp -->
 		<!-- <dependency> <groupId>org.hibernate</groupId> <artifactId>hibernate-hikaricp</artifactId> 
 			<version>5.3.1.Final</version> </dependency> https://mvnrepository.com/artifact/com.zaxxer/HikariCP 
@@ -211,7 +208,24 @@
 			<version>0.9.11</version>
 		</dependency>
 		<!-- Hibernate & c3p0 libraries -->
+		<!-- <dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>5.3.7.Final</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-hikaricp -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-hikaricp</artifactId>
+		    <version>5.3.7.Final</version>
+		</dependency>
 
+<!-- 	https://mvnrepository.com/artifact/com.mchange/c3p0
+	<dependency>
+		<groupId>com.mchange</groupId>
+		<artifactId>c3p0</artifactId>
+		<version>0.9.5.2</version>
+	</dependency> -->
 		<!-- RDBMS -->
 
 		<dependency>
@@ -223,7 +237,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.2.2</version>
+			<version>42.2.5</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
 		<dependency>
@@ -530,7 +544,14 @@
 						</dependency>
 					</dependencies>
 				</plugin>
-
+				<!-- The Javadoc Plugin uses the Javadoc tool to generate javadocs for the specified project -->
+				 <plugin>
+			        <groupId>org.apache.maven.plugins</groupId>
+			        <artifactId>maven-javadoc-plugin</artifactId>
+			        <version>${javadoc.plugin.version}</version>
+			        <configuration>
+			        </configuration>
+			      </plugin>
 			</plugins>
 
 		</pluginManagement>
