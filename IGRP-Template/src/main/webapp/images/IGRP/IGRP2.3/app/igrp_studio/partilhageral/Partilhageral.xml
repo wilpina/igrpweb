@@ -2,9 +2,10 @@
 <?xml-stylesheet href="/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/partilhageral/Partilhageral.xsl" type="text/xsl"?>
 <rows>
     <link_img>/IGRP/images/IGRP/IGRP2.3</link_img>
+    <title>Dummie XML prototype</title>
     <site>
         <welcome_note>Oba</welcome_note>
-        <footer_note>2017 - Copyright NOSI</footer_note>
+        <footer_note>2018 - Copyright NOSI v.180723</footer_note>
         <user_name>Hexagon</user_name>
         <button type="specific">
             <title>Sair</title>
@@ -30,20 +31,24 @@
         <copy_menu>false</copy_menu>
         <package_copy_db />
         <package_copy_html />
-        <preserve_url>webapps?r=igrp/page/preserveUrl&amp;p_id=211</preserve_url>
+        <preserve_url>webapps?r=igrp/page/preserveUrl&amp;p_id=49</preserve_url>
     </plsql>
+    <slide-menu file="/IGRP/images/IGRP/IGRP2.3/xml/IGRP-slide-menu.xml?v=2" />
+    <top_menu file="/IGRP/images/IGRP/IGRP2.3/xml/IGRP-top_menu.xml?v=2" />
     <content>
-        <title>Partilha geral</title>
+        <title>Partilha Página</title>
         <sectionheader_1 type="sectionheader" xml-type="form" gen-type="container" gen-group="">
             <fields>
                 <sectionheader_1_text type="text" name="p_sectionheader_1_text" persist="true" maxlength="40">
-                    <value>Partilha geral entre aplicações</value>
+                    <value>
+                        <![CDATA[Partilha geral entre aplicações]]>
+                    </value>
                 </sectionheader_1_text>
             </fields>
         </sectionheader_1>
         <form_1 type="form" xml-type="form" gen-type="container" gen-group="">
             <fields>
-                <aplicacao_origem name="p_aplicacao_origem" type="select" multiple="false" domain="" maxlength="50" required="true" change="true" disabled="false" right="false" java-type="">
+                <aplicacao_origem name="p_aplicacao_origem" type="select" multiple="false" domain="" maxlength="50" required="true" change="false" disabled="false" right="false" java-type="" tags="false">
                     <label>Aplicação origem</label>
                     <list>
                         <option/>
@@ -66,7 +71,7 @@
                     </list>
                     <rules/>
                 </aplicacao_origem>
-                <elemento name="p_elemento" type="select" multiple="false" domain="" maxlength="30" required="true" change="true" disabled="false" right="true" java-type="">
+                <elemento name="p_elemento" type="select" multiple="false" domain="" maxlength="30" required="true" change="true" disabled="false" right="true" java-type="" tags="false">
                     <label>Tipo</label>
                     <list>
                         <option/>
@@ -92,8 +97,8 @@
         </form_1>
         <table_1 type="table" xml-type="table" gen-type="container" gen-group="true">
             <fields>
-                <estado name="p_estado" type="checkbox" maxlength="30" align="left" lookup_parser="false" iskey="false" switch="true" check="true" desc="true">
-                    <label>Estado</label>
+                <estado name="p_estado" type="checkbox" maxlength="30" align="left" lookup_parser="false" iskey="false" switch="false" java-type="" check="true" desc="true">
+                    <label></label>
                 </estado>
                 <nome name="p_nome" type="plaintext" maxlength="100" align="left" lookup_parser="false" iskey="false">
                     <label>Nome (code)</label>
@@ -104,34 +109,34 @@
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <nome name="p_nome">Elit deserunt voluptatem iste sed natus doloremque rem elit deserunt ipsum sit adipiscing elit sed c</nome>
+                        <nome name="p_nome">Iste deserunt aperiam sit stract unde amet aliqua stract sed sit aperiam perspiciatis adipiscing sit</nome>
                     </row>
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <nome name="p_nome">Elit perspiciatis rem accusantium laudantium anim sit officia consectetur natus sit magna sit rem ap</nome>
+                        <nome name="p_nome">Anim sit deserunt ipsum lorem magna sed mollit voluptatem officia natus magna mollit amet ipsum unde</nome>
                     </row>
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <nome name="p_nome">Dolor ipsum elit voluptatem mollit deserunt elit labore anim omnis doloremque natus consectetur amet</nome>
+                        <nome name="p_nome">Natus totam laudantium iste deserunt labore aliqua unde iste laudantium sed aperiam mollit stract ac</nome>
                     </row>
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <nome name="p_nome">Doloremque accusantium consectetur sit ut laudantium anim omnis sed amet labore adipiscing labore ap</nome>
+                        <nome name="p_nome">Laudantium labore lorem sit omnis labore adipiscing aperiam rem labore ipsum rem ipsum elit sit moll</nome>
                     </row>
                     <row>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <nome name="p_nome">Rem labore mollit dolor sit sit ipsum accusantium perspiciatis anim laudantium lorem laudantium omni</nome>
+                        <nome name="p_nome">Lorem aperiam anim sed magna iste stract labore dolor lorem labore deserunt aperiam magna officia la</nome>
                     </row>
                 </value>
             </table>
         </table_1>
         <form_2 type="form" xml-type="form" gen-type="container" gen-group="">
             <fields>
-                <aplicacao_destino name="p_aplicacao_destino" type="select" multiple="false" domain="" maxlength="30" required="true" change="true" disabled="false" right="false" java-type="">
+                <aplicacao_destino name="p_aplicacao_destino" type="select" multiple="false" domain="" maxlength="30" required="true" change="false" disabled="false" right="false" java-type="" tags="false">
                     <label>Aplicação destino</label>
                     <list>
                         <option/>
@@ -160,11 +165,11 @@
             <item type="specific" code="" rel="partilhar">
                 <title>Partilhar</title>
                 <app>igrp_studio</app>
-                <page>Partilhageral</page>
+                <page>Env</page>
                 <link>index</link>
-                <target>submit</target>
+                <target>submit_ajax</target>
                 <img>success|fa-share-alt</img>
-                <preview>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/partilhageral/Partilhageral.xml</preview>
+                <preview>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/env/Env.xml</preview>
             </item>
         </toolsbar_1>
     </content>
