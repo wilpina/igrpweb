@@ -684,8 +684,8 @@ if($ && $.IGRP && !$.IGRP.rules){
 						
 							itemName = $(f).attr('item-name'),
 							
-							wrapper  = $(list).is(itemName) ? list : $(list).find(itemName)[0];
-						
+							wrapper  = $(list).is(itemName) ? list : $(list).find('rows content '+itemName)[0];
+
 						if (wrapper) {
 							
 							$.each($('option', wrapper), function(z, o) {
@@ -732,22 +732,20 @@ if($ && $.IGRP && !$.IGRP.rules){
 						url   : $.IGRP.utils.getSubmitParams(actionURL,form,false),
 
 						data  : form.serialize(),
+						
+						headers : {
+					       	'X-IGRP-REMOTE' : 1
+					   	},
 
 						success:function(c){
 							
-							var table = c.itemHTML.find('table').first();
-							
-							if(table.hasClass('igrp-data-table')){
+							$.IGRP.utils.refreshComponents({
 								
-								$.IGRP.components.tableCtrl.dataTable({
-									parent : c.itemHTML
-								})
+								wrapper : c.itemHTML,
 								
-							}
-
-							if($.IGRP.components.contextMenu)
+								itemName : tableName
 								
-								$.IGRP.components.contextMenu.set( $('.gen-container-item[item-name="'+tableName+'"]') );
+							});
 
 						},
 
