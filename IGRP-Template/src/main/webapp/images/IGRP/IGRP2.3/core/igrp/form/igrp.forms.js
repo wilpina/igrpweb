@@ -45,6 +45,10 @@
 	  				var paramsCount = 1*object.attr("CTX_PARAM_COUNT")+1;
 	  				var formName    = object.attr("CTX_FORM") ? object.attr("CTX_FORM") : 'formular_default';
 	  				var formIdx     = object.attr("CTX_FORM_IDX") ? parseInt(object.attr("CTX_FORM_IDX")) : 0;
+	  				var parentWindow= window.opener || window.parent.document;
+	  				var parentModal = $(parentWindow).find('#igrp-iframe-nav');
+	  				var isModal 	 = parentModal.hasClass('in');
+	  				var rowIdx 		 = parentModal.attr('formlist-lookup-row')
 	  				
 	  				var form 		= window.opener ? window.opener.document.forms[formName] : window.parent.document.forms[formName];
 					var vFwlNoclose = 0;
@@ -52,6 +56,8 @@
 					var forminput   = null,
 						isChange 	= false,
 						oChange 	= null; 
+					
+					formIdx = formIdx || rowIdx*1 || 0;
 
 					if(form){
 
@@ -66,9 +72,10 @@
 								vFwlAdd		= (vOp[0]=="p_fwl_add")?vOp[1]*1:vFwlAdd;
 								
 								forminput	= $("*[name='"+vOp[0]+"']", form);
+								
 
 								var holder 	= $('*[item-name="'+vOp[0]+'"]',form);
-
+								
 								if(forminput[0]){
 
 									$(forminput[(formIdx)]).val(vOp[1]).attr('value',vOp[1]);//.trigger('change');
