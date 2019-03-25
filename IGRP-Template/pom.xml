@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>IGRP-Template</groupId>
 	<artifactId>IGRP-Template</artifactId>
-	<version>v.190311</version>
+	<version>v.190325</version>
 	<packaging>war</packaging>
 
 	<properties>
@@ -245,8 +245,7 @@
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
-			<version>6.4.0.jre8</version>
-			<scope>test</scope>
+			<version>6.4.0.jre8</version>			
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
