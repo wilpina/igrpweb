@@ -38,7 +38,11 @@
 		
 		app.addWidgetButton = function(btn){
 			
-			$('.gis-widgets-controller', app.dom).append(btn);
+			//$('.gis-widgets-controller', app.dom).append(btn);
+			
+			$('.leaflet-top.leaflet-right', app.dom).append(btn);
+			
+			
 			
 		};
 
