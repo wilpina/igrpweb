@@ -97,13 +97,15 @@
 			
 			if(CurrentLayer && widget.addedObject){
 				
+				console.log(CurrentLayer.layer.Info)
+				
 				var layerData = CurrentLayer.data,
 				
-					workSpaceLayer = layerData.options.typeName || layerData.options.layers || '',
+					workSpaceLayer = CurrentLayer.layer.Info.workspaceLayer,
 				
-					workSpace = workSpaceLayer.split(':')[0],
+					workSpace	   = CurrentLayer.layer.Info.workspace,
 					
-					linkWorkSpace = 'https:/www.nosi.cv/INSP_GIS',
+					linkWorkSpace = CurrentLayer.layer.Info.workspaceLink,
 					
 					categoria 	 = 	widget.html.find('form [name="categoria"]').val(),
 					
@@ -112,6 +114,7 @@
 					indexOfWMS   =  layerData.url.lastIndexOf('/wms'),
 					
 					postData;
+			
 				
 				if(indexOfWMS >= 0)
 					
@@ -131,14 +134,14 @@
 		            + '                      '+layerUrl+'?service=wfs&amp;request=DescribeFeatureType&amp;typeName='+workSpaceLayer+'&amp;version=1.0.0">\n'
 		            + '  <wfs:Insert>\n'
 		            + '    <gml:featureMember>'
-		            + '      <'+workSpace+':insp_foco_mosquito>'
-		            + '        <'+workSpace+':categoria>' + categoria + '</'+workSpace+':categoria>'
+		            + '      <'+workSpace+':'+workSpaceLayer.split(':')[1]+'>'
+		            //+ '        <'+workSpace+':nome>' + categoria + '</'+workSpace+':nome>'
 		            + '        <'+workSpace+':geom>'
 		            + '          <gml:Point srsName="http://www.opengis.net/gml/srs/epsg.xml#4326">'
 		            + '            <gml:coordinates xmlns:gml="http://www.opengis.net/gml" decimal="." cs="," ts=" ">' + widget.addedObject.getLatLng().lng + ',' + widget.addedObject.getLatLng().lat + '</gml:coordinates>'
 		            + '          </gml:Point>'
 		            + '        </'+workSpace+':geom>'
-		            + '      </'+workSpace+':insp_foco_mosquito>'
+		            + '      </'+workSpace+':'+workSpaceLayer.split(':')[1]+'>'
 		            + '    </gml:featureMember>'
 		            + '  </wfs:Insert>\n'
 		            + '</wfs:Transaction>';
@@ -173,6 +176,7 @@
 			        			
 			        		});
 			        		
+			        		CurrentLayer.layer.updateData();
 			        		
 			        		widget.actions.cancel();
 			        		
@@ -228,6 +232,8 @@
 			
 			var type = l.layer.getGeometryType();
 			
+			console.log(l.layer)
+			
 			if(type == 'Point')
 				
 				type = 'Marker';
@@ -237,6 +243,18 @@
 			CurrentLayer = l;
 			
 			DrawTool.enable();
+			
+		};
+		
+		function CheckLayersOptions(){
+			
+			
+			
+		};
+		
+		function GetLayersLength(){
+			
+			return Object.keys(Layers).length;
 			
 		};
 		
@@ -323,13 +341,11 @@
 			
 			GetLayers();
 			
-			//SetWidgetMenu();
-			
 			InitDraw();
 			
-			widget.on('deactivate', Clear);
+			widget.on('activate', CheckLayersOptions);
 			
-			//widget.on('activate', SetControllers);
+			widget.on('deactivate', Clear);
 			
 			widget.on('load-html', SetControllers);
 			
