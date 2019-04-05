@@ -645,7 +645,7 @@ body.sidebar-off .navbar-brand {
 .treeview>a.active {
 	font-size: 15px;
 	/*border-right: 4px solid #fafafa;*/
-	p/*adding-top: 8px !important; 
+	/*padding-top: 8px !important; 
     padding-bottom: 8px !important;
    */
 }
@@ -1730,6 +1730,7 @@ ul.nav-tabs{
     height: 80px;
     margin: 5px;
     overflow: hidden;
+    border:1px solid #eee
 }
 
 #igrp-apps-1 a.igrp-app-block.not-available{
