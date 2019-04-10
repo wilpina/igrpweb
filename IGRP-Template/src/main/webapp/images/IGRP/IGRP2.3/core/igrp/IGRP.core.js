@@ -144,12 +144,10 @@
 				}
 				return null;
 			},
-			resetFields  : function(o){
-				
-				$(":input",o).each(function(i,e){
+			resetFieldsSelector : function(o){
+				o.each(function(i,e){
                     var parents = $(e).parents('.form-group')
                     	type 	= parents.attr('item-type');
-                    
                     switch(type){
                         case'radio':
                         case 'checkbox':
@@ -159,7 +157,7 @@
                         break;
 
                         case 'select' :
-
+                        	
                         	if( $(e).is('.select2')){
 
                         		if(!$(e).data('select2'))
@@ -167,8 +165,8 @@
                         			$.IGRP.components['select2'].init( parents );
 
                         		$(e).select2("val", "");
-                        	}
-
+                        	}		
+                        	
                         break;
 
                         case 'textarea' :
@@ -180,11 +178,15 @@
                         default:
 
                             $(e).val('');
-                            //$(e).text('').attr('value','');
+                            $(e).text('').attr('value','');
                     }
                 });
 
                 return o;
+			},
+			resetFields  : function(o){
+				
+				$.IGRP.utils.resetFieldsSelector($(":input",o));
 			},
 			setFieldValue:function(tag,value){
 
