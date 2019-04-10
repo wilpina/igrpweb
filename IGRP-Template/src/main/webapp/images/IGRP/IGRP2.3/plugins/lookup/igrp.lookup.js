@@ -91,24 +91,18 @@ $(function(){
 				var holder = $(this).parents('.input-group:first'),
 					href   = $('.IGRP_lookupPopup',holder).attr('href');
 				try{
-
-					if(href.indexOf('?')){
-
-						href = href.split('?');
-
-						if (href[1]) {
-							
-							href[1].split('&').forEach(function(f){
-								var p     = f.split('='),
-									param = p[0],
-									field = p[1];
-
-								if(param != null && field != null && (param.substring(0,6) == "p_fwl_" || param.substring(0,5) == "p_cx_"))
-									$('[name="'+field+'"]').addClass('lookuperaser');
-							});
-
-							$.IGRP.utils.resetFieldsSelector($(".lookuperaser"));
+					
+					var param = $.IGRP.utils.url.getParam('jsonLookup');
+					console.log(param);
+					if(param){
+						param = JSON.parse(param);
+						
+						for(var name in param){
+							$('[name="'+name+'"]').addClass('lookuperaser');
 						}
+
+						$.IGRP.utils.resetFieldsSelector($(".lookuperaser"));
+						
 					}
 
 				}catch(e){
