@@ -94,6 +94,8 @@ $(function(){
 					
 					var param = $.IGRP.utils.url.getParam('jsonLookup');
 					console.log(param);
+					
+					
 					if(param){
 						param = JSON.parse(param);
 						
