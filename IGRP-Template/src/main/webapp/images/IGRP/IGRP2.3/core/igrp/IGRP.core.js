@@ -73,9 +73,9 @@
 				  return obj;
 				},
 
-				getParam : function(name){
+				getParam : function(name,url){
 					
-					var all = $.IGRP.utils.url.getParams();
+					var all = $.IGRP.utils.url.getParams(url);
 
 					return all[name] || null;
 

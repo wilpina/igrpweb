@@ -92,7 +92,7 @@ $(function(){
 					href   = $('.IGRP_lookupPopup',holder).attr('href');
 				try{
 					
-					var param = $.IGRP.utils.url.getParam('jsonLookup');
+					var param = $.IGRP.utils.url.getParam('jsonLookup',href);
 					console.log(param);
 					
 					
