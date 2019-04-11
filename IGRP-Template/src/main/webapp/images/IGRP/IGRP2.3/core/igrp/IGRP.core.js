@@ -434,11 +434,13 @@
 			},
 			arrayValuesToString : function(arr,spliter){
 				var str = "";
-				arr.forEach(function(a,i){
-					str+=a;
-					if(i != arr.length-1)
-						str+=spliter;
-				});
+				if(arr){
+					arr.forEach(function(a,i){
+						str+=a;
+						if(i != arr.length-1)
+							str+=spliter;
+					});
+				}
 				return str;
 			},
 			ffoxDisableOutputEscaping: function(){
