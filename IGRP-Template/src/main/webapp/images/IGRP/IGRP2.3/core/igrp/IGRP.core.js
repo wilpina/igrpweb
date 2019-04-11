@@ -29,10 +29,10 @@
 				},
 
 				getParams : function (url) {
-
+					
 				 	var queryString = url ? url.split('?')[1] : window.location.search.slice(1);
 				  		obj 				= {};
-
+				  		
 				  if (queryString) {
 
 				    queryString = queryString.split('#')[0];
@@ -77,7 +77,7 @@
 					
 					var all = $.IGRP.utils.url.getParams(url);
 
-					return all[name] || null;
+					return all[name.toLowerCase()] || null;
 
 				}
 

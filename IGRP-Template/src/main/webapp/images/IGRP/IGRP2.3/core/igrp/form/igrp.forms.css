@@ -275,9 +275,9 @@ form [item-type="plaintext"]{
 
 .lookup-eraser{
   position: absolute;
-  right: 12px;
+  right: 40px;
   z-index: 2;
-  bottom: -15px;
+  bottom: 11px;
   color: #c9302c;
   cursor: pointer;
   width: 16px;

@@ -93,11 +93,9 @@ $(function(){
 				try{
 					
 					var param = $.IGRP.utils.url.getParam('jsonLookup',href);
-					console.log(param);
-					
 					
 					if(param){
-						param = JSON.parse(param);
+						param = JSON.parse(decodeURIComponent(param));
 						
 						for(var name in param){
 							$('[name="'+name+'"]').addClass('lookuperaser');
