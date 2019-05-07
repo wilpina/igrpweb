@@ -81,12 +81,15 @@
 								
 								var graphic = Graphics.create( feature );
 								
-								if(g.infoWindow)
-					
-									graphic.bindPopup( Utils.feature.properties.toHTML( feature.properties ) );
+								if(graphic){
+	
+									if(g.infoWindow)
+										
+										graphic.bindPopup( Utils.feature.properties.toHTML( feature.properties ) );
 
-								graphic.addTo(map.graphicsLayer);
-
+									graphic.addTo(map.graphicsLayer);
+								}
+								
 							}
 							
 						});
@@ -97,7 +100,7 @@
 				
 				map.graphicsLayer.addTo( map.view );
 				
-				map.view.fitBounds(  map.graphicsLayer.getBounds() )
+				map.view.fitBounds(  map.graphicsLayer.getBounds() );
 				
 			}
 
