@@ -63,11 +63,11 @@
                 </aplicacao>
                 <url_wsdl name="p_url_wsdl" type="url" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="https://....?wsdl" desclabel="false" right="false">
                     <label>URL WSDL</label>
-                    <value/>
+                    <value>http://roccopu.io/mernuse</value>
                 </url_wsdl>
                 <package_name name="p_package_name" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="Subfolder inside services" desclabel="false" right="false">
                     <label>Folder Name</label>
-                    <value>Magna dolor amet ut accusantium</value>
+                    <value>Sit iste doloremque lorem deserunt</value>
                 </package_name>
             </fields>
             <tools-bar>
@@ -77,7 +77,7 @@
                     <page>Wsdl2java</page>
                     <link>index</link>
                     <parameter>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/wsdl2java/Wsdl2java.xml?</parameter>
-                    <target>alert_submit</target>
+                    <target>submit</target>
                     <img>primary|fa-gear</img>
                     <preview>/IGRP/images/IGRP/IGRP2.3/app/igrp_studio/wsdl2java/Wsdl2java.xml</preview>
                 </item>

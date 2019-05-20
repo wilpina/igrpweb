@@ -139,12 +139,7 @@ if($ && $.IGRP && !$.IGRP.rules){
 				
 				rules.forEach(function(rule){
 					
-					var suffix = $.IGRP.rules.getSuffix(rule);
-					
-					if(suffix)
-						fname += suffix;
-
-					//fname = rule.isTable ? fname+'_fk' : fname;
+					fname = rule.isTable ? fname+'_fk' : fname;
 					
 					var events = rule.events.split(',')
 
@@ -165,9 +160,10 @@ if($ && $.IGRP && !$.IGRP.rules){
 						}else
 							validateAndExecute($('[name="'+fname+'"]'),rule);
 					}
+					
+					
 
 					$(document).on(events.join(' '), '[name="'+fname+'"]',function(){
-						console.log(this);
 						validateAndExecute($(this),rule);
 						
 					});
@@ -270,14 +266,7 @@ if($ && $.IGRP && !$.IGRP.rules){
 			
 			names.forEach(function(n){
 				
-				var suffix = $.IGRP.rules.getSuffix(p),
-				
-					name   = n;
-
-				if(suffix)
-					name += suffix;
-	
-				var elmnt = row ? row.find('[name="p_'+name+'"]') : $('[name="p_'+n+'"]');
+				var elmnt = row ? row.find('[name="p_'+n+'_fk"]') : $('[name="p_'+n+'"]');
 	
 				res['p_'+n] = elmnt.val() || $('[name="p_'+n+'"]').val();
 	
@@ -427,7 +416,7 @@ if($ && $.IGRP && !$.IGRP.rules){
 
 						fieldName = xpr.slice(xi.length, xpr.indexOf(xe) ),
 
-						field 	  = fieldName == 'this' ? $(r.field) : $('[name="'+fieldName+'"]');
+						field 	  = fieldName == 'this' ? $(r.field) : $('[name="p_'+fieldName+'"]');
 
 					replaceObj[xpr] = {
 
@@ -490,7 +479,7 @@ if($ && $.IGRP && !$.IGRP.rules){
 
 						fieldName = xpr.slice(xi.length, xpr.indexOf(xe) ),
 
-						field 	  = fieldName == 'this' ? $(r.field) : $('[name="'+fieldName+'"]');
+						field 	  = fieldName == 'this' ? $(r.field) : $('[name="p_'+fieldName+'"]');
 
 					replaceObj[xpr] = {
 
@@ -799,8 +788,12 @@ if($ && $.IGRP && !$.IGRP.rules){
 				var actionURL	 = $.IGRP.utils.getUrl(p.procedure)+'dad='+$('body').attr('app') || $.IGRP.utils.getPageUrl(),
 					form		 = $.IGRP.utils.getForm();
 				
+				$.IGRP.utils.loading.show();
+				
 				$.each( p.targetFields ,function(i,f){
+					
 					var tableName = $(f).attr('item-name');
+					
 					$.IGRP.utils.transformXMLNodes({
 					
 						nodes : [tableName],
@@ -813,7 +806,7 @@ if($ && $.IGRP && !$.IGRP.rules){
 					       	'X-IGRP-REMOTE' : 1
 					   	},
 
-						success:function(c){
+						/*success:function(c){
 							
 							$.IGRP.utils.refreshComponents({
 								
@@ -823,9 +816,12 @@ if($ && $.IGRP && !$.IGRP.rules){
 								
 							});
 
-						},
+						},*/
 
 						error:function(){
+							
+							$.IGRP.utils.loading.hide();
+							
 							console.log('dsa')
 						}
 
