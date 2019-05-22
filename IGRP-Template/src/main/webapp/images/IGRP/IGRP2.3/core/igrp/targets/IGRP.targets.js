@@ -173,7 +173,7 @@
 					pNotify 	: false,
 					pComplete 	: function(resp){
 
-						$.IGRP.utils.loading.hide();
+						//$.IGRP.utils.loading.hide();
 
 						try{
 
@@ -978,6 +978,16 @@
 				
 				action : function(){
 					return false;
+				}
+				
+			},
+			
+			download  : {
+				
+				label : 'Download',
+				
+				action : function(){
+					return true;
 				}
 				
 			},
