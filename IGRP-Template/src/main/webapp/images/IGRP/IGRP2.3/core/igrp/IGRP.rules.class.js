@@ -44,6 +44,14 @@ if($ && $.IGRP && !$.IGRP.rules){
 
 			return str;
 		},
+		
+		getRemoteUrl : function(p){
+			
+			var remote  = $(':input[name="'+p.sourceName+'"]').attr('remote'),
+				url 	= remote && remote != undefined ? remote : $.IGRP.utils.getUrl(p.procedure)+'dad='+$('body').attr('app');
+			
+			return url;
+		},
 
 		executeAction:function(p){
 			//var rule = p;
@@ -709,12 +717,12 @@ if($ && $.IGRP && !$.IGRP.rules){
 		remote:{
 			
 			do : function(p){
-				var url = $.IGRP.utils.getUrl(p.procedure)+'dad='+$('body').attr('app');
-				$.IGRP.request( url ,{
+				//var url = $.IGRP.utils.getUrl(p.procedure)+'dad='+$('body').attr('app');
+				$.IGRP.request( $.IGRP.rules.getRemoteUrl(p) ,{
 					params  : getParam(p),
-					headers : {
+					/*headers : {
 				       	'X-IGRP-REMOTE' : 1
-				   	},
+				   	},*/
 					method 	: 'POST',
 					success : function(data){
 
@@ -734,12 +742,15 @@ if($ && $.IGRP && !$.IGRP.rules){
 			do:function(p){
 				
 				//var param = p.sourceName+'='+$(p.sourceField).val();
-				var url = $.IGRP.utils.getUrl(p.procedure)+'dad='+$('body').attr('app');
+				
+				
+				//var url = $.IGRP.utils.getUrl(p.procedure)+'dad='+$('body').attr('app');
+				
 				$.ajax({
-					url 	: url,
-					headers : {
+					url 	: $.IGRP.rules.getRemoteUrl(p),
+					/*headers : {
 				       	'X-IGRP-REMOTE' : 1
-				   	},
+				   	},*/
 					method 	: 'post',
 					dataType: 'xml',
 					data 	: getParam(p)
@@ -788,7 +799,7 @@ if($ && $.IGRP && !$.IGRP.rules){
 		},
 		remote_list:{
 			do : function(p){
-				var actionURL	 = $.IGRP.utils.getUrl(p.procedure)+'dad='+$('body').attr('app') || $.IGRP.utils.getPageUrl(),
+				var actionURL	 = $.IGRP.rules.getRemoteUrl(p) || $.IGRP.utils.getPageUrl(),
 					form		 = $.IGRP.utils.getForm();
 				
 				$.each( p.targetFields ,function(i,f){
@@ -803,9 +814,9 @@ if($ && $.IGRP && !$.IGRP.rules){
 
 						data  : form.serialize(),
 						
-						headers : {
+						/*headers : {
 					       	'X-IGRP-REMOTE' : 1
-					   	},
+					   	},**/
 
 						/*success:function(c){
 							
