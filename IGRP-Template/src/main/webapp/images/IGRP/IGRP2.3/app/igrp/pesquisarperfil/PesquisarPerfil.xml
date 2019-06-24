@@ -59,19 +59,19 @@
         </toolsbar_1>
         <table_1 type="table" xml-type="table" gen-type="container" gen-group="true">
             <fields>
-                <organica name="p_organica" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
+                <organica name="p_organica" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false" showLabel="true">
                     <label>Organização</label>
                 </organica>
-                <estado name="p_estado" type="checkbox" maxlength="30" align="center" lookup_parser="false" iskey="false" switch="false" java-type="" check="true" desc="true">
+                <estado name="p_estado" type="checkbox" maxlength="30" align="center" lookup_parser="false" iskey="false" switch="false" java-type="int" showLabel="true" check="true" desc="true">
                     <label>Estado</label>
                 </estado>
-                <descricao name="p_descricao" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
+                <descricao name="p_descricao" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false" showLabel="true">
                     <label>Nome</label>
                 </descricao>
-                <codigo name="p_codigo" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false">
+                <codigo name="p_codigo" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false" showLabel="true">
                     <label>Código</label>
                 </codigo>
-                <id name="p_id" type="hidden" maxlength="30" iskey="true" java-type="" tag="id"/>
+                <id name="p_id" type="hidden" maxlength="30" iskey="true" java-type="" showLabel="true" tag="id"/>
             </fields>
             <table>
                 <value>
@@ -80,60 +80,60 @@
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <organica name="p_organica">Ut iste voluptatem mollit lore</organica>
+                        <organica name="p_organica">Aliqua lorem adipiscing perspi</organica>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Voluptatem sit consectetur dol</descricao>
-                        <codigo name="p_codigo">Mollit sit deserunt perspiciat</codigo>
-                        <id name="p_id" tag="id">1</id>
+                        <descricao name="p_descricao">Aliqua sed laudantium omnis an</descricao>
+                        <codigo name="p_codigo">Aliqua ipsum aperiam amet pers</codigo>
+                        <id name="p_id" tag="id">hidden-576c_b380</id>
                     </row>
                     <row>
                         <context-menu>
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <organica name="p_organica">Labore elit aperiam anim molli</organica>
+                        <organica name="p_organica">Laudantium deserunt amet persp</organica>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Voluptatem consectetur sit ut</descricao>
-                        <codigo name="p_codigo">Stract aliqua amet mollit sed</codigo>
-                        <id name="p_id" tag="id">1</id>
+                        <descricao name="p_descricao">Sed amet accusantium rem volup</descricao>
+                        <codigo name="p_codigo">Sit anim aperiam labore amet</codigo>
+                        <id name="p_id" tag="id">hidden-9349_3e34</id>
                     </row>
                     <row>
                         <context-menu>
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <organica name="p_organica">Sit perspiciatis stract amet d</organica>
+                        <organica name="p_organica">Stract laudantium iste omnis d</organica>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Sed sit magna natus adipiscing</descricao>
-                        <codigo name="p_codigo">Consectetur magna mollit sit p</codigo>
-                        <id name="p_id" tag="id">1</id>
+                        <descricao name="p_descricao">Unde aperiam amet iste omnis</descricao>
+                        <codigo name="p_codigo">Voluptatem sit laudantium moll</codigo>
+                        <id name="p_id" tag="id">hidden-74d9_551d</id>
                     </row>
                     <row>
                         <context-menu>
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <organica name="p_organica">Totam sed natus dolor amet</organica>
+                        <organica name="p_organica">Ipsum dolor aliqua deserunt ut</organica>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Mollit consectetur doloremque</descricao>
-                        <codigo name="p_codigo">Labore unde accusantium ut dol</codigo>
-                        <id name="p_id" tag="id">1</id>
+                        <descricao name="p_descricao">Iste aliqua laudantium sed ani</descricao>
+                        <codigo name="p_codigo">Doloremque lorem totam dolor a</codigo>
+                        <id name="p_id" tag="id">hidden-a507_3c23</id>
                     </row>
                     <row>
                         <context-menu>
                             <param>p1=linha1</param>
                             <param>p2=linha1</param>
                         </context-menu>
-                        <organica name="p_organica">Amet stract officia accusantiu</organica>
+                        <organica name="p_organica">Officia lorem consectetur ipsu</organica>
                         <estado name="p_estado" check="true" desc="true">1</estado>
                         <estado_desc name="p_estado_desc">1</estado_desc>
-                        <descricao name="p_descricao">Amet laudantium perspiciatis e</descricao>
-                        <codigo name="p_codigo">Accusantium ut dolor sed labor</codigo>
-                        <id name="p_id" tag="id">1</id>
+                        <descricao name="p_descricao">Iste ipsum aliqua accusantium</descricao>
+                        <codigo name="p_codigo">Magna dolor deserunt aliqua vo</codigo>
+                        <id name="p_id" tag="id">hidden-f791_49cc</id>
                     </row>
                 </value>
                 <context-menu>
