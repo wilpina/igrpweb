@@ -13,13 +13,17 @@
 	
 	<xsl:template name="blockly.element.row">
 	
-		<xsl:variable name="fieldType" select="substring-before(field,'::')"/>
+		<xsl:variable name="rowType" select="substring-before(field,'::')"/>
 		
-		<xsl:variable name="fieldValue" select="substring-after(field,'::')"/>
+		<xsl:variable name="rowtypechild" select="substring-before(value[@name='fields_model']/block/field,'::')"/>
+		
+		<xsl:variable name="rowtypeneto" select="substring-before(value[@name='fields_model']/block/value[@name='value1']/block/field,'::')"/>
+		
+		<xsl:variable name="rowValue" select="substring-after(field,'::')"/>
 		
 		<xsl:variable name="nameCap">
 			<xsl:call-template name="InitCap">
-				<xsl:with-param name="text" select="$fieldValue"/>
+				<xsl:with-param name="text" select="$rowValue"/>
 			</xsl:call-template>
 		</xsl:variable>
 		
@@ -29,19 +33,46 @@
 			</xsl:call-template>
 		</xsl:variable>
 		
-		<xsl:if test="$fieldType = 'Link'">
-			<xsl:text>row.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
-			<xsl:text>("</xsl:text><xsl:value-of select="$app-title"></xsl:value-of><xsl:text>","</xsl:text>
-			<xsl:value-of select="$page-title"></xsl:value-of><xsl:text>","download&amp;file_id="+</xsl:text>
-			<xsl:value-of select="$valorA"></xsl:value-of><xsl:text>);</xsl:text>
-		</xsl:if>
-		
-		<xsl:if test="$fieldType != 'Link'">
-		
-			<xsl:text>row.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
-			<xsl:text>(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of><xsl:text>);</xsl:text>
 			
-			</xsl:if>
+		<xsl:variable name="rowset">
+			<xsl:choose>
+				<xsl:when test="$rowType = 'Link'">
+					<xsl:text>row.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+					<xsl:text>("</xsl:text><xsl:value-of select="$app-title"></xsl:value-of><xsl:text>","</xsl:text>
+					<xsl:value-of select="$page-title"></xsl:value-of><xsl:text>","download&amp;file_id="+</xsl:text>
+					<xsl:value-of select="$valorA"></xsl:value-of><xsl:text>);</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$rowtypeneto != '' ">
+					<xsl:text>row.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+					<xsl:text>(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of><xsl:text>);</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$rowType = 'String' and $rowtypechild = 'Integer' ">
+					<xsl:text>row.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+					<xsl:text>(""+</xsl:text><xsl:value-of select="$valorA"></xsl:value-of><xsl:text>);</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$rowType = 'hidden' and $rowtypechild = 'Integer' ">
+					<xsl:text>row.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+					<xsl:text>(""+</xsl:text><xsl:value-of select="$valorA"></xsl:value-of><xsl:text>);</xsl:text>
+				</xsl:when>
+					
+				<xsl:when test="$rowType = 'String' and $rowtypechild = 'Date' ">
+					<xsl:text>row.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+					<xsl:text>(""+</xsl:text><xsl:value-of select="$valorA"></xsl:value-of><xsl:text>);</xsl:text>
+				</xsl:when>
+				
+				<xsl:otherwise>
+					<xsl:text>row.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+					<xsl:text>(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of><xsl:text>);</xsl:text>
+				</xsl:otherwise>
+			
+			</xsl:choose>
+			
+		</xsl:variable>
+		
+		<xsl:value-of select="$rowset"></xsl:value-of>
 	
 	</xsl:template>
 	
@@ -59,36 +90,37 @@
 			</xsl:call-template>
 		</xsl:variable>
 		
-		<xsl:if test="$fieldType = 'String' or $fieldType = 'Integer'">
-			<xsl:text>model.get</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
-			<xsl:call-template name="utils.arguments"/>
-		</xsl:if>
+		<xsl:variable name="gettingmodel">
+			<xsl:choose>
+				<xsl:when test="$fieldType = 'File'">
+						<xsl:text>""+(Core.saveFile("p_</xsl:text><xsl:value-of select="$fieldValue"></xsl:value-of>
+						<xsl:text>"))</xsl:text>
+				</xsl:when>
+				
+				<xsl:otherwise>
+						<xsl:text>model.get</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+						<xsl:call-template name="utils.arguments"/>
+				</xsl:otherwise>
+			
+			</xsl:choose>
+			
+		</xsl:variable>
 		
-		<xsl:if test="$fieldType = 'Select'">
-			<xsl:text>model.get</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
-			<xsl:call-template name="utils.arguments"/>
-		</xsl:if>
-		
-		<xsl:if test="$fieldType = 'Date'">
-			<xsl:text>model.get</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
-			<xsl:call-template name="utils.arguments"/>
-		</xsl:if>
-		
-		<xsl:if test="$fieldType = 'File'">
-			<xsl:text>""+(Core.saveFile("p_</xsl:text><xsl:value-of select="$fieldValue"></xsl:value-of><xsl:text>"))</xsl:text>
-		</xsl:if>
+		<xsl:value-of select="$gettingmodel"></xsl:value-of>
 		
 	</xsl:template>
 	
 	<xsl:template name="blockly.element.model_set">
 		
-		<xsl:variable name="fieldType" select="substring-before(field,'::')"/>
+		<xsl:variable name="modelType" select="substring-before(field,'::')"/>
 		
-		<xsl:variable name="fieldValue" select="substring-after(field,'::')"/>
+		<xsl:variable name="modelValue" select="substring-after(field,'::')"/>
+		
+		<xsl:variable name="modeltypechild" select="substring-before(value[@name='value1']/block/field,'::')"/>
 		
 		<xsl:variable name="nameCap">
 			<xsl:call-template name="InitCap">
-				<xsl:with-param name="text" select="$fieldValue"/>
+				<xsl:with-param name="text" select="$modelValue"/>
 			</xsl:call-template>
 		</xsl:variable>
 		
@@ -96,11 +128,35 @@
 			<xsl:call-template name="blockly.getValue">
 				<xsl:with-param name="value" select="*[@name='value1']"/>
 			</xsl:call-template>
+			
 		</xsl:variable>
 		
-		<xsl:text>model.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
-		<xsl:text>(</xsl:text><xsl:value-of select="$setting"></xsl:value-of>
-		<xsl:text>);</xsl:text>
+		<xsl:variable name="modelset">
+			
+			<xsl:choose>
+				
+				<xsl:when test="$modeltypechild = 'Date' ">
+					<xsl:text>model.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+					<xsl:text>(""+</xsl:text><xsl:value-of select="$setting"></xsl:value-of><xsl:text>);</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$modeltypechild = 'Integer' ">
+					<xsl:text>model.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+					<xsl:text>(""+</xsl:text><xsl:value-of select="$setting"></xsl:value-of><xsl:text>);</xsl:text>
+				</xsl:when>
+					
+				<xsl:otherwise>
+					<xsl:text>model.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
+					<xsl:text>(</xsl:text><xsl:value-of select="$setting"></xsl:value-of>
+					<xsl:text>);</xsl:text>
+				</xsl:otherwise>
+			
+			</xsl:choose>
+		
+		</xsl:variable>
+		
+		<xsl:value-of select="$modelset"></xsl:value-of>
+	
 	</xsl:template>
 	
 	<xsl:template name="blockly.element.getDao">
@@ -139,20 +195,8 @@
 			
 		</xsl:variable>
 		
-		<xsl:if test="$typedad = 'hidden' and $fieldType = 'Integer'" >
-			<xsl:text>""+(obj.get</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>())</xsl:text>
-			<xsl:value-of select="$otherdao"/>
-		</xsl:if>
-
-		<xsl:if test="$fieldType = 'Date'">
-			<xsl:text>""+(obj.get</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>())</xsl:text>
-			<xsl:value-of select="$otherdao"/>
-		</xsl:if>
-		
-		<xsl:if test="$fieldType = 'String'">
 			<xsl:text>obj.get</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>()</xsl:text>
 			<xsl:value-of select="$otherdao2"/>
-		</xsl:if>
 		
 	</xsl:template>
 	
@@ -161,6 +205,10 @@
 		<xsl:variable name="fieldType" select="substring-before(field,'::')"/>
 		
 		<xsl:variable name="fieldValue" select="substring-after(field,'::')"/>
+		
+		<xsl:variable name="childstrange" select="value[@name='value1']/block[@type='core_get_param']"/>
+		
+		<xsl:variable name="childstrangeValue" select="value[@name='value1']/block[@type='core_get_param']/field"/>
 		
 		<xsl:variable name="nameCap">
 			<xsl:call-template name="InitCap">
@@ -174,21 +222,49 @@
 			</xsl:call-template>
 		</xsl:variable>
 		
-		<xsl:if test="$fieldType = 'Date'">
+		<xsl:variable name="Daosetting">
+			
+			<xsl:choose>
+				
+				<xsl:when test="$fieldType = 'Date'">
+					<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(Core.formatDate(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of>
+					<xsl:text>, "dd-mm-yyyy", "yyyy-mm-dd"));</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$fieldType = 'Integer'">
+					<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(Core.toInt(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of>
+					<xsl:text>));</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$fieldType = 'String'">
+					<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of>
+					<xsl:text>);</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$childstrange != '' ">
+				
+					<xsl:value-of select="$fieldType"></xsl:value-of>
+					<xsl:text> foreign = new </xsl:text><xsl:value-of select="$fieldType"></xsl:value-of>
+					<xsl:text>().findOne(Core.getParamInt("p_</xsl:text><xsl:value-of select="$childstrangeValue"></xsl:value-of>
+					<xsl:text>"));</xsl:text>
+					<xsl:value-of select="$newline"></xsl:value-of>
+					<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(foreign);</xsl:text>
+					
+				</xsl:when>
+					
+				<xsl:otherwise>
+				
+					<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(</xsl:text>
+					<xsl:value-of select="$valorA"></xsl:value-of>
+					<xsl:text>);</xsl:text>
+					
+				</xsl:otherwise>
+			
+			</xsl:choose>
 		
-			<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(Core.formatDate(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of>
-			<xsl:text>, "dd-mm-yyyy", "yyyy-mm-dd"));</xsl:text>
-		</xsl:if>
+		</xsl:variable>
 		
-		<xsl:if test="$fieldType = 'Integer'">
-			<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(Core.toInt(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of>
-			<xsl:text>));</xsl:text>
-		</xsl:if>
-		
-		<xsl:if test="$fieldType = 'String'">
-			<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of>
-			<xsl:text>);</xsl:text>
-		</xsl:if>
+		<xsl:value-of select="$Daosetting"></xsl:value-of>
 		
 	</xsl:template>
 	
@@ -461,11 +537,19 @@
 	
 	<xsl:template name="blockly.element.core">
 	
-		<xsl:variable name="core">
+		<xsl:variable name="core_set">
 			<xsl:call-template name="utils.core.meaning">
-				<xsl:with-param name="key" select="field[@name='core']"/>
+				<xsl:with-param name="key" select="field[@name='core_set']"/>
 			</xsl:call-template>
 		</xsl:variable>
+		
+		<xsl:variable name="core_get">
+			<xsl:call-template name="utils.core.meaning">
+				<xsl:with-param name="key" select="field[@name='core_get']"/>
+			</xsl:call-template>
+		</xsl:variable>
+		
+		<xsl:variable name="core_param"  select="field"></xsl:variable>
 		
 		<xsl:variable name="valor">
 			<xsl:call-template name="blockly.getValue">
@@ -473,9 +557,25 @@
 			</xsl:call-template>
 		</xsl:variable>
 		
+		<xsl:variable name="Core">
+			<xsl:choose>
+				<xsl:when test="$core_set != ''">
+					<xsl:value-of select="$core_set"></xsl:value-of><xsl:text>(</xsl:text><xsl:value-of select="$valor"></xsl:value-of><xsl:text>);</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$core_get != ''">
+					<xsl:value-of select="$core_get"></xsl:value-of><xsl:text>(</xsl:text><xsl:value-of select="$valor"></xsl:value-of><xsl:text>)</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$core_param != ''">
+					<xsl:text>Core.getParamInt("p_</xsl:text><xsl:value-of select="$core_param"></xsl:value-of><xsl:text>")</xsl:text>
+				</xsl:when>
+			
+			</xsl:choose>
+		</xsl:variable>
 		
-		<xsl:value-of select="$core"></xsl:value-of><xsl:text>(</xsl:text><xsl:value-of select="$valor"></xsl:value-of><xsl:text>)</xsl:text>
-
+		<xsl:value-of select="$Core"></xsl:value-of>
+		
 	</xsl:template>			
 	
 	<xsl:template name="blockly.element.edit">
@@ -634,13 +734,22 @@
 			</xsl:call-template>
 		</xsl:variable>
 		
+		<xsl:variable name="paramvalue" select="substring-after(value[@name='PARAM']/block/field,'::')"/>
+		
+		<xsl:variable name="paramtype" select="substring-before(value[@name='PARAM']/block/field,'::')"/>
+		
 		<xsl:variable name="Check_">
 			<xsl:choose>
-				<xsl:when test="$Check = 'TRUE'">
-					<xsl:text>Core.getParamInt("p_</xsl:text><xsl:value-of select="$param"></xsl:value-of><xsl:text>")</xsl:text>
+				<xsl:when test="$paramtype = 'Integer'">
+					<xsl:text>.findOne(Core.getParamInt("param"));</xsl:text>
 				</xsl:when>
-				<xsl:when test="$Check = 'FALSE'">
-					<xsl:text>Core.getParam("p_</xsl:text><xsl:value-of select="$param"></xsl:value-of><xsl:text>")</xsl:text>
+				
+				<xsl:when test="$paramtype = 'hidden'">
+					<xsl:text>.findOne(Core.getParamInt("param"));</xsl:text>
+				</xsl:when>
+				
+				<xsl:when test="$paramtype = 'String'">
+					<xsl:text>.findOne(Core.getParam("p_</xsl:text><xsl:value-of select="$paramteste"></xsl:value-of><xsl:text>"));</xsl:text>
 				</xsl:when>
 			</xsl:choose>
 		</xsl:variable>
@@ -656,8 +765,7 @@
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			<xsl:text>if (Core.isNotNull(isEdit)) {</xsl:text>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
-			 <xsl:text> obj = obj</xsl:text>
-			<xsl:value-of select="$find"></xsl:value-of><xsl:text>(</xsl:text><xsl:value-of select="$Check_"></xsl:value-of><xsl:text>);</xsl:text>
+			 <xsl:text> obj = obj.findOne(Core.getParamInt("param"));</xsl:text>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			<xsl:text>}</xsl:text>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
@@ -719,30 +827,38 @@
 			</xsl:call-template>
 		</xsl:variable>
 		
+		<xsl:variable name="paramGet" select="field[@name='iskey']"/>
+		
+		<xsl:variable name="paramvalue" select="substring-after(value[@name='PARAM']/block/field,'::')"/>
+		
+		<xsl:variable name="paramType" select="substring-before(value[@name='PARAM']/block/field,'::')"/>
+		
 		<xsl:variable name="param">
-			<xsl:call-template name="blockly.getValue">
-				<xsl:with-param name="value" select="*[@name='PARAM']"/>
-			</xsl:call-template>
+			
+				<xsl:text>int param = Core.getParamInt("p_</xsl:text><xsl:value-of select="$paramGet"></xsl:value-of><xsl:text>");</xsl:text>
+			
 		</xsl:variable>
 
 		<xsl:variable name="code_edit">
 			
 			<xsl:text>String isEdit = Core.getParam("isEdit");</xsl:text>
 			<xsl:value-of select="$newline"></xsl:value-of>
+			<xsl:value-of select="$param"></xsl:value-of>
+			<xsl:value-of select="$newline"></xsl:value-of>
 			<xsl:text>if (Core.isNotNull(isEdit)) {</xsl:text>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
-			<xsl:value-of select="$dao"></xsl:value-of> obj = new <xsl:value-of select="$dao"></xsl:value-of>
-			<xsl:text>()</xsl:text><xsl:value-of select="$find"></xsl:value-of>
-			<xsl:text>Core.getParam</xsl:text><xsl:text>("p_</xsl:text>
-			<xsl:value-of select="$param"></xsl:value-of><xsl:text>"));</xsl:text>
+			<xsl:value-of select="$dao"></xsl:value-of><xsl:text> obj = new </xsl:text> <xsl:value-of select="$dao"></xsl:value-of>
+			<xsl:text>().findOne(param);</xsl:text>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			<xsl:text>if (obj!=null) {</xsl:text>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			<xsl:value-of select="$edicao"></xsl:value-of>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			<xsl:text>}</xsl:text>
-			<xsl:value-of select="$newlineTab1"></xsl:value-of>
-			<xsl:text>view.btn_</xsl:text><xsl:value-of select="$button"></xsl:value-of><xsl:text>.setLink("</xsl:text><xsl:value-of select="$button"></xsl:value-of><xsl:text>&amp;isEdit=true");</xsl:text>
+			<xsl:value-of select="$newline"></xsl:value-of>
+			<xsl:text>view.btn_</xsl:text><xsl:value-of select="$button"></xsl:value-of><xsl:text>.addParameter("param", param);</xsl:text>
+			<xsl:value-of select="$newline"></xsl:value-of>
+			<xsl:text>view.btn_</xsl:text><xsl:value-of select="$button"></xsl:value-of><xsl:text>.addParameter("isEdit", "true");</xsl:text>
 			<xsl:value-of select="$newline"></xsl:value-of>
 			<xsl:text>}</xsl:text>
 		</xsl:variable>
@@ -753,20 +869,30 @@
 	</xsl:template>
 	
 	<xsl:template name="blockly.element.editar_dao" >
+	
+		<xsl:variable name="paramvalue" select="substring-after(value[@name='PARAM']/block/field,'::')"/>
 		
-		<xsl:variable name="param">
-			<xsl:call-template name="blockly.getValue">
-				<xsl:with-param name="value" select="*[@name='PARAM']"/>
-			</xsl:call-template>
-		</xsl:variable>
+		<xsl:variable name="paramtype" select="substring-after(value[@name='PARAM']/block/field,'::')"/>
+		
+		<xsl:variable name="paramkey" select="field[@name='iskey']"/>
 				
-		<xsl:value-of select="$newline"></xsl:value-of>
-		<xsl:text>this.addQueryString("target", "_blank");</xsl:text>
 		<xsl:value-of select="$newline"></xsl:value-of>
 		<xsl:text>this.addQueryString("isEdit", "true");</xsl:text>
 		<xsl:value-of select="$newline"></xsl:value-of>
-		<xsl:text>this.addQueryString("p_</xsl:text><xsl:value-of select="$param"></xsl:value-of><xsl:text>", Core.getParam("p_</xsl:text>
-		<xsl:value-of select="$param"></xsl:value-of><xsl:text>"));</xsl:text>
+		<xsl:text>this.addQueryString("p_</xsl:text><xsl:value-of select="$paramkey"></xsl:value-of><xsl:text>", Core.getParam("p_</xsl:text>
+		<xsl:value-of select="$paramkey"></xsl:value-of><xsl:text>"));</xsl:text>
+		<xsl:value-of select="$newline"></xsl:value-of>
+		
+	</xsl:template>
+	
+	<xsl:template name="blockly.element.enviar_p" >
+	
+		
+		<xsl:variable name="paramkey" select="field[@name='iskey']"/>
+				
+		<xsl:value-of select="$newline"></xsl:value-of>
+		<xsl:text>this.addQueryString("p_</xsl:text><xsl:value-of select="$paramkey"></xsl:value-of><xsl:text>", Core.getParam("p_</xsl:text>
+		<xsl:value-of select="$paramkey"></xsl:value-of><xsl:text>"));</xsl:text>
 		<xsl:value-of select="$newline"></xsl:value-of>
 		
 	</xsl:template>
@@ -837,20 +963,39 @@
 		
 	</xsl:template>
 	
-	<xsl:template name="blockly.element.delete" >
+		<xsl:template name="blockly.element.apagar" >
 		
-		<xsl:variable name="nameCap">
-			<xsl:call-template name="InitCap">
-				<xsl:with-param name="text" select="field"/>
+		<xsl:variable name="dao" select="field[@name='dao']"/>
+		
+		<xsl:variable name="paramGet" select="field[@name='iskey']"/>
+		
+		<xsl:variable name="getDelete">
+			<xsl:call-template name="blockly.getValue">
+				<xsl:with-param name="value" select="*[@name='valor1']"/>
+				<xsl:with-param name="parent" select="."></xsl:with-param>
 			</xsl:call-template>
 		</xsl:variable>
-				
-		<xsl:value-of select="$combo"></xsl:value-of>
-		<xsl:text>.put(</xsl:text><xsl:value-of select="$double_quotes"></xsl:value-of><xsl:value-of select="$nameCap"></xsl:value-of>
-		<xsl:value-of select="$double_quotes"></xsl:value-of><xsl:text>,gt(</xsl:text>
-		<xsl:value-of select="$double_quotes"></xsl:value-of><xsl:value-of select="$nameCap"></xsl:value-of>
-		<xsl:value-of select="$double_quotes"></xsl:value-of>
-		<xsl:text>));</xsl:text>
+	
+	<xsl:value-of select="$dao"></xsl:value-of><xsl:text> obj = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of>
+	<xsl:text>().findOne(Core.getParamInt("p_</xsl:text><xsl:value-of select="$paramGet"></xsl:value-of><xsl:text>"));</xsl:text>
+	<xsl:value-of select="$newline"></xsl:value-of>	
+	<xsl:text>if (obj != null &amp;&amp;  !obj.hasError()) {</xsl:text>
+	<xsl:value-of select="$newlineTab1"></xsl:value-of>	
+	<xsl:text>boolean del = obj.delete(</xsl:text><xsl:value-of select="$getDelete"></xsl:value-of><xsl:text>);</xsl:text>
+	<xsl:value-of select="$newlineTab1"></xsl:value-of>	 
+		<xsl:text>if (del == true)</xsl:text>
+		<xsl:text>Core.setMessageSuccess("Deleted from DB successfully!");</xsl:text>
+		<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			<xsl:text>else</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+				<xsl:text>Core.setMessageError("Error deleting person from DB!");</xsl:text>
+				<xsl:value-of select="$newlineTab1"></xsl:value-of>
+		<xsl:text>} else {</xsl:text>
+		<xsl:value-of select="$newlineTab1"></xsl:value-of>
+		<xsl:text>Core.setMessageError(obj.getError().toString());</xsl:text>
+		<xsl:value-of select="$newline"></xsl:value-of>
+		<xsl:text>}</xsl:text>
+		<xsl:value-of select="$newline"></xsl:value-of>
 		
 	</xsl:template>
 	
@@ -859,7 +1004,26 @@
 		<xsl:variable name="hasLinkField" select="//*[contains(field,'Link::')]"></xsl:variable>
 		
 		<xsl:if test="$hasLinkField[1]">
-			baza bororo di link
+		
+			<xsl:text>public Response actionDownload() throws IOException, IllegalArgumentException, IllegalAccessException {</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			<xsl:text>int fileId = Core.getParamInt("file_id");</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			<xsl:text>CLob c = Core.getFile(fileId);</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			<xsl:text>byte[] content = c.getC_lob_content();</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			<xsl:text>String name = c.getName();</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			<xsl:text>String contentType = c.getMime_type();</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			<xsl:text>boolean download = false;</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			<xsl:text>return this.xSend(content, name, contentType, download);</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			<xsl:text>}</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			
 		</xsl:if>
 		
 	</xsl:template>
@@ -1000,8 +1164,12 @@
 				</xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="$block-type = 'delete'">
-				<xsl:call-template name="blockly.element.delete"></xsl:call-template>
+			<xsl:when test="$block-type = 'apagar'">
+				<xsl:call-template name="blockly.element.apagar"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="$block-type = 'enviar_p'">
+				<xsl:call-template name="blockly.element.enviar_p"></xsl:call-template>
 			</xsl:when>
 		
 		
