@@ -24,7 +24,7 @@ function SetupBlockly(){
 			
 			color = element.attr('color') || 180,
 			
-			title = element.attr('title') || $.trim(type.split('_').join(' ')),
+			title = element.attr('title') || '',
 			
 			rtn    = element.attr('return'),
 			
@@ -143,7 +143,9 @@ function SetupBlockly(){
 										
 									case 'field_text':
 										
-										value.appendField(new Blockly.FieldTextInput('insira o texto'), name)
+										 var textfield = field.attr('options');
+										
+										value.appendField(new Blockly.FieldTextInput(textfield), name)
 										
 									break;
 										
@@ -217,6 +219,20 @@ function SetupBlockly(){
 						IGRPElement.init(block);		
 					
 				}
+				
+				$(document).trigger('block-init', [ block ]);
+				
+				$(document).trigger('block-'+type+'-init', [ block ]);
+				
+				if(type.indexOf('get-dao-') >= 0){
+					var daoName = type.split('get-dao-').pop();
+					
+					$(document).trigger('get-dao-block-init', [ block, daoName ]);
+				}
+					
+					
+				
+			
 					
 					
 			}
@@ -250,97 +266,3 @@ Blockly.Blocks['where'] = {
 		},
 };
 
-/*
-
-
-Blockly.Blocks['campo_t'] = {
-		init : function() {
-			this.appendDummyInput().appendField("campos");
-			this.appendStatementInput("SCRIPT");
-			this.setNextStatement(true);
-			this.setColour(230);
-		},
-};
-Blockly.Blocks['campo'] = {
-		init : function() {
-			this.appendDummyInput().appendField("novo campo");
-			this.setPreviousStatement(true);
-			this.setNextStatement(true);
-			this.setColour(230);
-		},
-};
-
-var ContFields=0;
-Blockly.Blocks['criar_dao'] = {
-		init: function() {
-			this.itemCount_ = 0;
-	        this.updateShape_();
-	        this.setMutator(new Blockly.Mutator(['campo']));
-	        this.appendDummyInput().appendField("Criar nova classe DAO:").appendField(new Blockly.FieldTextInput(''), 'NOME')
-	        .appendField("Nome da tabela:").appendField(new Blockly.FieldTextInput(''), 'TABLE');
-			this.setColour(130);
-			this.setInputsInline(true);
-		},
-		mutationToDom: function() {
-			  var container = document.createElement('mutation');
-			  container.setAttribute('count', this.itemCount_);
-			  return container;
-			},
-		domToMutation: function(xmlElement) {
-			this.itemCount_ = parseInt(xmlElement.getAttribute('count'), 10);
-			  this.updateShape_();  
-			},
-		 decompose: function (workspace) {
-		        var containerBlock = workspace.newBlock('campo_t');
-		        containerBlock.initSvg();
-		        var connection = containerBlock.getInput('SCRIPT').connection;	        
-		        for (var i = 0; i < this.itemCount_; i++) { 
-			            var itemBlock = workspace.newBlock('campo');
-			            itemBlock.initSvg();
-			            connection.connect(itemBlock.previousConnection);
-			            connection = itemBlock.nextConnection;
-		        }
-		        return containerBlock;
-		    },
-		    compose: function (containerBlock) {
-		        var itemBlock = containerBlock.getInputTargetBlock('SCRIPT');
-		        var connections = [];
-		        while (itemBlock) {
-		            connections.push(itemBlock.valueConnection_);
-		            itemBlock = itemBlock.nextConnection && itemBlock.nextConnection.targetBlock();
-		        }
-		      for (var i = 0; i < this.itemCount_; i++) {
-		            var connection = this.getInput('ADD' + i).connection.targetConnection;
-		            if (connection && connections.indexOf(connection) == -1) {
-		                connection.disconnect();
-		            }
-		        }
-		        this.itemCount_ = connections.length;
-		        ContFields = this.itemCount_;
-		         
-		        this.updateShape_();
-		        for (var i = 0; i < this.itemCount_; i++) {
-		            Blockly.Mutator.reconnect(connections[i], this, 'ADD' + i);
-		        }
-		    },
-		    updateShape_: function () {
-			    
-		        for (var i = 0; i < this.itemCount_; i++) {
-		            if (!this.getInput('ADD' + i)) {
-	    	        	 var input =
-	    	        	this.appendStatementInput('ADD' + i);
-	    	        	this.appendDummyInput('ADD' + i).appendField("Tipo de campo:").appendField(new Blockly.FieldDropdown(TIPO),i+'TIPO').appendField("Nome do campo:")
-	    	        	.appendField(new Blockly.FieldTextInput(''), i+'TEXT');	
-	    	        	 
-		            }
-		        }
-		        while (this.getInput('ADD' + i)) {
-		        	
-		            this.removeInput('ADD' + i);      
-		            i++;
-		        }   
-		    } 
-		};
-
-
-*/
