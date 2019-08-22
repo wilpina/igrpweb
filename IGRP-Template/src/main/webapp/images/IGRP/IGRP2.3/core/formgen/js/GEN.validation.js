@@ -5,9 +5,16 @@
 	function Config(){
 
 		if(annotationsController[0] && annotationsController[0].events){
+			
+			annotationsController[0].events.on('row-add', function(o){
+				
+				$('.validations-message').html('');
+				
+			});
+			
 			//validate unique groups
 			annotationsController[0].events.on('valid-row-add', function(o){
-				
+
 				var valid 		    = true,
 				
 					annotationField = o.values.annotation.field,
@@ -40,11 +47,17 @@
 								
 								valid = false;
 								
+								$('.validations-message').html('');
+								
 								$.IGRP.notify({
 									
 									message : 'Validation conflict. Please check!',
 									
-									type : 'warning'
+									type : 'warning',
+									
+									component : 'field_validations',
+									
+									appendTo : '.validations-message'
 										
 								});
 								
@@ -67,15 +80,21 @@
 			
 			var val = $(this).val();
 			
+			$('.validations-message').html('');
+			
 			if(val && onEdition){				
 				
-				var typeData  = data.annotation.types[onEdition.type];
+				var typeData  = data.annotation.types[onEdition.type] || data.annotation.types.text;
 				
 				HideValidationFields();
+				
+				console.log(typeData)
 				
 				if(typeData){
 					
 					var annotationData = GetAnnotationData( val, typeData );
+					
+					console.log(annotationData.inputs);
 				
 					for(var inputName in annotationData.inputs){
 						
@@ -115,6 +134,8 @@
 		
 		$(document).on('gen-field-edition-confirm', function(e, field){
 			
+			$('.validations-message').html('');
+			
 			var data = annotationsController[0].toJSON();
 			
 			field.validation = data;
@@ -122,6 +143,8 @@
 		});
 		
 		$(document).on('gen-field-edition', function(e, field){
+			
+			$('.validations-message').html('');
 			
 			var type 			= field.type,
 			
@@ -146,8 +169,8 @@
 					var groupType = group.type,
 					
 						groupHTML = (
-							
-						'<optgroup label="Group '+(gi+1)+'">'+
+						//Group '+(gi+1)+'
+						'<optgroup label="">'+
 						
 						   (function(){
 							   
@@ -180,7 +203,7 @@
 					
 					trigger : false
 					
-				})
+				});
 				
 				validationTab.show();
 				
@@ -215,7 +238,7 @@
 		});
 		
 		$(document).on('gen-field-init', function(e,data){
-			
+
 			data.field.validation = data.params.validation || [];
 
 		});
@@ -298,6 +321,20 @@
 		
 		data = d;
 		
+		
+		
+		//validationContents = $('#igrp-field-validation');
+		
+		//validationsList = $('.form-group',validationContents);
+		
+		//validationFormList = $('#igrp-validation-fl').clone(true);
+		
+		
+		
+	};
+	
+	$.IGRP.on('init', function(){
+		
 		editionModal = $('#gen-edition-modal');
 		
 		validationTab = $('li[rel="validation"]', editionModal);
@@ -306,17 +343,7 @@
 		
 		annotationsController    = $('#igrp-field-annotations-list');
 		
-		//validationContents = $('#igrp-field-validation');
-		
-		//validationsList = $('.form-group',validationContents);
-		
-		//validationFormList = $('#igrp-validation-fl').clone(true);
-		
 		Config();
-		
-	};
-	
-	$.IGRP.on('init', function(){
 
 		$.getJSON(path+'/core/formgen/data/annotations.json').then( Init );
 		
