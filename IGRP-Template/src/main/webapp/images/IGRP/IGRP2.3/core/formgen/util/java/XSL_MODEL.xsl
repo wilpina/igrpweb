@@ -9,7 +9,7 @@
     	...
 	-->
     <xsl:template name="gen-get-set-model">
-    	<xsl:for-each select="/rows/content/*[@type != 'treemenu'  and @type != 'table' and @type != 'formlist']">
+    	<xsl:for-each select="/rows/content/*[@type != 'treemenu'  and @type != 'table' and @type != 'formlist' and @type !='separatorlist']">
     		<xsl:for-each select="fields/*">
     			<xsl:variable name="tag_name">
 					<xsl:choose>
@@ -36,9 +36,9 @@
 					<xsl:choose>
 							<xsl:when test="@type='select' and @multiple='true'">
 								<xsl:call-template name="gen-method-set-get">
-									<xsl:with-param name="type" select="concat($type_field_, '[]')" />
+									<xsl:with-param name="type" select="$type_field_" />
 						    		<xsl:with-param name="name" select="$tag_name" />
-						    		<xsl:with-param name="javaType" select="concat($type_field_, '[]')"/>
+						    		<xsl:with-param name="javaType" select="$type_field_"/>
 						    	</xsl:call-template>
 							</xsl:when>
 							<xsl:otherwise>
@@ -65,7 +65,7 @@
     	...
 	-->
     <xsl:template name="declare-variables-model">
-    	<xsl:for-each select="/rows/content/*[@type != 'treemenu' and @type != 'table' and @type != 'formlist']">
+    	<xsl:for-each select="/rows/content/*[@type != 'treemenu' and @type != 'table' and @type != 'formlist' and @type !='separatorlist']">
     		<xsl:for-each select="fields/*">
     			<xsl:variable name="tag_name">
 					<xsl:choose>

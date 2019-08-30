@@ -284,11 +284,10 @@
 		
 		//submit not validate
 		var submit_notvalidate = function(p){
-			$.IGRP.targets.submit.action({
-				url 	 : p.url,
-				validate : false,
-				clicked  : p.clicked
-			});
+			
+			p.valid = true;
+			
+			submitpage2file(p);
 
 			return false;
 		};
@@ -301,9 +300,10 @@
 			
 			var sform     	= $.IGRP.utils.getForm(),
 				fields    	= $.IGRP.utils.getFieldsValidate(sform),
-				events 		= p.clicked[0].events;;
+				events 		= p.clicked[0].events,
+				valid   	= p.valid ? p.valid : fields.valid();
 
-			if (fields.valid()) {
+			if (valid) {
 				
 				$.IGRP.utils.loading.show();
 
@@ -823,7 +823,11 @@
 			
 			form.addClass('download');
 			
-			submit_notvalidate(p);
+			$.IGRP.targets.submit.action({
+				url 	 : p.url,
+				validate : false,
+				clicked  : p.clicked
+			});
 			
 			setTimeout(function(){
 
@@ -832,20 +836,6 @@
 				form.removeClass('download');
 
 			},500);
-			
-			/*if(!$('#iframe-download')[0]){
-				var iframe = $('<iframe>');
-
-				iframe.attr({
-					src  : p.url,
-					id   : 'iframe-download',
-					name : 'iframe-download',
-					class: 'hidden'
-				});
-
-				$('body').append(iframe);
-			}else
-				$('#iframe-download').attr('src',p.url);*/
 		};
 
 		changesrc.showContents = function(holder){
