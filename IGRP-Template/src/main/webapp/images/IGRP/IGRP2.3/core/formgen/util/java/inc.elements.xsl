@@ -1,8 +1,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-	
+
 	<xsl:include href="inc.listar.block.xsl"/>
 	
 	<xsl:include href="inc.separator.block.xsl"/>
+	
+	<xsl:include href="inc.formlist.block.xsl"/>
 	
 	<xsl:include href="inc.if.controls.xsl"/>
 	
@@ -78,7 +80,7 @@
 					
 				<xsl:when test="$rowType = 'String' and $rowtypechild = 'Date' ">
 					<xsl:text>row.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
-					<xsl:text>(""+</xsl:text><xsl:value-of select="$valorA"></xsl:value-of><xsl:text>);</xsl:text>
+					<xsl:text>(Core.dateToString(</xsl:text><xsl:value-of select="$valorA"></xsl:value-of><xsl:text>,"dd-MM-yyyy")); </xsl:text>
 				</xsl:when>
 				
 				<xsl:otherwise>
@@ -95,8 +97,6 @@
 	</xsl:template>
 	
 	<xsl:template name="blockly.element.model_get">
-	
-		<xsl:variable name="typedad" select="../../block/@type"/>
 		
 		<xsl:variable name="fieldType" select="substring-before(field,'::')"/>
 		
@@ -144,7 +144,7 @@
 				
 				<xsl:when test="$modeltypechild = 'Date' ">
 					<xsl:text>model.set</xsl:text><xsl:value-of select="$nameCap"></xsl:value-of>
-					<xsl:text>(""+</xsl:text><xsl:value-of select="$setting"></xsl:value-of><xsl:text>);</xsl:text>
+					<xsl:text>(Core.dateToString(</xsl:text><xsl:value-of select="$setting"></xsl:value-of><xsl:text>,"dd-MM-yyyy")); </xsl:text>
 				</xsl:when>
 				
 				<xsl:when test="$modeltypechild = 'Integer' ">
@@ -356,12 +356,10 @@
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			<xsl:text>String isEdit = Core.getParam("isEdit");</xsl:text>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
-			<xsl:text>int param = Core.getParamInt("</xsl:text><xsl:value-of select="$param"></xsl:value-of><xsl:text>");</xsl:text>
-			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			<xsl:text>if (Core.isNotNull(isEdit)) {</xsl:text>
 			<xsl:value-of select="$newlineTab2"></xsl:value-of>
 			<xsl:value-of select="$dao"></xsl:value-of><xsl:text> obj = new </xsl:text> <xsl:value-of select="$dao"></xsl:value-of>
-			<xsl:text>().findOne(param);</xsl:text>
+			<xsl:text>().findOne(Core.getParamInt("</xsl:text><xsl:value-of select="$param"></xsl:value-of><xsl:text>"));</xsl:text>
 			<xsl:value-of select="$newlineTab2"></xsl:value-of>
 			<xsl:text>if (obj!=null) {</xsl:text>
 			<xsl:value-of select="$newlineTab3"></xsl:value-of>
@@ -819,16 +817,32 @@
 				<xsl:call-template name="blockly.element.separator"></xsl:call-template>
 			</xsl:when>
 			
+			<xsl:when test="$block-type = 'formlist'">
+				<xsl:call-template name="blockly.element.formlist"></xsl:call-template>
+			</xsl:when>
+			
 			<xsl:when test="$block-type = 'sep_row'">
 				<xsl:call-template name="blockly.element.sep_row"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="$block-type = 'form_row'">
+				<xsl:call-template name="blockly.element.form_row"></xsl:call-template>
 			</xsl:when>
 			
 			<xsl:when test="$block-type = 'save_separator'">
 				<xsl:call-template name="blockly.element.save_separator"></xsl:call-template>
 			</xsl:when>
 			
+			<xsl:when test="$block-type = 'save_formlist'">
+				<xsl:call-template name="blockly.element.save_formlist"></xsl:call-template>
+			</xsl:when>
+			
 			<xsl:when test="$block-type = 'get_row_sep'">
 				<xsl:call-template name="blockly.element.get_row_sep"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="$block-type = 'get_row_form'">
+				<xsl:call-template name="blockly.element.get_row_form"></xsl:call-template>
 			</xsl:when>
 			
 			<xsl:when test="$block-type = 'corre_get_param'">
