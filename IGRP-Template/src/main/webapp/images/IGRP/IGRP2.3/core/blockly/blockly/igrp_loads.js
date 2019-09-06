@@ -85,7 +85,7 @@ var GetJavaType = {
 	
 	number : 'Integer',
 	
-	date : 'Date',
+	date : 'String',
 	
 	file : 'File',
 		
@@ -135,7 +135,7 @@ $('#refresh_bloco').on('click', function() {
 	if (typeof (Storage) !== "undefined") {
 		if (localStorage.data !== null) {
 		var xml = Blockly.Xml.textToDom(localStorage.getItem(IGRPblockly));
-		Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, xml);
+		Blockly.Xml.domToWorkspace(xml,Blockly.mainWorkspace);
 		var code = Blockly.Java.workspaceToCode(Code.workspace);
 		   content.textContent = code; 
 		console.log("Bloco Atualizado");
@@ -332,6 +332,27 @@ window.IGRPBlocklyInit = function(){
 							+'<field type="field_text" name="param" options=""></field>'
 						+'</value>'
 					+'</block>'
+					
+					+'<block type="param_foreign" output="" color="300" class="blocly-dynamic">'
+						+'<value name="value1" type="value"  title="get foreign-key">'
+						+'</value>'	
+					+'</block>'
+					
+					+'<category id="model" name="Custom Code" colour="300" class="blocly-dynamic">'
+					
+						 +'<block type="set_custom_line" prev-statement="" next-statement="" color="300">'
+					 		+'<value name="value1" type="dummy" title="custom code">'
+					 			+'<field type="field_text" name="param" options=""></field>'
+							+'</value>'
+						 +'</block>'
+						 
+						 +'<block type="get_custom_line" output="" color="300">'
+						 	+'<value name="value1" type="dummy" title="custom code">'
+						 		+'<field type="field_text" name="param" options=""></field>'
+						 	+'</value>'
+						 +'</block>'
+					 
+					 +'</category>'
 					 
 				 +'</category>'
 				 +'<sep class="blocly-dynamic"></sep>'
@@ -398,7 +419,7 @@ window.IGRPBlocklyInit = function(){
 	
 	success : function(data) {
 		
-		console.log(data)
+		//console.log(data)
 		
 		var temdao = '';
 		
@@ -410,7 +431,7 @@ window.IGRPBlocklyInit = function(){
 			$('#toolbox').append(
 					'<category id="dao" name="DAO" colour="160" class="blocly-dynamic">'
 							+'<block type="inserir_dao" mutator="separatori" color ="160" prev-statement="" next-statement="" inline="true">'
-								+'<value type="dummy" title="insert DAO">'
+								+'<value type="dummy" title="save DAO">'
 									+'<field type="dropdown" name="dao" options="IGRP_BLOCKLY_DROPS.dao_list"></field>'
 									+'<field type="field_text" name="param_id" title="or update by parameter:" options=""></field>'
 								+'</value>'
@@ -425,12 +446,14 @@ window.IGRPBlocklyInit = function(){
 							+'<value name="value2" type="statement"></value>' 
 						+'</block>'
 						
-						+'<block type="instance_dao" color ="160" prev-statement="" next-statement="">'
-						+'<value name="findone" type="value" >'
-							+'<field type="dropdown" name="dao" title="declarate obj in DAO" options="IGRP_BLOCKLY_DROPS.dao_list"></field>'
-							+'<field type="text" options="or find by:"></field>'
-						+'</value>'
-					+'</block>'
+//						+'<block type="instance_dao" color ="160" prev-statement="" next-statement="">'
+//							+'<value name="findone" type="value" >'
+//								+'<field type="dropdown" name="dao" title="declarate obj in DAO" options="IGRP_BLOCKLY_DROPS.dao_list"></field>'
+//								+'<field type="text" options="or find by:"></field>'
+//							+'</value>'
+//						+'</block>'
+//					
+//						+'<block type="dao_obj" color ="160" output="" title="obj"></block>'
 						
 					+'</category><sep class="blocly-dynamic"></sep>');
 				
@@ -491,12 +514,6 @@ window.IGRPBlocklyInit = function(){
 							+'<value name="value3" type="dummy">'
 							+'<field type="dropdown" name="button" title="add parameter isEdit in button" options="IGRP_BLOCKLY_DROPS.buttons"></field>'
 							+'</value>'
-						+'</block>'
-						
-						+'<block type="core_get_param" output="" color="300" class="blocly-dynamic">'
-							+'<value name="value1" type="dummy"  title="insert foreign-key">'
-							+'<field type="field_text" name="param" options=""></field>'
-							+'</value>'	
 						+'</block>'
 							
 						);
@@ -1073,7 +1090,7 @@ $.IGRP.on('init', function(){
 					
 					Blockly.mainWorkspace.clear();
 					
-					Blockly.Xml.domToWorkspace(Blockly.mainWorkspace, pageBlockly );
+					Blockly.Xml.domToWorkspace(pageBlockly, Blockly.mainWorkspace);
 					
 				},400)		
 				
