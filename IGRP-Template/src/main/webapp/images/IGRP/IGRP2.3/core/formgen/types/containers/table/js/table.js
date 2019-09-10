@@ -51,15 +51,6 @@ var GENTABLE = function(name,params){
 		]
 	};
 
-	/*var tableExportIncludes = [
-		{ path:'/core/igrp/table/igrp.table.export2.js'},
-		{ path:'/core/jspdf/js/jspdf.plugin.table.js'},
-		{ path:'/core/filesaver/filesaver.js'},
-		{ path:'/core/jspdf/js/bluebird.min.js'},
-		{ path:'/core/jspdf/js/jspdf.debug.js'},
-		{ path:'/core/jspdf/js/html2pdf.js'}
-	];*/
-
 	var tableOrderIncludes 		= [{path : '/core/formgen/js/jquery-ui.min.js'}],
 
 		tablePaginationIncludes = [{path : '/core/igrp/table/pagination.js'}];
@@ -148,7 +139,18 @@ var GENTABLE = function(name,params){
 			value:false,
 			editable:false,
 			xslValue:function(){
-				var rtn = !container.GET.ctxInlineTmpl() ? '<xsl:apply-templates select="'+container.GET.path()+'/table/context-menu'+'" mode="table-context-menu"/>' : '';
+				
+				var rtn = '';
+				
+				if(!container.GET.ctxInlineTmpl()){
+					
+					rtn = '<xsl:apply-templates select="'+container.GET.path()+'/table/context-menu'+'" mode="table-context-menu">';
+					
+					if(container.GET.ctxType() == 'hover')
+						rtn += '<xsl:with-param name="view" select="\'lavel-menu\'"/>';
+
+					rtn += '</xsl:apply-templates>';
+				}
 				
 				return rtn;
 			}
@@ -221,11 +223,12 @@ var GENTABLE = function(name,params){
 				value:'inl',
 				options:[
 					{value:'ctx',label:'Right Click'},
-					{value:'inl',label:'Inline'}
+					{value:'inl',label:'Inline'},
+					{value:'hover',label:'Hover'}
 				]
 			},
 			onChange:function(v){
-				var ismenu = v == 'ctx' ? true : false;
+				var ismenu = v == 'ctx' || v == 'hover' ? true : false;
 				container.SET.ctxInlineTmpl(!ismenu);
 			},
 			onEditionStart : function(v){
@@ -276,37 +279,6 @@ var GENTABLE = function(name,params){
 
 			}
 		});
-
-		/*container.setPropriety({
-			name:'exportTmpl',
-			value:false,
-			editable:false,
-			xslValue:function(){
-				var rtn = '<xsl:call-template name="table-export-options">';
-
-				container.GET.export().forEach(function(e){
-					rtn+='<xsl:with-param name="'+e+'" select="true()"/>'
-				});
-				rtn+='</xsl:call-template>';
-
-				return rtn;
-			},
-			onChange:function(v){
-				if(v){
-
-					if(!tableExportInc){
-						tableExportIncludes.forEach(function(e){
-							container.includes.js.unshift(e);
-						});
-						tableExportInc = true;
-					}					
-				}else{
-					includesJs(tableExportIncludes);
-					tableExportInc = false;
-				}
-				console.log(container)
-			}			
-		});*/
 
 		container.setPropriety({
 			name:'dataTable',
@@ -424,6 +396,39 @@ var GENTABLE = function(name,params){
 				}
 			});
 		}
+		
+		field.setPropriety({
+			name:'group_in',
+			label:'Group in',
+			value: {
+				value : '',
+				options : function(){
+					
+					var o = [{
+						label : '',
+						value : ''
+					}];
+					
+					field.parent.GET.fields().forEach(function(f){
+						
+						if(f.GET.tag() != field.GET.tag()){
+							
+							if(f.GET.group_in && !f.GET.group_in())
+								
+								o.push({
+									label : f.GET.label() || f.GET.tag(),
+									value : f.GET.tag()
+								})
+									
+						}
+						
+					});
+					
+					return o;
+					
+				}
+			}
+		});
 		
 		GEN.SetJavaTypeAttr( field );
 	}
