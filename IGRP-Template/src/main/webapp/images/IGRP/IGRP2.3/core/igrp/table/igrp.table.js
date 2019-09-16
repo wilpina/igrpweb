@@ -238,6 +238,14 @@
 							datatable.destroy();
 	            	});
 					
+					$.IGRP.events.on('element-transform',function(p){
+
+	            	 	var table = $('.table:not(.IGRP_formlist)',p.content);
+	            	 	
+		        		if(table[0] && table.hasClass('igrp-data-table') && table.attr('id') == $(t).attr('id'))
+		        			datatable.destroy();
+		        	});
+					
 				});
 
 			}
@@ -413,31 +421,83 @@
             });
 			
 			$.IGRP.events.on('element-transform',function(p){
-		        if($('.table:not(.IGRP_formlist)',p.content)[0]){
-		            var table = p.content.find('table'),
-						id    = table.attr('id');
 
-					if($.IGRP.components.contextMenu)
+			        if($('.table:not(.IGRP_formlist)',p.content)[0]){
+			        	
+			            var table = p.content.find('table'),
+							id    = table.attr('id');
 
-						$.IGRP.components.contextMenu.set( p.content );
+						if($.IGRP.components.contextMenu)
 
-					if(table.hasClass('igrp-data-table')){
-						
-						$.IGRP.components.tableCtrl.dataTable({
+							$.IGRP.components.contextMenu.set( p.content );
 
-							selector : 'table#'+id+'.igrp-data-table'
+						if(table.hasClass('igrp-data-table')){
+							
+							$.IGRP.components.tableCtrl.dataTable({
 
-						});
-					}
-					
-					if(table.hasClass('ordertable'))
-		            	$.IGRP.components.tableCtrl.ordertable('#'+id);
+								selector : 'table#'+id+'.igrp-data-table'
 
-					if ($.IGRP.components.tableCtrl.pagination)
-						$.IGRP.components.tableCtrl.pagination('ul[filter-name="p_'+id+'_filter"]');
-		        }
+							});
+						}
+
+						if ($.IGRP.components.tableCtrl.pagination)
+							$.IGRP.components.tableCtrl.pagination('ul[filter-name="p_'+id+'_filter"]');
+			        }
 		    });
 
+		},
+		
+		operation : {
+			isNum : function(v){
+                return isNaN(v) ? 0 : v*1;
+            },
+			sum : {
+	            allrow : function(p){
+	                p.obj.each(function(i,tr){
+	                    var val = 0;
+	                    $(p.field,tr).each(function(io,o){
+	                        val += com.operation.isNum($(o).val());
+	                    });
+	                    $(p.result,tr).val(val);
+	                });
+	            },
+
+	            row : function(p){
+	                var total = 0;
+	                $(p.field,p.obj).each(function(io,o){
+	                    total += com.operation.isNum($(o).val());
+	                });
+	                if (p.result)
+	                    $(p.result,p.tr).val(total);
+
+	                return total;
+	            },
+	            col : function(p){
+	                var total = 0;
+	                p.obj.each(function(i,tr){
+	                    total += com.operation.isNum($(p.field,$(tr)).val());
+	                });
+
+	                if (p.result[0]){
+	                    $(':input',p.result).val(total);
+	                    $('p',p.result).html(total);
+	                }
+
+	                return total;
+	            },
+	            allcol : function(p){
+	                var total = {};
+	                p.obj.each(function(i,tr){
+	                    total[i] = com.operation.sum.col({
+	                        obj     : p.obj,
+	                        field   : $(p.field,'td:eq('+i+')'),
+	                        result  : p.result
+	                    });
+	                });
+
+	                return total;
+	            }
+	        }
 		},
 
 		init:function(){

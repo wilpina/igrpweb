@@ -127,6 +127,7 @@ table td.min-width{
 
 .table-context-menu.lavel-menu>li>a .icon-item-holder{
   position: relative;
+  padding: 0;
 }
 
 .table-context-menu.lavel-menu .list-group-item{
@@ -136,6 +137,9 @@ table td.min-width{
   box-shadow: 0px 4px 5px 2px #ddd;
 }
 
+.lavel-menu li > a.btn{
+  border-radius:2px !important
+}
 
 /* IGRP TABLE FILTER */
 .igrp-table-filter{
@@ -277,7 +281,7 @@ th.igrp-table-ctx-th{
   display: block;
   float: right;
 }
-.igrp-table-ctx-td>ul>.operationTable{
+.igrp-table-ctx-td>ul>.operationTable, .lavel-menu .operationTable{
   float: left;
   text-align: center;
   margin-right: 4px;
@@ -294,7 +298,7 @@ table:not(.align) .table-ctx-holder li[invisible="true"]{
   display: none!important;
 }
 
-.igrp-table-ctx-td>ul>.operationTable > .btn{
+.igrp-table-ctx-td>ul>.operationTable > .btn, .lavel-menu li > a.btn{
     width: 28px;
     padding: 4px 6px;
     margin: 2px 0;
