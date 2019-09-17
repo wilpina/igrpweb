@@ -355,7 +355,10 @@
 	    		</xsl:when>
 	    		<xsl:otherwise>
 	    			<xsl:choose>
-			    		<xsl:when test="$type='checkbox' or $type='radio' or $type='range' or $type='number'  or $type='radiolist'">
+			    		<xsl:when test="$type='checkbox' or $type='radio' or $type='range' or $type='number'">
+			    			<xsl:value-of select="'Integer'" />
+			    		</xsl:when>
+			    		<xsl:when test="$type='checkbox' or $type='radio' or $type='range' or $type='number'">
 			    			<xsl:value-of select="'Integer'" />
 			    		</xsl:when>
 			    		<xsl:when test="$type ='file'"><xsl:value-of select="concat('UploadFile',$addArray)" /></xsl:when>
