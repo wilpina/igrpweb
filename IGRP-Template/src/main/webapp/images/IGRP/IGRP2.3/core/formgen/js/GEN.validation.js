@@ -2,9 +2,62 @@
 	
 	var data, editionModal, validationTab, annotationsController, annotationsSelect, validationContents, validationsList, validationFormList, clonableTr, onEdition;
 
+	function SetNotNullWhenRequired(field){
+		
+		$(document).on('gen-edition-show', function(e,params){
+
+			$('[rel="required"] .propriety-setter.checker', params.modal).on('change', function(){
+				
+				var checked = $(this).is(':checked');
+				
+				if(checked)
+					annotationsController[0].setRows([{annotation : "@NotNull"}],{  
+						prefix : false,
+						trigger : false
+					});
+				else
+					
+					$('tbody tr td[item-name="annotation"] [name="annotation_fk"][value="@NotNull"]',annotationsController).parents('tr').remove();
+					
+			});
+			
+		});
+		
+	};
+	
+	function SetMinMaxValidation(){
+		
+		$(document).on('gen-edition-show', function(e,params){
+
+			$('.propriety-setter[name="edit-min"]', params.modal).on('blur', function(){
+				
+				var val = $(this).val() ? $(this).val()*1 : null;
+				
+				if(val){
+					
+					annotationsController[0].setRows([{
+						annotation : "@Min",
+						value      : val
+					}],{  
+						prefix : false,
+						trigger : false
+					});
+					
+				}
+				
+			});
+			
+		});
+		
+	}
+	
 	function Config(){
 
 		if(annotationsController[0] && annotationsController[0].events){
+			
+			SetNotNullWhenRequired();
+			
+			//SetMinMaxValidation();
 			
 			annotationsController[0].events.on('row-add', function(o){
 				
@@ -14,8 +67,10 @@
 			
 			//validate unique groups
 			annotationsController[0].events.on('valid-row-add', function(o){
-
+	
 				var valid 		    = true,
+				
+					_data  		    = annotationsController[0].toJSON(),
 				
 					annotationField = o.values.annotation.field,
 				
@@ -70,6 +125,36 @@
 					}
 					
 				}
+				
+				/*var addedAnnotation = o.values.annotation.value[0];
+				
+				for(var x = 0; x < _data.length; x++){
+					
+					var item = _data[x];
+					
+					if(item.annotation == addedAnnotation){
+						
+						valid = false;
+						
+						$.IGRP.notify({
+							
+							message   : 'Validation Already Set!',
+							
+							type      : 'warning',
+							
+							component : 'field_validations',
+							
+							appendTo  : '.validations-message'
+								
+						});
+						
+						break;
+					}
+						
+					
+				}*/
+				//annotationsController[0].toJSON().
+				
 				
 				return valid;
 			});
@@ -194,6 +279,7 @@
 				annotationsSelect.trigger('change');
 				
 				annotationsController[0].resetAll();
+			
 
 				annotationsController[0].setRows(fieldValidations, {  
 					
@@ -204,6 +290,7 @@
 				});
 				
 				validationTab.show();
+				
 				
 			}
 
@@ -278,7 +365,7 @@
 	
 			return rtn;
 
-		})
+		});
 		
 	};
 	

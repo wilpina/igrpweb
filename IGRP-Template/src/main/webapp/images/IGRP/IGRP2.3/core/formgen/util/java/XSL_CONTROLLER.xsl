@@ -357,7 +357,7 @@
 						<xsl:call-template name="setSqlCombobox_">						
 							<xsl:with-param name="app_"><xsl:value-of select="./app"/></xsl:with-param>						
 		     	       </xsl:call-template> 
-						<xsl:if test="//content/*[@type='statbox' or @type='smallbox' or @type='circlestatbox'] or //rows/content/*[@type='chart']  or //rows/content/*[@type='separatorlist'] or //rows/content/*[@type='formlist']  or //rows/content/*[@type='table'] or //rows/content/*[@type='table']/fields/*[@iskey='true'] or //rows/content/*/fields/*[@type='select'] or //rows/content/*/fields/*[@type='radiolist'] or //rows/content/*/fields/*[@type='checkboxlist']">
+						<xsl:if test="//content/*[@type='statbox' or @type='smallbox' or @type='circlestatbox' or @type='quickbuttonbox'] or //rows/content/*[@type='chart']  or //rows/content/*[@type='separatorlist'] or //rows/content/*[@type='formlist']  or //rows/content/*[@type='table'] or //rows/content/*[@type='table']/fields/*[@iskey='true'] or //rows/content/*/fields/*[@type='select'] or //rows/content/*/fields/*[@type='radiolist'] or //rows/content/*/fields/*[@type='checkboxlist']">
 							<xsl:call-template name="start-example"/>				    					    		
 							<xsl:call-template name="setSqlTable"/>					
 							<xsl:call-template name="setSqlChart"/>						
@@ -735,7 +735,7 @@
  	
  	<!-- statbox, smallbox, circlestatbox  -->
  	<xsl:template name="setBoxUrl">
- 		<xsl:for-each select="//content/*[@type='statbox' or @type='smallbox' or @type='circlestatbox']/fields/*">
+ 		<xsl:for-each select="//content/*[@type='statbox' or @type='smallbox' or @type='circlestatbox' or @type='quickbuttonbox']/fields/*">
 	 		 
 	 			<xsl:call-template name="newlineTab2"/>
 	 			
@@ -752,7 +752,7 @@
  	</xsl:template>
  	
  	<xsl:template name="setBoxValue">
- 		<xsl:for-each select="//content/*[@type='statbox' or @type='smallbox' or @type='circlestatbox']">
+ 		<xsl:for-each select="//content/*[@type='statbox' or @type='smallbox' or @type='circlestatbox' or @type='quickbuttonbox']">
 	 		 	
 	 			<xsl:variable name="_url" select="./fields/*[@name = concat(@name,'_url')]/value" />
 	 			<xsl:variable name="_val" select="./fields/*[@name = concat(@name,'_val')]/value" /> 			
