@@ -34,7 +34,7 @@
 	       	</xsl:call-template>
 	   	</xsl:variable>
 		
-		<xsl:variable name="table" select="field[@name='table']"/>
+		<xsl:variable name="table" select="substring-after(@type,'listar_')"/>
 		
 		<xsl:variable name="table_up">
 	       	<xsl:call-template name="InitCap">
@@ -58,9 +58,7 @@
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			<xsl:text>List&lt;</xsl:text><xsl:value-of select="$page-title"></xsl:value-of>
 			<xsl:text>.</xsl:text><xsl:value-of select="$table_up"></xsl:value-of><xsl:text>&gt; </xsl:text>
-			<xsl:value-of select="$dao_low"></xsl:value-of><xsl:text>Table = new ArrayList&lt;</xsl:text>
-			<xsl:value-of select="$page-title"></xsl:value-of><xsl:text>.</xsl:text>
-			<xsl:value-of select="$table_up"></xsl:value-of><xsl:text>&gt;</xsl:text><xsl:text>();</xsl:text>
+			<xsl:value-of select="$dao_low"></xsl:value-of><xsl:text>Table = new ArrayList&lt;&gt;</xsl:text><xsl:text>();</xsl:text>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of> 
 			<xsl:text>if (</xsl:text><xsl:value-of select="$dao_low"></xsl:value-of><xsl:text>List != null){</xsl:text>
 			<xsl:value-of select="$newlineTab1"></xsl:value-of><xsl:value-of select="$tab"></xsl:value-of>
