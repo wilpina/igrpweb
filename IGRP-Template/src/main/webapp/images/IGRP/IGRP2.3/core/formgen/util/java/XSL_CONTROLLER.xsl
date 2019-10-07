@@ -747,7 +747,7 @@
  				<xsl:value-of select="concat('model.','set', $instance_name,'(',$double_quotes, ./value, $double_quotes,');')"/>  			
  						
 	 	</xsl:for-each>
-	 	<xsl:for-each select="//content/*[@type='quickbuttonbox']/fields/*">
+	 	<xsl:for-each select="//content/*[@type='quickbuttonbox' or @type='infopanel']/fields/*">
 	 		 
 	 			<xsl:call-template name="newlineTab2"/>
 	 			
@@ -761,7 +761,7 @@
  					<xsl:value-of select="concat('model.','set', $instance_name,'(',$double_quotes, ./value, $double_quotes,');')"/> 
  				</xsl:when>
  				<xsl:otherwise>
- 					<xsl:value-of select="concat('model.','set', $instance_name,'(','Core.getIGRPLink(',$double_quotes,'your app',$double_quotes,',',$double_quotes,'your page',$double_quotes,',',$double_quotes,'your action',$double_quotes,'));')"/>
+ 					<xsl:value-of select="concat('model.','set', $instance_name,'(','Core.getIGRPLink(',$double_quotes,./value/app,$double_quotes,',',$double_quotes,./value/page,$double_quotes,',',$double_quotes,./value/action,$double_quotes,'));')"/>
 				</xsl:otherwise>
 				</xsl:choose>
 	 	</xsl:for-each>
@@ -769,7 +769,7 @@
  	</xsl:template>
  	
  	<xsl:template name="setBoxValue">
- 		<xsl:for-each select="//content/*[@type='statbox' or @type='smallbox' or @type='circlestatbox' or @type='quickbuttonbox']">
+ 		<xsl:for-each select="//content/*[@type='statbox' or @type='smallbox' or @type='circlestatbox']">
 	 		 	
 	 			<xsl:variable name="_url" select="./fields/*[@name = concat(@name,'_url')]/value" />
 	 			<xsl:variable name="_val" select="./fields/*[@name = concat(@name,'_val')]/value" /> 			
@@ -782,8 +782,8 @@
 	 			
  				<xsl:value-of select="concat('model.','set', $instance_name,'_url(','Core.getIGRPLink(',$double_quotes,'your app',$double_quotes,',',$double_quotes,'your page',$double_quotes,',',$double_quotes,'your action',$double_quotes,'));')"/>
 				<xsl:call-template name="newlineTab2"/>
-	 			<xsl:value-of select="concat('model.','set', $instance_name,'_val(',$double_quotes, ./fields/*[contains(@name, '_val')]/value, $double_quotes,');')"/> 		
-	 			<xsl:call-template name="newlineTab2"/>			
+<!-- 	 			<xsl:value-of select="concat('model.','set', $instance_name,'_val(',$double_quotes, ./fields/*[contains(@name, '_val')]/value, $double_quotes,');')"/> 		 -->
+<!-- 	 			<xsl:call-template name="newlineTab2"/>			 -->
 	 	</xsl:for-each>
 	
  	</xsl:template>

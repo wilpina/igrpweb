@@ -104,8 +104,7 @@
 	   	<xsl:variable name="setting">
 			<xsl:call-template name="blockly.getValue">
 				<xsl:with-param name="value" select="*[@name='value1']"/>
-			</xsl:call-template>
-			
+			</xsl:call-template>	
 		</xsl:variable>
 		
 		<xsl:variable name="modelset">
@@ -129,6 +128,14 @@
 	
 	<xsl:template name="blockly.element.getDao">
 	
+		<xsl:variable name="dao" select="substring-after(@type,'get-dao-')"/>
+		
+		<xsl:variable name="daolow">
+	       	<xsl:call-template name="LowerCase">
+	       		<xsl:with-param name="text" select="$dao"/>
+	       	</xsl:call-template>
+		</xsl:variable>
+	
 		<xsl:variable name="dad" select="../../field"/>
 		
 		<xsl:variable name="typedad" select="substring-before($dad,'::')"/>
@@ -137,6 +144,8 @@
 		
 		<xsl:variable name="fieldValue" select="substring-after(field,'::')"/>
 		
+		<xsl:variable name="otherdaofield" select="substring-after(value/block/field,'::')"/>
+		
 		<xsl:variable name="nameCap">
 			<xsl:call-template name="InitCap">
 				<xsl:with-param name="text" select="$fieldValue"/>
@@ -144,31 +153,40 @@
 		</xsl:variable>
 		
 		<xsl:variable name="otherdao">
-			<xsl:call-template name="blockly.getValue">
-				<xsl:with-param name="value" select="*[@name='value1']"/>
+			<xsl:call-template name="InitCap">
+				<xsl:with-param name="text" select="$otherdaofield"/>
 			</xsl:call-template>
 		</xsl:variable>
 		
-		<xsl:variable name="otherdao2">
-			
-			<xsl:call-template name="replace-all">
-			
-				<xsl:with-param name="text" select="$otherdao"/>
-				
-				<xsl:with-param name="replace" select="'obj'"/>
-				
-				<xsl:with-param name="by" select="''"/>
-				
-			</xsl:call-template>
-			
-		</xsl:variable>
+		<xsl:choose>
 		
-			<xsl:text>obj.get</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>()</xsl:text>
-			<xsl:value-of select="$otherdao2"/>
+			<xsl:when test="$otherdao != '' ">
+				<xsl:value-of select="$daolow"/><xsl:text>.get</xsl:text><xsl:value-of select="$nameCap"/>
+				<xsl:text>()!=null?</xsl:text><xsl:value-of select="$daolow"/><xsl:text>.get</xsl:text>
+				<xsl:value-of select="$nameCap"></xsl:value-of><xsl:text>().get</xsl:text>
+				<xsl:value-of select="$otherdao"></xsl:value-of>
+				<xsl:text>():null</xsl:text>
+			</xsl:when>
+			
+			<xsl:otherwise>
+			
+				<xsl:value-of select="$daolow"/><xsl:text>.get</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>()</xsl:text>
+			
+			</xsl:otherwise>
+		
+		</xsl:choose>		
 		
 	</xsl:template>
 	
 	<xsl:template name="blockly.element.setDao">
+	
+		<xsl:variable name="dao" select="substring-after(@type,'set-dao-')"/>
+		
+		<xsl:variable name="daolow">
+	       	<xsl:call-template name="LowerCase">
+	       		<xsl:with-param name="text" select="$dao"/>
+	       	</xsl:call-template>
+		</xsl:variable>
 		
 		<xsl:variable name="fieldType" select="substring-before(field,'::')"/>
 		
@@ -221,7 +239,7 @@
 						<xsl:value-of select="$paramlow"></xsl:value-of><xsl:text> = session.find(</xsl:text><xsl:value-of select="$fieldType"></xsl:value-of>
 						<xsl:text>.class, Core.toInt(</xsl:text><xsl:value-of select="$valorparam"></xsl:value-of><xsl:text>));</xsl:text>
 						<xsl:value-of select="$newlineTab1"></xsl:value-of>
-						<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(</xsl:text><xsl:value-of select="$paramlow"></xsl:value-of><xsl:text>);</xsl:text>
+						<xsl:value-of select="$daolow"></xsl:value-of><xsl:text>.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(</xsl:text><xsl:value-of select="$paramlow"></xsl:value-of><xsl:text>);</xsl:text>
 					</xsl:when>
 					
 					<xsl:otherwise>
@@ -229,17 +247,16 @@
 						<xsl:value-of select="$paramlow"></xsl:value-of><xsl:text> = session.find(</xsl:text><xsl:value-of select="$fieldType"></xsl:value-of>
 						<xsl:text>.class, </xsl:text><xsl:value-of select="$valorparam"></xsl:value-of><xsl:text>);</xsl:text>
 						<xsl:value-of select="$newlineTab1"></xsl:value-of>
-						<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(</xsl:text><xsl:value-of select="$paramlow"></xsl:value-of><xsl:text>);</xsl:text>
+						<xsl:value-of select="$daolow"></xsl:value-of><xsl:text>.set</xsl:text><xsl:value-of select="$nameCap"/><xsl:text>(</xsl:text><xsl:value-of select="$paramlow"></xsl:value-of><xsl:text>);</xsl:text>
 					</xsl:otherwise>
 				   	
 				   	</xsl:choose>
 		
-				
 				</xsl:when>
 					
 				<xsl:otherwise>
 				
-					<xsl:text>obj.set</xsl:text><xsl:value-of select="$nameCap"/>
+					<xsl:value-of select="$daolow"></xsl:value-of><xsl:text>.set</xsl:text><xsl:value-of select="$nameCap"/>
 						<xsl:text>(</xsl:text>
 							<xsl:call-template name="convert_blocks">
 								<xsl:with-param name="value" select="$valorA"></xsl:with-param>
@@ -313,7 +330,11 @@
 		
 		<xsl:variable name="dao" select="field[@name='dao']"/>
 		
-		<xsl:variable name="param" select="field[@name='param_id']"/>
+		<xsl:variable name="daolow">
+	       	<xsl:call-template name="LowerCase">
+	       		<xsl:with-param name="text" select="$dao"/>
+	       	</xsl:call-template>
+	   	</xsl:variable>
 		
 		<xsl:variable name="button" select="field[@name='button']"/>
 	   	
@@ -323,6 +344,14 @@
 			</xsl:call-template>
 		</xsl:variable>
 		
+		<xsl:variable name="param">
+			<xsl:call-template name="blockly.getValue">
+				<xsl:with-param name="value" select="*[@name='param_id']"/>
+			</xsl:call-template>
+		</xsl:variable>
+		
+		
+		
 		<xsl:variable name="code_edit">
 			
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
@@ -330,10 +359,10 @@
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			<xsl:text>if (Core.isNotNull(isEdit)) {</xsl:text>
 			<xsl:value-of select="$newlineTab2"></xsl:value-of>
-			<xsl:value-of select="$dao"></xsl:value-of><xsl:text> obj = new </xsl:text> <xsl:value-of select="$dao"></xsl:value-of>
-			<xsl:text>().findOne(Core.getParamInt("</xsl:text><xsl:value-of select="$param"></xsl:value-of><xsl:text>"));</xsl:text>
+			<xsl:value-of select="$dao"></xsl:value-of><xsl:text> </xsl:text><xsl:value-of select="$daolow"/><xsl:text> = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of>
+			<xsl:text>().findOne(</xsl:text><xsl:value-of select="$param"></xsl:value-of><xsl:text>);</xsl:text>
 			<xsl:value-of select="$newlineTab2"></xsl:value-of>
-			<xsl:text>if (obj!=null) {</xsl:text>
+			<xsl:text>if (</xsl:text><xsl:value-of select="$daolow"/><xsl:text>!=null) {</xsl:text>
 			<xsl:value-of select="$newlineTab3"></xsl:value-of>
 			<xsl:value-of select="$edicao"></xsl:value-of>
 			<xsl:value-of select="$newlineTab2"></xsl:value-of>
@@ -364,65 +393,6 @@
 		<xsl:value-of select="$paramkey"></xsl:value-of><xsl:text>"));</xsl:text>
 		
 	</xsl:template>
-
-	<xsl:template name="blockly.element.fill_combo" >
-	
-		<xsl:variable name="combo" select="field"/>
-		
-		<xsl:variable name="options">
-			<xsl:call-template name="blockly.getValue">
-				<xsl:with-param name="value" select="*[@name='value2']"/>
-				<xsl:with-param name="parent" select="."></xsl:with-param>
-			</xsl:call-template>
-		</xsl:variable>
-		
-		<xsl:variable name="code">
-			<xsl:value-of select="$newlineTab1"></xsl:value-of>	
-			<xsl:text>LinkedHashMap&lt;String, String&gt; </xsl:text>
-			<xsl:value-of select="$combo"></xsl:value-of>
-			<xsl:text> = new LinkedHashMap&lt;&gt;();</xsl:text>
-			<xsl:value-of select="$newlineTab1"></xsl:value-of>
-			<xsl:value-of select="$combo"></xsl:value-of><xsl:text>.put(null, gt("-- Selecionar --"));</xsl:text>
-			<xsl:value-of select="$newlineTab1"></xsl:value-of>	
-			<xsl:value-of select="$options"></xsl:value-of>
-			<xsl:value-of select="$newlineTab1"></xsl:value-of>	
-			<xsl:text>view.</xsl:text><xsl:value-of select="$combo"></xsl:value-of>
-			<xsl:text>.setValue(</xsl:text><xsl:value-of select="$combo"></xsl:value-of>
-			<xsl:text>);</xsl:text>	
-			<xsl:value-of select="$newline"></xsl:value-of>
-			
-		</xsl:variable>
-		
-		<xsl:value-of select="$code"></xsl:value-of>
-		
-	</xsl:template>
-	
-	<xsl:template name="blockly.element.option_combo" >
-		
-		<xsl:param name="parent"/>
-		
-	   	<xsl:variable name="valor">
-			<xsl:call-template name="blockly.getValue">
-				<xsl:with-param name="value" select="field[@name='opcao_val']"/>
-			</xsl:call-template>
-		</xsl:variable>
-		
-		<xsl:variable name="descricao">
-			<xsl:call-template name="InitCap">
-				<xsl:with-param name="text" select="field[@name='opcao_des']"/>
-			</xsl:call-template>
-		</xsl:variable>
-		
-		<xsl:variable name="combo" select="$parent/field"/>
-				
-		<xsl:value-of select="$combo"></xsl:value-of>
-		<xsl:text>.put(</xsl:text><xsl:value-of select="$double_quotes"></xsl:value-of><xsl:value-of select="$valor"></xsl:value-of>
-		<xsl:value-of select="$double_quotes"></xsl:value-of><xsl:text>,gt(</xsl:text>
-		<xsl:value-of select="$double_quotes"></xsl:value-of><xsl:value-of select="$descricao"></xsl:value-of>
-		<xsl:value-of select="$double_quotes"></xsl:value-of>
-		<xsl:text>));</xsl:text>
-		
-	</xsl:template>
 	
 	<xsl:template name="blockly.element.rediret_p" >
 		
@@ -451,7 +421,7 @@
 		
 	</xsl:template>
 	
-	<xsl:template name="blockly.element.corre_get_param" >
+	<xsl:template name="blockly.element.core_get_param" >
 		
 		<xsl:variable name="paramget" select="field[@name='param']"/>
 
@@ -492,6 +462,12 @@
 		
 		<xsl:variable name="dao" select="field[@name='dao']"/>
 		
+		<xsl:variable name="daolow">
+	       	<xsl:call-template name="LowerCase">
+	       		<xsl:with-param name="text" select="$dao"/>
+	       	</xsl:call-template>
+		</xsl:variable>
+		
 		<xsl:variable name="findone">
 			<xsl:call-template name="blockly.getValue">
 				<xsl:with-param name="value" select="value[@name='findone']"/>
@@ -499,7 +475,8 @@
 		</xsl:variable>
 		
 		<xsl:variable name="code">
-		<xsl:value-of select="$dao"></xsl:value-of><xsl:text> obj = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of>
+		<xsl:value-of select="$dao"></xsl:value-of><xsl:text> </xsl:text><xsl:value-of select="$daolow"/>
+		<xsl:text> = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of>
 		<xsl:text>()</xsl:text>
 		
 		<xsl:choose>
@@ -522,6 +499,12 @@
 		
 		<xsl:variable name="dao" select="field[@name='dao']"/>
 		
+		<xsl:variable name="daolow">
+	       	<xsl:call-template name="LowerCase">
+	       		<xsl:with-param name="text" select="$dao"/>
+	       	</xsl:call-template>
+		</xsl:variable>
+		
 		<xsl:variable name="paramGet" select="field[@name='iskey']"/>
 		
 		<xsl:variable name="getDelete">
@@ -532,12 +515,12 @@
 		</xsl:variable>
 	
 		<xsl:value-of select="$newlineTab1"></xsl:value-of>	
-		<xsl:value-of select="$dao"></xsl:value-of><xsl:text> obj = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of>
+		<xsl:value-of select="$dao"></xsl:value-of><xsl:text> </xsl:text><xsl:value-of select="$daolow"></xsl:value-of><xsl:text> = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of>
 		<xsl:text>().findOne(Core.getParamInt("p_</xsl:text><xsl:value-of select="$paramGet"></xsl:value-of><xsl:text>"));</xsl:text>
 		<xsl:value-of select="$newlineTab1"></xsl:value-of>	
-		<xsl:text>if (obj != null &amp;&amp;  !obj.hasError()) {</xsl:text>
+		<xsl:text>if (</xsl:text><xsl:value-of select="$daolow"></xsl:value-of><xsl:text> != null &amp;&amp;  !</xsl:text><xsl:value-of select="$daolow"></xsl:value-of><xsl:text>.hasError()) {</xsl:text>
 		<xsl:value-of select="$newlineTab2"></xsl:value-of>	
-		<xsl:text>boolean del = obj.delete(</xsl:text><xsl:value-of select="$getDelete"></xsl:value-of><xsl:text>);</xsl:text>
+		<xsl:text>boolean del = </xsl:text><xsl:value-of select="$daolow"></xsl:value-of><xsl:text>.delete(</xsl:text><xsl:value-of select="$getDelete"></xsl:value-of><xsl:text>);</xsl:text>
 		<xsl:value-of select="$newlineTab2"></xsl:value-of>	 
 		<xsl:text>if (del == true)</xsl:text>
 		<xsl:value-of select="$newlineTab3"></xsl:value-of>
@@ -549,7 +532,7 @@
 		<xsl:value-of select="$newlineTab1"></xsl:value-of>
 		<xsl:text>} else {</xsl:text>
 		<xsl:value-of select="$newlineTab2"></xsl:value-of>
-		<xsl:text>Core.setMessageError(obj.getError().toString());</xsl:text>
+		<xsl:text>Core.setMessageError(</xsl:text><xsl:value-of select="$daolow"></xsl:value-of><xsl:text>.getError().toString());</xsl:text>
 		<xsl:value-of select="$newlineTab1"></xsl:value-of>
 		<xsl:text>}</xsl:text>
 		<xsl:value-of select="$newlineTab1"></xsl:value-of>
@@ -604,7 +587,7 @@
 	<xsl:value-of select="$newlineTab1"></xsl:value-of>
 	<xsl:value-of select="$dao"></xsl:value-of><xsl:text> p = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of><xsl:text>();</xsl:text>
 	<xsl:value-of select="$newlineTab1"></xsl:value-of>
-	<xsl:text>p.findAll().stream().forEach(obj->{</xsl:text>
+	<xsl:text>p.findAll().stream().forEach(</xsl:text><xsl:value-of select="$daolow"></xsl:value-of><xsl:text>->{</xsl:text>
 	<xsl:value-of select="$newlineTab2"></xsl:value-of>
 	<xsl:value-of select="$graficoup"></xsl:value-of><xsl:text> c = new </xsl:text><xsl:value-of select="$graficoup"></xsl:value-of><xsl:text>();</xsl:text>
 	<xsl:choose>
@@ -655,6 +638,77 @@
 		
 	</xsl:template>
 	
+	<xsl:template name="blockly.element.fill_combo" >
+	
+		<xsl:variable name="combo" select="field"/>
+		
+		<xsl:variable name="checkbox" select="field[@name='selecionar']"/>
+		
+		<xsl:variable name="options">
+			<xsl:call-template name="blockly.getValue">
+				<xsl:with-param name="value" select="*[@name='value2']"/>
+				<xsl:with-param name="parent" select="."></xsl:with-param>
+			</xsl:call-template>
+		</xsl:variable>
+		
+		<xsl:variable name="code">
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>	
+			<xsl:text>LinkedHashMap&lt;String, String&gt; </xsl:text>
+			<xsl:value-of select="$combo"></xsl:value-of>
+			<xsl:text> = new LinkedHashMap&lt;&gt;();</xsl:text>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+			
+			<xsl:choose>
+			
+				<xsl:when test="$checkbox = 'TRUE'">
+				
+					<xsl:value-of select="$combo"></xsl:value-of><xsl:text>.put(null, gt("-- Selecionar --"));</xsl:text>
+					<xsl:value-of select="$newlineTab1"></xsl:value-of>	
+				
+				</xsl:when>
+			
+			</xsl:choose>
+			
+			<xsl:value-of select="$options"></xsl:value-of>
+			<xsl:value-of select="$newlineTab1"></xsl:value-of>	
+			<xsl:text>view.</xsl:text><xsl:value-of select="$combo"></xsl:value-of>
+			<xsl:text>.setValue(</xsl:text><xsl:value-of select="$combo"></xsl:value-of>
+			<xsl:text>);</xsl:text>	
+			<xsl:value-of select="$newline"></xsl:value-of>
+			
+		</xsl:variable>
+		
+		<xsl:value-of select="$code"></xsl:value-of>
+		
+	</xsl:template>
+	
+	<xsl:template name="blockly.element.option_combo" >
+		
+		<xsl:param name="parent"/>
+		
+	   	<xsl:variable name="valor">
+			<xsl:call-template name="blockly.getValue">
+				<xsl:with-param name="value" select="field[@name='opcao_val']"/>
+			</xsl:call-template>
+		</xsl:variable>
+		
+		<xsl:variable name="descricao">
+			<xsl:call-template name="InitCap">
+				<xsl:with-param name="text" select="field[@name='opcao_des']"/>
+			</xsl:call-template>
+		</xsl:variable>
+		
+		<xsl:variable name="combo" select="$parent/field"/>
+				
+		<xsl:value-of select="$combo"></xsl:value-of>
+		<xsl:text>.put(</xsl:text><xsl:value-of select="$double_quotes"></xsl:value-of><xsl:value-of select="$valor"></xsl:value-of>
+		<xsl:value-of select="$double_quotes"></xsl:value-of><xsl:text>,gt(</xsl:text>
+		<xsl:value-of select="$double_quotes"></xsl:value-of><xsl:value-of select="$descricao"></xsl:value-of>
+		<xsl:value-of select="$double_quotes"></xsl:value-of>
+		<xsl:text>));</xsl:text>
+		
+	</xsl:template>
+	
 	<xsl:template name="blockly.element.combo_dao" >
 	
 		<xsl:variable name="mutation" select="mutation/@count"/>
@@ -662,6 +716,8 @@
 		<xsl:variable name="dao" select="field[@name='dao']"/>
 		
 		<xsl:variable name="combo" select="field[@name='selecao']"/>
+		
+		<xsl:variable name="checkbox" select="field[@name='selecionar']"/>
 		
 		<xsl:variable name="andWheres">
 			
@@ -691,19 +747,44 @@
 		</xsl:variable>
 
 		<xsl:variable name="code">
-			<xsl:value-of select="$newlineTab1"></xsl:value-of>
-			<xsl:text>List &lt;</xsl:text><xsl:value-of select="$dao"></xsl:value-of>
-			<xsl:text>&gt; </xsl:text><xsl:value-of select="$dao_low"></xsl:value-of>
-			<xsl:text>List = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of>
-			<xsl:text>().find()</xsl:text><xsl:value-of select="$andWheres"></xsl:value-of>
-			<xsl:text>.all();</xsl:text>
-			<xsl:value-of select="$newlineTab1"></xsl:value-of>
+		
+		<xsl:choose>
 			
-			<xsl:value-of select="$newlineTab1"></xsl:value-of>	
-			<xsl:text>view.</xsl:text><xsl:value-of select="$combo"></xsl:value-of>
-			<xsl:text>.setValue(</xsl:text><xsl:value-of select="$options_dao"></xsl:value-of>
-			<xsl:text>);</xsl:text>	
-			<xsl:value-of select="$newline"></xsl:value-of>
+				<xsl:when test="$checkbox = 'TRUE'">
+				
+					<xsl:value-of select="$newlineTab1"></xsl:value-of>
+					<xsl:text>List &lt;</xsl:text><xsl:value-of select="$dao"></xsl:value-of>
+					<xsl:text>&gt; </xsl:text><xsl:value-of select="$dao_low"></xsl:value-of>
+					<xsl:text>List = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of>
+					<xsl:text>().find()</xsl:text><xsl:value-of select="$andWheres"></xsl:value-of>
+					<xsl:text>.all();</xsl:text>
+					<xsl:value-of select="$newlineTab1"></xsl:value-of>
+					<xsl:text>view.</xsl:text><xsl:value-of select="$combo"></xsl:value-of>
+					<xsl:text>.setValue(Core.toMap(</xsl:text><xsl:value-of select="$options_dao"></xsl:value-of>
+					<xsl:text>,"-- Selecionar --");</xsl:text>	
+					<xsl:value-of select="$newline"></xsl:value-of>
+				
+				</xsl:when>
+				
+				<xsl:otherwise>
+				
+					<xsl:value-of select="$newlineTab1"></xsl:value-of>
+					<xsl:text>List &lt;</xsl:text><xsl:value-of select="$dao"></xsl:value-of>
+					<xsl:text>&gt; </xsl:text><xsl:value-of select="$dao_low"></xsl:value-of>
+					<xsl:text>List = new </xsl:text><xsl:value-of select="$dao"></xsl:value-of>
+					<xsl:text>().find()</xsl:text><xsl:value-of select="$andWheres"></xsl:value-of>
+					<xsl:text>.all();</xsl:text>
+					<xsl:value-of select="$newlineTab1"></xsl:value-of>
+					<xsl:text>view.</xsl:text><xsl:value-of select="$combo"></xsl:value-of>
+					<xsl:text>.setValue(Core.toMap(</xsl:text><xsl:value-of select="$options_dao"></xsl:value-of>
+					<xsl:text>);</xsl:text>	
+					<xsl:value-of select="$newline"></xsl:value-of>
+				
+				</xsl:otherwise>
+			
+			</xsl:choose>
+			
+			
 		</xsl:variable>
 		
 		<xsl:value-of select="$code"></xsl:value-of>
@@ -728,8 +809,8 @@
 		
 		<xsl:variable name="combo" select="$parent/field"/>
 				
-		<xsl:text>Core.toMap(</xsl:text><xsl:value-of select="$dao_low"></xsl:value-of><xsl:text>List, "</xsl:text><xsl:value-of select="$valor1"></xsl:value-of><xsl:text>","</xsl:text>
-		<xsl:value-of select="$valor2"></xsl:value-of><xsl:text>")</xsl:text>
+		<xsl:value-of select="$dao_low"></xsl:value-of><xsl:text>List, "</xsl:text><xsl:value-of select="$valor1"></xsl:value-of><xsl:text>","</xsl:text>
+		<xsl:value-of select="$valor2"></xsl:value-of><xsl:text>"</xsl:text>
 		
 	</xsl:template>
 	
@@ -771,14 +852,6 @@
 		<xsl:variable name="block-type" select="$element/@type"/>
 
 		<xsl:choose>
-		
-			<xsl:when test="$block-type = 'controller'">
-				<xsl:call-template name="blockly.element.controller"></xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="contains( $block-type,'listar_' )">
-				<xsl:call-template name="blockly.element.listar"></xsl:call-template>
-			</xsl:when>
 			
 			<xsl:when test="$block-type = 'logic_operation'">
 				<xsl:call-template name="blockly.element.logic_operation"></xsl:call-template>
@@ -812,22 +885,6 @@
 				<xsl:call-template name="blockly.element.controls_if"></xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="contains( $block-type,'get-dao-' )">
-				<xsl:call-template name="blockly.element.getDao"></xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="contains( $block-type,'set-dao-' )">
-				<xsl:call-template name="blockly.element.setDao"></xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="$block-type = 'model_get'">
-				<xsl:call-template name="blockly.element.model_get"></xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="$block-type = 'model_set'">
-				<xsl:call-template name="blockly.element.model_set"></xsl:call-template>
-			</xsl:when>
-			
 			<xsl:when test="$block-type = 'controls_repeat_ext'">
 				<xsl:call-template name="blockly.element.controls_repeat_ext"></xsl:call-template>
 			</xsl:when>
@@ -852,12 +909,24 @@
 				<xsl:call-template name="blockly.element.text"></xsl:call-template>
 			</xsl:when>
 			
+			<xsl:when test="$block-type = 'controls_for'">
+				<xsl:call-template name="blockly.element.controls_for"></xsl:call-template>
+			</xsl:when>
+			
 			<xsl:when test="$block-type = 'text_print'">
 				<xsl:call-template name="blockly.element.text_print"></xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="contains( $block-type,'core' )">
-				<xsl:call-template name="blockly.element.core"></xsl:call-template>
+			<xsl:when test="$block-type = 'controller'">
+				<xsl:call-template name="blockly.element.controller"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="contains( $block-type,'get-dao-' )">
+				<xsl:call-template name="blockly.element.getDao"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="contains( $block-type,'set-dao-' )">
+				<xsl:call-template name="blockly.element.setDao"></xsl:call-template>
 			</xsl:when>
 			
 			<xsl:when test="$block-type = 'inserir_dao'">
@@ -872,28 +941,16 @@
 				<xsl:call-template name="blockly.element.index_editar"></xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="contains( $block-type,'rowtable' )">
-				<xsl:call-template name="blockly.element.row"></xsl:call-template>
+			<xsl:when test="$block-type = 'model_get'">
+				<xsl:call-template name="blockly.element.model_get"></xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="$block-type = 'controls_for'">
-				<xsl:call-template name="blockly.element.controls_for"></xsl:call-template>
+			<xsl:when test="$block-type = 'model_set'">
+				<xsl:call-template name="blockly.element.model_set"></xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="$block-type = 'fill_combo'">
-				<xsl:call-template name="blockly.element.fill_combo"></xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="$block-type = 'option_combo'">
-				<xsl:call-template name="blockly.element.option_combo">
-					<xsl:with-param name="parent" select="$parent"></xsl:with-param>
-				</xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="$block-type = 'option_dao'">
-				<xsl:call-template name="blockly.element.option_dao">
-					<xsl:with-param name="parent" select="$parent"></xsl:with-param>
-				</xsl:call-template>
+			<xsl:when test="contains( $block-type,'core' )">
+				<xsl:call-template name="blockly.element.core"></xsl:call-template>
 			</xsl:when>
 			
 			<xsl:when test="$block-type = 'apagar'">
@@ -908,40 +965,68 @@
 				<xsl:call-template name="blockly.element.rediret_p"></xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="$block-type = 'separator'">
+			<xsl:when test="contains( $block-type,'listar_' )">
+				<xsl:call-template name="blockly.element.listar"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="contains( $block-type,'rowtable' )">
+				<xsl:call-template name="blockly.element.row"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="$block-type = 'fill_combo'">
+				<xsl:call-template name="blockly.element.fill_combo"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="$block-type = 'option_combo'">
+				<xsl:call-template name="blockly.element.option_combo">
+					<xsl:with-param name="parent" select="$parent"></xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="$block-type = 'combo_dao'">
+				<xsl:call-template name="blockly.element.combo_dao"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="$block-type = 'option_dao'">
+				<xsl:call-template name="blockly.element.option_dao">
+					<xsl:with-param name="parent" select="$parent"></xsl:with-param>
+				</xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="contains( $block-type,'separator_')">
 				<xsl:call-template name="blockly.element.separator"></xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="$block-type = 'formlist'">
-				<xsl:call-template name="blockly.element.formlist"></xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="$block-type = 'sep_row'">
-				<xsl:call-template name="blockly.element.sep_row"></xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="$block-type = 'sep_form'">
-				<xsl:call-template name="blockly.element.sep_row"></xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="$block-type = 'save_separator'">
+			<xsl:when test="contains( $block-type,'save_sepator_')">
 				<xsl:call-template name="blockly.element.save_separator"></xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="$block-type = 'save_formlist'">
-				<xsl:call-template name="blockly.element.save_formlist"></xsl:call-template>
+			<xsl:when test="contains( $block-type,'sep_row_')">
+				<xsl:call-template name="blockly.element.sep_row"></xsl:call-template>
 			</xsl:when>
 			
 			<xsl:when test="$block-type = 'get_row_sep'">
 				<xsl:call-template name="blockly.element.get_row_sep"></xsl:call-template>
 			</xsl:when>
 			
+			<xsl:when test="$block-type = 'formlist'">
+				<xsl:call-template name="blockly.element.formlist"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="$block-type = 'save_formlist'">
+				<xsl:call-template name="blockly.element.save_formlist"></xsl:call-template>
+			</xsl:when>
+			
+			<xsl:when test="$block-type = 'sep_form'">
+				<xsl:call-template name="blockly.element.sep_row"></xsl:call-template>
+			</xsl:when>
+			
 			<xsl:when test="$block-type = 'get_row_form'">
 				<xsl:call-template name="blockly.element.get_row_sep"></xsl:call-template>
 			</xsl:when>
 			
-			<xsl:when test="$block-type = 'corre_get_param'">
-				<xsl:call-template name="blockly.element.corre_get_param"></xsl:call-template>
+			<xsl:when test="$block-type = 'core_get_param'">
+				<xsl:call-template name="blockly.element.core_get_param"></xsl:call-template>
 			</xsl:when>
 			
 			<xsl:when test="$block-type = 'grafico'">
@@ -966,10 +1051,6 @@
 			
 			<xsl:when test="$block-type = 'get_custom_line'">
 				<xsl:call-template name="blockly.element.get_custom_line"></xsl:call-template>
-			</xsl:when>
-			
-			<xsl:when test="$block-type = 'combo_dao'">
-				<xsl:call-template name="blockly.element.combo_dao"></xsl:call-template>
 			</xsl:when>
 		
 			<xsl:otherwise>
