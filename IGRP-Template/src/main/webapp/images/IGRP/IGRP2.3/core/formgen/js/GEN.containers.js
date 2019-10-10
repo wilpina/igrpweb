@@ -609,10 +609,6 @@ var CONTAINER = function(name,params){
 			
 			var ctxHolder = $(container.contextMenu.holder,container.holder);
 			
-			console.log(container.contextMenu.holder)
-			
-			console.log(ctxHolder)
-			
 			ctxHolder.addClass(VARS.class.ctxMenu+' active');
 			
 			var startPos;
@@ -2000,6 +1996,7 @@ var CONTAINER = function(name,params){
 	container.copy = function(o){	
 		
 		container.copyOptions = o;
+
 		//container.holder.removeClass('gen-container-copy');
 		if(container.copyOptions && container.copyOptions.settings){
 			var s = container.copyOptions.settings;
@@ -2012,15 +2009,18 @@ var CONTAINER = function(name,params){
 			FIELDS = [];
 			
 			if(container.contextMenu)
+				
 				container.contextMenu.items = [];
 
 			if(s.fields[0]){
+				
 				var fields = (s && s.fields && s.fields[0]) ? s.fields : [];
 				
 				fields.forEach(function(_field){
 					var f = GEN.getDeclaredField(_field.properties.type);
 					if(f) settedFields.push(new f.field(_field.properties.type,_field));
 				});
+				
 			}
 			
 			settedFields = settedFields.concat(ctxFields);
@@ -2028,11 +2028,20 @@ var CONTAINER = function(name,params){
 			container.SET.fields(settedFields);
 
 			if(s.contents && container.setContents){
-				container.setContents(s.contents);
+				
+				container.contents.forEach(function(__c){
+				
+					console.log(__c);
+					
+				});
+				
+				container.setContents(s.contents, true);
+				
 			}
-
-			setCopyClass();
+				
 		}
+		
+		setCopyClass();
 	}
 
 	container.includeCss = function(_name,p){
@@ -2975,6 +2984,8 @@ var CONTAINER = function(name,params){
 		var objects = type == 'container'   ? GEN.getContainers() : 
 					  type == 'contents'    ? container.contents  :
 					  container.contextMenu ? FIELDS.concat(container.contextMenu.getFields()) : FIELDS;
+					  
+		objects = type == 'field' && container.incrementFieldsType && container.incrementFieldsType == 'contents' ?  container.contents : objects;
 		
 		var rtn = name+'_'+index;
 

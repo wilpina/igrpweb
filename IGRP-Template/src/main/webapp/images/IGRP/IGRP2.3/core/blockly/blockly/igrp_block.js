@@ -49,6 +49,18 @@ function SetupBlockly(){
 			if( type.indexOf('listar_') == 0 )
 				
 				IGRPElement = IGRP_BLOCKLY_ELEMENTS.listar;
+			
+			if( type.indexOf('separator_') == 0 )
+				
+				IGRPElement = IGRP_BLOCKLY_ELEMENTS.separator;
+			
+			if( type.indexOf('forrmlist_') == 0 )
+				
+				IGRPElement = IGRP_BLOCKLY_ELEMENTS.formlist;
+			
+			if( type.indexOf('grafico_') == 0 )
+				
+				IGRPElement = IGRP_BLOCKLY_ELEMENTS.grafico;
 				
 		
 		Blockly.Blocks[type] = {
@@ -227,15 +239,19 @@ function SetupBlockly(){
 				}
 					
 				if(color)	
+					
 					block.setColour(color);
 				
 				if(coment)	
+					
 					block.setTooltip(coment);
 				
 				if(IGRPElement) {
 					
 					for(var method in IGRPElement){
+						
 						if(method != 'init')
+							
 							block[method] = IGRPElement[method];
 						
 					}
@@ -251,6 +267,7 @@ function SetupBlockly(){
 				$(document).trigger('block-'+type+'-init', [ block ]);
 				
 				if(type.indexOf('get-dao-') >= 0){
+					
 					var daoName = type.split('get-dao-').pop();
 					
 					$(document).trigger('get-dao-block-init', [ block, daoName ]);
@@ -258,8 +275,6 @@ function SetupBlockly(){
 					
 			}
 		};
-		
-		
 		
 		Blockly.Java[type] = function(block) {
 			
