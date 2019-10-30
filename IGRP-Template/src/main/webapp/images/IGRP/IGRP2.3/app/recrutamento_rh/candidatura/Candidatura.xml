@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/IGRP/images/IGRP/IGRP2.3/app/recrutamento_rh/candidatura/Candidatura.xsl" type="text/xsl"?>
+<rows>
+    <link_img>/IGRP/images/IGRP/IGRP2.3</link_img>
+    <title>Dummie XML prototype</title>
+    <site>
+        <welcome_note>Oba</welcome_note>
+        <footer_note>2019 - Copyright NOSI v.190711</footer_note>
+        <user_name>Hexagon</user_name>
+        <button type="specific">
+            <title>Sair</title>
+            <app>DUA</app>
+            <page />
+            <link>#</link>
+            <target>_self</target>
+            <img>exit.png</img>
+        </button>
+    </site>
+    <page>Candidatura</page>
+    <app>recrutamento_rh</app>
+    <plsql>
+        <action>index</action>
+        <package_instance></package_instance>
+        <package_db>nosi.webapps.recrutamento_rh.pages</package_db>
+        <package_html>Candidatura</package_html>
+        <table_name></table_name>
+        <with_replace>false</with_replace>
+        <with_label>false</with_label>
+        <with_biztalk>false</with_biztalk>
+        <dynamic_menu>false</dynamic_menu>
+        <copy_menu>false</copy_menu>
+        <package_copy_db />
+        <package_copy_html />
+        <preserve_url>webapps?r=igrp/page/preserveUrl&amp;p_id=1992</preserve_url>
+    </plsql>
+    <slide-menu file="/IGRP/images/IGRP/IGRP2.3/xml/IGRP-slide-menu.xml?v=2" />
+    <top_menu file="/IGRP/images/IGRP/IGRP2.3/xml/IGRP-top_menu.xml?v=2" />
+    <content>
+        <title>Candidatura</title>
+        <informacao_profissional type="sectionheader" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <informacao_profissional_text type="text" name="p_informacao_profissional_text" persist="true" maxlength="4000">
+                    <value>
+                        <![CDATA[<p>Informa&ccedil;&atilde;o Profissional</p>
+]]>
+                    </value>
+                </informacao_profissional_text>
+            </fields>
+        </informacao_profissional>
+        <info_profs type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="submeter">
+                <title>Submeter</title>
+                <app>recrutamento_rh</app>
+                <page>Pedido_de_concurso</page>
+                <link>index</link>
+                <target>_blank</target>
+                <img>info|fa-send-o</img>
+                <preview>/IGRP/images/IGRP/IGRP2.3/app/recrutamento_rh/pedido_de_concurso/Pedido_de_concurso.xml</preview>
+            </item>
+        </info_profs>
+        <form_1 type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <copia_de_bi name="p_copia_de_bi" type="file" accept="" targetrend="" multiple="false" rendvalue="false" maxlength="250" required="true" disabled="false" right="false" class="grey">
+                    <label>Cópia de BI</label>
+                    <value/>
+                </copia_de_bi>
+                <curriculinm_ name="p_curriculinm_" type="file" accept="" targetrend="" multiple="false" rendvalue="false" maxlength="250" required="true" disabled="false" right="false" class="grey">
+                    <label>Curriculum </label>
+                    <value/>
+                </curriculinm_>
+                <certificado_conclusao_do_curso name="p_certificado_conclusao_do_curso" type="file" accept="" targetrend="" multiple="false" rendvalue="false" maxlength="250" required="true" disabled="false" right="false" class="grey">
+                    <label>Certificado Conclusão do Curso</label>
+                    <value/>
+                </certificado_conclusao_do_curso>
+                <certificado_de_equivalencia_ name="p_certificado_de_equivalencia_" type="file" accept="" targetrend="" multiple="false" rendvalue="false" maxlength="250" required="false" disabled="false" right="false" class="grey">
+                    <label>Certificado de Equivalência </label>
+                    <value/>
+                </certificado_de_equivalencia_>
+                <outro_documento name="p_outro_documento" type="file" accept="" targetrend="" multiple="false" rendvalue="false" maxlength="250" required="false" disabled="false" right="false" class="grey">
+                    <label>Outro Documento</label>
+                    <value/>
+                </outro_documento>
+            </fields>
+        </form_1>
+        <form_2 type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <exper_profissional name="p_exper_profissional" type="separator" maxlength="250" placeholder="" desclabel="false" right="false">
+                    <label>Experiência profissional</label>
+                </exper_profissional>
+                <funcao name="p_funcao" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false">
+                    <label>Função</label>
+                    <value>Mollit aliqua totam mollit unde</value>
+                </funcao>
+                <entidade_empregadora name="p_entidade_empregadora" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false">
+                    <label>Entidade Empregadora</label>
+                    <value>Labore sit iste aliqua anim</value>
+                </entidade_empregadora>
+                <data_inicio name="p_data_inicio" type="date" range="false" maxlength="250" required="false" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false" class="info">
+                    <label>Data Inicio</label>
+                    <value>06-07-2013</value>
+                </data_inicio>
+                <dt_fim name="p_dt_fim" type="date" range="false" maxlength="250" required="false" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false" class="info">
+                    <label>Data Fim</label>
+                    <value>05-02-2017</value>
+                </dt_fim>
+            </fields>
+        </form_2>
+        <form_acd type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <forma_academica name="p_forma_academica" type="separator" maxlength="250" placeholder="" desclabel="false" right="false">
+                    <label>Formação Acadêmica</label>
+                </forma_academica>
+                <descricao name="p_descricao" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false">
+                    <label>Descrição</label>
+                    <value>Magna adipiscing laudantium sed dolor</value>
+                </descricao>
+                <area_de_formacao name="p_area_de_formacao" type="select" multiple="false" tags="false" domain="" maxlength="250" required="true" change="false" disabled="false" right="false" java-type="">
+                    <label>Área de formação</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Option 1</text>
+                            <value>1</value>
+                        </option>
+                        <option>
+                            <text>Option 2</text>
+                            <value>2</value>
+                        </option>
+                        <option>
+                            <text>Option 3</text>
+                            <value>3</value>
+                        </option>
+                        <option>
+                            <text>Option 4</text>
+                            <value>4</value>
+                        </option>
+                    </list>
+                </area_de_formacao>
+                <habilitacao_academica name="p_habilitacao_academica" type="select" multiple="false" tags="false" domain="" maxlength="250" required="true" change="false" disabled="false" right="false" java-type="">
+                    <label>Habilitação Acadêmica</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Option 1</text>
+                            <value>1</value>
+                        </option>
+                        <option>
+                            <text>Option 2</text>
+                            <value>2</value>
+                        </option>
+                        <option>
+                            <text>Option 3</text>
+                            <value>3</value>
+                        </option>
+                        <option>
+                            <text>Option 4</text>
+                            <value>4</value>
+                        </option>
+                    </list>
+                </habilitacao_academica>
+                <nivel_de_habilitacao name="p_nivel_de_habilitacao" type="select" multiple="false" tags="false" domain="" maxlength="250" required="true" change="false" disabled="false" right="false" java-type="">
+                    <label>Nível de Habilitação</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Option 1</text>
+                            <value>1</value>
+                        </option>
+                        <option>
+                            <text>Option 2</text>
+                            <value>2</value>
+                        </option>
+                        <option>
+                            <text>Option 3</text>
+                            <value>3</value>
+                        </option>
+                        <option>
+                            <text>Option 4</text>
+                            <value>4</value>
+                        </option>
+                    </list>
+                </nivel_de_habilitacao>
+                <text_1 name="p_text_1" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false">
+                    <label>Instituição de Ensino</label>
+                    <value>Laudantium omnis natus elit lorem</value>
+                </text_1>
+                <data_de_inicio_ name="p_data_de_inicio_" type="date" range="false" maxlength="250" required="false" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false" class="info">
+                    <label>Data de inicio </label>
+                    <value>05-02-2016</value>
+                </data_de_inicio_>
+                <data_fim name="p_data_fim" type="date" range="false" maxlength="250" required="false" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false" class="info">
+                    <label>Data Fim</label>
+                    <value>08-08-2016</value>
+                </data_fim>
+                <certificado name="p_certificado" type="file" accept="" targetrend="" multiple="false" rendvalue="false" maxlength="250" required="false" disabled="false" right="false" class="grey">
+                    <label>Certificado</label>
+                    <value/>
+                </certificado>
+            </fields>
+        </form_acd>
+    </content>
+    <blockly>
+        <imports></imports>
+        <xml>
+            <block type="controller" id="controller" x="388" y="13"></block>
+        </xml>
+    </blockly>
+</rows>

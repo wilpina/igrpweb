@@ -1,0 +1,1495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/gestao_de_parametrizacao/Gestao_de_parametrizacao.xsl" type="text/xsl"?>
+<rows>
+    <link_img>/srs_rh/images/IGRP/IGRP2.3</link_img>
+    <title>Dummie XML prototype</title>
+    <site>
+        <welcome_note>Oba</welcome_note>
+        <footer_note>2019 - Copyright NOSI v.190711</footer_note>
+        <user_name>Hexagon</user_name>
+        <button type="specific">
+            <title>Sair</title>
+            <app>DUA</app>
+            <page />
+            <link>#</link>
+            <target>_self</target>
+            <img>exit.png</img>
+        </button>
+    </site>
+    <page>Gestao_de_parametrizacao</page>
+    <app>recrutamento_rh</app>
+    <plsql>
+        <action>index</action>
+        <package_instance></package_instance>
+        <package_db>nosi.webapps.recrutamento_rh.pages</package_db>
+        <package_html>Gestao_de_parametrizacao</package_html>
+        <table_name></table_name>
+        <with_replace>false</with_replace>
+        <with_label>false</with_label>
+        <with_biztalk>false</with_biztalk>
+        <dynamic_menu>false</dynamic_menu>
+        <copy_menu>false</copy_menu>
+        <package_copy_db />
+        <package_copy_html />
+        <preserve_url>webapps?r=igrp/page/preserveUrl&amp;p_id=2095</preserve_url>
+    </plsql>
+    <slide-menu file="/IGRP/images/IGRP/IGRP2.3/xml/IGRP-slide-menu.xml?v=2" />
+    <top_menu file="/IGRP/images/IGRP/IGRP2.3/xml/IGRP-top_menu.xml?v=2" />
+    <content>
+        <title>Gestão de Parametrização</title>
+        <gest_parametrizacao type="sectionheader" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <gest_parametrizacao_text type="text" name="p_gest_parametrizacao_text" persist="true" maxlength="4000">
+                    <value>
+                        <![CDATA[<p>Gest&atilde;o de Parametriza&ccedil;&atilde;o</p>
+]]>
+                    </value>
+                </gest_parametrizacao_text>
+            </fields>
+        </gest_parametrizacao>
+        <menu type="tabcontent" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <entidade name="p_entidade" type="button" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" custom_return="false" iconColor="#333" iconClass="" img="fa-home" maxlength="50">
+                    <label>Entidade</label>
+                    <value/>
+                </entidade>
+                <areas_formacao name="p_areas_formacao" type="button" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" custom_return="false" iconColor="#333" iconClass="" img="fa-cube" maxlength="50">
+                    <label>Áreas de Formação</label>
+                    <value/>
+                </areas_formacao>
+                <area_de_emprego name="p_area_de_emprego" type="button" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" custom_return="false" iconColor="#333" iconClass="" img="fa-cubes" maxlength="50">
+                    <label>Área de Emprego</label>
+                    <value/>
+                </area_de_emprego>
+                <tp_doc name="p_tp_doc" type="button" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" custom_return="false" iconColor="#333" iconClass="" img="fa-file-text-o" maxlength="50">
+                    <label>Tipo Documento</label>
+                    <value/>
+                </tp_doc>
+                <tipo_de_concurso name="p_tipo_de_concurso" type="button" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" custom_return="false" iconColor="#333" iconClass="" img="fa-text-width" maxlength="50">
+                    <label>Tipo de Concurso</label>
+                    <value/>
+                </tipo_de_concurso>
+                <tp_form name="p_tp_form" type="button" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" custom_return="false" iconColor="#333" iconClass="" img="fa-facebook" maxlength="50">
+                    <label>Tipo Formação</label>
+                    <value/>
+                </tp_form>
+                <idioma name="p_idioma" type="button" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" custom_return="false" iconColor="#333" iconClass="" img="fa-globe" maxlength="50">
+                    <label>Idioma</label>
+                    <value/>
+                </idioma>
+                <profissao name="p_profissao" type="button" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" custom_return="false" iconColor="#333" iconClass="" img="fa-user" maxlength="50">
+                    <label>Profissão</label>
+                    <value/>
+                </profissao>
+                <cargos name="p_cargos" type="button" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" custom_return="false" iconColor="#333" iconClass="" img="fa-copyright" maxlength="50">
+                    <label>Cargo</label>
+                    <value/>
+                </cargos>
+            </fields>
+        </menu>
+        <form_entidade type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <f_nome name="p_f_nome" type="text" maxlength="50" required="false" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false">
+                    <label>Nome</label>
+                    <value>Natus omnis accusantium sit totam</value>
+                </f_nome>
+                <f_codigo name="p_f_codigo" type="text" maxlength="15" required="false" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false">
+                    <label>Código</label>
+                    <value>Doloremque sit</value>
+                </f_codigo>
+                <f_nif name="p_f_nif" type="number" min="" max="" maxlength="15" required="false" change="false" readonly="true" disabled="false" placeholder="" desclabel="false" right="false" java-type="">
+                    <label>Nif</label>
+                    <value>2</value>
+                </f_nif>
+            </fields>
+            <tools-bar>
+                <item type="form" code="" class="info" rel="pesquisar" refresh_components="">
+                    <title>Pesquisar</title>
+                    <app>recrutamento_rh</app>
+                    <page>Gestao_de_parametrizacao</page>
+                    <link>index</link>
+                    <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/gestao_de_parametrizacao/Gestao_de_parametrizacao.xml?</parameter>
+                    <target>submit</target>
+                    <img>info|fa-search</img>
+                    <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/gestao_de_parametrizacao/Gestao_de_parametrizacao.xml</preview>
+                </item>
+            </tools-bar>
+        </form_entidade>
+        <novo type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="novo" refresh_components="">
+                <title>Novo</title>
+                <app>recrutamento_rh</app>
+                <page>Inserir__alterar_area_de_formacao</page>
+                <link>index</link>
+                <target>modal</target>
+                <img>success|fa-plus</img>
+                <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/inserir__alterar_area_de_formacao/Inserir__alterar_area_de_formacao.xml</preview>
+            </item>
+        </novo>
+        <novo_area_emp type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="novo_emp" refresh_components="">
+                <title>Novo</title>
+                <app>recrutamento_rh</app>
+                <page>Ins__alt_area_emp</page>
+                <link>index</link>
+                <target>_blank</target>
+                <img>success|fa-plus</img>
+                <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_area_emp/Ins__alt_area_emp.xml</preview>
+            </item>
+        </novo_area_emp>
+        <novo_doc type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="doc_novo" refresh_components="">
+                <title>Novo</title>
+                <app>recrutamento_rh</app>
+                <page>Ins_alt_doc</page>
+                <link>index</link>
+                <target>_blank</target>
+                <img>success|fa-plus</img>
+                <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins_alt_doc/Ins_alt_doc.xml</preview>
+            </item>
+        </novo_doc>
+        <novo_concurso type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="novo_concurso" refresh_components="">
+                <title>Novo</title>
+                <app>recrutamento_rh</app>
+                <page>Tipo_concurso</page>
+                <link>index</link>
+                <target>_blank</target>
+                <img>success|fa-plus</img>
+                <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipo_concurso/Tipo_concurso.xml</preview>
+            </item>
+        </novo_concurso>
+        <novo_tp_form type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="novo_tp_form" refresh_components="">
+                <title>Novo</title>
+                <app>recrutamento_rh</app>
+                <page>Tipos_de_formacao</page>
+                <link>index</link>
+                <target>_blank</target>
+                <img>success|fa-plus</img>
+                <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipos_de_formacao/Tipos_de_formacao.xml</preview>
+            </item>
+        </novo_tp_form>
+        <novo_idioma type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="novo_idi" refresh_components="">
+                <title>Novo</title>
+                <app>recrutamento_rh</app>
+                <page>Inserir__alterar_idioma</page>
+                <link>index</link>
+                <target>_blank</target>
+                <img>success|fa-plus</img>
+                <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/inserir__alterar_idioma/Inserir__alterar_idioma.xml</preview>
+            </item>
+        </novo_idioma>
+        <novo_profissao type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="novo_prof" refresh_components="">
+                <title>Novo</title>
+                <app>recrutamento_rh</app>
+                <page>Ins__alt_profissao</page>
+                <link>index</link>
+                <target>_blank</target>
+                <img>success|fa-plus</img>
+                <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_profissao/Ins__alt_profissao.xml</preview>
+            </item>
+        </novo_profissao>
+        <novo_cargo type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="novo_carg" refresh_components="">
+                <title>Novo</title>
+                <app>recrutamento_rh</app>
+                <page>Cargo</page>
+                <link>index</link>
+                <target>_blank</target>
+                <img>success|fa-plus</img>
+                <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/cargo/Cargo.xml</preview>
+            </item>
+        </novo_cargo>
+        <lista_af type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <area_de_formacao name="p_area_de_formacao" type="text" maxlength="100" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Área de Formação</label>
+                </area_de_formacao>
+                <f_estado name="p_f_estado" type="text" maxlength="100" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Estado</label>
+                </f_estado>
+                <id_area_formacao name="p_id_area_formacao" type="hidden" maxlength="100" showLabel="true" iskey="true" group_in="" java-type="" tag="id_area_formacao"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <area_de_formacao name="p_area_de_formacao">Aliqua omnis officia adipiscing iste</area_de_formacao>
+                        <f_estado name="p_f_estado">Rem elit dolor rem natus</f_estado>
+                        <id_area_formacao name="p_id_area_formacao" tag="id_area_formacao">hidden-6188_fbf0</id_area_formacao>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <area_de_formacao name="p_area_de_formacao">Sit accusantium deserunt natus deserunt</area_de_formacao>
+                        <f_estado name="p_f_estado">Lorem amet laudantium aperiam accusantium</f_estado>
+                        <id_area_formacao name="p_id_area_formacao" tag="id_area_formacao">hidden-7fc0_20d4</id_area_formacao>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <area_de_formacao name="p_area_de_formacao">Iste officia ut laudantium sit</area_de_formacao>
+                        <f_estado name="p_f_estado">Rem aperiam sit ut dolor</f_estado>
+                        <id_area_formacao name="p_id_area_formacao" tag="id_area_formacao">hidden-206f_6814</id_area_formacao>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <area_de_formacao name="p_area_de_formacao">Perspiciatis officia aperiam aliqua rem</area_de_formacao>
+                        <f_estado name="p_f_estado">Elit aliqua ipsum doloremque aperiam</f_estado>
+                        <id_area_formacao name="p_id_area_formacao" tag="id_area_formacao">hidden-08aa_eccb</id_area_formacao>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <area_de_formacao name="p_area_de_formacao">Ipsum unde labore rem natus</area_de_formacao>
+                        <f_estado name="p_f_estado">Sit sed lorem consectetur aperiam</f_estado>
+                        <id_area_formacao name="p_id_area_formacao" tag="id_area_formacao">hidden-968d_7eee</id_area_formacao>
+                    </row>
+                </value>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Inserir__alterar_area_de_formacao</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/inserir__alterar_area_de_formacao/Inserir__alterar_area_de_formacao.xml?</parameter>
+                        <target>_blank</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/inserir__alterar_area_de_formacao/Inserir__alterar_area_de_formacao.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="eliminar" refresh_components="">
+                        <title>Eliminar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Gestao_de_parametrizacao</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/gestao_de_parametrizacao/Gestao_de_parametrizacao.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-times</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/gestao_de_parametrizacao/Gestao_de_parametrizacao.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </lista_af>
+        <table_3 type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <emp_codigo name="p_emp_codigo" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Código</label>
+                </emp_codigo>
+                <emp_descricao name="p_emp_descricao" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Descrição</label>
+                </emp_descricao>
+                <estado_emp name="p_estado_emp" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Estado</label>
+                </estado_emp>
+                <id_area_emprego name="p_id_area_emprego" type="hidden" maxlength="30" showLabel="true" iskey="true" group_in="" java-type="" tag="id_area_emprego"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <emp_codigo name="p_emp_codigo">Rem aperiam magna amet mollit</emp_codigo>
+                        <emp_descricao name="p_emp_descricao">Natus mollit adipiscing amet v</emp_descricao>
+                        <estado_emp name="p_estado_emp">Amet sit mollit anim sit</estado_emp>
+                        <id_area_emprego name="p_id_area_emprego" tag="id_area_emprego">hidden-6f2c_7e1d</id_area_emprego>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <emp_codigo name="p_emp_codigo">Stract deserunt magna lorem do</emp_codigo>
+                        <emp_descricao name="p_emp_descricao">Unde sit laudantium stract lab</emp_descricao>
+                        <estado_emp name="p_estado_emp">Mollit sed amet consectetur ma</estado_emp>
+                        <id_area_emprego name="p_id_area_emprego" tag="id_area_emprego">hidden-d2ec_913f</id_area_emprego>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <emp_codigo name="p_emp_codigo">Anim sit elit labore mollit</emp_codigo>
+                        <emp_descricao name="p_emp_descricao">Natus sed dolor ipsum stract</emp_descricao>
+                        <estado_emp name="p_estado_emp">Officia stract magna elit anim</estado_emp>
+                        <id_area_emprego name="p_id_area_emprego" tag="id_area_emprego">hidden-8e38_3cdd</id_area_emprego>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <emp_codigo name="p_emp_codigo">Anim dolor ut anim sit</emp_codigo>
+                        <emp_descricao name="p_emp_descricao">Doloremque sit elit dolor elit</emp_descricao>
+                        <estado_emp name="p_estado_emp">Rem elit consectetur sed lauda</estado_emp>
+                        <id_area_emprego name="p_id_area_emprego" tag="id_area_emprego">hidden-5a79_31c4</id_area_emprego>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <emp_codigo name="p_emp_codigo">Magna unde mollit doloremque a</emp_codigo>
+                        <emp_descricao name="p_emp_descricao">Adipiscing aliqua labore dolor</emp_descricao>
+                        <estado_emp name="p_estado_emp">Iste aliqua ut mollit adipisci</estado_emp>
+                        <id_area_emprego name="p_id_area_emprego" tag="id_area_emprego">hidden-a1f6_51f3</id_area_emprego>
+                    </row>
+                </value>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Ins__alt_area_emp</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_area_emp/Ins__alt_area_emp.xml?</parameter>
+                        <target>_blank</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_area_emp/Ins__alt_area_emp.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="eliminar" refresh_components="">
+                        <title>Eliminar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Gestao_de_parametrizacao</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/gestao_de_parametrizacao/Gestao_de_parametrizacao.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-remove</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/gestao_de_parametrizacao/Gestao_de_parametrizacao.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </table_3>
+        <table_2 type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <doc_codigo name="p_doc_codigo" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Código</label>
+                </doc_codigo>
+                <doc_descricao name="p_doc_descricao" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Descrição</label>
+                </doc_descricao>
+                <doc_estado name="p_doc_estado" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Estado</label>
+                </doc_estado>
+                <id_tp_doc name="p_id_tp_doc" type="hidden" maxlength="30" showLabel="true" iskey="true" group_in="" java-type="" tag="id_tp_doc"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <doc_codigo name="p_doc_codigo">Magna stract deserunt consecte</doc_codigo>
+                        <doc_descricao name="p_doc_descricao">Voluptatem perspiciatis rem do</doc_descricao>
+                        <doc_estado name="p_doc_estado">Doloremque amet dolor rem ipsu</doc_estado>
+                        <id_tp_doc name="p_id_tp_doc" tag="id_tp_doc">hidden-1770_8f6b</id_tp_doc>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <doc_codigo name="p_doc_codigo">Officia doloremque sit magna l</doc_codigo>
+                        <doc_descricao name="p_doc_descricao">Natus voluptatem aperiam adipi</doc_descricao>
+                        <doc_estado name="p_doc_estado">Accusantium rem anim sit strac</doc_estado>
+                        <id_tp_doc name="p_id_tp_doc" tag="id_tp_doc">hidden-bfa7_4343</id_tp_doc>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <doc_codigo name="p_doc_codigo">Consectetur officia aperiam ac</doc_codigo>
+                        <doc_descricao name="p_doc_descricao">Unde voluptatem natus omnis an</doc_descricao>
+                        <doc_estado name="p_doc_estado">Elit consectetur iste totam ma</doc_estado>
+                        <id_tp_doc name="p_id_tp_doc" tag="id_tp_doc">hidden-ce76_5925</id_tp_doc>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <doc_codigo name="p_doc_codigo">Laudantium dolor lorem stract</doc_codigo>
+                        <doc_descricao name="p_doc_descricao">Ipsum ut natus sit amet</doc_descricao>
+                        <doc_estado name="p_doc_estado">Rem voluptatem omnis magna nat</doc_estado>
+                        <id_tp_doc name="p_id_tp_doc" tag="id_tp_doc">hidden-69bd_97e6</id_tp_doc>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <doc_codigo name="p_doc_codigo">Unde deserunt amet ipsum elit</doc_codigo>
+                        <doc_descricao name="p_doc_descricao">Adipiscing iste dolor ut adipi</doc_descricao>
+                        <doc_estado name="p_doc_estado">Rem consectetur stract natus a</doc_estado>
+                        <id_tp_doc name="p_id_tp_doc" tag="id_tp_doc">hidden-f1a3_b6fa</id_tp_doc>
+                    </row>
+                </value>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Ins_alt_doc</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins_alt_doc/Ins_alt_doc.xml?</parameter>
+                        <target>_blank</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins_alt_doc/Ins_alt_doc.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="eliminar" refresh_components="">
+                        <title>Eliminar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Ins_alt_doc</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins_alt_doc/Ins_alt_doc.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-remove</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins_alt_doc/Ins_alt_doc.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </table_2>
+        <tp_concurso type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <codigo name="p_codigo" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Código</label>
+                </codigo>
+                <descricao_tpconcurso name="p_descricao_tpconcurso" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Descrição</label>
+                </descricao_tpconcurso>
+                <estado_tc name="p_estado_tc" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Estado</label>
+                </estado_tc>
+                <id_tp_con name="p_id_tp_con" type="hidden" maxlength="30" showLabel="true" iskey="true" group_in="" java-type="" tag="id_tp_con"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo name="p_codigo">Accusantium natus stract totam</codigo>
+                        <descricao_tpconcurso name="p_descricao_tpconcurso">Elit lorem dolor consectetur a</descricao_tpconcurso>
+                        <estado_tc name="p_estado_tc">Natus mollit elit natus adipis</estado_tc>
+                        <id_tp_con name="p_id_tp_con" tag="id_tp_con">hidden-78eb_aee9</id_tp_con>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo name="p_codigo">Adipiscing aperiam elit lorem</codigo>
+                        <descricao_tpconcurso name="p_descricao_tpconcurso">Elit totam ut laudantium dolor</descricao_tpconcurso>
+                        <estado_tc name="p_estado_tc">Aperiam sit omnis elit omnis</estado_tc>
+                        <id_tp_con name="p_id_tp_con" tag="id_tp_con">hidden-e74a_cbf2</id_tp_con>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo name="p_codigo">Doloremque deserunt anim offic</codigo>
+                        <descricao_tpconcurso name="p_descricao_tpconcurso">Unde doloremque accusantium la</descricao_tpconcurso>
+                        <estado_tc name="p_estado_tc">Aliqua magna voluptatem offici</estado_tc>
+                        <id_tp_con name="p_id_tp_con" tag="id_tp_con">hidden-72c3_d1ec</id_tp_con>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo name="p_codigo">Elit perspiciatis amet perspic</codigo>
+                        <descricao_tpconcurso name="p_descricao_tpconcurso">Ipsum perspiciatis mollit labo</descricao_tpconcurso>
+                        <estado_tc name="p_estado_tc">Ipsum totam anim adipiscing an</estado_tc>
+                        <id_tp_con name="p_id_tp_con" tag="id_tp_con">hidden-5a4e_75fc</id_tp_con>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo name="p_codigo">Aperiam officia dolor deserunt</codigo>
+                        <descricao_tpconcurso name="p_descricao_tpconcurso">Omnis magna officia lorem aliq</descricao_tpconcurso>
+                        <estado_tc name="p_estado_tc">Perspiciatis voluptatem accusa</estado_tc>
+                        <id_tp_con name="p_id_tp_con" tag="id_tp_con">hidden-2931_8cfe</id_tp_con>
+                    </row>
+                </value>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Tipo_concurso</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipo_concurso/Tipo_concurso.xml?</parameter>
+                        <target>_blank</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipo_concurso/Tipo_concurso.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="eliminar" refresh_components="">
+                        <title>Eliminar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Tipo_concurso</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipo_concurso/Tipo_concurso.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-remove</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipo_concurso/Tipo_concurso.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </tp_concurso>
+        <lista_forma type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <codigo_tp_form name="p_codigo_tp_form" type="text" maxlength="15" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Código</label>
+                </codigo_tp_form>
+                <descri_tp_form name="p_descri_tp_form" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Descrição</label>
+                </descri_tp_form>
+                <estado_tp_form name="p_estado_tp_form" type="text" maxlength="10" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Estado</label>
+                </estado_tp_form>
+                <id_tp_for name="p_id_tp_for" type="hidden" maxlength="10" showLabel="true" iskey="true" group_in="" java-type="" tag="id_tp_for"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_tp_form name="p_codigo_tp_form">Accusantium ame</codigo_tp_form>
+                        <descri_tp_form name="p_descri_tp_form">Ipsum stract sit doloremque om</descri_tp_form>
+                        <estado_tp_form name="p_estado_tp_form">Labore sed</estado_tp_form>
+                        <id_tp_for name="p_id_tp_for" tag="id_tp_for">hidden-e3e2_1337</id_tp_for>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_tp_form name="p_codigo_tp_form">Rem adipiscing</codigo_tp_form>
+                        <descri_tp_form name="p_descri_tp_form">Stract magna deserunt stract s</descri_tp_form>
+                        <estado_tp_form name="p_estado_tp_form">Amet lorem</estado_tp_form>
+                        <id_tp_for name="p_id_tp_for" tag="id_tp_for">hidden-7871_a6a8</id_tp_for>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_tp_form name="p_codigo_tp_form">Adipiscing stra</codigo_tp_form>
+                        <descri_tp_form name="p_descri_tp_form">Omnis amet totam sit consectet</descri_tp_form>
+                        <estado_tp_form name="p_estado_tp_form">Aperiam ma</estado_tp_form>
+                        <id_tp_for name="p_id_tp_for" tag="id_tp_for">hidden-439e_0b82</id_tp_for>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_tp_form name="p_codigo_tp_form">Anim aperiam do</codigo_tp_form>
+                        <descri_tp_form name="p_descri_tp_form">Labore adipiscing mollit totam</descri_tp_form>
+                        <estado_tp_form name="p_estado_tp_form">Sit perspi</estado_tp_form>
+                        <id_tp_for name="p_id_tp_for" tag="id_tp_for">hidden-4192_7e6e</id_tp_for>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_tp_form name="p_codigo_tp_form">Accusantium dol</codigo_tp_form>
+                        <descri_tp_form name="p_descri_tp_form">Ut omnis labore iste omnis</descri_tp_form>
+                        <estado_tp_form name="p_estado_tp_form">Labore nat</estado_tp_form>
+                        <id_tp_for name="p_id_tp_for" tag="id_tp_for">hidden-7da9_3887</id_tp_for>
+                    </row>
+                </value>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Tipos_de_formacao</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipos_de_formacao/Tipos_de_formacao.xml?</parameter>
+                        <target>_blank</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipos_de_formacao/Tipos_de_formacao.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Tipos_de_formacao</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipos_de_formacao/Tipos_de_formacao.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-remove</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/tipos_de_formacao/Tipos_de_formacao.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </lista_forma>
+        <lista_idioma type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <codigo_idioma name="p_codigo_idioma" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Codigo</label>
+                </codigo_idioma>
+                <tp_idioma name="p_tp_idioma" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Tipo de Idioma</label>
+                </tp_idioma>
+                <estado_idioma name="p_estado_idioma" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Estado</label>
+                </estado_idioma>
+                <id_idioma name="p_id_idioma" type="hidden" maxlength="30" showLabel="true" iskey="true" group_in="" java-type="" tag="id_idioma"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_idioma name="p_codigo_idioma">Omnis sed adipiscing rem sit</codigo_idioma>
+                        <tp_idioma name="p_tp_idioma">Lorem sit officia omnis anim</tp_idioma>
+                        <estado_idioma name="p_estado_idioma">Sit dolor labore dolor lorem</estado_idioma>
+                        <id_idioma name="p_id_idioma" tag="id_idioma">hidden-116e_1e23</id_idioma>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_idioma name="p_codigo_idioma">Perspiciatis laudantium elit i</codigo_idioma>
+                        <tp_idioma name="p_tp_idioma">Omnis mollit ipsum voluptatem</tp_idioma>
+                        <estado_idioma name="p_estado_idioma">Totam ut natus sit dolor</estado_idioma>
+                        <id_idioma name="p_id_idioma" tag="id_idioma">hidden-8959_b561</id_idioma>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_idioma name="p_codigo_idioma">Magna elit ipsum laudantium si</codigo_idioma>
+                        <tp_idioma name="p_tp_idioma">Amet laudantium omnis unde ape</tp_idioma>
+                        <estado_idioma name="p_estado_idioma">Sit rem sit lorem totam</estado_idioma>
+                        <id_idioma name="p_id_idioma" tag="id_idioma">hidden-59d7_65e3</id_idioma>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_idioma name="p_codigo_idioma">Lorem doloremque sit accusanti</codigo_idioma>
+                        <tp_idioma name="p_tp_idioma">Omnis adipiscing omnis dolorem</tp_idioma>
+                        <estado_idioma name="p_estado_idioma">Doloremque ipsum ut stract off</estado_idioma>
+                        <id_idioma name="p_id_idioma" tag="id_idioma">hidden-b842_c095</id_idioma>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_idioma name="p_codigo_idioma">Amet sed aliqua doloremque lau</codigo_idioma>
+                        <tp_idioma name="p_tp_idioma">Labore officia accusantium sed</tp_idioma>
+                        <estado_idioma name="p_estado_idioma">Laudantium unde aliqua rem sit</estado_idioma>
+                        <id_idioma name="p_id_idioma" tag="id_idioma">hidden-b492_f2af</id_idioma>
+                    </row>
+                </value>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Inserir__alterar_idioma</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/inserir__alterar_idioma/Inserir__alterar_idioma.xml?</parameter>
+                        <target>_blank</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/inserir__alterar_idioma/Inserir__alterar_idioma.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="eliminar" refresh_components="">
+                        <title>Eliminar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Inserir__alterar_idioma</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/inserir__alterar_idioma/Inserir__alterar_idioma.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-remove</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/inserir__alterar_idioma/Inserir__alterar_idioma.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </lista_idioma>
+        <lista_profissao type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <codigo_prof name="p_codigo_prof" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Código</label>
+                </codigo_prof>
+                <descricao_profissao name="p_descricao_profissao" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Descrição</label>
+                </descricao_profissao>
+                <estado_prof name="p_estado_prof" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Estado</label>
+                </estado_prof>
+                <id_profissao name="p_id_profissao" type="hidden" maxlength="30" showLabel="true" iskey="true" group_in="" java-type="" tag="id_profissao"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_prof name="p_codigo_prof">Sed sit elit magna rem</codigo_prof>
+                        <descricao_profissao name="p_descricao_profissao">Mollit iste accusantium aperia</descricao_profissao>
+                        <estado_prof name="p_estado_prof">Natus doloremque sed sit strac</estado_prof>
+                        <id_profissao name="p_id_profissao" tag="id_profissao">hidden-7276_f40b</id_profissao>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_prof name="p_codigo_prof">Mollit lorem ipsum dolor magna</codigo_prof>
+                        <descricao_profissao name="p_descricao_profissao">Natus perspiciatis mollit iste</descricao_profissao>
+                        <estado_prof name="p_estado_prof">Sed accusantium mollit dolor o</estado_prof>
+                        <id_profissao name="p_id_profissao" tag="id_profissao">hidden-c955_7a7d</id_profissao>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_prof name="p_codigo_prof">Deserunt doloremque officia ad</codigo_prof>
+                        <descricao_profissao name="p_descricao_profissao">Natus magna deserunt amet tota</descricao_profissao>
+                        <estado_prof name="p_estado_prof">Anim amet natus omnis aperiam</estado_prof>
+                        <id_profissao name="p_id_profissao" tag="id_profissao">hidden-0729_98cb</id_profissao>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_prof name="p_codigo_prof">Perspiciatis laudantium sit ad</codigo_prof>
+                        <descricao_profissao name="p_descricao_profissao">Lorem mollit officia iste ipsu</descricao_profissao>
+                        <estado_prof name="p_estado_prof">Perspiciatis rem adipiscing ap</estado_prof>
+                        <id_profissao name="p_id_profissao" tag="id_profissao">hidden-50fd_b500</id_profissao>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_prof name="p_codigo_prof">Sit voluptatem adipiscing amet</codigo_prof>
+                        <descricao_profissao name="p_descricao_profissao">Consectetur omnis consectetur</descricao_profissao>
+                        <estado_prof name="p_estado_prof">Laudantium perspiciatis volupt</estado_prof>
+                        <id_profissao name="p_id_profissao" tag="id_profissao">hidden-b341_f9c2</id_profissao>
+                    </row>
+                </value>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Ins__alt_profissao</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_profissao/Ins__alt_profissao.xml?</parameter>
+                        <target>_blank</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_profissao/Ins__alt_profissao.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="eliminar" refresh_components="">
+                        <title>Eliminar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Ins__alt_profissao</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_profissao/Ins__alt_profissao.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-remove</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_profissao/Ins__alt_profissao.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </lista_profissao>
+        <list_cargo type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <cargo name="p_cargo" type="text" maxlength="50" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Cargo</label>
+                </cargo>
+                <estado_cargo name="p_estado_cargo" type="text" maxlength="50" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Estado</label>
+                </estado_cargo>
+                <id_cargo name="p_id_cargo" type="hidden" maxlength="50" showLabel="true" iskey="false" group_in="" java-type="" tag="id_cargo"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <cargo name="p_cargo">Deserunt sit ipsum stract iste</cargo>
+                        <estado_cargo name="p_estado_cargo">Officia sit accusantium perspiciatis aperiam</estado_cargo>
+                        <id_cargo name="p_id_cargo" tag="id_cargo">hidden-80c5_3e9e</id_cargo>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <cargo name="p_cargo">Aperiam anim sit doloremque sed</cargo>
+                        <estado_cargo name="p_estado_cargo">Rem omnis dolor sed laudantium</estado_cargo>
+                        <id_cargo name="p_id_cargo" tag="id_cargo">hidden-4f2b_4eca</id_cargo>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <cargo name="p_cargo">Unde anim sit lorem aliqua</cargo>
+                        <estado_cargo name="p_estado_cargo">Natus laudantium voluptatem lorem accusantium</estado_cargo>
+                        <id_cargo name="p_id_cargo" tag="id_cargo">hidden-3a06_97f0</id_cargo>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <cargo name="p_cargo">Sit officia labore laudantium dolor</cargo>
+                        <estado_cargo name="p_estado_cargo">Lorem natus deserunt ipsum totam</estado_cargo>
+                        <id_cargo name="p_id_cargo" tag="id_cargo">hidden-f096_e809</id_cargo>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <cargo name="p_cargo">Lorem accusantium iste doloremque ipsum</cargo>
+                        <estado_cargo name="p_estado_cargo">Perspiciatis totam mollit iste dolor</estado_cargo>
+                        <id_cargo name="p_id_cargo" tag="id_cargo">hidden-2d28_e409</id_cargo>
+                    </row>
+                </value>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Cargo</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/cargo/Cargo.xml?</parameter>
+                        <target>_blank</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/cargo/Cargo.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="eliminar" refresh_components="">
+                        <title>Eliminar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Cargo</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/cargo/Cargo.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-remove</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/cargo/Cargo.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </list_cargo>
+        <novo_entidade type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="novo_entidades" refresh_components="">
+                <title>Novo</title>
+                <app>recrutamento_rh</app>
+                <page>Ins__alt_entidade</page>
+                <link>index</link>
+                <target>_blank</target>
+                <img>success|fa-plus</img>
+                <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_entidade/Ins__alt_entidade.xml</preview>
+            </item>
+        </novo_entidade>
+        <lista_entidade type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <codigo_entidade name="p_codigo_entidade" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Código</label>
+                </codigo_entidade>
+                <nif name="p_nif" type="number" min="" max="" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" total_footer="false" group_in="" java-type="">
+                    <label>Nif</label>
+                </nif>
+                <nome name="p_nome" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Nome</label>
+                </nome>
+                <estado name="p_estado" type="text" maxlength="30" showLabel="true" align="left" lookup_parser="false" iskey="false" group_in="">
+                    <label>Estado</label>
+                </estado>
+                <id_entidade name="p_id_entidade" type="hidden" maxlength="30" showLabel="true" iskey="true" group_in="" java-type="" tag="id_entidade"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_entidade name="p_codigo_entidade">Sit elit anim dolor sit</codigo_entidade>
+                        <nif name="p_nif">16</nif>
+                        <nome name="p_nome">Ut lorem voluptatem labore vol</nome>
+                        <estado name="p_estado">Stract consectetur mollit ut a</estado>
+                        <id_entidade name="p_id_entidade" tag="id_entidade">hidden-70c1_c40f</id_entidade>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_entidade name="p_codigo_entidade">Deserunt sit accusantium conse</codigo_entidade>
+                        <nif name="p_nif">17</nif>
+                        <nome name="p_nome">Accusantium iste magna totam r</nome>
+                        <estado name="p_estado">Aliqua magna anim accusantium</estado>
+                        <id_entidade name="p_id_entidade" tag="id_entidade">hidden-97b3_b66f</id_entidade>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_entidade name="p_codigo_entidade">Dolor anim omnis sed natus</codigo_entidade>
+                        <nif name="p_nif">11</nif>
+                        <nome name="p_nome">Sit mollit rem mollit sed</nome>
+                        <estado name="p_estado">Amet consectetur officia anim</estado>
+                        <id_entidade name="p_id_entidade" tag="id_entidade">hidden-b6e4_e41c</id_entidade>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_entidade name="p_codigo_entidade">Stract mollit omnis totam rem</codigo_entidade>
+                        <nif name="p_nif">17</nif>
+                        <nome name="p_nome">Unde ipsum perspiciatis amet d</nome>
+                        <estado name="p_estado">Perspiciatis voluptatem elit l</estado>
+                        <id_entidade name="p_id_entidade" tag="id_entidade">hidden-8d8e_eeb7</id_entidade>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <codigo_entidade name="p_codigo_entidade">Laudantium adipiscing ipsum is</codigo_entidade>
+                        <nif name="p_nif">18</nif>
+                        <nome name="p_nome">Iste stract voluptatem anim la</nome>
+                        <estado name="p_estado">Consectetur sit lorem laudanti</estado>
+                        <id_entidade name="p_id_entidade" tag="id_entidade">hidden-3c93_baa2</id_entidade>
+                    </row>
+                </value>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Ins__alt_entidade</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_entidade/Ins__alt_entidade.xml?</parameter>
+                        <target>_blank</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/ins__alt_entidade/Ins__alt_entidade.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="eliminar" refresh_components="">
+                        <title>Eliminar</title>
+                        <app>recrutamento_rh</app>
+                        <page>Gestao_de_parametrizacao</page>
+                        <link>index</link>
+                        <parameter>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/gestao_de_parametrizacao/Gestao_de_parametrizacao.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-remove</img>
+                        <preview>/srs_rh/images/IGRP/IGRP2.3/app/recrutamento_rh/gestao_de_parametrizacao/Gestao_de_parametrizacao.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </lista_entidade>
+    </content>
+    <blockly>
+        <imports>
+            <import type="listar">Listar</import>
+            <import type="dao">SrsTParametrizacao</import>
+        </imports>
+        <xml>
+            <block type="controller" id="controller" x="-387" y="-212"></block>
+            <block type="listar_table_3" id="table_3" inline="true" x="-88" y="-212">
+                <mutation count="1" mutation-1="andWhere"></mutation>
+                <field name="dao">SrsTParametrizacao</field>
+                <field name="find">TODOSS</field>
+                <field name="FILL">FALSE</field>
+                <field name="ADD1FILTER">andWhere</field>
+                <field name="ADD1WHERE">WHERE_EQ</field>
+                <statement name="value2">
+                    <block type="rowtableemp_codigo" id="String::emp_codigo">
+                        <value name="fields_model">
+                            <block type="get-dao-SrsTParametrizacao" id="cc|UMsGqD7Ph/[CF6iON">
+                                <mutation hover_type="String::codigo"></mutation>
+                                <field name="DAO_FIELD">String::codigo</field>
+                            </block>
+                        </value>
+                        <next>
+                            <block type="rowtableemp_descricao" id="String::emp_descricao">
+                                <value name="fields_model">
+                                    <block type="get-dao-SrsTParametrizacao" id="0GJ+pVq~5oZj51]a49Wx">
+                                        <mutation hover_type="String::descricao"></mutation>
+                                        <field name="DAO_FIELD">String::descricao</field>
+                                    </block>
+                                </value>
+                                <next>
+                                    <block type="rowtableestado_emp" id="String::estado_emp">
+                                        <value name="fields_model">
+                                            <block type="get-dao-SrsTParametrizacao" id="/T{BNr#jKtM^AX)C27rp">
+                                                <mutation hover_type="String::estado"></mutation>
+                                                <field name="DAO_FIELD">String::estado</field>
+                                            </block>
+                                        </value>
+                                        <next>
+                                            <block type="rowtableid_area_emprego" id="hidden::id_area_emprego">
+                                                <value name="fields_model">
+                                                    <block type="get-dao-SrsTParametrizacao" id="s]9nl?%R+q6}%p(n/lh*">
+                                                        <mutation hover_type="Integer::id"></mutation>
+                                                        <field name="DAO_FIELD">Integer::id</field>
+                                                    </block>
+                                                </value>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </next>
+                            </block>
+                        </next>
+                    </block>
+                </statement>
+                <value name="ADD1">
+                    <block type="get-dao-SrsTParametrizacao" id="uzJwUn-k*iHc?xEM/xyF">
+                        <mutation hover_type="String::tipo"></mutation>
+                        <field name="DAO_FIELD">String::tipo</field>
+                    </block>
+                </value>
+                <value name="ADD1STATE2">
+                    <block type="get_custom_line" id="Zcupw%US:5wAR7c4wkWH">
+                        <field name="param">"AREA_EMP"</field>
+                    </block>
+                </value>
+                <next>
+                    <block type="listar_table_2" id="table_2" inline="true">
+                        <mutation count="1" mutation-1="andWhere"></mutation>
+                        <field name="dao">SrsTParametrizacao</field>
+                        <field name="find">TODOSS</field>
+                        <field name="FILL">FALSE</field>
+                        <field name="ADD1FILTER">andWhere</field>
+                        <field name="ADD1WHERE">WHERE_EQ</field>
+                        <statement name="value2">
+                            <block type="rowtabledoc_codigo" id="String::doc_codigo">
+                                <value name="fields_model">
+                                    <block type="get-dao-SrsTParametrizacao" id="lS4Le=PNq=1?,2PDxoe=">
+                                        <mutation hover_type="String::codigo"></mutation>
+                                        <field name="DAO_FIELD">String::codigo</field>
+                                    </block>
+                                </value>
+                                <next>
+                                    <block type="rowtabledoc_descricao" id="String::doc_descricao">
+                                        <value name="fields_model">
+                                            <block type="get-dao-SrsTParametrizacao" id="M7Qp87h};]hS;sN0}LZ+">
+                                                <mutation hover_type="String::descricao"></mutation>
+                                                <field name="DAO_FIELD">String::descricao</field>
+                                            </block>
+                                        </value>
+                                        <next>
+                                            <block type="rowtabledoc_estado" id="String::doc_estado">
+                                                <value name="fields_model">
+                                                    <block type="get-dao-SrsTParametrizacao" id="MeO{@4y])SRI1#:uuOji">
+                                                        <mutation hover_type="String::estado"></mutation>
+                                                        <field name="DAO_FIELD">String::estado</field>
+                                                    </block>
+                                                </value>
+                                                <next>
+                                                    <block type="rowtableid_tp_doc" id="hidden::id_tp_doc">
+                                                        <value name="fields_model">
+                                                            <block type="get-dao-SrsTParametrizacao" id="_f!%{Nl!D!NgMjV{ct{)">
+                                                                <mutation hover_type="Integer::id"></mutation>
+                                                                <field name="DAO_FIELD">Integer::id</field>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </next>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </next>
+                            </block>
+                        </statement>
+                        <value name="ADD1">
+                            <block type="get-dao-SrsTParametrizacao" id="s6ujI7N#xqMO%T9hptOk">
+                                <mutation hover_type="String::tipo"></mutation>
+                                <field name="DAO_FIELD">String::tipo</field>
+                            </block>
+                        </value>
+                        <value name="ADD1STATE2">
+                            <block type="get_custom_line" id="LLL-|74aUcL1R/ERjgAm">
+                                <field name="param">"TP_DOC"</field>
+                            </block>
+                        </value>
+                        <next>
+                            <block type="listar_lista_af" id="lista_af" inline="true">
+                                <mutation count="1" mutation-1="andWhere"></mutation>
+                                <field name="dao">SrsTParametrizacao</field>
+                                <field name="find">TODOSS</field>
+                                <field name="FILL">FALSE</field>
+                                <field name="ADD1FILTER">andWhere</field>
+                                <field name="ADD1WHERE">WHERE_EQ</field>
+                                <statement name="value2">
+                                    <block type="rowtablearea_de_formacao" id="String::area_de_formacao">
+                                        <value name="fields_model">
+                                            <block type="get-dao-SrsTParametrizacao" id="0^R/l}Exo]03WZ-K/BBs">
+                                                <mutation hover_type="String::descricao"></mutation>
+                                                <field name="DAO_FIELD">String::descricao</field>
+                                            </block>
+                                        </value>
+                                        <next>
+                                            <block type="rowtablef_estado" id="String::f_estado">
+                                                <value name="fields_model">
+                                                    <block type="get-dao-SrsTParametrizacao" id="AI5YqAK%rP+::8aG=dCB">
+                                                        <mutation hover_type="String::estado"></mutation>
+                                                        <field name="DAO_FIELD">String::estado</field>
+                                                    </block>
+                                                </value>
+                                                <next>
+                                                    <block type="rowtableid_area_formacao" id="hidden::id_area_formacao">
+                                                        <value name="fields_model">
+                                                            <block type="get-dao-SrsTParametrizacao" id="n6*i?7ceIl(s5JhghPx2">
+                                                                <mutation hover_type="Integer::id"></mutation>
+                                                                <field name="DAO_FIELD">Integer::id</field>
+                                                            </block>
+                                                        </value>
+                                                    </block>
+                                                </next>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </statement>
+                                <value name="ADD1">
+                                    <block type="get-dao-SrsTParametrizacao" id="yS_!O-@b_{iP+hRic?C:">
+                                        <mutation hover_type="String::tipo"></mutation>
+                                        <field name="DAO_FIELD">String::tipo</field>
+                                    </block>
+                                </value>
+                                <value name="ADD1STATE2">
+                                    <block type="get_custom_line" id="!c6S;bbY_R0*CG`MzZa`">
+                                        <field name="param">"AREA_FORM"</field>
+                                    </block>
+                                </value>
+                                <next>
+                                    <block type="listar_tp_concurso" id="tp_concurso" inline="true">
+                                        <mutation count="1" mutation-1="andWhere"></mutation>
+                                        <field name="dao">SrsTParametrizacao</field>
+                                        <field name="find">TODOSS</field>
+                                        <field name="FILL">FALSE</field>
+                                        <field name="ADD1FILTER">andWhere</field>
+                                        <field name="ADD1WHERE">WHERE_EQ</field>
+                                        <statement name="value2">
+                                            <block type="rowtablecodigo" id="String::codigo">
+                                                <value name="fields_model">
+                                                    <block type="get-dao-SrsTParametrizacao" id="=DmToFzer@5!osVmkipj">
+                                                        <mutation hover_type="String::codigo"></mutation>
+                                                        <field name="DAO_FIELD">String::codigo</field>
+                                                    </block>
+                                                </value>
+                                                <next>
+                                                    <block type="rowtabledescricao_tpconcurso" id="String::descricao_tpconcurso">
+                                                        <value name="fields_model">
+                                                            <block type="get-dao-SrsTParametrizacao" id="Rum^+b-!={,;oji|z)n3">
+                                                                <mutation hover_type="String::descricao"></mutation>
+                                                                <field name="DAO_FIELD">String::descricao</field>
+                                                            </block>
+                                                        </value>
+                                                        <next>
+                                                            <block type="rowtableestado_tc" id="String::estado_tc">
+                                                                <value name="fields_model">
+                                                                    <block type="get-dao-SrsTParametrizacao" id="9XDVoQqGFr[@@@bWgxcp">
+                                                                        <mutation hover_type="String::estado"></mutation>
+                                                                        <field name="DAO_FIELD">String::estado</field>
+                                                                    </block>
+                                                                </value>
+                                                                <next>
+                                                                    <block type="rowtableid_tp_con" id="hidden::id_tp_con">
+                                                                        <value name="fields_model">
+                                                                            <block type="get-dao-SrsTParametrizacao" id="J9C+q?o}mQGp@!_#QhU^">
+                                                                                <mutation hover_type="Integer::id"></mutation>
+                                                                                <field name="DAO_FIELD">Integer::id</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </next>
+                                                            </block>
+                                                        </next>
+                                                    </block>
+                                                </next>
+                                            </block>
+                                        </statement>
+                                        <value name="ADD1">
+                                            <block type="get-dao-SrsTParametrizacao" id="Oe`%I04qd@2,09_8s|mk">
+                                                <mutation hover_type="String::tipo"></mutation>
+                                                <field name="DAO_FIELD">String::tipo</field>
+                                            </block>
+                                        </value>
+                                        <value name="ADD1STATE2">
+                                            <block type="get_custom_line" id="k9**-Cl-jbLdYeUOy/+b">
+                                                <field name="param">"TP_CONCURSO"</field>
+                                            </block>
+                                        </value>
+                                        <next>
+                                            <block type="listar_list_cargo" id="list_cargo" inline="true">
+                                                <mutation count="1" mutation-1="andWhere"></mutation>
+                                                <field name="dao">SrsTParametrizacao</field>
+                                                <field name="find">TODOSS</field>
+                                                <field name="FILL">FALSE</field>
+                                                <field name="ADD1FILTER">andWhere</field>
+                                                <field name="ADD1WHERE">WHERE_EQ</field>
+                                                <statement name="value2">
+                                                    <block type="rowtablecargo" id="String::cargo">
+                                                        <value name="fields_model">
+                                                            <block type="get-dao-SrsTParametrizacao" id="[Wsi|Pi@/7OIR!=;QQ0:">
+                                                                <mutation hover_type="String::descricao"></mutation>
+                                                                <field name="DAO_FIELD">String::descricao</field>
+                                                            </block>
+                                                        </value>
+                                                        <next>
+                                                            <block type="rowtableestado_cargo" id="String::estado_cargo">
+                                                                <value name="fields_model">
+                                                                    <block type="get-dao-SrsTParametrizacao" id="F_/@zW`d}i,!HFLb=C_t">
+                                                                        <mutation hover_type="String::estado"></mutation>
+                                                                        <field name="DAO_FIELD">String::estado</field>
+                                                                    </block>
+                                                                </value>
+                                                                <next>
+                                                                    <block type="rowtableid_cargo" id="hidden::id_cargo">
+                                                                        <value name="fields_model">
+                                                                            <block type="get-dao-SrsTParametrizacao" id="Tg+]Pv[_C)o(`r8oO[Ib">
+                                                                                <mutation hover_type="Integer::id"></mutation>
+                                                                                <field name="DAO_FIELD">Integer::id</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </next>
+                                                            </block>
+                                                        </next>
+                                                    </block>
+                                                </statement>
+                                                <value name="ADD1">
+                                                    <block type="get-dao-SrsTParametrizacao" id="l+r4Chq^].9~l24qT]!H">
+                                                        <mutation hover_type="String::tipo"></mutation>
+                                                        <field name="DAO_FIELD">String::tipo</field>
+                                                    </block>
+                                                </value>
+                                                <value name="ADD1STATE2">
+                                                    <block type="get_custom_line" id="jRThEzn]HqQ@/dr`V1,o">
+                                                        <field name="param">"CARGO"</field>
+                                                    </block>
+                                                </value>
+                                                <next>
+                                                    <block type="listar_lista_profissao" id="lista_profissao" inline="true">
+                                                        <mutation count="1" mutation-1="andWhere"></mutation>
+                                                        <field name="dao">SrsTParametrizacao</field>
+                                                        <field name="find">TODOSS</field>
+                                                        <field name="FILL">FALSE</field>
+                                                        <field name="ADD1FILTER">andWhere</field>
+                                                        <field name="ADD1WHERE">WHERE_EQ</field>
+                                                        <statement name="value2">
+                                                            <block type="rowtablecodigo_prof" id="String::codigo_prof">
+                                                                <value name="fields_model">
+                                                                    <block type="get-dao-SrsTParametrizacao" id=",Y{3Q,A^x(oktAc`D-]]">
+                                                                        <mutation hover_type="String::codigo"></mutation>
+                                                                        <field name="DAO_FIELD">String::codigo</field>
+                                                                    </block>
+                                                                </value>
+                                                                <next>
+                                                                    <block type="rowtabledescricao_profissao" id="String::descricao_profissao">
+                                                                        <value name="fields_model">
+                                                                            <block type="get-dao-SrsTParametrizacao" id="Tj-){@UNO8w2AyPsQ=C|">
+                                                                                <mutation hover_type="String::descricao"></mutation>
+                                                                                <field name="DAO_FIELD">String::descricao</field>
+                                                                            </block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="rowtableestado_prof" id="String::estado_prof">
+                                                                                <value name="fields_model">
+                                                                                    <block type="get-dao-SrsTParametrizacao" id="gB,BmLO2#7#L2X-fa?k|">
+                                                                                        <mutation hover_type="String::estado"></mutation>
+                                                                                        <field name="DAO_FIELD">String::estado</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                    <block type="rowtableid_profissao" id="hidden::id_profissao">
+                                                                                        <value name="fields_model">
+                                                                                            <block type="get-dao-SrsTParametrizacao" id="9rO17}-GXw6ZUlC@;{ug">
+                                                                                                <mutation hover_type="Integer::id"></mutation>
+                                                                                                <field name="DAO_FIELD">Integer::id</field>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                    </block>
+                                                                                </next>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </next>
+                                                            </block>
+                                                        </statement>
+                                                        <value name="ADD1">
+                                                            <block type="get-dao-SrsTParametrizacao" id="1|T,:6%ij!D*QMG0eD5T">
+                                                                <mutation hover_type="String::tipo"></mutation>
+                                                                <field name="DAO_FIELD">String::tipo</field>
+                                                            </block>
+                                                        </value>
+                                                        <value name="ADD1STATE2">
+                                                            <block type="get_custom_line" id="DWb0m7xD.lq}{Z[w2?:o">
+                                                                <field name="param">"PROFISSAO"</field>
+                                                            </block>
+                                                        </value>
+                                                        <next>
+                                                            <block type="listar_lista_idioma" id="lista_idioma" inline="true">
+                                                                <mutation count="1" mutation-1="andWhere"></mutation>
+                                                                <field name="dao">SrsTParametrizacao</field>
+                                                                <field name="find">TODOSS</field>
+                                                                <field name="FILL">FALSE</field>
+                                                                <field name="ADD1FILTER">andWhere</field>
+                                                                <field name="ADD1WHERE">WHERE_EQ</field>
+                                                                <statement name="value2">
+                                                                    <block type="rowtablecodigo_idioma" id="String::codigo_idioma">
+                                                                        <value name="fields_model">
+                                                                            <block type="get-dao-SrsTParametrizacao" id="=[k*|gz=To1:+5{w=7?s">
+                                                                                <mutation hover_type="String::codigo"></mutation>
+                                                                                <field name="DAO_FIELD">String::codigo</field>
+                                                                            </block>
+                                                                        </value>
+                                                                        <next>
+                                                                            <block type="rowtabletp_idioma" id="String::tp_idioma">
+                                                                                <value name="fields_model">
+                                                                                    <block type="get-dao-SrsTParametrizacao" id="d5eF@3#jT_r{H6V8R?5v">
+                                                                                        <mutation hover_type="String::descricao"></mutation>
+                                                                                        <field name="DAO_FIELD">String::descricao</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                    <block type="rowtableestado_idioma" id="String::estado_idioma">
+                                                                                        <value name="fields_model">
+                                                                                            <block type="get-dao-SrsTParametrizacao" id="6=:MH5cagh?dw[p+]B8;">
+                                                                                                <mutation hover_type="String::estado"></mutation>
+                                                                                                <field name="DAO_FIELD">String::estado</field>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                            <block type="rowtableid_idioma" id="hidden::id_idioma">
+                                                                                                <value name="fields_model">
+                                                                                                    <block type="get-dao-SrsTParametrizacao" id="cRvAqf]x;{vLp__ge/sE">
+                                                                                                        <mutation hover_type="Integer::id"></mutation>
+                                                                                                        <field name="DAO_FIELD">Integer::id</field>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                            </block>
+                                                                                        </next>
+                                                                                    </block>
+                                                                                </next>
+                                                                            </block>
+                                                                        </next>
+                                                                    </block>
+                                                                </statement>
+                                                                <value name="ADD1">
+                                                                    <block type="get-dao-SrsTParametrizacao" id="fMmYK3Gm=,]F)8)Uap~;">
+                                                                        <mutation hover_type="String::tipo"></mutation>
+                                                                        <field name="DAO_FIELD">String::tipo</field>
+                                                                    </block>
+                                                                </value>
+                                                                <value name="ADD1STATE2">
+                                                                    <block type="get_custom_line" id="/Y~,?bjb`XQu;CKNOYzt">
+                                                                        <field name="param">"IDIOMA"</field>
+                                                                    </block>
+                                                                </value>
+                                                                <next>
+                                                                    <block type="listar_lista_forma" id="lista_forma" inline="true">
+                                                                        <mutation count="1" mutation-1="andWhere"></mutation>
+                                                                        <field name="dao">SrsTParametrizacao</field>
+                                                                        <field name="find">TODOSS</field>
+                                                                        <field name="FILL">FALSE</field>
+                                                                        <field name="ADD1FILTER">andWhere</field>
+                                                                        <field name="ADD1WHERE">WHERE_EQ</field>
+                                                                        <statement name="value2">
+                                                                            <block type="rowtablecodigo_tp_form" id="String::codigo_tp_form">
+                                                                                <value name="fields_model">
+                                                                                    <block type="get-dao-SrsTParametrizacao" id="B]MzyHWYIqiBunRDa;0|">
+                                                                                        <mutation hover_type="String::codigo"></mutation>
+                                                                                        <field name="DAO_FIELD">String::codigo</field>
+                                                                                    </block>
+                                                                                </value>
+                                                                                <next>
+                                                                                    <block type="rowtabledescri_tp_form" id="String::descri_tp_form">
+                                                                                        <value name="fields_model">
+                                                                                            <block type="get-dao-SrsTParametrizacao" id="bY%G?`CxqA)Z.(cHH(^z">
+                                                                                                <mutation hover_type="String::descricao"></mutation>
+                                                                                                <field name="DAO_FIELD">String::descricao</field>
+                                                                                            </block>
+                                                                                        </value>
+                                                                                        <next>
+                                                                                            <block type="rowtableestado_tp_form" id="String::estado_tp_form">
+                                                                                                <value name="fields_model">
+                                                                                                    <block type="get-dao-SrsTParametrizacao" id="]hT#Th6_,|cDcB#f,x_/">
+                                                                                                        <mutation hover_type="String::estado"></mutation>
+                                                                                                        <field name="DAO_FIELD">String::estado</field>
+                                                                                                    </block>
+                                                                                                </value>
+                                                                                                <next>
+                                                                                                    <block type="rowtableid_tp_for" id="hidden::id_tp_for">
+                                                                                                        <value name="fields_model">
+                                                                                                            <block type="get-dao-SrsTParametrizacao" id="XEf)ijbeyvUxL,3!eyZ;">
+                                                                                                                <mutation hover_type="Integer::id"></mutation>
+                                                                                                                <field name="DAO_FIELD">Integer::id</field>
+                                                                                                            </block>
+                                                                                                        </value>
+                                                                                                    </block>
+                                                                                                </next>
+                                                                                            </block>
+                                                                                        </next>
+                                                                                    </block>
+                                                                                </next>
+                                                                            </block>
+                                                                        </statement>
+                                                                        <value name="ADD1">
+                                                                            <block type="get-dao-SrsTParametrizacao" id="GYb}YM@@.r`iBLT`aY?H">
+                                                                                <mutation hover_type="String::tipo"></mutation>
+                                                                                <field name="DAO_FIELD">String::tipo</field>
+                                                                            </block>
+                                                                        </value>
+                                                                        <value name="ADD1STATE2">
+                                                                            <block type="get_custom_line" id="?#]#_0P5H%N;bQ==Ke0A">
+                                                                                <field name="param">"TP_FORM"</field>
+                                                                            </block>
+                                                                        </value>
+                                                                    </block>
+                                                                </next>
+                                                            </block>
+                                                        </next>
+                                                    </block>
+                                                </next>
+                                            </block>
+                                        </next>
+                                    </block>
+                                </next>
+                            </block>
+                        </next>
+                    </block>
+                </next>
+            </block>
+        </xml>
+    </blockly>
+</rows>
