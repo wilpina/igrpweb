@@ -70,7 +70,7 @@
                   '</div>'+
                   '<div class="col-md-4">'+
                   	'<label for="preview" class="lpreview">Pr&eacute;-visualiza&ccedil;&atilde;o</label>'+
-                    '<div class="preview pull-right" style="width:'+width+'px;height:'+height+'px">'+
+                    '<div class="preview pull-right" style="width:'+width+'px;height:'+height+'px;max-width:200px;max-height:200px">'+
                     '<img/></div>'+
                   '</div>'+
                 '</div>';
@@ -167,6 +167,12 @@
                                     filename: uploadName[0],
                                     format  : uploadName[1]
                                 }
+                            ],
+                            pArrayItem : [
+                            	{
+                            		name  : 'dad',
+                            		value : $('body').attr('app')
+                            	}
                             ]
                         },
                         pUrl        : 'webapps?r=igrp/File/save-image',
@@ -194,7 +200,7 @@
                                     	});
                                     	
                                     	$.IGRP.utils.createHidden({
-                                    		name  : 'p_uuid_'+p.name,
+                                    		name  : 'p_'+p.name+'_uuid',
 											value : resp.uuid,
 											class :'submittable'
                                     	});

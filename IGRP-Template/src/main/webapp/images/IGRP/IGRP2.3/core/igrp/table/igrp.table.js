@@ -474,10 +474,8 @@
             });
 			
 			/*$.IGRP.events.on('element-transform',function(p){
-	
-				var tableHolder = p.content;
 				
-				_self.resetTableConfigurations(tableHolder);
+				_self.resetTableConfigurations(p.content);
 				
 		    });*/
 			
