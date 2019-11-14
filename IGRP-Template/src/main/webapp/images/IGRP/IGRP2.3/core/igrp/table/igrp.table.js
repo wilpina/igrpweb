@@ -473,15 +473,11 @@
 
             });
 			
-<<<<<<< HEAD
 			/*$.IGRP.events.on('element-transform',function(p){
-=======
-			$.IGRP.events.on('element-transform',function(p){
->>>>>>> branch 'master' of https://github.com/NOSiCode-CV/IGRP-Java-Template-Eclipse.git
 				
 				_self.resetTableConfigurations(p.content);
 				
-		    });
+		    });*/
 			
 			$.IGRP.events.on('submit-complete',function(p){
 				
