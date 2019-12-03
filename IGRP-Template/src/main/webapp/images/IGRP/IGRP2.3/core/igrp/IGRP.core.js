@@ -215,6 +215,8 @@
 
 					parent  	= $(formElement.parents('[item-name]')[0]);
 				
+					parent 	    = parent[0] ? parent : $('*[item-name="'+tag+'"]');
+				
 				if( parent[0] ){
 
 					var type = parent.attr('item-type');
@@ -266,6 +268,12 @@
 							
 							formElement.text(value).val(value);
 							
+						break;
+						
+						case 'link':
+							
+							$('a',parent).attr('href',value);
+						
 						break;
 
 						default:

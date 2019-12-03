@@ -277,9 +277,15 @@ if($ && $.IGRP && !$.IGRP.rules){
 			
 			names.forEach(function(n){
 				
-				var elmnt = row ? row.find('[name="p_'+n+'_fk"]') : $('[name="p_'+n+'"]');
+				var elmnt = row ? row.find('[name="p_'+n+'_fk"]') : $('[name="p_'+n+'"]'),
+					
+					type  = elmnt.attr('type');
+				
+				if (type == 'radio' || type == 'checkbox') 
+
+					elmnt =  row ? row.find('[name="p_'+n+'_fk"]:checked') : $('input[name="p_'+n+'"]:checked');
 	
-				res['p_'+n] = elmnt.val() || $('[name="p_'+n+'"]').val();
+				res['p_'+n] = elmnt.val();
 	
 				if (res['p_'+n] && typeof res['p_'+n] === 'object') 
 	
@@ -1012,7 +1018,7 @@ if($ && $.IGRP && !$.IGRP.rules){
 
 				var oppObject = jQuery.extend(true,{}, o);;
 
-				var orule = conditionsList[rules[0].condition].opposite;
+				var orule = conditionsList[rules[0].condition] ? conditionsList[rules[0].condition].opposite : null;
 
 				var oactions = oppObject.conditions.actions.slice();
 

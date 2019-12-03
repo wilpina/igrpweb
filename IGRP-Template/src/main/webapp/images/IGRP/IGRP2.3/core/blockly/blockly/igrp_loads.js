@@ -376,7 +376,7 @@ $('#active_selenium').on('click', function() {
 						
 							+'<field type="field_text" name="opcao_val" options="key"></field>'
 							
-							+'<field type="field_text" name="opcao_des" options="value"></field>'
+							+'<field type="field_text" name="opcao_des" options="description"></field>'
 							
 						+'</value>'
 						
@@ -410,7 +410,7 @@ $('#active_selenium').on('click', function() {
 					
 					+'</value>'
 					
-					+'<value type="value" title="value" name="value_val">'
+					+'<value type="value" title="description" name="value_val">'
 					
 				+'</value>'
 				
@@ -949,6 +949,12 @@ $('#active_selenium').on('click', function() {
 						
 						+'</value>'
 						
+						+'<value type="value" name="get_pa">'
+						
+							+'<field type="text" options="by"></field>'
+					
+						+'</value>'
+						
 						+'<value name="value2" type="statement" >'
 						
 						+getFormlistBlock()
@@ -1246,8 +1252,12 @@ $('#active_selenium').on('click', function() {
 								
 									+'<field type="dropdown" name="dao" title="DAO" options="IGRP_BLOCKLY_DROPS.dao_list"></field>'
 									
-									//+'<field type="text" title="by:" options=""></field>'
-									
+								+'</value>'
+								
+								+'<value type="value" name="get_pa">'
+								
+									+'<field type="text" options="by"></field>'
+						
 								+'</value>'
 								
 								+'<value name="value2" type="statement">'
