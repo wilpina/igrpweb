@@ -470,10 +470,10 @@ var GENSTRUCTURES = function(GEN){
 	                    '<app>'+app+'</app>'+
 	                    '<page>'+page+'</page>'+
 	                    '<link>'+link+'</link>'+
-	                    '<parameter>'+'..'+item.action.link.substring(1).substring(item.action.link.substring(1).indexOf('/'))+'?</parameter>'+
+	                    '<parameter>'+item.action && item.action.link? '..'+item.action.link.substring(1).substring(item.action.link.substring(1).indexOf('/')) : ''+'?</parameter>'+
 	                    '<target>'+target+'</target>'+
 	                    '<img>'+_class+'|'+item.GET.img()+'</img>'+
-	                    '<preview>'+'..'+item.action.link.substring(1).substring(item.action.link.substring(1).indexOf('/'))+'</preview>'+
+	                    '<preview>'+item.action && item.action.link ? '..'+item.action.link.substring(1).substring(item.action.link.substring(1).indexOf('/')) : ''+'</preview>'+
 	                     map+
 	                 '</item>';
 			});
@@ -772,8 +772,8 @@ var GENSTRUCTURES = function(GEN){
 			
 		console.log(f);
 		
-		var link 	= f.action && f.action.link ? f.action.link : '',				
-			rtn     = '<lookup>'+'..'+link.substring(1).substring(link.substring(1).indexOf('/'))+'</lookup>',
+		var link 	= f.action && f.action.link ? '..'+f.action.link.substring(1).substring(f.action.link.substring(1).indexOf('/')) : '',				
+			rtn     = '<lookup>'+link+'</lookup>',
 		
 			isTable = f.parent.GET.type() == 'formlist' ? 'is-table="true"' : '';
 		
