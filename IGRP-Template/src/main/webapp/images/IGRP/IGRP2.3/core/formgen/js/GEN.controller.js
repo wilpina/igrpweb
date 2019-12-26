@@ -180,19 +180,6 @@ var GENERATOR = function(genparams){
 			}
 		});
 	}
-	
-	GEN.openIgrpDoc = function(type){
-			
-		if($('#igrp-doc')[0] && $('#link_doc')[0]){
-			var url = $('#link_doc').val();
-			
-			url += url.indexOf('?') !== -1 ? '&' : '?'; 
-			
-			url += 'target=_blank&p_type='+type;
-			
-			$('#igrp-doc').attr({'href' : url, 'position' : type});
-		}
-	}
 
 	var tagsIncr = {};
 
@@ -1834,10 +1821,6 @@ var GENERATOR = function(genparams){
 		$(document).trigger('gen-edition-show', {
 			onEdition : object,
 			modal : modal
-		});
-		
-		$(document).on('change','select[name="edit-type_changer"]',function(){
-			GEN.openIgrpDoc($(this).val());
 		});
 
 		GEN.edit.show();
