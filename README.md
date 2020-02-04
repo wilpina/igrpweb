@@ -1,3 +1,5 @@
+[![Gitter](https://badges.gitter.im/igrpweb/template.svg)](https://gitter.im/igrpweb/template?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 << GITHUB PROJECT AND DOCUMENTS IN CONSTRUCTION >>
 
 ## FAQ How to...
