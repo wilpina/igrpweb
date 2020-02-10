@@ -1,4 +1,4 @@
-# Contributing to Deeplearning4j
+# Contributing to igrpweb framework
 
 Thanks for your interest in igrpweb framework. Our goal is to bring fast, open-source framework to build e-Govermment solutions.
 
