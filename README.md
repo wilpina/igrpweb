@@ -6,7 +6,7 @@ igrpweb
 
 Homepage: www.igrp.cv
 
-igrpweb is a integrated platform created and developed by NOSi targeted at e-Govermment people, developers ans system admins. Its core is extremely lightweight and based on simple concepts. The development process is empowered by IGRP-Studio combining Aplication Builder, Business Process Management (BMN), Report Builder, Java Code Editor, . It's open-source and distributed under the Apache license. igrpweb runs in java web application, on a server, on a cluster or in the cloud.
+igrpweb is a integrated platform created and developed by NOSi targeted at e-Govermment people, developers ans system admins. Its core is extremely lightweight and based on simple concepts. The development process is empowered by IGRP-Studio combining Aplication Builder, Business Process Management (BMN), Report Builder, Java Code Editor. It's open-source and distributed under the Apache license. igrpweb runs in java web application, on a server, on a cluster or in the cloud.
 
 This template includes jar file of the igrpweb core. 
 
