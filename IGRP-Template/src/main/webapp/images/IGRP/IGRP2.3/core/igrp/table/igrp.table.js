@@ -79,67 +79,57 @@
 			
 			var rows = $('table.table[id] tbody tr', o.parent);
 			
-			if(!rows[0] && $('table.table[id] thead tr th', o.parent)[0]){
+			rows.each(function(trIndex, tr){
 				
-				$(o.thSelector, $('table.table[id] thead', o.parent)).each(function(i, th){
-					
-					$(th).remove();
-					
-				});
-			}
-			else{
+				var table = $(tr).parents('table');
 				
-				rows.each(function(trIndex, tr){
+				var tdContent;
+
+				$(o.thSelector, table).each(function(i, th){
 					
-					var table = $(tr).parents('table');
+					var thName    = $(this).attr('td-name'),
 					
-					var tdContent;
-	
-					$(o.thSelector, table).each(function(i, th){
+						groupName = $(this).attr('group-in'),
 						
-						var thName    = $(this).attr('td-name'),
+						tdHolder = $('td[item-name="'+groupName+'"]', tr),
 						
-							groupName = $(this).attr('group-in'),
-							
-							tdHolder = $('td[item-name="'+groupName+'"]', tr),
-							
-							tdInfo   = $('td[item-name="'+thName+'"]',tr);
-						
-						if(tdHolder[0] && tdInfo[0]){
-							
-							$(th).removeClass('is-grouped');
-							
-							var infoHolder = $('<div class="table-info-holder" item-name="'+thName+'">'+
-													'<div class="table-info-th '+$(th).attr('class')+'">'+$(th).html()+'</div>'+
-													'<div class="table-info-td '+tdInfo.attr('class')+'">'+tdInfo.html()+'</div>'+
-											   '</div>'),
-								tdMainHolder;
-											   
-						
-							if(!tdHolder.find('.table-info-group-main')[0]){
-								
-								tdMainHolder = $('<div class="table-info-group-main"></div>');
-								
-								tdHolder.append( tdMainHolder );
-								
-								tdHolder.find('>*').appendTo( tdMainHolder );
-							}
-							
+						tdInfo   = $('td[item-name="'+thName+'"]',tr);
 					
-							tdHolder.append( infoHolder );
+					if(tdHolder[0] && tdInfo[0]){
+						
+						$(th).removeClass('is-grouped');
+						
+						var infoHolder = $('<div class="table-info-holder" item-name="'+thName+'">'+
+												'<div class="table-info-th '+$(th).attr('class')+'">'+$(th).html()+'</div>'+
+												'<div class="table-info-td '+tdInfo.attr('class')+'">'+tdInfo.html()+'</div>'+
+										   '</div>'),
+							tdMainHolder;
+										   
+					
+						if(!tdHolder.find('.table-info-group-main')[0]){
 							
-							$(th).addClass('is-grouped');
+							tdMainHolder = $('<div class="table-info-group-main"></div>');
 							
-							tdInfo.addClass('is-grouped');
+							tdHolder.append( tdMainHolder );
 							
+							tdHolder.find('>*').appendTo( tdMainHolder );
 						}
-	
-					});			
-					
-				});
+						
 				
-				rows.parents('table').find('.is-grouped').remove();
-			}
+						tdHolder.append( infoHolder );
+						
+						$(th).addClass('is-grouped');
+						
+						tdInfo.addClass('is-grouped');
+						
+					}
+
+				});			
+				
+			});
+			
+			rows.parents('table').find('.is-grouped').remove();
+			
 		},
 
 		dataTable : function(op){
