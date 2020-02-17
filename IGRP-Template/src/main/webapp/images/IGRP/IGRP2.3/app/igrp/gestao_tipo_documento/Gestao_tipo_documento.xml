@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/IGRP/images/IGRP/IGRP2.3/app/igrp/gestao_tipo_documento/Gestao_tipo_documento.xsl" type="text/xsl"?>
+<rows>
+    <link_img>/IGRP/images/IGRP/IGRP2.3</link_img>
+    <title>Dummie XML prototype</title>
+    <site>
+        <welcome_note>Oba</welcome_note>
+        <footer_note>2019 - Copyright NOSI v.190711</footer_note>
+        <user_name>Hexagon</user_name>
+        <button type="specific">
+            <title>Sair</title>
+            <app>DUA</app>
+            <page />
+            <link>#</link>
+            <target>_self</target>
+            <img>exit.png</img>
+        </button>
+    </site>
+    <page>Gestao_tipo_documento</page>
+    <app>igrp</app>
+    <plsql>
+        <action>index</action>
+        <package_instance></package_instance>
+        <package_db>nosi.webapps.igrp.pages</package_db>
+        <package_html>Gestao_tipo_documento</package_html>
+        <table_name></table_name>
+        <with_replace>false</with_replace>
+        <with_label>false</with_label>
+        <with_biztalk>false</with_biztalk>
+        <dynamic_menu>false</dynamic_menu>
+        <copy_menu>false</copy_menu>
+        <package_copy_db />
+        <package_copy_html />
+        <preserve_url>webapps?r=igrp/page/preserveUrl&amp;p_id=60</preserve_url>
+    </plsql>
+    <slide-menu file="../images/IGRP/IGRP2.3/xml/IGRP-slide-menu.xml?v=2" />
+    <top_menu file="../images/IGRP/IGRP2.3/xml/IGRP-top_menu.xml?v=2" />
+    <content>
+        <title>Gestao Tipo Documento</title>
+        <sectionheader_1 type="sectionheader" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <sectionheader_1_text type="text" name="p_sectionheader_1_text" persist="true" maxlength="4000">
+                    <value>
+                        <![CDATA[Gestão Tipo de Documento]]>
+                    </value>
+                </sectionheader_1_text>
+            </fields>
+        </sectionheader_1>
+        <form_2 type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <aplicacao name="p_aplicacao" type="select" multiple="false" tags="false" domain="" maxlength="250" required="false" change="false" disabled="false" right="false" java-type="">
+                    <label>Aplicação</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Option 1</text>
+                            <value>1</value>
+                        </option>
+                        <option>
+                            <text>Option 2</text>
+                            <value>2</value>
+                        </option>
+                        <option>
+                            <text>Option 3</text>
+                            <value>3</value>
+                        </option>
+                        <option>
+                            <text>Option 4</text>
+                            <value>4</value>
+                        </option>
+                    </list>
+                </aplicacao>
+                <ativo name="p_ativo" type="checkbox" maxlength="250" required="false" change="false" readonly="false" disabled="false" right="false" java-type="Integer" switch="true" check="true">
+                    <label>Ativo?</label>
+                    <value>1</value>
+                </ativo>
+            </fields>
+        </form_2>
+        <novo type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <nome name="p_nome" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false" desclabel="false">
+                    <label>Nome</label>
+                    <value>Mollit perspiciatis sit rem dolor</value>
+                </nome>
+                <codigo name="p_codigo" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" right="false" desclabel="false">
+                    <label>Codigo</label>
+                    <value>Dolor natus sit magna sed</value>
+                </codigo>
+                <descricao name="p_descricao" type="textarea" maxlength="250" required="false" change="false" readonly="false" disabled="false" placeholder="" right="false" desclabel="false">
+                    <label>Descrição</label>
+                    <value>Elit ipsum adipiscing stract accusantium elit mollit lorem totam perspiciatis accusantium ut unde aliqua iste</value>
+                </descricao>
+            </fields>
+            <tools-bar>
+                <item type="form" code="" class="primary" rel="gravar" refresh_components="">
+                    <title>Adicionar</title>
+                    <app>igrp</app>
+                    <page>Dominio</page>
+                    <link>index</link>
+                    <parameter>../images/IGRP/IGRP2.3/app/igrp/dominio/Dominio.xml?</parameter>
+                    <target>submit_form</target>
+                    <img>primary|fa-file-text</img>
+                    <preview>../images/IGRP/IGRP2.3/app/igrp/dominio/Dominio.xml</preview>
+                </item>
+            </tools-bar>
+        </novo>
+        <table_1 type="table" xml-type="table" gen-type="container" gen-group="true">
+            <fields>
+                <t_estado name="p_t_estado" type="color" format="hex" maxlength="30" align="left" lookup_parser="false" iskey="false" showLabel="true" group_in="">
+                    <label>Estado</label>
+                </t_estado>
+                <t_aplicacao name="p_t_aplicacao" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false" showLabel="true" group_in="">
+                    <label>Aplicação</label>
+                </t_aplicacao>
+                <t_nome name="p_t_nome" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false" showLabel="true" group_in="">
+                    <label>Nome</label>
+                </t_nome>
+                <t_codigo name="p_t_codigo" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false" showLabel="true" group_in="">
+                    <label>Código</label>
+                </t_codigo>
+                <t_descricao name="p_t_descricao" type="text" maxlength="30" align="left" lookup_parser="false" iskey="false" showLabel="true" group_in="">
+                    <label>Descrição</label>
+                </t_descricao>
+                <id name="p_id" type="hidden" maxlength="30" iskey="true" java-type="" showLabel="true" group_in="" tag="id"/>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <t_estado name="p_t_estado">2</t_estado>
+                        <t_aplicacao name="p_t_aplicacao">Deserunt amet unde adipiscing</t_aplicacao>
+                        <t_nome name="p_t_nome">Lorem laudantium totam dolorem</t_nome>
+                        <t_codigo name="p_t_codigo">Amet unde rem ut dolor</t_codigo>
+                        <t_descricao name="p_t_descricao">Adipiscing sit consectetur und</t_descricao>
+                        <id name="p_id" tag="id">hidden-a8ea_6f7b</id>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <t_estado name="p_t_estado">1</t_estado>
+                        <t_aplicacao name="p_t_aplicacao">Anim rem doloremque ipsum dolo</t_aplicacao>
+                        <t_nome name="p_t_nome">Natus sit lorem natus officia</t_nome>
+                        <t_codigo name="p_t_codigo">Adipiscing unde mollit labore</t_codigo>
+                        <t_descricao name="p_t_descricao">Amet stract officia deserunt m</t_descricao>
+                        <id name="p_id" tag="id">hidden-924e_dc90</id>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <t_estado name="p_t_estado">2</t_estado>
+                        <t_aplicacao name="p_t_aplicacao">Totam sed mollit anim voluptat</t_aplicacao>
+                        <t_nome name="p_t_nome">Doloremque officia perspiciati</t_nome>
+                        <t_codigo name="p_t_codigo">Sit totam accusantium lorem se</t_codigo>
+                        <t_descricao name="p_t_descricao">Magna labore iste consectetur</t_descricao>
+                        <id name="p_id" tag="id">hidden-4660_634c</id>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <t_estado name="p_t_estado">2</t_estado>
+                        <t_aplicacao name="p_t_aplicacao">Accusantium laudantium dolorem</t_aplicacao>
+                        <t_nome name="p_t_nome">Accusantium iste stract aperia</t_nome>
+                        <t_codigo name="p_t_codigo">Doloremque ut officia doloremq</t_codigo>
+                        <t_descricao name="p_t_descricao">Iste rem stract consectetur si</t_descricao>
+                        <id name="p_id" tag="id">hidden-9eed_887a</id>
+                    </row>
+                    <row>
+                        <context-menu>
+                            <param>p1=linha1</param>
+                            <param>p2=linha1</param>
+                        </context-menu>
+                        <t_estado name="p_t_estado">1</t_estado>
+                        <t_aplicacao name="p_t_aplicacao">Aperiam officia laudantium ame</t_aplicacao>
+                        <t_nome name="p_t_nome">Voluptatem magna adipiscing si</t_nome>
+                        <t_codigo name="p_t_codigo">Laudantium anim perspiciatis r</t_codigo>
+                        <t_descricao name="p_t_descricao">Sed consectetur aperiam accusa</t_descricao>
+                        <id name="p_id" tag="id">hidden-8b21_1847</id>
+                    </row>
+                </value>
+                <legend_color>
+                    <item>
+                        <label>Ativo</label>
+                        <value>1</value>
+                        <color>#37dc2b</color>
+                    </item>
+                    <item>
+                        <label>Desativo</label>
+                        <value>2</value>
+                        <color>#ff0025</color>
+                    </item>
+                </legend_color>
+                <context-menu>
+                    <item type="specific" code="" class="warning" rel="editar" refresh_components="">
+                        <title>Editar</title>
+                        <app>igrp</app>
+                        <page>Gestao_tipo_documento</page>
+                        <link>index</link>
+                        <parameter>../images/IGRP/IGRP2.3/app/igrp/gestao_tipo_documento/Gestao_tipo_documento.xml?</parameter>
+                        <target>right_panel_submit|refresh</target>
+                        <img>warning|fa-pencil</img>
+                        <preview>../images/IGRP/IGRP2.3/app/igrp/gestao_tipo_documento/Gestao_tipo_documento.xml</preview>
+                    </item>
+                    <item type="specific" code="" class="danger" rel="eliminar" refresh_components="">
+                        <title>Eliminar</title>
+                        <app>igrp</app>
+                        <page>Gestao_tipo_documento</page>
+                        <link>index</link>
+                        <parameter>../images/IGRP/IGRP2.3/app/igrp/gestao_tipo_documento/Gestao_tipo_documento.xml?</parameter>
+                        <target>alert_submit</target>
+                        <img>danger|fa-trash</img>
+                        <preview>../images/IGRP/IGRP2.3/app/igrp/gestao_tipo_documento/Gestao_tipo_documento.xml</preview>
+                    </item>
+                </context-menu>
+            </table>
+        </table_1>
+    </content>
+    <blockly>
+        <imports></imports>
+        <xml>
+            <block type="controller" id="controller" x="388" y="13"></block>
+        </xml>
+    </blockly>
+</rows>
