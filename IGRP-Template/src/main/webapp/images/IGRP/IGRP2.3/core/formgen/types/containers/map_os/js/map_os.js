@@ -77,7 +77,7 @@
 					
 					{ path : '/plugins/leaflet/library/plugins/markercluster/leaflet.markercluster-src.js' },
 					
-					{ path : 'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js' },
+					{ path : '/plugins/leaflet/library/plugins/draw/leaflet.draw.js' },
 					
 					{ path : '/plugins/leaflet/library/plugins/draw/Leaflet.Editable.js' },
 					
