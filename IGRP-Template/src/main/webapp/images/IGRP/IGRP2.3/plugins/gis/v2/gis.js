@@ -3,7 +3,7 @@
 	var modules = {};
 
 	function MapController(dom){
-		
+				
 		var app    = this,
 
 			dataURL   = $(dom).data().configURL || false,
@@ -29,13 +29,13 @@
 			$('.gis-widgets-controller', app.dom).append(btn);
 
 		};
-
+		
 		if(dataURL){
 			
 			$.get(dataURL).then(function(d){
 				
 				var data = typeof d === 'string' ? JSON.parse(d) : d;
-				
+								
 				var config = $.extend({
 
 					id : id,
@@ -43,9 +43,9 @@
 					dom : dom,
 
 				}, data );
-				
+								
 				if(modules.Map){
-
+					
 					app.map = new modules.Map( app, config );
 
 					if(modules.BaseMaps)

@@ -394,6 +394,26 @@
 			return type;
 			
 		};
+		
+		layer.getGeometryDraw = function(){
+			
+			var type = "";
+			
+			if(layer.Description.geometryType.indexOf('Polygon') >= 0 )
+				
+				type = 'Polygon';
+			
+			if(layer.Description.geometryType.indexOf('Line') >= 0 )
+				
+				type = 'Polyline';
+			
+			if(layer.Description.geometryType.indexOf('Point') >= 0 )
+				
+				type = 'Marker';
+			
+			return type;
+			
+		};
 
 		layer.query = function(o){
 			
@@ -423,6 +443,8 @@
 
 			layer.updateData();
 			
+			map.fire('addlayer', layer);
+			
 		};
 
 		layer.hide = function(){
@@ -430,7 +452,9 @@
 			layer.visible = false;
 
 			layer.container.removeLayer( layer );
-
+			
+			map.fire('removelayer', layer);
+			
 		};
 
 		layer.on('add', function(){
@@ -449,6 +473,8 @@
 			
 				workSpace	   = workSpaceLayer.split(':')[0],
 				
+				workSpaceName  = workSpaceLayer.split(':')[1],
+				
 				indexOfWMS     =  layerData.url.lastIndexOf('/wms'),
 				
 				owsUrl 		   = layerData.url;
@@ -461,9 +487,13 @@
 				
 				workspace 	   : workSpace,
 				
+				workspaceName  : workSpaceName,
+				
 				workspaceLayer : workSpaceLayer,
 				
 				workspaceLink  : 'https:/www.nosi.cv/'+workSpace,
+				
+				geometryField  : 'geom',
 				
 				owsURL  	   : owsUrl
 				
@@ -515,7 +545,7 @@
 		GetDescribeData();
 
 		layer.addTo( layer.container );
-		
+				
 		return layer;
 			
 	});

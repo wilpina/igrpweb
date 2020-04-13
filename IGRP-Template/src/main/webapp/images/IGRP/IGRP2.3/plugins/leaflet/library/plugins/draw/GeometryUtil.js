@@ -1,4 +1,4 @@
-L.GeometryUtil2 = L.extend(L.GeometryUtil || {}, {
+L.GeometryUtil = L.extend(L.GeometryUtil || {}, {
 	// Ported from the OpenLayers implementation. See https://github.com/openlayers/openlayers/blob/master/lib/OpenLayers/Geometry/LinearRing.js#L270
 	geodesicArea: function (latLngs) {
 		var pointsCount = latLngs.length,
@@ -27,6 +27,7 @@ L.GeometryUtil2 = L.extend(L.GeometryUtil || {}, {
 	},
 
 	readableArea: function (area, isMetric) {
+		
 		var areaStr;
 
 		if (isMetric) {
@@ -51,6 +52,7 @@ L.GeometryUtil2 = L.extend(L.GeometryUtil || {}, {
 	},
 
 	readableDistance: function (distance, isMetric) {
+		
 		var distanceStr;
 
 		if (isMetric) {

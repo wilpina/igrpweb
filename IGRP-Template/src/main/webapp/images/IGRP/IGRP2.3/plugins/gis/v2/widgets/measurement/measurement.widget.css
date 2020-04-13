@@ -1,20 +1,11 @@
-.gis-widget-wrapper[widget-type="measurement"] .measurement-body{
-	padding: 0 10px 10px;
-}
-
 .gis-widget-wrapper[widget-type="measurement"] .tasks{
-	border-top: 1px solid #ddd;
+	border-top: 2px solid whitesmoke;
 	text-align: right;
-	padding: 10px 0 0;
 }
 
-.gis-widget-wrapper[widget-type="measurement"] .results{
-	padding: 0 0 10px;
-}
-
-.gis-widget-wrapper[widget-type="measurement"] .results .heading {
-    margin-right: 5px;
-    color: #999;
+.gis-widget-wrapper[widget-type="measurement"] .results .group{
+	margin-top: 10px;
+    padding-top: 10px;
 }
 
 .gis-widget-wrapper[widget-type="measurement"] .results .heading {
@@ -22,11 +13,15 @@
     color: #999;
 }
 
-.gis-widget-wrapper[widget-type="measurement"] .measurement-body:not(.active), .gis-widget-wrapper[widget-type="measurement"] .help:not(.active){
-    display: none;
+.gis-widget-wrapper[widget-type="measurement"] .results .heading {
+    margin-right: 5px;
+    color: #999;
 }
 
 .gis-widget-wrapper[widget-type="measurement"] p{
-    margin: 10px 0 0;
     line-height: 1.5em;
+}
+
+.gis-widget-wrapper[widget-type="measurement"] .coorddivider{
+    color: #ccc;
 }

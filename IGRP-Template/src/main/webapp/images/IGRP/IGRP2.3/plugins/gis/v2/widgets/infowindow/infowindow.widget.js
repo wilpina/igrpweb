@@ -36,7 +36,7 @@
 		
 		function SetWindowContent(feature, attributes){
 			
-			var visibleAttrs = !attributes || attributes == '*' ? feature.properties : GetFeatureProperties(feature,attributes),
+			var visibleAttrs = !attributes || attributes == '*' ? feature.properties : GetFeatureProperties(feature, attributes),
 					
 				content 	 = Utils.feature.properties.toHTML( visibleAttrs );
 			

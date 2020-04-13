@@ -4,15 +4,7 @@
 	
 	function SearchWidget( widget, app ){
 		
-		var input, 
-		
-			check,
-			
-			txtCql,
-			
-			submitSearch,
-			
-			inputDiv,
+		var input, check, txtCql, submitSearch, inputDiv,
 		
 			Layers  = [],
 			
@@ -466,15 +458,21 @@
 		
 		(function(){
 			
-			widget.on( 'load-html', function(){
-				
+			widget.on( 'activate', function(){
+								
 				SetEvents();
 				
 				LoadFields();
-				
+								
 			});
 			
-			widget.on( 'deactivate', UnHighLightFeatures)
+			widget.on( 'deactivate', function(){
+				
+				UnHighLightFeatures();
+				
+				clearSearch();
+				
+			})
 									
 		})();
 		

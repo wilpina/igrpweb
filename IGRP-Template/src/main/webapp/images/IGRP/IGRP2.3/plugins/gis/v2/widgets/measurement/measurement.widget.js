@@ -1,26 +1,19 @@
 (function(){
 	
-	var utils = GIS.module('utils');
+	var utils = GIS.module('Utils');
 	
 	function MeasurementWidget( widget, app ){
 		
-		var Result = {length : null, area: null},
+		var Result = {length : null, area: null, lastPoint: {}}, LastPoint = {},
 		
 		 	Map     = app.map.view,
 		 	
-		 	DrawLayer, DrawControl, DrawTool, EditTool, Tooltip;
-		 					
-		function RemoveDrawing(){
-			
-	        if (!DrawLayer) return;
-	      
-	        Map.removeLayer(DrawLayer);
-	      
-	        delete DrawLayer;
-	      	      
-	        DrawLayer.clearLayers();
-	    };
+		 	DrawLayer, DrawControl, DrawTool, EditTool, isMeasurement = false;
 		
+		widget.drawStart = null;
+		
+		widget.drawHelp = null;
+			
 		function Clear(){
 			
 			if(DrawTool && DrawTool.disable)
@@ -31,11 +24,13 @@
 				
 				EditTool.disable();
 			
-			DrawLayer.clearLayers();			
+			if(DrawLayer)
+			
+				DrawLayer.clearLayers();				
 			
 			SetResult(Result);
-						
-			//$('.measurement-body', widget.html).removeClass('active');
+			
+			widget.drawStart = null;
 						
 		};
 		
@@ -43,6 +38,7 @@
 			 
 		    var distance =  L.GeometryUtil.length(obj.getLatLngs());
 		    
+		  //@param {String} unit 'metric' or 'imperial'
 		    return L.GeometryUtil.readableDistance(distance,'metric');
 		    
 		};
@@ -52,8 +48,8 @@
 			var latLngs  =  obj.getLatLngs();
 			 			
 		    var area =  L.GeometryUtil.geodesicArea(latLngs[0]);
-
-			return L.GeometryUtil.readableArea(area, 'miles');
+		    
+			return utils.L.Geometry.readableArea(area, 'metric');
 		  
 		}
 		
@@ -88,19 +84,9 @@
 			});
 						
 			EditTool   = new L.EditToolbar.Edit( Map, DrawControl.options.edit );
-			
-			Tooltip    = new L.Draw.Tooltip(Map);
-			
-			console.log(Tooltip)
-						
+									
 			DrawLayer.addTo( Map );
-			
-			Map.on( 'click', function (e) {
-				
-				//widget.actions.disable();
-				
-			});
-
+	
 			Map.on( L.Draw.Event.CREATED, function (e) {
 				
 				var layer = e.layer;
@@ -109,60 +95,67 @@
 													
 			});
 			
-			Map.on('draw:drawvertex', function(e){
+			Map.on( L.Draw.Event.DRAWVERTEX, function (e) {
 				
-				var point = e.target._lastCenter;
+				var point = null;
 				
-				//Result.lastPoint = point.lat +' / '+ point.lng;
+				e.layers.eachLayer(function(layer){
+					
+					 point = layer.getLatLng();
+					 					
+				})
 				
-				//console.log(Result.lastPoint)
+				LastPoint.lat = point.lat.toFixed(6);
+					 
+				LastPoint.lng = point.lng.toFixed(6);
 				
-				//SetResult(Result);
+				LastPoint.lat_c = utils.L.Geometry.toDMS_lat(LastPoint.lat);
 				
-			});
+				LastPoint.lng_c = utils.L.Geometry.toDMS_lng(LastPoint.lng);
+				 				
+				Result.lastPoint = LastPoint;
+				
+				SetResult(Result);
+								
+				widget.html.find('.widget-step[step-id="help"]').removeClass('active');
+																	
+			});			
 			
-			Map.on('draw:editvertex', function(e){
-				
-				console.log(e.layers)
-				
-				widget.actions.drawend(e.layers);
-				
-			});
-						
 		};
-			    
+					    
 		widget.action('measure-length', function(){
-						
-			widget.actions.enable();
 			
-			DrawControl.setDrawingOptions({
-			    rectangle: {
-			    	shapeOptions: {
-			        	color: '#0000FF'
-			        }
-			    }
-			});
-
-			
+			Clear();
+												
 			DrawTool = new L.Draw.Polyline( Map );
 			
 			DrawTool.enable();
+						
+			widget.drawStart = true;
+			
+			widget.drawHelp  = true;
 									
 		});
 		
 
-		widget.action('measure-area', function(){									
+		widget.action('measure-area', function(){			
 			
-			widget.actions.enable();
-			
+			Clear();
+						
 			DrawTool = new L.Draw.Polygon( Map );
 			
 			DrawTool.enable();
 			
+			widget.drawStart = true;
+			
+			widget.drawHelp  = true;
+			
 		});
 		
 		widget.action('finish', function(){
+			
 			DrawTool.disable();
+			
 			widget.toggle();
 			
 		});
@@ -170,22 +163,13 @@
 		widget.action('cancel', function(){
 
 			Clear();	
-			
-			Tooltip.dispose();
-			
-			//console.log(Tooltip)
-			
-			widget.actions.activate();
-			
+						
 		});
 		
 		widget.action('drawend', function(layer){
 			
 			DrawLayer.addLayer(layer);
 			
-			console.log(layer)
-			//{String} unit 'metric' or 'imperial'
-			//returns {String} in yard or miles
 			if (layer instanceof L.Polygon) {
 				
 				Result.area = getArea(layer);
@@ -196,50 +180,28 @@
 				
 			}
 			
+			Result.lastPoint = LastPoint;
+			
 			SetResult(Result);
 			
-			$('.measurement-body .help', widget.html).removeClass('active');
-			
-		});
-		
-		widget.action('activate', function(){
-			
-			widget.actions.enable();
-			
-			DrawTool.enable();
-			
-		});
-		
-		widget.action('enable', function(){
-			
-			$('.measurement-body', widget.html).addClass('active');
-			
-			$('.measurement-body .help', widget.html).addClass('active')
-			
-		});
-		
-		widget.action('disable', function(){
-			
-			$('.measurement-body', widget.html).removeClass('active');
-			
+			widget.drawHelp  = null;
+						
 		});
 		
 		(function(){
 			
-			Init();
-			
-			widget.on('load-html', function(){
+			widget.on('activate', function(){
 				
-				widget.actions.disable();
+				Init();
+				
+				widget.steps.measure.activate();
 				
 			});
 									
 			widget.on('deactivate', function(){
 				
 				Clear();
-				
-				widget.actions.disable();
-				
+								
 			});
 			
 		})();
@@ -249,12 +211,7 @@
 		
 		dependencies : {
 			
-			js  : [ 
-					'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js',
-				    'https://npmcdn.com/leaflet-geometryutil@0.9.3/src/leaflet.geometryutil.js',
-				  ],
-			
-			css : [ 'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css' ]
+			js  : [ 'https://npmcdn.com/leaflet-geometryutil@0.9.3/src/leaflet.geometryutil.js' ]
 				
 		},
 		

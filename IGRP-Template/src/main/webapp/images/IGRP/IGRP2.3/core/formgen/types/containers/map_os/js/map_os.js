@@ -63,13 +63,12 @@
 					{ path : '/plugins/leaflet/library/plugins/markercluster/MarkerCluster.Default.css' }, 
 					{ path : '/plugins/gis/styles/igrp.gis.css' }, 
 					
-					//{ path : '/plugins/leaflet/library/plugins/draw/leaflet.draw.css' },
+					{ path : 'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css' },
 					
 				],
 				
 				js  : [ 
 					{ path : '/plugins/leaflet/library/js/leaflet.js' },
-					//{ path : '/plugins/leaflet/classes/TileLayer.WMS.js' },
 					{ path : '/plugins/leaflet/library/plugins/basemap-provider/leaflet-providers.js' },
 					{ path : '/plugins/leaflet/library/plugins/ajax/leaflet.ajax.min.js' },
 					
@@ -78,12 +77,15 @@
 					
 					{ path : '/plugins/leaflet/library/plugins/markercluster/leaflet.markercluster-src.js' },
 					
-					//{ path : '/plugins/leaflet/library/plugins/draw/leaflet.draw.js' },
+					{ path : 'https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js' },
+					
+					{ path : '/plugins/leaflet/library/plugins/draw/Leaflet.Editable.js' },
 					
 					{ path : '/plugins/handlebars/handlebars-v4.1.1.js' },
 					
 					{ path : '/plugins/gis/v2/gis.js' },
 					{ path : '/plugins/gis/v2/modules/gis.utils.js' },
+					{ path : '/plugins/gis/v2/modules/gis.config.js' },
 					{ path : '/plugins/gis/v2/modules/gis.templates.js' },
 					{ path : '/plugins/gis/v2/modules/gis.map.js' },
 					{ path : '/plugins/gis/v2/modules/gis.basemaps.js' },
@@ -93,8 +95,8 @@
 					{ path : '/plugins/gis/v2/modules/gis.widgets.js' },
 					{ path : '/plugins/gis/v2/modules/gis.widget.js' },
 					{ path : '/plugins/gis/v2/modules/gis.panels.js' },
-					{ path : '/plugins/gis/v2/modules/gis.graphics.js' }
-
+					{ path : '/plugins/gis/v2/modules/gis.graphics.js' },
+				
 				],
 				xsl : [ 'gis.map' ]
 			};

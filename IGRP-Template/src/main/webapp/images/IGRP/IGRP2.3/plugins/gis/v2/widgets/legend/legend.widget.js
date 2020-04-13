@@ -4,7 +4,9 @@
 	
 	function LegendWidget( widget, app ){
 		
-		request = null,
+		var Map = app.map.view,
+		
+		request = null, addedLegend = false,
 				
 		Layers  = app.layers.getLayers(),
 		
@@ -37,10 +39,8 @@
 	            
 	        };
 			
-			request = $.get( l.owsURL, params );
-			
-			return request;
-			
+			return $.get( l.owsURL, params );
+		
 		}
 		
 		function Load(){
@@ -50,7 +50,7 @@
 				Results = [];
 			
 			Layers.forEach(function(l){
-				
+								
 				var info = l.Info,
 				
 				    req  = GetRequest(info),
@@ -62,7 +62,7 @@
 				req.then(function(f){
 					
 					var legend = f.Legend[0];
-										
+															
 					var rules = legend.rules,
 					
 						items = [];
@@ -71,7 +71,7 @@
 						
 						var symbolizers = rules[i].symbolizers[0];	
 						
-						var label = rules[i].name,
+						var label = rules[i].name !== 'rule1' ? rules[i].name : '',
 							
 							item = {label : label};
 						
@@ -117,32 +117,27 @@
                         }
 						
 					}
-					
-					var results = {
+										
+					Results.push({
 						
 						title : layer.name,
 						
 						items : items
 						
-					}
+					});	
 					
-					Results.push(results);					
+					SetResults( Results );
+					
+					addedLegend = true;
+					
 				});
 				
-				reqs.push( req );
+				//widget.loading(false);
 				
-			});
-						
-			$.when.apply(undefined,reqs).then(function(){
-				
-				SetResults( Results );
-		
-			}).always(function(v){
-				
-				widget.loading(false);
-				
-			});
-				
+			});	
+					
+			SetResults( Results );
+			
 		};
 		
 		function SetResults(legends){
@@ -169,14 +164,19 @@
 		
 		function SetEvents(){
 			
-			clearTimeout(timeout);
+			/*clearTimeout(timeout);
 
 			timeout = setTimeout(Load, 600 );
 			
-			widget.loading(true);
+			widget.loading(true);*/
+			
+			Load();
+			
+			Map.on('removelayer', Load);
+			
+			Map.on('addlayer', Load);
 			
 		};
-		
 		
 		
 		(function(){
@@ -191,7 +191,7 @@
 	}
 	
 	GIS.widgets.register('legend', {
-		
+				
 		init : LegendWidget
 		
 	});

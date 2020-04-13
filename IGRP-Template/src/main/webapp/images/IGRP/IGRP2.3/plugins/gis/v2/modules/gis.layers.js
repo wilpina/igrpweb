@@ -51,13 +51,14 @@
 		};
 
 		Layers.addGroup = function(groupOptions,index){
-			
-			if( groupOptions ){
+				
+			/*Grupo de Layers*/
+			if( groupOptions.layers ){
 
 				var id    = groupOptions.id || 'group-'+$.IGRP.utils.unique(),
 
 					group = L.layerGroup();
-
+				
 				groupOptions.id = group.id   = id;
 
 				group.visible   = groupOptions.visible;
@@ -71,7 +72,7 @@
 					groupOptions.layers.forEach( function(layerOptions){
 
 						layerOptions.group = group;
-
+						
 						var layer = Layers.add( layerOptions );
 
 						layer.groupVisible = group.visible;
@@ -88,6 +89,8 @@
 					group.visible = true;
 
 					app.map.view.addLayer(group, true);
+					
+					//viewer.fire('addlayer', group);
 				
 				};
 
@@ -96,6 +99,8 @@
 					group.visible = false;
 
 					group.remove();
+					
+					//viewer.fire('removelayer', group);
 
 				};
 
@@ -107,12 +112,31 @@
 
 					group.show();
 
+			}else{
+				
+				/*Layer Sem Grupo*/
+				var layer = Layers.add( groupOptions );
+				
+				if(!layer.visble)
+					
+					layer.hide();
+				
+				if(layer){
+											
+					var html = $(Templates.Layers.element());
+					
+					$('>ul', html ).append( layer.controller );
+																	
+					$('.layers-data', app.dom).append(html);
+					
+				}
+				
 			}
 
 		};
 
 		Layers.addGroups = function(groups){
-
+			
 			if(groups.length){
 				
 				$('.layers-wrapper', app.dom ).removeClass('hidden');
@@ -193,7 +217,7 @@
 		};	
 
 		(function(){
-		
+					
 			if(groupLayers && groupLayers[0])
 
 				Layers.addGroups( groupLayers );

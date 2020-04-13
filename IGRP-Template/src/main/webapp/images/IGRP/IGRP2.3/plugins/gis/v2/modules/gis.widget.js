@@ -1,4 +1,6 @@
 (function(){
+	
+	var config = GIS.module('Config');
 
 	GIS.module('Widget', function(app, options){
 		
@@ -15,13 +17,7 @@
 			_htmlRequest = false;
 		
 		widget.html = "";
-		
-		/*widget.options.html = false;
-		
-		widget.options.js = false;
-		
-		widget.options.css = false;*/
-		
+				
 		widget.on = events.on;
 		
 		widget.map = app;
@@ -45,7 +41,11 @@
 		};
 		
 		widget.templateParams = {};
-
+		
+		var initialConfig = config.getOptions(options.type)
+		
+		options = $.extend(initialConfig, options);	
+		
 		widget.action = function(name, fnc){
 			
 			if(!widget.actions[name])
@@ -63,7 +63,7 @@
 		};
 		
 		widget.activateStep = function(id){
-			
+						
 			if(widget.steps[id])
 				
 				widget.steps[id].activate();
@@ -334,7 +334,7 @@
 							widgetExtension.init(widget, app);
 						
 						};
-
+						
 					if(widgetExtension.dependencies)
 						
 						LoadDependencies( widgetExtension.dependencies,  initWidget);
@@ -362,15 +362,15 @@
 			if(dependencies.js && dependencies.js[0]){
 				
 				var jsDependenciesReq = [];
-				
+								
 				dependencies.js.forEach(function(js){
-					
-					jsDependenciesReq.push($.getScript( js ));
-					
+												
+					jsDependenciesReq.push($.getScript( js ));					
+						
 				});
 				
 				$.when.apply($, jsDependenciesReq).then( function(){
-					
+										
 					Ready( callback );
 					
 				} );
