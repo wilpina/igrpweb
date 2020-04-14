@@ -271,12 +271,16 @@
 		
 		var listAssociation = function(p){
 			
-			var sourceInput     = $('.list-association-source [name="p_lst_association_rel"]');
+			var clicked = p.clicked;
+			
+			var clickedID = clicked.attr('id');
+			
+			var sourceInput     = $('.list-association-source [name*="p_'+clickedID+'_association_rel"]');
 			
 			if(sourceInput[0]){
 				
 				var ListSource = sourceInput.parents('.list-association-source').first();
-				
+
 				$.IGRP.components.ListAssociation.set({
 					
 					source : ListSource,
@@ -881,6 +885,11 @@
 			},300);
 		};
 		
+		var sharpadbclient = function(p){
+			if($.IGRP.components.sharpadbclient.run)
+				$.IGRP.components.sharpadbclient.run(p);
+		};
+		
 		var handleXMLMessages = function(xml){
 
 			try{
@@ -974,15 +983,16 @@
 		  					for(var i = 1; i < paramsCount; i++){
 
 		  						var vOp   = object.attr("CTX_P"+i).split("=");
-
+		  						
+		  						
 		  						if(vOp[0]){
 
-		  							var name  	   = vOp[0].replace("p_", ""),
+		  							var name  	   = vOp[0].replace("p_", "").replace("_fk",""),
 
 		  								value 	   = vOp[1],
 
-		  								inputField = $( '*[name="p_'+name+'_fk"]',form );
-
+		  								inputField = $( '*[name="p_'+name+'_fk"]', form );
+		  							
 		  							if(!target || !target[0])
 
 		  								target = inputField.parents('table').first();
@@ -1002,11 +1012,10 @@
 					if(target && target[0] && target[0]._import){
 						
 						var merge = target.parents('.box').first().hasClass('merge-import-data');
-
+						
 						target[0]._import(Arr, merge);
 						
 					}
-
 
 					if(window.parent)
 						window.parent.$.IGRP.components.iframeNav.hide();
@@ -1228,6 +1237,12 @@
 
 				action : _self
 
+			},
+			
+			sharpadbclient: {
+				label: 'Sharp Adb Client',
+
+				action: sharpadbclient
 			},
 
 			specific     : {

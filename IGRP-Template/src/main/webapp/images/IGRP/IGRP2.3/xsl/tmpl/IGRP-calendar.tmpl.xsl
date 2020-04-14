@@ -6,6 +6,7 @@
         <xsl:param name="editevents"/>
         <xsl:param name="alleditevents"/>
         <xsl:param name="addevents"/>
+        <xsl:param name="loadevents"/>
         <xsl:param name="defaultview"/>
         <xsl:param name="defaultdate"/>
         <xsl:param name="ebeforetoday"/>
@@ -13,6 +14,7 @@
         <xsl:param name="firstday"/>
         <xsl:param name="views"/>
         <xsl:param name="header"/>
+        <xsl:param name="refreshonedit"/>
         
         <div class="igrp-calendar-holder">
             <div id="{$id}" class="igrp-calendar"></div>
@@ -68,13 +70,15 @@
                         editevents      : '<xsl:value-of select="$editevents"/>',
                         alleditevents   : '<xsl:value-of select="$alleditevents"/>',
                         addevents       : '<xsl:value-of select="$addevents"/>',
+                        loadevents 		: '<xsl:value-of select="$loadevents"/>',
                         defaultview     : '<xsl:value-of select="$defaultview"/>',
                         defaultdate     : '<xsl:value-of select="$defaultdate"/>',
                         ebeforetoday    : '<xsl:value-of select="$ebeforetoday"/>',
                         weekends        : '<xsl:value-of select="$weekends"/>',
                         firstday        : '<xsl:value-of select="$firstday"/>',
                         views           : '<xsl:value-of select="$views"/>',
-                        header          : '<xsl:value-of select="$header"/>'
+                        header          : '<xsl:value-of select="$header"/>',
+                        refreshonedit   : '<xsl:value-of select="$refreshonedit"/>'
                     });
                 });
             </script>
