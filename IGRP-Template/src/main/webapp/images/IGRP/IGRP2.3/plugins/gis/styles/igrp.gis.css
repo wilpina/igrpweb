@@ -535,3 +535,8 @@
 	border-radius: 50%;
 	background-color: #0085BA;
 }
+
+.locate-marker-icon{
+	 text-align: center !important; 
+  	 line-height: 20px !important;
+}

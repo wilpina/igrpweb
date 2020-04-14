@@ -98,11 +98,8 @@
 			wrapper : function(w){
 				
 				var r = '<div class="gis-widget-wrapper" widget-id="'+w.id+'" widget-type="'+w.options.type+'">'+
-				
-							
-					
-						'</div>';
-					
+									
+						'</div>';					
 				
 				return r;
 				

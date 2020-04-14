@@ -11,15 +11,7 @@
       <xsl:when test="$id">
 
         <div class="igrp-map-os-wrapper" id="{$id}">
-         
-          <!--  <div class="gis-loading">
-            <div class="gis-spinner">
-              <div class="bounce1"></div>
-              <div class="bounce2"></div>
-              <div class="bounce3"></div>
-            </div>
-          </div>-->
-		
+         		
 		 <div class="gis-panel widget"></div>
 		
           <div class="gis-panel left">
@@ -27,6 +19,9 @@
             <div class="btn-group-vertical gis-panel-inner" role="group" >
               <button type="button" class="btn btn-default gis-zoom-in" text-color="primary">
                 <i class="fa fa-plus"></i>
+              </button>
+              <button type="button" class="btn btn-default gis-zoom-home" text-color="primary">
+                <i class="fa fa-home"></i>
               </button>
               <button type="button" class="btn btn-default gis-zoom-out" text-color="primary">
                 <i class="fa fa-minus"></i>
@@ -66,6 +61,11 @@
           <div class="gis-panel bottom">
           	
           	<div  type="button" class="btn-group-vertical gis-panel-inner" role="group">
+          	  <button class="gis-locate btn btn-default"  text-color="primary">
+	          	<i class="fa fa-compass"></i>
+	          </button>
+	       </div>
+	       <div  type="button" class="btn-group-vertical gis-panel-inner" role="group">
               <button class="gis-expand btn btn-default"  text-color="primary">
 	          	<i class="fa fa-expand"></i>
 	          </button>
