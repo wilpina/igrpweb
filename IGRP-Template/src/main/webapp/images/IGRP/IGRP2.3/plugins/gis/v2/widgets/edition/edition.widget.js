@@ -1,6 +1,8 @@
 (function(){
 	
-	var utils = GIS.module('Utils');
+	var utils = GIS.module('Utils'),
+	
+	    Templates = GIS.module('Templates');
 	
 	function EditionWidget( widget, app ){
 
@@ -8,7 +10,7 @@
 			
 			Map    = app.map.view,
 		
-			Layers = {}, Attributes, FileController, EditorController, currentlyEditing, enableEditing = false, Reqs = [],
+			Layers = {}, Attributes, FileController, EditorController, currentlyEditing, Reqs = [],
 			
 			LayerController, DrawLayer, DrawControl, DrawTool, EditTool, DeleteTool, CurrentLayer, CurrentLayerId, CurrentAction;
 		
@@ -22,6 +24,8 @@
 		
 		widget.editingObjects = {};
 		
+		Map.enableEditing = false;
+		
 		widget.events.declare(['draw-end']);	
 		
 		/**
@@ -32,13 +36,15 @@
 			
 			CurrentAction = 'init-create';		
 			
-			SetTitle('Novo');
+			SetTitle('Desenhar');
 			
 		});
 		
 		widget.action('tool-edit', function(){
+			
+			CurrentAction = 'start-editing';	
 						
-			SetTitle('Editar');
+			SetTitle('Modificar');
 						
 		});
 		
@@ -52,7 +58,7 @@
 		
 		widget.action('tool-shp', function(){
 						
-			SetTitle('Shpfile');
+			SetTitle('Upload Shapefile');
 						
 		});
 		
@@ -60,7 +66,7 @@
 			
 			CurrentAction = 'init-editor';
 			
-			SetTitle('Editor');
+			SetTitle('Inserir Coordenadas');
 			
 		});
 		
@@ -73,7 +79,7 @@
 		});
 		
 		/**
-		 * @Execute/OnChange Tipo/edicao
+		 * @Execute/OnChange Tipo/Edição
 		*/
 		
 		widget.action('select-layer', function(){
@@ -136,7 +142,7 @@
 				
 				$.IGRP.notify({
         			
-        			message : 'Escolha o Layer para continuar.!!!',
+        			message : 'Escolha o Layer para continuar.',
         			
         			type    : 'error'
         			
@@ -149,6 +155,19 @@
 			var layer = app.layers.get( CurrentLayerId );
 			
 			CurrentLayer = {layer: layer, data: layer.data()}
+			
+			if(layer.getGeometryType() !=  ShpType() ){
+				
+				$.IGRP.notify({
+        			
+        			message : 'Tipo de layer escolhido  não é igual ao do shpfile.',
+        			
+        			type    : 'error'
+        			
+        		});
+				
+				return;
+			}
 			
 			widget.actions['save']()	
 						
@@ -193,8 +212,8 @@
 					
 					app.viewer().fitBounds( widget.addedShpfile.getBounds() );		
 					
-					if (widget.addedShpfile) widget.steps['finish-shp'].activate()
-				
+					if (widget.addedShpfile) widget.steps['finish-shp'].activate()					
+					
 				});
 			
 			}catch(e){
@@ -202,6 +221,30 @@
 				console.log(e)
 				
 			}
+			
+		}
+		
+		function ShpType(){
+			
+			var type = null,
+			
+				layers = widget.addedShpfile;
+			
+			layers.eachLayer(function(layer){
+				
+				var object = utils.feature.getData( layer.feature );
+				
+				if(object){
+					
+					type = object.type;
+					
+					return false;
+					
+				}
+				
+			});
+			
+			return type;
 			
 		}
 		
@@ -372,7 +415,7 @@
 		// start editing a given layers
 		widget.action('start-editing', function(){
 			
-			enableEditing = true;	
+			Map.enableEditing = true;	
 			
 			GetEditableLayers();
 			
@@ -446,47 +489,43 @@
 			
 		    var results = [];		    
 		   		    		    
-			for (var i in data.layers){
+		    var layers = CurrentLayer.layer;
+			
+			var info = layers.Info;
+							
+			layers.eachLayer(function(layer){
 				
-				var layers = data.layers[i].layer;
-				
-				var info = layers.Info;
-								
-				layers.eachLayer(function(layer){
+				if (layer instanceof L.Path){
 					
-					if (layer instanceof L.Path){
-						
-						layer.info = info;
-						
-						results[L.stamp(layer)]  = layer;
-	                   
-	               } else if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {    
-	            	   
-	                    if (layer.getChildCount){
-	                    	
-	                        var layers = layer.getAllChildMarkers();
-	                        
-	                        for (var key in layers) {
-	                        	
-	                        	layers[key].info = info;
-	                        	
-	                        	results[L.stamp(layers[key])]  = layers[key];
-	                        	
-	                        }
-	                        
-	                    }else{
-	                    	
-	                    	layer.info = info;
-	                    	
-	                    	results[L.stamp(layer)] = layer;
-	                    	
-	                    } 
-	                    
-	                }
+					layer.info = info;
 					
-				});
+					results[L.stamp(layer)]  = layer;
+                   
+               } else if (layer instanceof L.Marker || layer instanceof L.CircleMarker) {    
+            	   
+                    if (layer.getChildCount){
+                    	
+                        var layers = layer.getAllChildMarkers();
+                        
+                        for (var key in layers) {
+                        	
+                        	layers[key].info = info;
+                        	
+                        	results[L.stamp(layers[key])]  = layers[key];
+                        	
+                        }
+                        
+                    }else{
+                    	
+                    	layer.info = info;
+                    	
+                    	results[L.stamp(layer)] = layer;
+                    	
+                    } 
+                    
+                }
 				
-			}
+			});
 			
 			data.editableLayers = results;
 						
@@ -607,7 +646,7 @@
 				
 				if(f.insertResults[0]){
 					
-					if (!enableEditing) {
+					if (!Map.enableEditing) {
 						
 						ClearDelete();
 						
@@ -659,7 +698,7 @@
 		
 		widget.action('save', function(){
 			
-			if(!enableEditing && CurrentLayer){
+			if(!Map.enableEditing && CurrentLayer){
 									
 				var wfst = GetWFST(CurrentLayer.layer.Info),
 					
@@ -688,7 +727,7 @@
 				    }else{
 				    	
 				    	layer.feature  = {properties : properties};
-					    
+				    	
 						wfst.addLayer(layer); 
 				    	
 				    }
@@ -730,6 +769,8 @@
 				$.when.apply(undefined,Reqs).then(function(){
 					
 					widget.actions['stop-editing']()
+					
+					widget.actions.cancel()
 					
 					$.IGRP.notify({
 	        			
@@ -809,7 +850,9 @@
 				
 				EditTool.disable();
 			
-			DrawLayer.clearLayers();	
+			if(DrawLayer)
+			
+				DrawLayer.clearLayers();	
 			
 			ClearShp();
 			
@@ -817,7 +860,7 @@
 			
 			ClearEditor();
 			
-			if (enableEditing)
+			if (Map.enableEditing)
 				
 				widget.actions['stop-editing']();
 			
@@ -828,6 +871,8 @@
 			CurrentLayer = null;
 			
 			LayerController.val('');
+			
+			Map.enableEditing = false;
 			
 		};
 				
@@ -915,7 +960,7 @@
 				    form.html("");
 				
 			});
-			
+								
 		};
 		
 		function SetTitle(t){
@@ -944,8 +989,23 @@
 								
 				SetControllers();
 				
+				widget.setTemplateParams({
+					
+					add : Templates.Widgets.edition.icon( 'add' ),
+					
+					edit : Templates.Widgets.edition.icon( 'edit' ),
+					
+					trash : Templates.Widgets.edition.icon( 'trash' ),
+					
+					shp : Templates.Widgets.edition.icon( 'upshape' ),
+					
+					coords : Templates.Widgets.edition.icon( 'coords' )
+					
+				});	
+				
+				
 			});
-			
+						
 		})();
 		
 	};
