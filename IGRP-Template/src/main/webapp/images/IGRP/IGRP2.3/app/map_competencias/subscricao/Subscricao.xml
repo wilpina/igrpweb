@@ -1,0 +1,1039 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="../images/IGRP/IGRP2.3/app/map_competencias/subscricao/Subscricao.xsl" type="text/xsl"?>
+<rows>
+    <link_img>/IGRP/images/IGRP/IGRP2.3</link_img>
+    <title>Dummie XML prototype</title>
+    <site>
+        <welcome_note>Oba</welcome_note>
+        <footer_note>2019 - Copyright NOSI v.190711</footer_note>
+        <user_name>Hexagon</user_name>
+        <button type="specific">
+            <title>Sair</title>
+            <app>DUA</app>
+            <page />
+            <link>#</link>
+            <target>_self</target>
+            <img>exit.png</img>
+        </button>
+    </site>
+    <page>Subscricao</page>
+    <app>map_competencias</app>
+    <plsql>
+        <action>index</action>
+        <package_instance></package_instance>
+        <package_db>nosi.webapps.map_competencias.pages</package_db>
+        <package_html>Subscricao</package_html>
+        <table_name></table_name>
+        <with_replace>false</with_replace>
+        <with_label>false</with_label>
+        <with_biztalk>false</with_biztalk>
+        <dynamic_menu>false</dynamic_menu>
+        <copy_menu>false</copy_menu>
+        <package_copy_db />
+        <package_copy_html />
+        <preserve_url>webapps?r=igrp/page/preserveUrl&amp;p_id=1049</preserve_url>
+    </plsql>
+    <slide-menu file="../images/IGRP/IGRP2.3/xml/IGRP-slide-menu.xml?v=2" />
+    <top_menu file="../images/IGRP/IGRP2.3/xml/IGRP-top_menu.xml?v=2" />
+    <content>
+        <title>Subscrição</title>
+        <sectionheader_1 type="sectionheader" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <sectionheader_1_text type="text" name="p_sectionheader_1_text" persist="true" maxlength="4000">
+                    <value>
+                        <![CDATA[<p>Mapeamento de Compet&ecirc;ncias</p>
+]]>
+                    </value>
+                </sectionheader_1_text>
+            </fields>
+        </sectionheader_1>
+        <toolsbar_1 type="toolsbar" xml-type="toolsbar" gen-type="menu" gen-group="">
+            <item type="specific" code="" rel="enviar" refresh_components="form_1,separatorlist_1,separatorlist_2,form_2">
+                <title>Enviar</title>
+                <app>map_competencias</app>
+                <page>Subscricao</page>
+                <link>index</link>
+                <target>submit_ajax</target>
+                <img>primary|fa-send</img>
+                <preview>/IGRP/images/IGRP/IGRP2.3/app/map_competencias/subscricao/Subscricao.xml</preview>
+            </item>
+        </toolsbar_1>
+        <form_1 type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <picture name="p_picture" type="img" persist="true" img="/IGRP/images/IGRP/IGRP2.3/assets/img/jon_doe.jpg" width="250" height="250" croppie="true" rounded="true" autoupload="true" maxlength="250" placeholder="click aqui" desclabel="true" right="true">
+                    <label>Img</label>
+                    <value>/IGRP/images/IGRP/IGRP2.3/assets/img/jon_doe.jpg</value>
+                </picture>
+                <click_na_foto_clicando name="p_click_na_foto_clicando" type="plaintext" clear="false" disable_output_escaping="false" html_class="" maxlength="250" right="true">
+                    <label>Click na foto clicando</label>
+                    <value>Mollit natus iste ipsum unde amet ut lorem stract iste totam laudantium mollit consectetur adipiscing sed deserunt elit unde natus rem totam lorem mollit amet</value>
+                </click_na_foto_clicando>
+                <nome name="p_nome" type="text" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false">
+                    <label>Nome</label>
+                    <value>Magna aperiam doloremque adipiscing aperiam</value>
+                    <validations>
+                        <validation>
+                            <annotation>@NotNull</annotation>
+                        </validation>
+                    </validations>
+                </nome>
+                <email name="p_email" type="email" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="@nosi.cv" desclabel="false" right="false">
+                    <label>Email institucional</label>
+                    <value>ge@example.com</value>
+                    <validations>
+                        <validation>
+                            <annotation>@NotNull</annotation>
+                        </validation>
+                    </validations>
+                </email>
+                <data_nascimento name="p_data_nascimento" type="date" range="false" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="dd-MM-aaaa" desclabel="false" right="false" class="danger">
+                    <label>Data nascimento</label>
+                    <value>07-05-2013</value>
+                    <validations>
+                        <validation>
+                            <annotation>@NotNull</annotation>
+                        </validation>
+                    </validations>
+                </data_nascimento>
+                <habilitacao_literaria name="p_habilitacao_literaria" type="select" multiple="false" tags="false" domain="habilitacao « map_competencias" maxlength="250" required="true" change="false" disabled="false" right="false" java-type="">
+                    <label>Habilitação literária</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Bacharel</text>
+                            <value>BAC</value>
+                        </option>
+                        <option>
+                            <text>Ensino Secundário</text>
+                            <value>SEC</value>
+                        </option>
+                        <option>
+                            <text>Ensino profissional</text>
+                            <value>PROF</value>
+                        </option>
+                        <option>
+                            <text>Licenciatura</text>
+                            <value>LIC</value>
+                        </option>
+                        <option>
+                            <text>Pos-Graduação</text>
+                            <value>POSL</value>
+                        </option>
+                        <option>
+                            <text>Mestrado</text>
+                            <value>MEST</value>
+                        </option>
+                        <option>
+                            <text>Doutoramento</text>
+                            <value>DOUT</value>
+                        </option>
+                    </list>
+                    <validations>
+                        <validation>
+                            <annotation>@NotNull</annotation>
+                        </validation>
+                    </validations>
+                </habilitacao_literaria>
+                <tipo_colaborador name="p_tipo_colaborador" type="select" multiple="false" tags="false" domain="tipo_colaborador « map_competencias" maxlength="250" required="true" change="false" disabled="false" right="false" java-type="">
+                    <label>Tipo de colaborador</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>NOSiano contratado</text>
+                            <value>NOSi</value>
+                        </option>
+                        <option>
+                            <text>Estagiário - NOSiakademia / NOSi</text>
+                            <value>AKA</value>
+                        </option>
+                        <option>
+                            <text>Estagiário - Jumpstart</text>
+                            <value>JUMP</value>
+                        </option>
+                    </list>
+                    <validations>
+                        <validation>
+                            <annotation>@NotNull</annotation>
+                        </validation>
+                    </validations>
+                </tipo_colaborador>
+                <anos_exp_professional name="p_anos_exp_professional" type="number" min="" max="300" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="Anos de experiência" desclabel="false" right="false" java-type="">
+                    <label>Anos de experiência profissional</label>
+                    <value>42</value>
+                    <validations>
+                        <validation>
+                            <annotation>@NotNull</annotation>
+                        </validation>
+                    </validations>
+                </anos_exp_professional>
+                <ver_cv name="p_ver_cv" type="link" target="modal" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" action="index" page="Subscricao" app="map_competencias" custom_action="" action_type="false" class="link" btnSize="" iconColor="#333" iconClass="" img="fa-address-card" maxlength="250" placeholder="" desclabel="false" right="false">
+                    <label>Ver curriculum vitae (CV)</label>
+                    <value>/IGRP/images/IGRP/IGRP2.3/app/map_competencias/subscricao/Subscricao.xml</value>
+                </ver_cv>
+                <seu_curriculum_vitae_cv name="p_seu_curriculum_vitae_cv" type="file" accept="application/pdf" targetrend="" multiple="false" rendvalue="false" maxlength="250" required="false" disabled="false" right="false" class="primary">
+                    <label>Seu curriculum vitae (CV)</label>
+                    <value/>
+                </seu_curriculum_vitae_cv>
+                <data_de_entrada_nosi name="p_data_de_entrada_nosi" type="date" range="false" maxlength="250" required="true" change="false" readonly="false" disabled="false" placeholder="dd-MM-aaaa" desclabel="false" right="false" class="primary">
+                    <label>Data de entrada no NOSi</label>
+                    <value>07-01-2016</value>
+                    <validations>
+                        <validation>
+                            <annotation>@NotNull</annotation>
+                        </validation>
+                    </validations>
+                </data_de_entrada_nosi>
+                <salario_atual_bruto name="p_salario_atual_bruto" type="number" min="" max="300" maxlength="3" required="true" change="false" readonly="false" disabled="false" placeholder="Em contos ex: 100" desclabel="true" right="false" java-type="">
+                    <label>Salário bruto atual</label>
+                    <value>1</value>
+                    <validations>
+                        <validation>
+                            <annotation>@NotNull</annotation>
+                        </validation>
+                    </validations>
+                </salario_atual_bruto>
+                <departamento_atual name="p_departamento_atual" type="select" multiple="false" tags="false" domain="departamentos « map_competencias" maxlength="250" required="true" change="false" disabled="false" right="false" java-type="">
+                    <label>Ultimo departamento alocado</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>DDS - Desenvolvimento</text>
+                            <value>DDS</value>
+                        </option>
+                        <option>
+                            <text>DGC - Gestão de clientes</text>
+                            <value>DGC</value>
+                        </option>
+                        <option>
+                            <text>DSC - Suporte a clientes</text>
+                            <value>DSC</value>
+                        </option>
+                        <option>
+                            <text>DPS - Plataforma e sistemas</text>
+                            <value>DPS</value>
+                        </option>
+                        <option>
+                            <text>DC - Datacenter</text>
+                            <value>DC</value>
+                        </option>
+                    </list>
+                    <validations>
+                        <validation>
+                            <annotation>@NotNull</annotation>
+                        </validation>
+                    </validations>
+                </departamento_atual>
+                <enquadramento_pccs name="p_enquadramento_pccs" type="separator" maxlength="250" placeholder="" desclabel="false" right="false">
+                    <label>Enquadramento  tabela Salarial em vigor</label>
+                </enquadramento_pccs>
+                <categoria name="p_categoria" type="select" multiple="false" tags="false" domain="pccs « map_competencias" maxlength="250" required="false" change="false" disabled="false" right="false" java-type="">
+                    <label>Categoria</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>N10 - Expert</text>
+                            <value>N10</value>
+                        </option>
+                        <option>
+                            <text>N9 - Especialista</text>
+                            <value>N9</value>
+                        </option>
+                        <option>
+                            <text>N8 - Especialista</text>
+                            <value>N8</value>
+                        </option>
+                        <option>
+                            <text>N7 - Especialista</text>
+                            <value>N7</value>
+                        </option>
+                        <option>
+                            <text>N6 - Técnico</text>
+                            <value>N6</value>
+                        </option>
+                        <option>
+                            <text>N5 - Técnico</text>
+                            <value>N5</value>
+                        </option>
+                        <option>
+                            <text>N4 - Técnico</text>
+                            <value>N4</value>
+                        </option>
+                        <option>
+                            <text>N3 - Suporte</text>
+                            <value>N3</value>
+                        </option>
+                        <option>
+                            <text>N2 - Suporte</text>
+                            <value>N2</value>
+                        </option>
+                        <option>
+                            <text>N1 - Suporte</text>
+                            <value>N1</value>
+                        </option>
+                        <option>
+                            <text>N0 - Estagiário</text>
+                            <value>N0</value>
+                        </option>
+                        <option>
+                            <text>G2 - Coordenação</text>
+                            <value>G2</value>
+                        </option>
+                        <option>
+                            <text>G1 - Gestão Operacional</text>
+                            <value>G3</value>
+                        </option>
+                    </list>
+                </categoria>
+                <nivel name="p_nivel" type="select" multiple="false" tags="false" domain="pccs_nivel « map_competencias" maxlength="250" required="false" change="false" disabled="false" right="false" java-type="">
+                    <label>Nível</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>I - 1</text>
+                            <value>I</value>
+                        </option>
+                        <option>
+                            <text>II - 2</text>
+                            <value>II</value>
+                        </option>
+                        <option>
+                            <text>III - 3</text>
+                            <value>III</value>
+                        </option>
+                    </list>
+                </nivel>
+                <foto_pccs_deliberado_em_2016 name="p_foto_pccs_deliberado_em_2016" type="link" target="modal" request_fields="" target_fields="" closerefresh="false" refresh_components="" refresh_submit="false" action="index" page="Subscricao" app="map_competencias" custom_action="" action_type="false" class="link" btnSize="" iconColor="#333" iconClass="" img="fa-link" maxlength="250" placeholder="" desclabel="false" right="false">
+                    <label>Consultar pccs</label>
+                    <value>/IGRP/images/IGRP/IGRP2.3/app/map_competencias/subscricao/Subscricao.xml</value>
+                </foto_pccs_deliberado_em_2016>
+                <hidden name="p_uuid" type="hidden" maxlength="250" java-type="" tag="uuid"/>
+            </fields>
+        </form_1>
+        <separatorlist_1 type="separatorlist" xml-type="separatorlist" title="Função e Projeto / Produto que fez parte ou que está fazendo parte (em curso)" gen-clean="true" gen-type="container" gen-group="true">
+            <fields>
+                <funcao_desempenhada name="p_funcao_desempenhada" type="select" multiple="false" tags="false" domain="funcao « map_competencias" maxlength="250" required="false" change="false" disabled="false" right="false" java-type="" desc="true">
+                    <label>Função desempenhada</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Analista</text>
+                            <value>ANA</value>
+                        </option>
+                        <option>
+                            <text>DPS - Aplicações corporativas e cloud</text>
+                            <value>ACC</value>
+                        </option>
+                        <option>
+                            <text>DPS - Storage Back-up DR</text>
+                            <value>SBDR</value>
+                        </option>
+                        <option>
+                            <text>DPS - Serviços Core</text>
+                            <value>SC</value>
+                        </option>
+                        <option>
+                            <text>DPS - Base de dados</text>
+                            <value>BD</value>
+                        </option>
+                        <option>
+                            <text>Desenvolvedor</text>
+                            <value>DEV</value>
+                        </option>
+                        <option>
+                            <text>Teste &amp; QA</text>
+                            <value>QA</value>
+                        </option>
+                        <option>
+                            <text>Gestor de Software / Projeto</text>
+                            <value>GS</value>
+                        </option>
+                        <option>
+                            <text>DUA -  RTA</text>
+                            <value>RTA</value>
+                        </option>
+                        <option>
+                            <text>DPS - Redes</text>
+                            <value>NET</value>
+                        </option>
+                        <option>
+                            <text>DPS - Comunicação Segurança</text>
+                            <value>CSEG</value>
+                        </option>
+                        <option>
+                            <text>Gestor de contrato</text>
+                            <value>GC</value>
+                        </option>
+                        <option>
+                            <text>Marketing e Venda</text>
+                            <value>DMV</value>
+                        </option>
+                        <option>
+                            <text>Deploy</text>
+                            <value>DEP</value>
+                        </option>
+                        <option>
+                            <text>Suporte / Manutenção</text>
+                            <value>SUP</value>
+                        </option>
+                        <option>
+                            <text>Operador Helpdesk</text>
+                            <value>OPH</value>
+                        </option>
+                        <option>
+                            <text>Mobile</text>
+                            <value>MOB</value>
+                        </option>
+                        <option>
+                            <text>Web Developer</text>
+                            <value>WDEV</value>
+                        </option>
+                        <option>
+                            <text>Design</text>
+                            <value>DES</value>
+                        </option>
+                        <option>
+                            <text>DC - Operação</text>
+                            <value>OPE</value>
+                        </option>
+                        <option>
+                            <text>DC - Manutenção Segurança</text>
+                            <value>MANS</value>
+                        </option>
+                        <option>
+                            <text>Outro (Escreva na observação!)</text>
+                            <value>OUTR</value>
+                        </option>
+                    </list>
+                </funcao_desempenhada>
+                <produto name="p_produto" type="select" multiple="false" tags="false" domain="projeto_produto « map_competencias" maxlength="250" required="false" change="false" disabled="false" right="false" java-type="" desc="true">
+                    <label>Produto (opcional not DDS)</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Porton di nos Ilha</text>
+                            <value>Porton</value>
+                        </option>
+                        <option>
+                            <text>Aplicações de Back-office da Casa do Cidadão</text>
+                            <value>BCC</value>
+                        </option>
+                        <option>
+                            <text>END - Empresa no dia</text>
+                            <value>END</value>
+                        </option>
+                        <option>
+                            <text>CAF - Certificado de Admissibilidade de firma</text>
+                            <value>CAF</value>
+                        </option>
+                        <option>
+                            <text>Alterações a Empresa no Dia</text>
+                            <value>AED</value>
+                        </option>
+                        <option>
+                            <text>Encerramento de empresas</text>
+                            <value>EE</value>
+                        </option>
+                        <option>
+                            <text>Certidões online</text>
+                            <value>CO</value>
+                        </option>
+                        <option>
+                            <text>Mkonekta (Mobile)</text>
+                            <value>mKonekta</value>
+                        </option>
+                        <option>
+                            <text>Mgestão (Mobile)</text>
+                            <value>mGestão</value>
+                        </option>
+                        <option>
+                            <text>IGRP Web</text>
+                            <value>igrpweb</value>
+                        </option>
+                        <option>
+                            <text>IGRP Framework</text>
+                            <value>IGRPFra</value>
+                        </option>
+                        <option>
+                            <text>Participação On-line (mobile)</text>
+                            <value>POMOB</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - Orçamento e Execução</text>
+                            <value>SIGOFOE</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - Receitas</text>
+                            <value>SIGOFR</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - Justiça Tributária</text>
+                            <value>SIGOFJT</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - Bancarizacao</text>
+                            <value>SIGOFBAN</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - Compras Públicas</text>
+                            <value>SIGOFCP</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - Gestão de Contratos</text>
+                            <value>SIGOFGC</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - Sistema Integrado de Gestão Patrimonial Georreferenciado (SIGPG)</text>
+                            <value>SIGOFSIGPG</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - Bonificação</text>
+                            <value>SIGOFBo</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - Recursos Humanos (RH)</text>
+                            <value>SIGOFRH</value>
+                        </option>
+                        <option>
+                            <text>SIGOF - SCIA - Alfandega Isenções</text>
+                            <value>SCIA</value>
+                        </option>
+                        <option>
+                            <text>Bolsa de Qualificação e Emprego – BQE</text>
+                            <value>BQE</value>
+                        </option>
+                        <option>
+                            <text>Licenciamento Simplificado da Atividade Industrial</text>
+                            <value>LSAI</value>
+                        </option>
+                        <option>
+                            <text>Licenciamento do Turismo</text>
+                            <value>LT</value>
+                        </option>
+                        <option>
+                            <text>Licenciamento das Atividades do Comércio (Retalho e Grosso)</text>
+                            <value>LACRG</value>
+                        </option>
+                        <option>
+                            <text>Janela Única do Investimento</text>
+                            <value>JUI</value>
+                        </option>
+                        <option>
+                            <text>Sistema INDP</text>
+                            <value>INDP</value>
+                        </option>
+                        <option>
+                            <text>Sistema de Gestão de Transportes</text>
+                            <value>SGT</value>
+                        </option>
+                        <option>
+                            <text>Gestão de Multas - Policia Nacional</text>
+                            <value>GMPN</value>
+                        </option>
+                        <option>
+                            <text>SNIAC - Sistema Nacional de Identificação e Autenticação Civil</text>
+                            <value>SNIAC</value>
+                        </option>
+                        <option>
+                            <text>Sistema de identificação Civil</text>
+                            <value>SIC</value>
+                        </option>
+                        <option>
+                            <text>Sistema de Registo Criminal</text>
+                            <value>SRC</value>
+                        </option>
+                        <option>
+                            <text>SIRP - Sistema de Informação de Registo Predial</text>
+                            <value>SIRP</value>
+                        </option>
+                        <option>
+                            <text>SIN - Sistema de informação do Notariado</text>
+                            <value>SIN</value>
+                        </option>
+                        <option>
+                            <text>SIGE - Sistema Integrado de Gestão Escolar</text>
+                            <value>SIGE</value>
+                        </option>
+                        <option>
+                            <text>SIGEB - Sistema Integrado de Gestão Escolar para o Ensino Básico</text>
+                            <value>SIGEB</value>
+                        </option>
+                        <option>
+                            <text>Sistema de Seriação e Gestão de Vagas</text>
+                            <value>SSGV</value>
+                        </option>
+                        <option>
+                            <text>SIGAE - Sistema Integrado de Gestão e Acompanhamento de Estudantes</text>
+                            <value>SIGAE</value>
+                        </option>
+                        <option>
+                            <text>Cadastro Social e de Beneficiários</text>
+                            <value>CSB</value>
+                        </option>
+                        <option>
+                            <text>Carta social</text>
+                            <value>CS</value>
+                        </option>
+                        <option>
+                            <text>CNPS - Comissão Nacional de Pensões Sociais</text>
+                            <value>CNPS</value>
+                        </option>
+                        <option>
+                            <text>SIPS - Sistema Integrado da Previdência Social</text>
+                            <value>SIPS</value>
+                        </option>
+                        <option>
+                            <text>Sistema de gestão de alimentos e medicamentos</text>
+                            <value>Sgam</value>
+                        </option>
+                        <option>
+                            <text>SIS - Sistema de Informação da Saúde</text>
+                            <value>SIS</value>
+                        </option>
+                        <option>
+                            <text>Gestão de Infraestruturas Rurais</text>
+                            <value>GIR</value>
+                        </option>
+                        <option>
+                            <text>Licenciamento dos Alvarás de construção civil e Imobiliária</text>
+                            <value>LACCI</value>
+                        </option>
+                        <option>
+                            <text>CUBHIS - Cadastro Único de Benificiarios de Habitação de Interesse Social</text>
+                            <value>CUBHIS</value>
+                        </option>
+                        <option>
+                            <text>SIM - Sistema de Informação Municipal (Financeiro; RH; Licenciamento Retalho)</text>
+                            <value>SIM</value>
+                        </option>
+                        <option>
+                            <text>SIMLAND</text>
+                            <value>SIMLAND</value>
+                        </option>
+                        <option>
+                            <text>Sistema Tribunal de Contas</text>
+                            <value>STC</value>
+                        </option>
+                        <option>
+                            <text>Pagamento Facturas Electra</text>
+                            <value>PFE</value>
+                        </option>
+                        <option>
+                            <text>TCE - Titulo do Comercio Externo</text>
+                            <value>TCE</value>
+                        </option>
+                        <option>
+                            <text>Pagamento Electrónico</text>
+                            <value>PE</value>
+                        </option>
+                        <option>
+                            <text>SIMFAR - Sistema Integrado de Monitorização do Mercado Farmaceutico</text>
+                            <value>SIMFAR</value>
+                        </option>
+                        <option>
+                            <text>SGAE - Sistema de Gestão e Atribuição de Equipamentos - Mundu Novu</text>
+                            <value>SGAE</value>
+                        </option>
+                        <option>
+                            <text>Base de dados Legislação da Área Farmaceutica e Alimentar</text>
+                            <value>BDLAFA</value>
+                        </option>
+                        <option>
+                            <text>Sistema Pensão Social</text>
+                            <value>SPS</value>
+                        </option>
+                        <option>
+                            <text>Sistema de Regime Especial do Registo Predial</text>
+                            <value>SRERP</value>
+                        </option>
+                        <option>
+                            <text>SIG-Saúde - Observatório nacional de Saúde Publica</text>
+                            <value>SIG</value>
+                        </option>
+                        <option>
+                            <text>PDEX - Platform of Data Exchange</text>
+                            <value>PDEX </value>
+                        </option>
+                        <option>
+                            <text>Nha Login</text>
+                            <value>NL</value>
+                        </option>
+                        <option>
+                            <text>PAYLOG</text>
+                            <value>PAYLOG</value>
+                        </option>
+                        <option>
+                            <text>SIECP - Sistema de Informação de Execução do Cadastro Predial</text>
+                            <value>SIECP</value>
+                        </option>
+                        <option>
+                            <text>SICP - Sistema de Informação do Cadastro Predial</text>
+                            <value>SICP </value>
+                        </option>
+                        <option>
+                            <text>SIRA -Sistema de Informação do Registo Automóvel</text>
+                            <value>SIRA </value>
+                        </option>
+                        <option>
+                            <text>SIRC - Sistema de Informação de Registo Comercial</text>
+                            <value>SIRC </value>
+                        </option>
+                        <option>
+                            <text>BVCPI - Bolsa de Valores de Cabo Verde - Portal de Investimento</text>
+                            <value>BVCPI</value>
+                        </option>
+                        <option>
+                            <text>SGIT - Sistema de Gestão de Informação Turistica</text>
+                            <value>SGIT</value>
+                        </option>
+                        <option>
+                            <text>CPRAP - Cadastro de Pensão Regime Administração Pública</text>
+                            <value>CPRAP</value>
+                        </option>
+                        <option>
+                            <text>7 Maravilhas</text>
+                            <value>7Mara</value>
+                        </option>
+                        <option>
+                            <text>Compras Públicas</text>
+                            <value>CP</value>
+                        </option>
+                        <option>
+                            <text>BUI - Balcão Único de Investimento</text>
+                            <value>BUI</value>
+                        </option>
+                        <option>
+                            <text>Gestão de Correspondência</text>
+                            <value>GC</value>
+                        </option>
+                        <option>
+                            <text>Gestão de WebSites GOV</text>
+                            <value>WGOV</value>
+                        </option>
+                        <option>
+                            <text>INPS.cv - Portal</text>
+                            <value>INPSCV</value>
+                        </option>
+                        <option>
+                            <text>INPS - Porton</text>
+                            <value>INPS</value>
+                        </option>
+                        <option>
+                            <text>SINAS - Sistema de Infomação Nacional de Água e Saneamento</text>
+                            <value>SINAS</value>
+                        </option>
+                        <option>
+                            <text>SIT - Sistema de Gestão Teritorial</text>
+                            <value>SIT</value>
+                        </option>
+                        <option>
+                            <text>WebLab - LMS</text>
+                            <value>WebLab</value>
+                        </option>
+                        <option>
+                            <text>Seguimento de Avaliação (Gestão de indicadores e Metadados) - M&amp;E</text>
+                            <value>SAGME</value>
+                        </option>
+                        <option>
+                            <text>SIARA- Sistema Integrado de Alerta Rápido de Alimentos</text>
+                            <value>SIARA</value>
+                        </option>
+                        <option>
+                            <text>SGPRFP</text>
+                            <value>SGPRFP</value>
+                        </option>
+                        <option>
+                            <text>SICA - Sistema de Informacao e Colaboracao</text>
+                            <value>SICA</value>
+                        </option>
+                        <option>
+                            <text>eSAj</text>
+                            <value>eSAj</value>
+                        </option>
+                        <option>
+                            <text>AutentiKa</text>
+                            <value>AutentiKa</value>
+                        </option>
+                        <option>
+                            <text>Outros (Escreva na observação)</text>
+                            <value>OUTROS</value>
+                        </option>
+                    </list>
+                </produto>
+                <em_curso name="p_em_curso" type="checkbox" maxlength="250" required="false" change="false" readonly="false" disabled="false" right="false" java-type="int" check="true" desc="true">
+                    <label>Projeto ativo (em curso)</label>
+                    <value>1</value>
+                </em_curso>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <funcao_desempenhada name="p_funcao_desempenhada" desc="true">2</funcao_desempenhada>
+                        <funcao_desempenhada_desc name="p_funcao_desempenhada_desc">2</funcao_desempenhada_desc>
+                        <produto name="p_produto" desc="true">2</produto>
+                        <produto_desc name="p_produto_desc">2</produto_desc>
+                        <em_curso name="p_em_curso" check="true" desc="true">1</em_curso>
+                        <em_curso_desc name="p_em_curso_desc">1</em_curso_desc>
+                    </row>
+                    <row>
+                        <funcao_desempenhada name="p_funcao_desempenhada" desc="true">2</funcao_desempenhada>
+                        <funcao_desempenhada_desc name="p_funcao_desempenhada_desc">2</funcao_desempenhada_desc>
+                        <produto name="p_produto" desc="true">2</produto>
+                        <produto_desc name="p_produto_desc">2</produto_desc>
+                        <em_curso name="p_em_curso" check="true" desc="true">1</em_curso>
+                        <em_curso_desc name="p_em_curso_desc">1</em_curso_desc>
+                    </row>
+                    <row>
+                        <funcao_desempenhada name="p_funcao_desempenhada" desc="true">2</funcao_desempenhada>
+                        <funcao_desempenhada_desc name="p_funcao_desempenhada_desc">2</funcao_desempenhada_desc>
+                        <produto name="p_produto" desc="true">2</produto>
+                        <produto_desc name="p_produto_desc">2</produto_desc>
+                        <em_curso name="p_em_curso" check="true" desc="true">1</em_curso>
+                        <em_curso_desc name="p_em_curso_desc">1</em_curso_desc>
+                    </row>
+                    <row>
+                        <funcao_desempenhada name="p_funcao_desempenhada" desc="true">2</funcao_desempenhada>
+                        <funcao_desempenhada_desc name="p_funcao_desempenhada_desc">2</funcao_desempenhada_desc>
+                        <produto name="p_produto" desc="true">2</produto>
+                        <produto_desc name="p_produto_desc">2</produto_desc>
+                        <em_curso name="p_em_curso" check="true" desc="true">1</em_curso>
+                        <em_curso_desc name="p_em_curso_desc">1</em_curso_desc>
+                    </row>
+                    <row>
+                        <funcao_desempenhada name="p_funcao_desempenhada" desc="true">2</funcao_desempenhada>
+                        <funcao_desempenhada_desc name="p_funcao_desempenhada_desc">2</funcao_desempenhada_desc>
+                        <produto name="p_produto" desc="true">2</produto>
+                        <produto_desc name="p_produto_desc">2</produto_desc>
+                        <em_curso name="p_em_curso" check="true" desc="true">1</em_curso>
+                        <em_curso_desc name="p_em_curso_desc">1</em_curso_desc>
+                    </row>
+                </value>
+            </table>
+        </separatorlist_1>
+        <separatorlist_2 type="separatorlist" xml-type="separatorlist" title="Conhecimento Técnico/Formação Especifica para desempenho das funções" gen-clean="true" gen-type="container" gen-group="true">
+            <fields>
+                <formacao_certificacao name="p_formacao_certificacao" type="text" maxlength="250" required="false" change="false" readonly="false" disabled="false" placeholder="Ex: PASP /PALOP - Arquitetura de sistemas" desclabel="false" right="false" desc="true">
+                    <label>Formação /Certificação</label>
+                    <value>Doloremque ipsum voluptatem iste mollit</value>
+                </formacao_certificacao>
+                <ano_de_conclusao name="p_ano_de_conclusao" type="number" min="1975" max="" maxlength="4" required="false" change="false" readonly="false" disabled="false" placeholder="Ex: 2019" desclabel="false" right="false" java-type="" desc="true">
+                    <label>Ano de conclusão</label>
+                    <value>2</value>
+                </ano_de_conclusao>
+                <fornecida_pela_nosi name="p_fornecida_pela_nosi" type="checkbox" maxlength="250" required="false" change="false" readonly="false" disabled="false" right="false" java-type="int" check="true" desc="true">
+                    <label>Fornecida pela NOSi</label>
+                    <value>1</value>
+                </fornecida_pela_nosi>
+            </fields>
+            <table>
+                <value>
+                    <row>
+                        <formacao_certificacao name="p_formacao_certificacao" desc="true">Aliqua sit deserunt sit dolor</formacao_certificacao>
+                        <formacao_certificacao_desc name="p_formacao_certificacao_desc">Aliqua sit deserunt sit dolor</formacao_certificacao_desc>
+                        <ano_de_conclusao name="p_ano_de_conclusao" desc="true">2</ano_de_conclusao>
+                        <ano_de_conclusao_desc name="p_ano_de_conclusao_desc">2</ano_de_conclusao_desc>
+                        <fornecida_pela_nosi name="p_fornecida_pela_nosi" check="true" desc="true">1</fornecida_pela_nosi>
+                        <fornecida_pela_nosi_desc name="p_fornecida_pela_nosi_desc">1</fornecida_pela_nosi_desc>
+                    </row>
+                    <row>
+                        <formacao_certificacao name="p_formacao_certificacao" desc="true">Mollit perspiciatis ipsum elit sed</formacao_certificacao>
+                        <formacao_certificacao_desc name="p_formacao_certificacao_desc">Mollit perspiciatis ipsum elit sed</formacao_certificacao_desc>
+                        <ano_de_conclusao name="p_ano_de_conclusao" desc="true">2</ano_de_conclusao>
+                        <ano_de_conclusao_desc name="p_ano_de_conclusao_desc">2</ano_de_conclusao_desc>
+                        <fornecida_pela_nosi name="p_fornecida_pela_nosi" check="true" desc="true">1</fornecida_pela_nosi>
+                        <fornecida_pela_nosi_desc name="p_fornecida_pela_nosi_desc">1</fornecida_pela_nosi_desc>
+                    </row>
+                    <row>
+                        <formacao_certificacao name="p_formacao_certificacao" desc="true">Perspiciatis voluptatem officia sed dolor</formacao_certificacao>
+                        <formacao_certificacao_desc name="p_formacao_certificacao_desc">Perspiciatis voluptatem officia sed dolor</formacao_certificacao_desc>
+                        <ano_de_conclusao name="p_ano_de_conclusao" desc="true">2</ano_de_conclusao>
+                        <ano_de_conclusao_desc name="p_ano_de_conclusao_desc">2</ano_de_conclusao_desc>
+                        <fornecida_pela_nosi name="p_fornecida_pela_nosi" check="true" desc="true">1</fornecida_pela_nosi>
+                        <fornecida_pela_nosi_desc name="p_fornecida_pela_nosi_desc">1</fornecida_pela_nosi_desc>
+                    </row>
+                    <row>
+                        <formacao_certificacao name="p_formacao_certificacao" desc="true">Sit ipsum aperiam elit lorem</formacao_certificacao>
+                        <formacao_certificacao_desc name="p_formacao_certificacao_desc">Sit ipsum aperiam elit lorem</formacao_certificacao_desc>
+                        <ano_de_conclusao name="p_ano_de_conclusao" desc="true">3</ano_de_conclusao>
+                        <ano_de_conclusao_desc name="p_ano_de_conclusao_desc">3</ano_de_conclusao_desc>
+                        <fornecida_pela_nosi name="p_fornecida_pela_nosi" check="true" desc="true">1</fornecida_pela_nosi>
+                        <fornecida_pela_nosi_desc name="p_fornecida_pela_nosi_desc">1</fornecida_pela_nosi_desc>
+                    </row>
+                    <row>
+                        <formacao_certificacao name="p_formacao_certificacao" desc="true">Iste sed unde natus totam</formacao_certificacao>
+                        <formacao_certificacao_desc name="p_formacao_certificacao_desc">Iste sed unde natus totam</formacao_certificacao_desc>
+                        <ano_de_conclusao name="p_ano_de_conclusao" desc="true">0</ano_de_conclusao>
+                        <ano_de_conclusao_desc name="p_ano_de_conclusao_desc">0</ano_de_conclusao_desc>
+                        <fornecida_pela_nosi name="p_fornecida_pela_nosi" check="true" desc="true">1</fornecida_pela_nosi>
+                        <fornecida_pela_nosi_desc name="p_fornecida_pela_nosi_desc">1</fornecida_pela_nosi_desc>
+                    </row>
+                </value>
+            </table>
+        </separatorlist_2>
+        <form_2 type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <competencias_importantes name="p_competencias_importantes" type="separator" maxlength="250" placeholder="" desclabel="false" right="false">
+                    <label>Competências importantes que tens para desempenho das funções e que vão de acordo com a missão e visão da organização: </label>
+                </competencias_importantes>
+                <comportamental name="p_comportamental" type="select" multiple="true" tags="false" domain="comportamental « map_competencias" maxlength="250" required="false" change="false" disabled="false" right="false" java-type="">
+                    <label>Comportamental</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Atualizado / Inovador</text>
+                            <value>AT_INOV</value>
+                        </option>
+                        <option>
+                            <text>Trabalho em equipe</text>
+                            <value>T_EQ</value>
+                        </option>
+                        <option>
+                            <text>Comunicação Interpessoal</text>
+                            <value>C_INT_P</value>
+                        </option>
+                        <option>
+                            <text>Capacidade de liderar</text>
+                            <value>C_LID</value>
+                        </option>
+                        <option>
+                            <text>Autonomia para novas tarefas</text>
+                            <value>AUT_N_T</value>
+                        </option>
+                        <option>
+                            <text>Flexibilidade / Adaptabilidade</text>
+                            <value>FLEX_A</value>
+                        </option>
+                        <option>
+                            <text>Relacionamento Interpessoal </text>
+                            <value>R_INT_P</value>
+                        </option>
+                        <option>
+                            <text>Comprometimento</text>
+                            <value>COMP</value>
+                        </option>
+                        <option>
+                            <text>Assiduidade/Pontualidade</text>
+                            <value>ASSI_P</value>
+                        </option>
+                        <option>
+                            <text>Responsabilidade</text>
+                            <value>RESP</value>
+                        </option>
+                        <option>
+                            <text>Engajamento Profissional</text>
+                            <value>ENG_P</value>
+                        </option>
+                    </list>
+                </comportamental>
+                <organizacionais name="p_organizacionais" type="select" multiple="true" tags="false" domain="Organizacionais « map_competencias" maxlength="250" required="false" change="false" disabled="false" right="false" java-type="">
+                    <label>Organizacionais</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Uso consciente de Recursos da Organização</text>
+                            <value>U_REC_O</value>
+                        </option>
+                        <option>
+                            <text>Conhecimento de Normas de Segurança Sistema de Informação</text>
+                            <value>C_N_S_S_I</value>
+                        </option>
+                        <option>
+                            <text>Conhecimento de Normas de Segurança da Organização</text>
+                            <value>C_N_S_O</value>
+                        </option>
+                    </list>
+                </organizacionais>
+                <estrategica name="p_estrategica" type="select" multiple="true" tags="false" domain="Estratégica « map_competencias" maxlength="250" required="false" change="false" disabled="false" right="false" java-type="">
+                    <label>Estratégica</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Orientação para Cliente</text>
+                            <value>O_CLI</value>
+                        </option>
+                        <option>
+                            <text>Visão Holistica do Negócio Nosi</text>
+                            <value>V_H_N_N</value>
+                        </option>
+                        <option>
+                            <text>Pensamento Visão Futuro </text>
+                            <value>P_V_F</value>
+                        </option>
+                        <option>
+                            <text>Desenvolvimento de Equipes</text>
+                            <value>D_E</value>
+                        </option>
+                        <option>
+                            <text>Persuasão e influência sob a  Equipa</text>
+                            <value>P_I_S_E</value>
+                        </option>
+                        <option>
+                            <text>Gestão de Mudança</text>
+                            <value>G_M</value>
+                        </option>
+                        <option>
+                            <text>Capacidade de Planeamento e organização de acordo com objectivo Traçados </text>
+                            <value>C_P_O_T</value>
+                        </option>
+                        <option>
+                            <text>Orientação para Resultados </text>
+                            <value>O_RES</value>
+                        </option>
+                    </list>
+                </estrategica>
+                <extra name="p_extra" type="separator" maxlength="250" placeholder="" desclabel="false" right="false">
+                    <label>Extra</label>
+                </extra>
+                <observacao name="p_observacao" type="textarea" maxlength="4000" required="false" change="false" readonly="false" disabled="false" placeholder="Ex: Queria fazer parte de outro departamento..." desclabel="false" right="false">
+                    <label>Observação</label>
+                    <value>Magna accusantium totam adipiscing aliqua sed sit aliqua accusantium lorem aperiam sit perspiciatis stract ut</value>
+                </observacao>
+            </fields>
+        </form_2>
+        <form_nota_ca type="form" xml-type="form" gen-type="container" gen-group="">
+            <fields>
+                <fase name="p_fase" type="select" multiple="false" tags="false" domain="fases « map_competencias" maxlength="250" required="false" change="false" disabled="false" right="false" java-type="">
+                    <label>Fase</label>
+                    <list>
+                        <option/>
+                        <option>
+                            <text>Recolha</text>
+                            <value>1REC</value>
+                        </option>
+                        <option>
+                            <text>Analise</text>
+                            <value>2ANA</value>
+                        </option>
+                        <option>
+                            <text>Entrevista</text>
+                            <value>3ENT</value>
+                        </option>
+                        <option>
+                            <text>Conclusão</text>
+                            <value>4CON</value>
+                        </option>
+                    </list>
+                </fase>
+                <nota_ca name="p_nota_ca" type="textarea" maxlength="4000" required="false" change="false" readonly="false" disabled="false" placeholder="" desclabel="false" right="false">
+                    <label>Nota do Conselho de Administração (CA)</label>
+                    <value>Ipsum omnis laudantium anim totam aliqua anim voluptatem natus unde stract ut iste anim aperiam</value>
+                </nota_ca>
+            </fields>
+            <tools-bar>
+                <item type="form" code="" class="primary" rel="guardar" refresh_components="form_nota_ca">
+                    <title>Guardar</title>
+                    <app>map_competencias</app>
+                    <page>Subscricao</page>
+                    <link>index</link>
+                    <parameter>../images/IGRP/IGRP2.3/app/map_competencias/subscricao/Subscricao.xml?</parameter>
+                    <target>submit_ajax</target>
+                    <img>primary|fa-save</img>
+                    <preview>../images/IGRP/IGRP2.3/app/map_competencias/subscricao/Subscricao.xml</preview>
+                </item>
+            </tools-bar>
+        </form_nota_ca>
+    </content>
+    <blockly>
+        <imports></imports>
+        <xml></xml>
+    </blockly>
+</rows>
