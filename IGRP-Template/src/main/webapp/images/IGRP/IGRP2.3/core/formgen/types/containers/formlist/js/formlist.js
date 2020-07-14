@@ -151,12 +151,13 @@
 
 						addColField = new f.field('number',{
 							properties:{
-								label 	 : 'Total',
-								tag   	 : name,
-								name  	 : 'p_'+name,
-								readonly : true,
-								totalrow : true,
-								total_col: true
+								label 	 	: 'Total',
+								tag   	 	: name,
+								name  	 	: 'p_'+name,
+								readonly 	: true,
+								totalrow 	: true,
+								total_col	: true,
+								calculation : true
 							}
 						});
 
@@ -307,21 +308,30 @@
 			table = container.GET.path()+"/table/value/row";
 
 		container.GET.fields().forEach(function(f){
-			if($.inArray(f.type,container.reject) === -1){
-				var fValue = table+"[@total='yes']/"+f.GET.tag();
-			var align  =  f.GET.align ? f.GET.align() : 'right';
-			rtn+=' <xsl:if test="'+fValue+'"><td class="total-col" align="'+align+'" id="total-col-'+f.GET.tag()+'">';
 			
-			if(f.GET.total_col && f.GET.total_col())
-				rtn+='<xsl:if test="not('+fValue+'/@visible)"><p><xsl:value-of select="'+fValue+'"/></p></xsl:if>';
-
-			rtn+='<input type="hidden" name="{'+fValue+'/@name}_fk_desc" value="{'+fValue+'}"/>'+
-				'<input type="hidden" name="{'+fValue+'/@name}_fk" value="{'+fValue+'_desc}"/>'
-			rtn+='</td></xsl:if>';
+			if(f.type != 'hidden' && $.inArray(f.type,container.reject) === -1){
+				
+				var fValue = table+"[@total='yes']/"+f.GET.tag(),
+					align  =  f.GET.align ? f.GET.align() : 'right',
+					id 	   = 'total-col-'+f.GET.tag();
+				
+				rtn+=' <xsl:if test="'+fValue+'"><td class="total-col" align="'+align+'" id="'+id+'">';
+				
+				if(f.GET.total_col && f.GET.total_col()){
+					rtn+='<xsl:if test="not('+fValue+'/@visible)">'+
+						'<p><xsl:value-of select="'+fValue+'"/></p>'+
+						'<input type="hidden" name="p_' + id + '" value="{' + fValue + '}"/>'+
+					'</xsl:if>';
+				}
+	
+				/*rtn+='<input type="hidden" name="{'+fValue+'/@name}_fk_desc" value="{'+fValue+'}"/>'+
+					'<input type="hidden" name="{'+fValue+'/@name}_fk" value="{'+fValue+'_desc}"/>'*/
+				rtn+='</td></xsl:if>';
 			}
 		});
 		
-		rtn+='<xsl:if test="not('+table+'[position() = 1]/@nodelete) or not('+table+'[position() = 1]/@noupdate)" gen-preserve="last"><td class="notbackground"></td></xsl:if>'
+		if (!container.GET.noupdate() || !container.GET.nodelete())
+			rtn+='<xsl:if test="not('+table+'[position() = 1]/@nodelete) or not('+table+'[position() = 1]/@noupdate)" gen-preserve="last"><td class="notbackground"></td></xsl:if>'
 
 		rtn+='</tr></tfoot>'
 

@@ -4952,7 +4952,9 @@ var GENERATOR = function(genparams){
 		
 		var RemoveAssociationFeatures = function(field, list){
 			
-			var targetHiddenField = field.parent.GET.fieldByTag('lst_association_id');
+			var parentTag = field.id;
+			
+			var targetHiddenField = field.parent.GET.fieldByTag( parentTag+'_association_id' );
 			
 			if(targetHiddenField)
 
@@ -4964,7 +4966,7 @@ var GENERATOR = function(genparams){
 				
 				if(list){
 					
-					var sourceHiddenField = list.GET.fieldByTag('lst_association_rel' );
+					var sourceHiddenField = list.GET.fieldByTag( parentTag+'_association_rel' );
 					
 					list.customStyle.class = list.customStyle.class.replaceAll('list-association-source','');
 					
@@ -5037,7 +5039,6 @@ var GENERATOR = function(genparams){
 					
 					toggle();
 					
-					
 				},
 				onChange:function(v,params){
 					
@@ -5049,9 +5050,11 @@ var GENERATOR = function(genparams){
 							
 								setFieldCallback = function(list){
 								
-									var sourceHiddenField = list.GET.fieldByTag( 'lst_association_rel' ),
+									var parentTag = field.id;
+								
+									var sourceHiddenField = list.GET.fieldByTag( parentTag+'_association_rel' ),
 									
-										targetHiddenField = field.parent.GET.fieldByTag('lst_association_id'),
+										targetHiddenField = field.parent.GET.fieldByTag(parentTag+'_association_id'),
 										
 										hiddenClass	      = GEN.getDeclaredField('hidden');
 									
@@ -5061,7 +5064,7 @@ var GENERATOR = function(genparams){
 										
 										var targetHiddenField = new hiddenClass.field('hidden',{});
 										
-										targetHiddenField.SET.tag( 'lst_association_id' );
+										targetHiddenField.SET.tag( parentTag+'_association_id' );
 										
 										field.parent.SET.fields( [targetHiddenField] );
 										
@@ -5069,9 +5072,9 @@ var GENERATOR = function(genparams){
 									
 									if(!sourceHiddenField){
 										
-										var sourceHiddenField = new hiddenClass.field('hidden',{});
-										
-										sourceHiddenField.SET.tag( 'lst_association_rel' );
+										var sourceHiddenField = new hiddenClass.field('hidden', {} );
+								
+										sourceHiddenField.SET.tag( parentTag+'_association_rel' );
 										
 										list.customStyle.class = list.customStyle.class+' list-association-source';
 										
@@ -5249,6 +5252,75 @@ var GENERATOR = function(genparams){
 
 		});
 		
+		var jsIncludes = [
+				{ path: '/plugins/sharpadbclient/sharpadbclient.js' }
+			],
+			removeIncluds = function (arr, t) {
+				
+				arr.forEach(function (e) {
+	
+					if (field.includes[t]){
+	
+						for (var i = 0; i < field.includes[t].length; i++) {
+							var inc = field.includes[t][i];
+	
+							if (inc.path == e.path) {
+								var index = field.includes[t].indexOf(inc);
+	
+								if (index > -1)
+									field.includes[t].splice(index, 1);
+	
+								break;
+							}
+						}
+					}
+				});
+			}
+		;
+	
+		field.setPropriety({
+			label: 'Sharp Adb Client Action',
+			name: 'adbcli',
+			order: 6,
+			value: {
+				value: '',
+				options: $.IGRP.defaults.buttons.sharpadbclient
+			}, 
+			onEditionStart: function (o) {
+	
+				var checkTarget = function (v) {
+					var target = v ? v : field.GET.target ? field.GET.target() : null;
+	
+					if (target == 'sharpadbclient') {
+	
+						o.input.show();
+	
+						jsIncludes.forEach(function (e) {
+							field.includes.js.unshift(e);
+						});
+					}
+	
+					else {
+						if ($.IGRP.components.select2) {
+							$.IGRP.components.select2.select2Init({
+								field: $('select', o.input)
+							});
+						}
+	
+						o.input.hide();
+	
+						removeIncluds(jsIncludes, 'js');
+					}
+				}
+	
+				$('select[name="edit-target"]').on('change', function () {
+					checkTarget($(this).val());
+				});
+	
+				checkTarget();
+			}
+		});
+		
 		if(!targetRulesSet){
 			$.IGRP.rules.set({"edit-target":[
 				{"name":"","event":"change","condition":"equal","value":"changesrc","value2":"","patern":"","patern_custom":"","action":"show","targets":"edit-target_fields","procedure":"","msg_type":"","msg":"","opposite":"1","isTable":false},
@@ -5392,13 +5464,15 @@ var GENERATOR = function(genparams){
 						value: ''
 					});
 					
-					field.setPropriety({
-						label    : 'Description Label',
-						name     : 'desclabel',
-						value 	 : false,
-						xslValue : 'desclabel'
-					});
-
+					if(container.GET.type() != 'formlist'){
+					
+						field.setPropriety({
+							label    : 'Description Label',
+							name     : 'desclabel',
+							value 	 : false,
+							xslValue : 'desclabel'
+						});
+					}
 				}
 			//}
 			

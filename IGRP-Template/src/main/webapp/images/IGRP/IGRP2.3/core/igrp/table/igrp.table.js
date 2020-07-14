@@ -83,7 +83,12 @@
 				
 				$('table.table[id] thead tr th[group-in]', o.parent).each(function(i, th){
 					
+					var thFoot = $('tfoot td[td-name="'+$(this).attr('td-name')+'"]',$(this).parents('table'));
+					
 					$(th).remove();
+					
+					if(thFoot[0])
+						thFoot.remove();
 					
 				});
 			}
@@ -131,6 +136,11 @@
 							$(th).addClass('is-grouped');
 							
 							tdInfo.addClass('is-grouped');
+							
+							var thFoot = $('tfoot td[td-name="'+thName+'"]',table);
+							
+							if(thFoot[0])
+								thFoot.remove();
 							
 						}
 	
@@ -232,14 +242,14 @@
 
 					};
 
-					var datatable = $(t).DataTable(options)
+					var datatable = $(t).DataTable(options);
 
 					$.IGRP.on('submit',function(o){
 						
-						if(o.valid)
-
+						if(o.valid && o.target == 'submit'){
 							datatable.destroy();
-
+						}
+					
 	            	});
 					
 					$.IGRP.events.on('submit-ajax',function(o){
@@ -309,31 +319,41 @@
 			});
 			
 		},
-		
+			
 		checkdControl : function(p){
+			console.log(p);
+			var inp     = $('input[type="hidden"].'+p.rel,p.o),
+				table   = p.o.parents('table'),
+				hidden  = '<input type="hidden" class="'+p.rel+'" value="'+p.value+'" name="p_'+p.rel+'_fk"/>',
+				inpcheck = p.o.find( '.'+p.rel+'_check');
 			
-			var inp   = $('input[type="hidden"].'+p.rel, p.o),
-			
-				check   = p.o.find( '.'+p.rel+'_check' );
-			
+			console.log(inpcheck);
+	
 			if(p.check){
-				
-				check.val( p.value );
-				
-                if (inp[0])
-                    inp.remove();
-                
-                
-            }else{
-            
-            	check.val( "" );
-            	
-                if (!inp[0])
-                    p.o.append('<input type="hidden" class="'+p.rel+'" value="'+p.value+'" name="'+p.name+'"/>');
-                
-                
-            }
-			
+	
+				inpcheck.val( p.value );
+	
+	            if (inp[0])
+	                inp.remove();
+	        }
+	        else{
+	
+	        	inpcheck.val( '' );
+	
+	        	if (!inp[0])
+	                p.o.append(hidden);
+	        }
+	
+	        if(p.type == 'radio'){
+	    		$('tbody tr td input[check-rel="'+p.rel+'"]',table).each(function(){
+	    			var td = $(this).parents('td:first');
+	
+	    			if(!$('input[type="hidden"].'+p.rel,td)[0] && !$(this).is(':checked')){
+	    				td.append(hidden);
+	    				td.find( '.'+p.rel+'_check').val('');
+	    			}
+	    		});
+	    	}
 			
 		},
 		
@@ -443,12 +463,13 @@
 			$(document).on('change', 'table .IGRP_checkall', function() {
 				var table    = $(this).parents('.table').first(),
 					checkrel = $(this).attr('check-rel'),
-					checkers = $('[check-rel="'+checkrel+'"]:not(.IGRP_checkall)',table),
+					checkers = $('[check-rel="'+checkrel+'"]:not(.IGRP_checkall):not([disabled])',table),
 					checkAll = $(this).is(':checked');
 					
 				
 				checkers.each(function(i,e){
 					var parent 	 = $(e).parents('div[item-name="'+checkrel+'"]')[0] ? $(e).parents('div[item-name="'+checkrel+'"]') : $(e).parents('td');
+					
 					com.checkdControl({
 						rel 	: checkrel,
 						o   	: parent,
@@ -465,15 +486,15 @@
 				
                 var o   = $(this),
                     rel = o.attr('check-rel'),
-                    obj = $('td[item-name="'+rel+'"]',o.parents('tr:first')),
-                    inp = $('input[type="hidden"].'+rel,obj);
+                    obj = $('td[item-name="'+rel+'"]',o.parents('tr:first'));
 
                 com.checkdControl({
                     rel     : rel,
                     o       : obj,
                     check   : o.is(':checked'),
                     value   : o.val(),
-                    name    : o.attr('name')
+                    name    : o.attr('name'),
+                    type  	: o.attr('type')
                 });
             });
 			
@@ -506,39 +527,75 @@
 			sum : {
 	            allrow : function(p){
 	                p.obj.each(function(i,tr){
-	                    var val = 0;
+
+						var total = 0;
+						
 	                    $(p.field,tr).each(function(io,o){
-	                        val += com.operation.isNum($(o).val());
-	                    });
-	                    $(p.result,tr).val(val);
+	                        total += com.operation.isNum($(o).val());
+						});
+
+						if($(p.result,tr)[0]){
+
+							total = $.IGRP.utils.numberFormat({
+								obj : p.result,
+								val : total
+							});
+
+							$(p.result,tr).val(val);
+						}
+						
 	                });
 	            },
 
 	            row : function(p){
-	                var total = 0;
+
+					var total = 0;
+					
 	                $(p.field,p.obj).each(function(io,o){
 	                    total += com.operation.isNum($(o).val());
-	                });
-	                if (p.result)
-	                    $(p.result,p.tr).val(total).trigger('change');
+					});
+					
+	                if ($(p.result,p.obj)[0]){
+						
+						total = $.IGRP.utils.numberFormat({
+							obj: $(p.result, p.obj).filter('[numberformat]'),
+							val : total
+						});
+
+						$(p.result,p.obj).val(total).trigger('change');
+					}
 
 	                return total;
 	            },
 	            col : function(p){
-	                var total = 0;
+					var total = 0,
+						obj   = null;
+					
 	                p.obj.each(function(i,tr){
-	                    total += com.operation.isNum($(p.field,$(tr)).val());
-	                });
+						if(i === 0)
+							obj = $(p.field,$(tr));
 
+	                    total += com.operation.isNum($(p.field,$(tr)).val());
+					});
+					
 	                if (p.result[0]){
-	                    $(':input',p.result).val(total);
+
+						total = $.IGRP.utils.numberFormat({
+							obj : obj,
+							val : total
+						});
+
+						$(':input',p.result).val(total);
 	                    $('p',p.result).html(total);
+	                    $('input[name="p_'+p.result.attr('id')+'"]').change();
 	                }
 
 	                return total;
 	            },
 	            allcol : function(p){
-	                var total = {};
+					
+					var total = {};
+					
 	                p.obj.each(function(i,tr){
 	                    total[i] = com.operation.sum.col({
 	                        obj     : p.obj,
@@ -549,7 +606,7 @@
 
 	                return total;
 	            }
-	        }
+			}
 		},
 
 		init:function(){
