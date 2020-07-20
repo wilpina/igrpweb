@@ -38,7 +38,7 @@
 			 
 		    var distance =  L.GeometryUtil.length(obj.getLatLngs());
 		    
-		  //@param {String} unit 'metric' or 'imperial'
+		    //@param {String} unit 'metric' or 'imperial'
 		    return L.GeometryUtil.readableDistance(distance,'metric');
 		    
 		};
@@ -55,7 +55,7 @@
 		
 		function SetResult(result){
 			
-			widget.setTemplateParam('results', {
+			widget.setTemplateParam('measurement', {
 				
 				length  	     : result.length,
 				
@@ -208,13 +208,7 @@
 	}
 	
 	GIS.widgets.register('measurement', {
-		
-		dependencies : {
-			
-			js  : [ 'https://npmcdn.com/leaflet-geometryutil@0.9.3/src/leaflet.geometryutil.js' ]
 				
-		},
-		
 		init : MeasurementWidget
 		
 	});

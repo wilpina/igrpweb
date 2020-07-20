@@ -518,32 +518,35 @@
 		
 		var modal       = function(p){
 			
-			if (p.clicked && p.clicked.attr('close') && p.clicked.attr('close').indexOf('refresh') >= 0)
-				
-				mWindow = mWindow ? mWindow : window;
-		
 			var url = setTargetParameter(p.url);
 			
-			mUrl = url;
+			if (p.clicked && p.clicked.attr('close') && p.clicked.attr('close').indexOf('refresh') >= 0){
+				
+				mWindow = mWindow ? mWindow : window;
+			
+				mUrl = url;
+			}
 			
 			$.IGRP.components.iframeNav.set({
 				url    :url,
 				clicked:p.clicked
 			});
+			
 			return false;
+			
 		};
 
 		var right_panel       = function(p){
-
-			if (p.clicked && p.clicked.attr('close') && p.clicked.attr('close').indexOf('refresh') >= 0)
-				
-				mWindow = window;
 			
 			var url = setTargetParameter(p.url);
 			
 			p.url = url;
+
+			if (p.clicked && p.clicked.attr('close') && p.clicked.attr('close').indexOf('refresh') >= 0){
 			
-			mUrl = url;
+				mWindow = window;
+			    mUrl = url;
+			}
 
 			$.IGRP.components.rightPanel.set(p);
 			
@@ -573,7 +576,7 @@
 			if(valid){
 			
 				if (p.clicked && p.clicked.attr('close') && p.clicked.attr('close').indexOf('refresh') >= 0)				
-					mWindow = window;
+						mWindow = window;
 				
 				$.IGRP.components.iframeNav.set({
 					url    : setTargetParameter($.IGRP.utils.getUrl(p.url)+formData),
@@ -673,6 +676,7 @@
 
 				if (mWindow) {
 					_window = mWindow;
+					
 					popup 	= false;
 					mWindow = null;
 					
@@ -1317,11 +1321,15 @@
 
 		$.IGRP.on('init',function(){
 			
-			form        = $.IGRP.utils.getForm(),
+			form    = $.IGRP.utils.getForm();
 
-			doc 	    = $(document),
-
+			doc 	    = $(document);
+			
 			confirmText = $('#confirm-text').text();
+			
+			var target = '_blank',
+			
+				_this  = null;
 
 			configTargetsEvents();
 
@@ -1330,16 +1338,18 @@
 				
 				e.preventDefault();
 				
-				var target       = $(this).attr('target')  ? $(this).attr('target'): '_blank';
+				target       = $(this).attr('target')  ? $(this).attr('target'): '_blank';
 				
 				var url          = $(this).attr('fw_href') ? $(this).attr('fw_href') : $(this).attr('href');			
 				
 				var targetAction = $.IGRP.targets[target] && $.IGRP.targets[target].action ? $.IGRP.targets[target].action : _blank;
+					
+				_this 	     = $(this);
 
 				ev.execute('target-click',{
 					target  : target,
 					url     : url,
-					clicked : this
+					clicked : _this
 				});
 
 				$.IGRP.store.set({
@@ -1350,14 +1360,14 @@
 				return targetAction({
 					url     : url,
 					target  : target,
-					clicked : $(this)
+					clicked : _this
 				});
 
 			});
 
 			/*form submit controller */
 			form.on('submit',function(e){ 
-
+				
 				var validate  = form.attr('validateCtrl'),
 					fields    = $.IGRP.utils.getFieldsValidate(),
 					vfields   = fields.filter('.submittable'),//form.find('.submittable'),//$.IGRP.utils.getFieldsValidate(),
@@ -1369,11 +1379,14 @@
  					}) == 1 ? true : false;
 
  				
- 				var eventCB  = $.IGRP.events.execute('submit',{
- 					valid  : canSubmit,
- 					fields :  fields
+ 				var eventCB = $.IGRP.events.execute('submit',{
+ 					valid   : canSubmit,
+ 					fields  : fields,
+ 					event   : e,
+ 					clicked : _this,
+ 					target  : target
  				});
-
+ 				
  				canSubmit = eventCB == false ? false : canSubmit;
 
  				if (canSubmit){
