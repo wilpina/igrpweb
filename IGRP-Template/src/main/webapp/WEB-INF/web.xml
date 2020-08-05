@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" metadata-complete="true" version="3.1">
   <display-name>IGRP-Template</display-name>
   <context-param>
     <param-name>workspace</param-name>
@@ -22,20 +22,14 @@
       <file-size-threshold>0</file-size-threshold>
     </multipart-config>
   </servlet>
-  <servlet>
-    <servlet-name>igrpsso</servlet-name>
-    <servlet-class>nosi.core.servlet.IgrpOAuth2SSO</servlet-class>
-  </servlet>
-  
   <filter>
     <filter-name>ThreadLocalFilter</filter-name>
     <filter-class>nosi.core.filter.ThreadLocalFilter</filter-class>
   </filter>
   <filter-mapping>
-	    <filter-name>ThreadLocalFilter</filter-name>
-	    <servlet-name>IGRP</servlet-name>
+    <filter-name>ThreadLocalFilter</filter-name>
+    <servlet-name>IGRP</servlet-name>
   </filter-mapping>
-  
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>nosi.core.filter.EncodingFilter</filter-class>
@@ -48,7 +42,6 @@
     <filter-name>EncodingFilter</filter-name>
     <servlet-name>IGRP</servlet-name>
   </filter-mapping>
-  
   <servlet-mapping>
     <servlet-name>IGRP</servlet-name>
     <url-pattern>/app/*</url-pattern>
@@ -57,10 +50,6 @@
     <servlet-name>default</servlet-name>
     <url-pattern>/images/*</url-pattern>
   </servlet-mapping>
-  <servlet>
-    <servlet-name>testesso</servlet-name>
-    <servlet-class>nosi.core.servlet.TesteSso</servlet-class>
-  </servlet>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
@@ -74,4 +63,4 @@
   <listener>
     <listener-class>nosi.core.listener.BasicListener</listener-class>
   </listener>
-</web-app>
+</web-app> 
