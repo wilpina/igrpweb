@@ -25,6 +25,7 @@
 	
 	<xsl:template name="blockly.element.controller">
 		
+		
 		<xsl:call-template name="blockly.getValue">
 		
 			<xsl:with-param name="value" select="statement"></xsl:with-param>
@@ -861,7 +862,6 @@
 		<xsl:choose>
 		
 			<xsl:when test="$unsel = 'TRUE'">
-			
 				<xsl:value-of select="$newlineTab2"/>
 			
 				<xsl:text>List&lt;String&gt; unselecteds = cb.getUncheckedIds();</xsl:text>
