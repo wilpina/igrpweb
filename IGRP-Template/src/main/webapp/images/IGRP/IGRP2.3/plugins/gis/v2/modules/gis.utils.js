@@ -87,17 +87,25 @@
 					var html = $('<ul class="gis-feature-properties-view" />');
 					
 					if(props){
-						
+
 						for(var p in props){
 							
-							var prop = props[p] || '';
+							var prop = props[p] || '', name = p;
 							
-							html.append(
-								'<li name="'+p+'">'+
-									'<span class="gis-feature-property-label" text-color="primary">'+p+'</span>'+
-									'<span class="gis-feature-property-value">'+prop+'</span>'+
-								'</li>'
-							);
+							if (props[p] && typeof props[p] != 'string'){
+								
+								prop = props[p].isImage ? '</br><img style="max-width:220px" src="'+prop+'"/>' : props[p].value;
+								
+								name  = props[p].name;
+							} 
+									
+							if(name)
+								html.append(
+									'<li name="'+name+'">'+
+										'<span class="gis-feature-property-label" text-color="primary">'+name+'</span>'+
+										 '<span class="gis-feature-property-value">'+prop+'</span>' +
+									'</li>'
+								);
 							
 						}
 						
@@ -276,7 +284,7 @@
 				
 				setMousePosition: function(e){
 										
-					var lat = L.Util.formatNum(e.latlng.lng, 6);
+					var lat = L.Util.formatNum(e.latlng.lat, 6);
 					
 					var lng = L.Util.formatNum(e.latlng.lng, 6);
 					
@@ -465,5 +473,21 @@
 		return index == 0 ? clss : '';
 
 	});
+	
+	//parse to int
+	Handlebars.registerHelper('_toInt', function(str) {
+				
+		str = str || 0;
+				
+		return parseInt(str,10);
 
+	});
+	
+	//parse to int
+	Handlebars.registerHelper('Ative', function(otpion, value) {
+						
+		return otpion === value ? true : false;
+
+	});
+	
 })();
