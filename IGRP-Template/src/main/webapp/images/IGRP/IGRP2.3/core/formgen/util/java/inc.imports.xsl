@@ -22,6 +22,7 @@
 					
 					<xsl:value-of select="$newline"></xsl:value-of>
 					
+					
 					<xsl:text>import java.util.List;</xsl:text>
 					
 				</xsl:when>
@@ -91,6 +92,18 @@
 				</xsl:when>
 				
 				<xsl:when test="@type = 'inserir_dao'">
+
+					<xsl:value-of select="$newline"></xsl:value-of>
+					
+					<xsl:text>import org.hibernate.Session;</xsl:text>
+					
+					<xsl:value-of select="$newline"></xsl:value-of>
+					
+					<xsl:text>import org.hibernate.Transaction;</xsl:text>
+				
+				</xsl:when>
+				
+				<xsl:when test="@type = 'insert_simple_dao'">
 
 					<xsl:value-of select="$newline"></xsl:value-of>
 					
@@ -246,7 +259,6 @@
 						</xsl:when>
 						
 						<xsl:when test="$fieldType = 'Link'">
-						
 							<xsl:value-of select="$newline"></xsl:value-of>
 							
 							<xsl:text>import nosi.webapps.igrp.dao.CLob;</xsl:text>	
@@ -255,6 +267,14 @@
 						
 					</xsl:choose>
 				
+				</xsl:when>
+				
+				<xsl:when test="@type = 'checkbox_table'">
+				
+					<xsl:value-of select="$newline"></xsl:value-of>
+					
+					<xsl:text>import nosi.core.webapp.helpers.CheckBoxHelper;</xsl:text>
+					
 				</xsl:when>
 			
 			</xsl:choose>

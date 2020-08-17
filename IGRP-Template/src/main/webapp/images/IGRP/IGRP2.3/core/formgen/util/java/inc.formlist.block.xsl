@@ -18,6 +18,7 @@
 	       	
 		</xsl:variable>
 		
+		
 		<xsl:variable name="daofilter" select="concat($daolow,'filter')"/>
 		
 		<xsl:variable name="andWheres">
@@ -51,18 +52,6 @@
 			<xsl:call-template name="blockly.getValue">
 			
 				<xsl:with-param name="value" select="*[@name='value2']"/>
-				
-			</xsl:call-template>
-			
-		</xsl:variable>
-		
-		<xsl:variable name="rowvaluechildID" select="substring-after(value[@name='id_formlist']/block/field,'::')"/>
-		
-		<xsl:variable name="ChildID">
-		
-			<xsl:call-template name="InitCap">
-			
-				<xsl:with-param name="text" select="$rowvaluechildID"/>
 				
 			</xsl:call-template>
 			
@@ -102,10 +91,6 @@
 			
 			<xsl:value-of select="$page-title"/><xsl:text>.</xsl:text><xsl:value-of select="$table_up"/><xsl:text> row = new </xsl:text><xsl:value-of select="$page-title"/><xsl:text>.</xsl:text><xsl:value-of select="$table_up"/><xsl:text>();</xsl:text>
 			
-			<xsl:value-of select="$newlineTab4"></xsl:value-of>
-			
-			<xsl:text>row.set</xsl:text><xsl:value-of select="$table_up"/><xsl:text>_id(</xsl:text><xsl:text>new Pair( ""+</xsl:text><xsl:value-of select="$daolow"/><xsl:text>.get</xsl:text><xsl:value-of select="$ChildID"/><xsl:text>(), ""+</xsl:text><xsl:value-of select="$daolow"/><xsl:text>.get</xsl:text><xsl:value-of select="$ChildID"/><xsl:text>()));</xsl:text>
-			
 			<xsl:value-of select="concat($newlineTab4,$sep_row)"></xsl:value-of>
 			
 			<xsl:value-of select="$newlineTab4"></xsl:value-of>
@@ -141,6 +126,9 @@
 		<xsl:value-of select="$code"></xsl:value-of>
 
 	</xsl:template>
+	
+	<!-- ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+	<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 	<xsl:template name="blockly.element.form_row">
 	
@@ -237,14 +225,46 @@
 			
 		</xsl:variable>
 		
-		<xsl:variable name="delete">
-		
+		<xsl:variable name="edited">
+	   	
 			<xsl:call-template name="blockly.getValue">
 			
-				<xsl:with-param name="value" select="*[@name='delete']"/>
+				<xsl:with-param name="value" select="*[@name='edited']"/>
 				
 			</xsl:call-template>
 			
+		</xsl:variable>
+		
+		<xsl:variable name="valueblock" select="substring-after(value[@name='edited']/block/field,'::')"/> 
+		
+		<xsl:variable name="type_childblock" select="substring-before(value[@name='edited']/block/field,'::')"/>
+		
+		<xsl:variable name="block_namechild" select="value[@name='edited']/block/@type"/>
+		
+		<xsl:variable name="edited_convert">
+		
+			<xsl:call-template name="convert_blocks">
+					
+				<xsl:with-param name="daolow" select="daolow"></xsl:with-param>
+				
+				<xsl:with-param name="value" select="$edited"></xsl:with-param>
+				
+				<xsl:with-param name="valueblock" select="$valueblock"></xsl:with-param>
+				
+				<xsl:with-param name="from" select="$type_childblock"></xsl:with-param>
+				
+				<xsl:with-param name="to" select="'Integer'"></xsl:with-param>
+				
+				<xsl:with-param name="neto" select="neto"></xsl:with-param>
+				
+				<xsl:with-param name="valuechild" select="value_namee"></xsl:with-param>
+				
+				<xsl:with-param name="block_namechild" select="$block_namechild"></xsl:with-param>
+				
+				<xsl:with-param name="block_name" select="block_name"></xsl:with-param>
+				
+			</xsl:call-template>
+					
 		</xsl:variable>
 	
 		<xsl:variable name="code">
@@ -293,11 +313,11 @@
 			
 			<xsl:value-of select="$newlineTab3"></xsl:value-of>
 			
-			<xsl:text>if(Core.isNotNull( row.get</xsl:text><xsl:value-of select="$table_up"/><xsl:text>_id().getKey())){</xsl:text>
+			<xsl:text>if(Core.isNotNullOrZero( </xsl:text><xsl:value-of select="$edited"/><xsl:text>)){</xsl:text>
 			
 			<xsl:value-of select="$newlineTab5"></xsl:value-of>
 			
-			<xsl:value-of select="$daolow"/><xsl:text> = session.find(</xsl:text><xsl:value-of select="$dao_sep"/><xsl:text>.class, Core.toInt(row.get</xsl:text><xsl:value-of select="$table_up"/><xsl:text>_id().getKey()));</xsl:text>
+			<xsl:value-of select="$daolow"/><xsl:text> = session.find(</xsl:text><xsl:value-of select="$dao_sep"/><xsl:text>.class, </xsl:text><xsl:value-of select="$edited_convert"/><xsl:text>);</xsl:text>
 			
 			<xsl:value-of select="$newlineTab3"></xsl:value-of>
 			
@@ -313,6 +333,18 @@
 			
 			<xsl:text>}</xsl:text>
 			
+			<xsl:choose>
+			
+				<xsl:when test="not(contains($edited, 'row.get'))">
+				
+					<xsl:value-of select="$newlineTab1"></xsl:value-of>
+					
+					<xsl:text>if(Core.isNotNullOrZero( </xsl:text><xsl:value-of select="$edited"/><xsl:text>)){</xsl:text>
+				
+				</xsl:when>
+					
+			</xsl:choose>
+
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>	
 			
 			<xsl:text>String [] </xsl:text><xsl:value-of select="$daolow"/><xsl:text>deletedIdsArray = model.getP_</xsl:text><xsl:value-of select="$table"/><xsl:text>_del();</xsl:text>
@@ -344,6 +376,18 @@
 			<xsl:value-of select="$newlineTab2"></xsl:value-of>
 			
 			<xsl:text>}</xsl:text>
+			
+			<xsl:choose>
+			
+				<xsl:when test="not(contains($edited, 'row.get'))">
+				
+					<xsl:value-of select="$newlineTab1"></xsl:value-of>
+					
+					<xsl:text>}</xsl:text>
+				
+				</xsl:when>
+					
+			</xsl:choose>
 			
 			<xsl:value-of select="$newlineTab1"></xsl:value-of>
 			
