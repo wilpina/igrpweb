@@ -5,7 +5,7 @@
 	<comment>All basic and advanced IGRP configuration parameters</comment>
 	
 	<!-- igrpweb environment parameter (dev|test|sta|prod) -->
-	<entry key="igrp.env"></entry>
+	<entry key="igrp.env">dev</entry>
 	
 	<!-- igrpweb workspace parameter (absolute path) -->
 	<entry key="igrp.workspace"></entry> 
